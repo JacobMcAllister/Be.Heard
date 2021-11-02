@@ -1,0 +1,25 @@
+{
+  "name": "be-heard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JacobMcAllister/Be.Heard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JacobMcAllister/Be.Heard/issues"
+  },
+  "homepage": "https://github.com/JacobMcAllister/Be.Heard#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "bootstrap": "^5.0.0",
+    "chart.js": "^3.6.0",
+    "jquery": "^3.6.0"
+  }
+}

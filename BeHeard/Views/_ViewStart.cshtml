@@ -1,0 +1,12 @@
+﻿@{
+    var routeUrl = ViewContext.RouteData.Values["Controller"].ToString();
+    var pages = new List<string> { "Login" };
+    if (pages.Any(routeUrl.Contains))
+    {
+        Layout = "_NoNavLayout";
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
+}
