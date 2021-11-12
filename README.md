@@ -7,8 +7,8 @@ These are necessary to build and setup the development environment.
 - Visual Studio 2017/2019
 - Node.js (npm)
 - .NET Core 3.1
-- Web Compiler (Visual Studio Extension)
-- Bundler & Minifier (Visual Studio Extension)
+- [Web Compiler] (https://marketplace.visualstudio.com/items?itemName=MadsKristensen.WebCompiler) (Visual Studio Extension)
+- [Bundler & Minifier] (https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BundlerMinifier) (Visual Studio Extension)
 
 ## IIS
 Turn on and configure the IIS feature in Windows 10.
