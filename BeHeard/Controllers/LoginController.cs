@@ -61,5 +61,10 @@ namespace BeHeard.Controllers
         {
             return View();
         }
+
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
     }
 }
