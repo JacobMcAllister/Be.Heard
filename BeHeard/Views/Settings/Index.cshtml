@@ -1,0 +1,156 @@
+﻿@{
+    ViewData["Title"] = "Settings";
+}
+<h1>@ViewData["Title"]</h1>
+<div class="containter my-5">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="Account-tab" data-bs-toggle="tab" data-bs-target="#account" type="button" role="tab" aria-controls="home" aria-selected="true">Account</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="preferences-tab" data-bs-toggle="tab" data-bs-target="#preferences" type="button" role="tab" aria-controls="profile" aria-selected="false">Preferences</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="random-tab" data-bs-toggle="tab" data-bs-target="#random" type="button" role="tab" aria-controls="contact" aria-selected="false">Random</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="Account-tab">
+            <h4 class="mb-0 mt-5">Account Settings</h4>
+            <hr class="my-4" />
+            <strong class="mb-1">Personal</strong>
+            <div class="list-group mb-5 shadow">
+                <div class="list-group-item">
+                    <div class="row align-items-center">
+                        <div class="col-1">
+                            <strong class="mb-0">Username</strong>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" class="form-control" value="ExampleUsername">
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="row align-items-center">
+                        <div class="col-1">
+                            <strong class="mb-0">First Name</strong>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" class="form-control" value="John">
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="row align-items-center">
+                        <div class="col-1">
+                            <strong class="mb-0">Last Name</strong>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" class="form-control" value="Smith">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <strong class="mb-0">Account</strong>
+            <div class="list-group mb-5 shadow">
+                <div class="list-group-item">
+                    <div class="row align-items-center">
+                        <div class="col-1">
+                            <strong class="mb-0">Email</strong>
+                        </div>
+                        <div class="col-auto">
+                             <input type="email" class="form-control" value="email@example.com">
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="row align-items-center">
+                        <div class="col-1">
+                            <strong class="mb-0">Password</strong>
+                        </div>
+                        <div class="col-auto">
+                            <input type="password" class="form-control" value="password">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="preferences" role="tabpanel" aria-labelledby="preferences-tab">
+            <h4 class="mb-0 mt-5">Preference Settings</h4>
+            <hr class="my-4" />
+            <strong class="mb-1">Assistance</strong>
+            <div class="list-group mb-5 shadow">
+                <div class="list-group-item">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <strong class="mb-0">Enable something to be decided</strong>
+                            <p class="text-muted mb-0">A short description of what is being enabled</p>
+                        </div>
+                        <div class="col-auto">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="alert1" checked="" />
+                                <span class="custom-control-label"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <strong class="mb-0">Enable something to be decided</strong>
+                            <p class="text-muted mb-0">A short description of what is being enabled</p>
+                        </div>
+                        <div class="col-auto">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="alert2" />
+                                <span class="custom-control-label"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <strong class="mb-0">Other Preference category</strong>
+            <div class="list-group mb-5 shadow">
+                <div class="list-group-item">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <strong class="mb-0">Enable something to be decided</strong>
+                            <p class="text-muted mb-0">A short description of what is being enabled</p>
+                        </div>
+                        <div class="col-auto">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="alert1" checked="" />
+                                <span class="custom-control-label"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <strong class="mb-0">Enable something to be decided</strong>
+                            <p class="text-muted mb-0">A short description of what is being enabled</p>
+                        </div>
+                        <div class="col-auto">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="alert2" />
+                                <span class="custom-control-label"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="random" role="tabpanel" aria-labelledby="random-tab">...</div>
+    </div>
+    <div class="row">
+        <div class="col-1 text-center">
+            <button type="button" class="btn btn-primary">Save</button>
+            @*execute save settings to player database*@
+        </div>
+        <div class="col-2 text-center">
+            <a href="/Profile" on type="button" class="btn btn-secondary">Cancel</a>
+            @*Load the profile view*@
+        </div>
+    </div>
+</div>
