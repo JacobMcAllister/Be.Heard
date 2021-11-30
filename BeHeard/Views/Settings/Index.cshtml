@@ -5,13 +5,13 @@
 <div class="containter my-5">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="Account-tab" data-bs-toggle="tab" data-bs-target="#account" type="button" role="tab" aria-controls="home" aria-selected="true">Account</button>
+            <button class="nav-link active" id="account-tab" data-bs-toggle="tab" data-bs-target="#account" type="button" role="tab" aria-controls="home" aria-selected="true">Account</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="preferences-tab" data-bs-toggle="tab" data-bs-target="#preferences" type="button" role="tab" aria-controls="profile" aria-selected="false">Preferences</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="random-tab" data-bs-toggle="tab" data-bs-target="#random" type="button" role="tab" aria-controls="contact" aria-selected="false">Random</button>
+            <button class="nav-link" id="sound-tab" data-bs-toggle="tab" data-bs-target="#sound" type="button" role="tab" aria-controls="contact" aria-selected="false">Sound</button>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -50,6 +50,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="list-group-item">
+                    <div class="row align-items-center">
+                        <div class="col-1">
+                            <strong class="mb-0">Phone</strong>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" class="form-control" value="(775)123-4567">
+                        </div>
+                    </div>
+                </div>
             </div>
             <strong class="mb-0">Account</strong>
             <div class="list-group mb-5 shadow">
@@ -83,12 +93,12 @@
                 <div class="list-group-item">
                     <div class="row align-items-center">
                         <div class="col">
-                            <strong class="mb-0">Enable something to be decided</strong>
-                            <p class="text-muted mb-0">A short description of what is being enabled</p>
+                            <strong class="mb-0">Text to speech</strong>
+                            <p class="text-muted mb-0">Check to enable voice to text to speech narration</p>
                         </div>
                         <div class="col-auto">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="alert1" checked="" />
+                                <input type="checkbox" class="custom-control-input" id="alert1" />
                                 <span class="custom-control-label"></span>
                             </div>
                         </div>
@@ -97,8 +107,8 @@
                 <div class="list-group-item">
                     <div class="row align-items-center">
                         <div class="col">
-                            <strong class="mb-0">Enable something to be decided</strong>
-                            <p class="text-muted mb-0">A short description of what is being enabled</p>
+                            <strong class="mb-0">Color Blind Mode</strong>
+                            <p class="text-muted mb-0">Check to enable Color Blind Mode</p>
                         </div>
                         <div class="col-auto">
                             <div class="custom-control custom-switch">
@@ -109,48 +119,82 @@
                     </div>
                 </div>
             </div>
-            <strong class="mb-0">Other Preference category</strong>
+            <strong class="mb-0">View</strong>
             <div class="list-group mb-5 shadow">
                 <div class="list-group-item">
                     <div class="row align-items-center">
                         <div class="col">
-                            <strong class="mb-0">Enable something to be decided</strong>
-                            <p class="text-muted mb-0">A short description of what is being enabled</p>
+                            <strong class="mb-0">Dark mode</strong>
+                            <p class="text-muted mb-0">Check to enable dark mode</p>
                         </div>
                         <div class="col-auto">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="alert1" checked="" />
+                                <input type="checkbox" class="custom-control-input" id="alert1" />
                                 <span class="custom-control-label"></span>
                             </div>
                         </div>
                     </div>
                 </div>
+                @*<div class="list-group-item">
+            <div class="row align-items-center">
+                <div class="col">
+                    <strong class="mb-0">Enable something to be decided</strong>
+                    <p class="text-muted mb-0">A short description of what is being enabled</p>
+                </div>
+                <div class="col-auto">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="alert2" />
+                        <span class="custom-control-label"></span>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+            </div>
+        </div>
+        <div class="tab-pane fade" id="sound" role="tabpanel" aria-labelledby="Sound-tab">
+            <strong class="mb-1">Master Volume</strong>
+            <div class="list-group mb-5 shadow">
                 <div class="list-group-item">
                     <div class="row align-items-center">
                         <div class="col">
-                            <strong class="mb-0">Enable something to be decided</strong>
-                            <p class="text-muted mb-0">A short description of what is being enabled</p>
-                        </div>
-                        <div class="col-auto">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="alert2" />
-                                <span class="custom-control-label"></span>
-                            </div>
+                            <input type="range" value="24" min="1" max="100" oninput="this.nextElementSibling.value = this.value">
+                            <output>24</output>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade" id="random" role="tabpanel" aria-labelledby="random-tab">...</div>
     </div>
     <div class="row">
-        <div class="col-1 text-center">
-            <button type="button" class="btn btn-primary">Save</button>
+        <div class="col-2 text-center">
+            <button type="button" id="save-button" class="btn btn-primary" onclick="SaveToast()">Save</button>
+            <div class="toast" id="Save-Toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-body">
+                    Settings have been saved!
+                </div>
+            </div>
             @*execute save settings to player database*@
         </div>
         <div class="col-2 text-center">
-            <a href="/Profile" on type="button" class="btn btn-secondary">Cancel</a>
+            <a href="/Profile" type="button" class="btn btn-secondary">Close</a>
             @*Load the profile view*@
         </div>
     </div>
 </div>
+<script>
+    var option =
+    {
+        animation: true,
+        delay: 2000,
+        autohide: true
+    };
+
+    function SaveToast()
+    {
+        var toastHTMLElement = document.getElementById("Save-Toast");
+
+        var toastElement = new bootstrap.Toast(toastHTMLElement, option);
+
+        toastElement.show( );
+    }
+</script>
