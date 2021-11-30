@@ -8,15 +8,15 @@ namespace BeHeard.Models
 {
     public class UserModel
     {
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Name { get => $"{FirstName} {LastName}";  }
+        //public string Name { get => $"{FirstName} {LastName}";  }
         public string Email { get; set; }
         public string Username { get; set; }
 
-        public string Password { get; set; } // not required
+        public string Password { get; set; } // hash
 
         // UserGender Gender { get; set; }
-        Guid Id { get; set; }
     }
 }

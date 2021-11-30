@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -58,6 +59,9 @@ namespace BeHeard
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+
+            // dbcontext test
+            services.AddDbContext<Application.BeHeardContext>(options => options.UseSqlServer("name=ConnectionStrings:BeHeard_DBconnectionstring"));
 
             // DI
             // services.AddTransient<Core.IJwtTokenConfig, Application.JwtTokenConfig>();
