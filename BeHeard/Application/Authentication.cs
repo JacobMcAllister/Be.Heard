@@ -79,6 +79,7 @@ namespace BeHeard.Application
         {
             throw new NotImplementedException();
         }
+  
 
         private static string GenerateRefreshTokenString()
         {
