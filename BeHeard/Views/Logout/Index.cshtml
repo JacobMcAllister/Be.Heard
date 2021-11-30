@@ -1,12 +1,10 @@
-﻿@model BeHeard.Models.LoginModel
-@{
-}
-
+﻿
 <div class="row justify-content-center">
     <div class="col-6">
         <div class="card">
             <div class="card-header text-center">
-                <h3>Be Heard Login</h3>
+                <h3>You've been logged out.</h3>
+                <h5>Thank you for using Be Heard.</h5>
             </div>
             <div class="card-body m-4">
                 <form method="post" enctype="multipart/form-data" asp-controller="Login" asp-action="Login">
@@ -19,16 +17,16 @@
                         <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="Enter your password" name="Password" />
                     </div>
                     <div class="text-center pb-4">
-                        <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                        <button type="submit" class="btn btn-primary w-100">Sign back In</button>
                     </div>
                 </form>
                 <div class="row justify-content-center text-center">
-                    <div class="col-6">
+                    @*<div class="col-6">
                         <a asp-area="" asp-controller="Login" asp-action="Registration">Create an account</a>
                     </div>
                     <div class="col-6">
                         <a href="#">Forgot password?</a>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>

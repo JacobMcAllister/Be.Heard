@@ -1,5 +1,4 @@
-﻿using BeHeard.Application;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace BeHeard.Controllers
 {
-    [BeHeardAuthorize]
-    public class DashboardController : Controller
+    public class LogoutController : Controller
     {
         public IActionResult Index()
         {

@@ -1,12 +1,16 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BeHeard
@@ -24,6 +28,46 @@ namespace BeHeard
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            // NOTE: testing
+            var jwtTokenConfig = Configuration.GetSection("jwtTokenConfig").Get<Application.JwtTokenConfig>();
+            services.AddSingleton(jwtTokenConfig);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = true;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = jwtTokenConfig.Issuer,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtTokenConfig.Secret)),
+                    ValidAudience = jwtTokenConfig.Audience,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.FromMinutes(1)
+                };
+            });
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            // dbcontext test
+            services.AddDbContext<Application.BeHeardContext>(options => options.UseSqlServer("name=ConnectionStrings:BeHeard_DBconnectionstring"));
+
+            // DI
+            // services.AddTransient<Core.IJwtTokenConfig, Application.JwtTokenConfig>();
+            services.AddTransient<Core.IAuthentication, Application.Authentication>();
+            services.AddTransient<Core.IUserService, Services.UserService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,7 +88,14 @@ namespace BeHeard
 
             app.UseRouting();
 
+            app.UseSession();
+
+
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware<Application.AuthenticationMiddleware>();
+
 
             app.UseEndpoints(endpoints =>
             {
