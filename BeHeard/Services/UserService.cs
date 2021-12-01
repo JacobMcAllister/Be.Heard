@@ -1,4 +1,5 @@
-﻿using BeHeard.Core;
+﻿using BeHeard.Application.Models;
+using BeHeard.Core;
 using BeHeard.Models;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,9 @@ namespace BeHeard.Services
     {
         // mock user
         // NOTE: add db here
-        private List<UserModel> _users = new List<UserModel>
+        private List<User> _users = new List<User>
         {
-            new UserModel {  FirstName = "super", LastName = "user", Username = "admin", Password = "password" }
+            new User {  FirstName = "super", LastName = "user", Username = "admin", Password = "password" }
         };
 
         public string GetUserRole(string username)
