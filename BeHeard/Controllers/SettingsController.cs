@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BeHeard.Controllers
 {
+
     public class SettingsController : Controller
     {
         public IActionResult Index()
@@ -21,5 +22,10 @@ namespace BeHeard.Controllers
         {
             return PartialView("_Preferences");
         }
+        public ActionResult Subscription()
+        {
+            return PartialView("_Subscription");
+        }
+
     }
 }

@@ -1,11 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Settings";
 }
+
 <h1>@ViewData["Title"]</h1>
 <div class="containter my-5">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="account-tab" data-bs-toggle="tab" data-bs-target="#account" type="button" role="tab" aria-controls="home" aria-selected="true">Account</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="subscription-tab" data-bs-toggle="tab" data-bs-target="#subscription" type="button" role="tab" aria-controls="contact" aria-selected="false">Subscription</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="preferences-tab" data-bs-toggle="tab" data-bs-target="#preferences" type="button" role="tab" aria-controls="profile" aria-selected="false">Preferences</button>
@@ -15,6 +19,7 @@
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
+        @*Account Tab*@
         <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="Account-tab">
             <h4 class="mb-0 mt-5">Account Settings</h4>
             <hr class="my-4" />
@@ -69,7 +74,7 @@
                             <strong class="mb-0">Email</strong>
                         </div>
                         <div class="col-auto">
-                             <input type="email" class="form-control" value="email@example.com">
+                            <input type="email" class="form-control" value="email@example.com">
                         </div>
                     </div>
                 </div>
@@ -85,6 +90,54 @@
                 </div>
             </div>
         </div>
+        @*Subscription Tab*@
+        <div class="tab-pane fade" id="subscription" role="tabpanel" aria-labelledby="subscription-tab">
+            <h4 class="mb-0 mt-5">Subscription Settings</h4>
+            <hr class="my-4" />
+            <div class="list-group mb-5 shadow">
+                <div class="list-group-item">
+                    <div class="row align-items-center">
+                        <div class="col-3">
+                            <strong class="mb-0">Current Subscription</strong>
+                        </div>
+                        <div class="col-auto">
+                            <p class="py-2 ">Free</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <strong class="mb-0">Subscription Options</strong>
+                    <ul class="list-group col-3">
+                        <li class="list-group-item">
+                            <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                            Free Subscription
+                        </li>
+                        <li class="list-group-item">
+                            <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                            Upgrade with established care team
+                        </li>
+                        <li class="list-group-item">
+                            <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                            Upgrade without care team
+                        </li>
+                    </ul>
+                </div>
+            </div>
+                <strong class="mb-1">Payment Type</strong>
+                <div class="list-group mb-5 shadow">
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col-3">
+                                <strong class="mb-0">Current Payment Method</strong>
+                            </div>
+                            <div class="col-auto">
+                                <p class="py-2 ">N/A</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
         <div class="tab-pane fade" id="preferences" role="tabpanel" aria-labelledby="preferences-tab">
             <h4 class="mb-0 mt-5">Preference Settings</h4>
             <hr class="my-4" />
@@ -136,19 +189,19 @@
                     </div>
                 </div>
                 @*<div class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col">
-                    <strong class="mb-0">Enable something to be decided</strong>
-                    <p class="text-muted mb-0">A short description of what is being enabled</p>
-                </div>
-                <div class="col-auto">
-                    <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="alert2" />
-                        <span class="custom-control-label"></span>
-                    </div>
-                </div>
-            </div>
-        </div>*@
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <strong class="mb-0">Enable something to be decided</strong>
+                                <p class="text-muted mb-0">A short description of what is being enabled</p>
+                            </div>
+                            <div class="col-auto">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="alert2" />
+                                    <span class="custom-control-label"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
             </div>
         </div>
         <div class="tab-pane fade" id="sound" role="tabpanel" aria-labelledby="Sound-tab">
@@ -189,12 +242,11 @@
         autohide: true
     };
 
-    function SaveToast()
-    {
+    function SaveToast() {
         var toastHTMLElement = document.getElementById("Save-Toast");
 
         var toastElement = new bootstrap.Toast(toastHTMLElement, option);
 
-        toastElement.show( );
+        toastElement.show();
     }
 </script>
