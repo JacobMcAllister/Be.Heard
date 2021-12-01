@@ -7,5 +7,6 @@ namespace BeHeard.Application.Models
 {
     public class Settings
     {
+        public Guid Id { get; set; }
     }
 }

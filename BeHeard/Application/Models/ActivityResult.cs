@@ -7,5 +7,10 @@ namespace BeHeard.Application.Models
 {
     public class ActivityResult
     {
+        public Guid Id { get; set; }
+        public DateTime Date { get; set; }
+        public double Frequency { get; set; }
+        public double Decibel { get; set; }
+        public ActivityLevel Level { get; set; }
     }
 }

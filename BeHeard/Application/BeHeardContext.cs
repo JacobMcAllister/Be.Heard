@@ -14,5 +14,8 @@ namespace BeHeard.Application
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Settings> Settings { get; set; }
+        public DbSet<ActivityResult> ActivityResults { get; set; }
     }
 }
