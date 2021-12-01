@@ -11,6 +11,7 @@ using BeHeard.Application;
 using Microsoft.AspNetCore.Authentication;
 using System.Net.Http.Headers;
 using System.Net.Http;
+using BeHeard.Application.Models;
 
 namespace BeHeard.Controllers
 {
@@ -33,7 +34,7 @@ namespace BeHeard.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(UserModel user)
+        public IActionResult Login(User user)
         {
             // NOTE: Add redirects for failed attempts and nonexistent accounts
 
