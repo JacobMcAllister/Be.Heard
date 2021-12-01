@@ -1,4 +1,5 @@
-﻿using BeHeard.Application.Models;
+﻿using BeHeard.Application;
+using BeHeard.Application.Models;
 using BeHeard.Core;
 using BeHeard.Models;
 using System;
@@ -17,6 +18,16 @@ namespace BeHeard.Services
             new User {  FirstName = "super", LastName = "user", Username = "admin", Password = "password" }
         };
 
+        // testing 
+        private readonly BeHeardContext _context;
+        private readonly BeHeardContextManager _beHeardContextManager;
+        public UserService(BeHeardContext context)
+        {
+            _context = context;
+            _beHeardContextManager = new BeHeardContextManager(_context);
+        }
+
+
         public string GetUserRole(string username)
         {
             if (!IsAnExistingUser(username))
@@ -34,7 +45,11 @@ namespace BeHeard.Services
 
         public bool IsAnExistingUser(string username)
         {
-            var user = _users.FirstOrDefault(x => x.Username == username);
+            //var user = _users.FirstOrDefault(x => x.Username == username);
+            //if (user != null) return true;
+            //else return false;
+
+            var user = _beHeardContextManager.UserRepository.GetUserByUsername(username);
             if (user != null) return true;
             else return false;
         }
@@ -47,9 +62,13 @@ namespace BeHeard.Services
             if (string.IsNullOrWhiteSpace(password))
                 return false;
 
-            var user = _users.FirstOrDefault(x => x.Username == username && x.Password == password);
+            //var user = _users.FirstOrDefault(x => x.Username == username && x.Password == password);
+            //if (user != null) return true;
+            //    // return _users.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
+            //else return false;
+
+            var user = _beHeardContextManager.UserRepository.GetUserByCredentials(new AuthorizationRequest { Username = username, Password = password});
             if (user != null) return true;
-                // return _users.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
             else return false;
         }
     }

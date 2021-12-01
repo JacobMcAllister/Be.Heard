@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BeHeard.Core
 {
-    interface IUserProfileRepository : IRepository<UserProfile>
+    public interface IUserProfileRepository : IRepository<UserProfile>
     {
         UserProfile GetUserProfileByUser(User user);
     }

@@ -1,6 +1,7 @@
 ﻿using BeHeard.Application;
 using BeHeard.Application.Models;
 using BeHeard.Core;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;

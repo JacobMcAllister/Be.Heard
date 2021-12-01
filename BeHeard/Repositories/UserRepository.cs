@@ -23,7 +23,7 @@ namespace BeHeard.Repositories
 
             return Context.Users
                 .Where(u => u.Username == credentials.Username && u.Password == credentials.Password)
-                .First();
+                .FirstOrDefault();
         }
 
         public User GetUserByEmail(string email)
@@ -35,7 +35,7 @@ namespace BeHeard.Repositories
         public User GetUserByUsername(string username)
         {
             // return Context.Set<User>().Where(u => u.Username == username).First();
-            return Context.Users.Where(u => u.Username == username).First();
+            return Context.Users.Where(u => u.Username == username).FirstOrDefault();
         }
     }
 }
