@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BeHeard.Application;
 
-namespace BeHeard.Models
+namespace BeHeard.Application.Models
 {
-    public class UserModel
+    public class User
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }
@@ -17,6 +16,11 @@ namespace BeHeard.Models
 
         public string Password { get; set; } // hash
 
-        // UserGender Gender { get; set; }
+        public Gender Gender { get; set; }
+    }
+
+    public enum Gender
+    {
+        Male, Female
     }
 }
