@@ -33,6 +33,7 @@
     <Folder Include="Domain\" />
     <Folder Include="Entities\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Properties\" />
     <Folder Include="ResourcePackages\dist\css\" />
     <Folder Include="ResourcePackages\dist\js\" />
     <Folder Include="ResourcePackages\js\dist\" />
