@@ -19,9 +19,14 @@ namespace BeHeard.Controllers
     {
         private readonly IUserService _userService;
         private readonly IAuthentication _authentication;
+        private readonly BeHeardContext _context;
+        private readonly BeHeardContextManager _beHeardContextManager;
 
-        public LoginController(IUserService userService, IAuthentication authentication)
+        public LoginController(IUserService userService, IAuthentication authentication, BeHeardContext context)
         {
+            _context = context;
+            _beHeardContextManager = new BeHeardContextManager(_context);
+
             _userService = userService;
             _authentication = authentication;
         }
@@ -47,9 +52,9 @@ namespace BeHeard.Controllers
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.Role, role)
             };
-
-            // NOTE: implement refresh tokens
-            var authenticationResult = _authentication.GenerateTokens(user.Username, claims, DateTime.Now);
+    
+        // NOTE: implement refresh tokens
+        var authenticationResult = _authentication.GenerateTokens(user.Username, claims, DateTime.Now);
 
             Response.Cookies.Append("token", authenticationResult.AccessToken);
             var home = $"{this.Request.Scheme}://{this.Request.Host}";
@@ -63,6 +68,45 @@ namespace BeHeard.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult RegisterAccount(User user)
+        {
+
+            var home = $"{this.Request.Scheme}://{this.Request.Host}";
+            var testing = home + "/Dashboard";
+            if (_userService.IsAnExistingUser(user.Username, user.Email)) {
+                Response.Redirect(testing);
+                return new EmptyResult();
+            }
+
+            var newAccount = new User
+            {
+                Username = user.Username,
+                Password = user.Password,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Gender = user.Gender,
+            };
+            var userSettings = new Settings
+            {
+                User = newAccount
+            };
+
+            var userProfile = new UserProfile
+            {
+                User =newAccount,
+                Settings = userSettings,
+                ActivityResults = new List<ActivityResult>()
+                
+            };
+
+            _beHeardContextManager.UserProfileRepository.Add(userProfile);
+            _beHeardContextManager.SaveChanges();
+
+            Response.Redirect(home);
+                return new EmptyResult();
+            }
         public IActionResult ForgotPassword()
         {
             return View();

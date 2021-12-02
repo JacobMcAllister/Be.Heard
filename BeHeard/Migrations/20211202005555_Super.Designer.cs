@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeHeard.Migrations
 {
     [DbContext(typeof(BeHeardContext))]
-    [Migration("20211201115102_InitialModelTest")]
-    partial class InitialModelTest
+    [Migration("20211202005555_Super")]
+    partial class Super
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -79,6 +79,9 @@ namespace BeHeard.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
