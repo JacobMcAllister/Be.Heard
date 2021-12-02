@@ -3,12 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BeHeard.Application;
 
 namespace BeHeard.Controllers
 {
-    [BeHeardAuthorize]
-    public class ExercisesController : Controller
+    public class LandingController : Controller
     {
         public IActionResult Index()
         {

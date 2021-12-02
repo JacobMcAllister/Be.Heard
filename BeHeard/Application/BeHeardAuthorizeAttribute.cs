@@ -12,7 +12,6 @@ namespace BeHeard.Application
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class BeHeardAuthorizeAttribute : Attribute, IAuthorizationFilter
-
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
@@ -20,10 +19,12 @@ namespace BeHeard.Application
 
             if (user == null)
             {
-                context.Result = new JsonResult(new { message = "Unauthorized" })
-                {
-                    StatusCode = StatusCodes.Status401Unauthorized
-                };
+                //context.Result = new JsonResult(new { message = "Unauthorized" })
+                //{
+                //    StatusCode = StatusCodes.Status401Unauthorized
+                //};
+
+                context.Result = new RedirectResult("~/landing");
             }
         }
     }

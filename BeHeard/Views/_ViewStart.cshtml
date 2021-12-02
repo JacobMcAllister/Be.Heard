@@ -7,6 +7,9 @@
     }
     else
     {
-        Layout = "_Layout";
+        if (routeUrl.Contains("Landing"))
+            Layout = "_LandingLayout";
+        else
+            Layout = "_Layout";
     }
 }
