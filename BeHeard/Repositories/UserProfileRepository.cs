@@ -1,6 +1,7 @@
 ﻿using BeHeard.Application;
 using BeHeard.Application.Models;
 using BeHeard.Core;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,12 @@ namespace BeHeard.Repositories
         public UserProfile GetUserProfileByUser(User user)
         {
             // return Context.Set<UserProfile>().Where(x => x.User.Id == user.Id).First();
-            return Context.UserProfiles.Where(x => x.User.Id == user.Id).First();
+            //return Context.UserProfiles.Where(x => x.User.Id == user.Id).First();
+            return Context.UserProfiles
+                    .Include(x => x.Settings)
+                    .Include(x => x.ActivityResults)
+                    .Where(x => x.User == user).First();
         }
+
     }
 }

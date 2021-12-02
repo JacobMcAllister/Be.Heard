@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BeHeard.Migrations
 {
-    public partial class InitialModelTest : Migration
+    public partial class Super : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,6 +27,7 @@ namespace BeHeard.Migrations
                     LastName = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     Username = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     Gender = table.Column<int>(nullable: false)
                 },
@@ -34,7 +35,6 @@ namespace BeHeard.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
-
 
             migrationBuilder.CreateTable(
                 name: "UserProfiles",
