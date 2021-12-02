@@ -24,6 +24,8 @@ namespace BeHeard.Application
 
         public IActivityResultRepository ActivityResultRepository { get; private set; }
 
+        public ISettingsRepository SettingsRepository { get; private set; }
+
         public void Dispose()
         {
             _context.Dispose();

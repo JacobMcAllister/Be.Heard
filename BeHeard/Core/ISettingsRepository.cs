@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BeHeard.Core
 {
-    public interface ISettingsService
+    public interface ISettingsRepository : IRepository<Settings>
     {
         Settings GetUserSettings(Guid userId);
         Settings GetUserSettings(User user);
