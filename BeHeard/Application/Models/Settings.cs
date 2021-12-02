@@ -8,7 +8,6 @@ namespace BeHeard.Application.Models
     public class Settings
     {
         public Guid Id { get; set; }
-
         public User User { get; set; }
     }
 }

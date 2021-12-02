@@ -1,15 +1,13 @@
-﻿using BeHeard.Application;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BeHeard.Application;
 
-//  Comment
 namespace BeHeard.Controllers
 {
-    [BeHeardAuthorize]
-    public class DashboardController : Controller
+    public class ExercisesController : Controller
     {
         public IActionResult Index()
         {

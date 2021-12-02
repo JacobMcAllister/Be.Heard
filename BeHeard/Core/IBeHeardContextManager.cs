@@ -10,6 +10,7 @@ namespace BeHeard.Core
         IUserRepository UserRepository { get; }
         IUserProfileRepository UserProfileRepository { get; }
         IActivityResultRepository ActivityResultRepository { get; }
+        ISettingsRepository SettingsRepository { get; }
         int SaveChanges();
     }
 }
