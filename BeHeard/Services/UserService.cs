@@ -54,6 +54,22 @@ namespace BeHeard.Services
             else return false;
         }
 
+   
+        public bool IsAnExistingUser(string username, string email)
+        {
+            //var user = _users.FirstOrDefault(x => x.Username == username);
+            //if (user != null) return true;
+            //else return false;
+
+            var user = _beHeardContextManager.UserRepository.GetUserByUsername(username);
+            if (user != null) return true;
+
+            //user = _beHeardContextManager.UserRepository.GetUserByEmail(email);
+            //if (user != null) return true;
+            else return false;
+        }
+        
+
         public bool IsValidUserCredentials(string username, string password)
         {
             if (string.IsNullOrWhiteSpace(username))

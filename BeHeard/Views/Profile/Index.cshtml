@@ -1,5 +1,10 @@
 ﻿@model BeHeard.Models.ProfileModel
 @{
+    string gender = "";
+    if (Model.UserProfile.User.Gender > 0)
+        gender = "Female";
+    else
+        gender = "Male";
 }
 
 
@@ -15,7 +20,7 @@
                                 data-holder-rendered="true">
                         </div>
                             <div class="d-flex justify-content-center">
-                                <p class="fw-bold h4 mt-3">John Smith</p>
+                                <p class="fw-bold h4 mt-3">--Placeholder--</p>
                             </div>
                             <div class="d-flex justify-content-center">
                                 <a href="" type="button" class="btn btn-primary btn-sm align">Change Photo</a>
@@ -35,36 +40,44 @@
                         <p class="fw-bold h4 mt-3">Account Information</p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between border-bottom">
-                        <p class="py-2">Full Name</p>
-                        <p class="py-2 text-muted">John Smith</p>
+                        <p class="py-2">Username</p>
+                        <p class="py-2 text-muted">@Model.UserProfile.User.Username</p>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between border-bottom">
+                        <p class="py-2">First Name</p>
+                        <p class="py-2 text-muted">@Model.UserProfile.User.FirstName</p>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between border-bottom">
+                        <p class="py-2">Last Name</p>
+                        <p class="py-2 text-muted">@Model.UserProfile.User.LastName</p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between border-bottom">
                         <p class="py-2">Email</p>
-                        <p class="py-2 text-muted">example@example.com</p>
+                        <p class="py-2 text-muted">@Model.UserProfile.User.Email</p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between border-bottom">
                         <p class="py-2">Phone</p>
-                        <p class="py-2 text-muted">(775)123-4567</p>
+                        <p class="py-2 text-muted">--PlaceHolder--</p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between border-bottom">
                         <p class="py-2">City</p>
-                        <p class="py-2 text-muted"> Reno, NV</p>
+                        <p class="py-2 text-muted"> --PlaceHolder--</p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between border-bottom">
                         <p class="py-2">Street Address</p>
-                        <p class="py-2 text-muted"> 235 w 6th</p>
+                        <p class="py-2 text-muted"> --PlaceHolder--</p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between border-bottom">
                         <p class="py-2">Zip Code</p>
-                        <p class="py-2 text-muted"> 89503</p>
+                        <p class="py-2 text-muted"> --PlaceHolder--</p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between border-bottom">
                         <p class="py-2">age</p>
-                        <p class="py-2 text-muted"> 65</p>
+                        <p class="py-2 text-muted"> --PlaceHolder--</p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <p class="py-2">Gender</p>
-                        <p class="py-2 text-muted"> Reno, NV</p>
+                        <p class="py-2 text-muted"> @gender</p>
                     </div>
                     <div class="d-flex">
                         <a href="/Settings" type="button" class="btn btn-primary btn-sm">Account Settings</a>
