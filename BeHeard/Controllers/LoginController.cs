@@ -73,9 +73,7 @@ namespace BeHeard.Controllers
         {
 
             var home = $"{this.Request.Scheme}://{this.Request.Host}";
-            var testing = home + "/Dashboard";
             if (_userService.IsAnExistingUser(user.Username, user.Email)) {
-                Response.Redirect(testing);
                 return new EmptyResult();
             }
 
