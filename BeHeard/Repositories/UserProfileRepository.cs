@@ -18,12 +18,12 @@ namespace BeHeard.Repositories
 
         public UserProfile GetUserProfileByUser(User user)
         {
-            //return Context.Set<UserProfile>().Where(x => x.User.Id == user.Id).First();
+            // return Context.Set<UserProfile>().Where(x => x.User.Id == user.Id).First();
             //return Context.UserProfiles.Where(x => x.User.Id == user.Id).First();
             return Context.UserProfiles
                     .Include(x => x.Settings)
                     .Include(x => x.ActivityResults)
-                    .Where(x => x.User== user).First();
+                    .Where(x => x.User == user).First();
         }
 
     }

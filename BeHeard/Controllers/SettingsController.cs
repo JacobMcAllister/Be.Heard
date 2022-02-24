@@ -1,5 +1,4 @@
-﻿using BeHeard.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +11,7 @@ namespace BeHeard.Controllers
     {
         public IActionResult Index()
         {
-            var thisSession = HttpContext.Session.GetObjectFromJson<SessionModel>("thisSession");
-
-            return View(thisSession);
+            return View();
         }
         public ActionResult Account()
         {

@@ -52,7 +52,6 @@ namespace BeHeard
                 };
             });
 
-
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {

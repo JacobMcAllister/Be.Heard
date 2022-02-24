@@ -1,19 +1,17 @@
-﻿
-@*@model BeHeard.Models.ProfileModel*@
-
-@model BeHeard.Models.SessionModel
-@*@{
-    string gender = " ";
-    if (Model.Gender > 0)
+﻿@model BeHeard.Models.ProfileModel
+@{
+    string gender = "";
+    if (Model.UserProfile.User.Gender > 0)
         gender = "Female";
     else
         gender = "Male";
-}*@
+}
 
 
-<div class="container mb-2" style="padding-top: 5%; margin-left: 5%; margin-right: auto;">
-    <div class="row" >
-        <div class="col-md-3">
+<div class="container mb-2">
+    <div style="height: 100px"></div>
+    <div class="row">
+        <div class="col-md-4">
             <div class="row">
                 <div class="col-12 bg-white p-0 px-3 py-3 mb-3">
                     <div class="d-flex flex-column">
@@ -22,7 +20,7 @@
                                 data-holder-rendered="true">
                         </div>
                             <div class="d-flex justify-content-center">
-                                <p class="fw-bold h4 mt-3">@Model.FirstName @Model.LastName </p>
+                                <p class="fw-bold h4 mt-3">--Placeholder--</p>
                             </div>
                             <div class="d-flex justify-content-center">
                                 <a href="" type="button" class="btn btn-primary btn-sm align">Change Photo</a>
@@ -43,43 +41,43 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-between border-bottom">
                         <p class="py-2">Username</p>
-                        <p class="py-2 text-muted">@Model.Username</p>
+                        <p class="py-2 text-muted">@Model.UserProfile.User.Username</p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between border-bottom">
                         <p class="py-2">First Name</p>
-                        <p class="py-2 text-muted">@Model.FirstName</p>
+                        <p class="py-2 text-muted">@Model.UserProfile.User.FirstName</p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between border-bottom">
                         <p class="py-2">Last Name</p>
-                        <p class="py-2 text-muted">@Model.LastName</p>
+                        <p class="py-2 text-muted">@Model.UserProfile.User.LastName</p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between border-bottom">
                         <p class="py-2">Email</p>
-                        <p class="py-2 text-muted">@Model.Email</p>
+                        <p class="py-2 text-muted">@Model.UserProfile.User.Email</p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between border-bottom">
                         <p class="py-2">Phone</p>
-                        <p class="py-2 text-muted">@Model.Phone</p>
+                        <p class="py-2 text-muted">--PlaceHolder--</p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between border-bottom">
                         <p class="py-2">City</p>
-                        <p class="py-2 text-muted"> @Model.City</p>
+                        <p class="py-2 text-muted"> --PlaceHolder--</p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between border-bottom">
                         <p class="py-2">Street Address</p>
-                        <p class="py-2 text-muted"> @Model.Street</p>
+                        <p class="py-2 text-muted"> --PlaceHolder--</p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between border-bottom">
                         <p class="py-2">Zip Code</p>
-                        <p class="py-2 text-muted"> @Model.ZipCode</p>
+                        <p class="py-2 text-muted"> --PlaceHolder--</p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between border-bottom">
-                        <p class="py-2">Age</p>
-                        <p class="py-2 text-muted">@Model.Age</p>
+                        <p class="py-2">age</p>
+                        <p class="py-2 text-muted"> --PlaceHolder--</p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <p class="py-2">Gender</p>
-                        <p class="py-2 text-muted"> @*@gender*@</p>
+                        <p class="py-2 text-muted"> @gender</p>
                     </div>
                     <div class="d-flex">
                         <a href="/Settings" type="button" class="btn btn-primary btn-sm">Account Settings</a>
