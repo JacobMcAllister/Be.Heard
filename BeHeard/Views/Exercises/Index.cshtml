@@ -1,35 +1,48 @@
-﻿<!--Exercises-->
+﻿@using Microsoft.AspNetCore.Http
+
+<!--Exercises-->
 @model BeHeard.Models.ExerciseModel
+
 @{
 
 }
 
 <!--user welcome-->
-<div class="row">
-    <div class="col-12 p-5 bg-white text-black text-center">
-        <h1>Exercise</h1>
-        <h3>Hello Homer</h3>
-        <h6>Every day is good day to get better!</h6>
-    </div>
-</div>
+<div class="container mb-2" style="padding-top: 5%; margin-left: 5%; margin-right: auto; padding-right: 5%;">
 
-<!--user current project-->
-<div class="container p-5 my-5 bg-dark text-white">
-    <h3>Current Exercise</h3>
-    <p>This is a space to list what the user is currently working on.  It will take the progress on an in-app project from the database and display here for the user.  It will be the last project the user was working on prior to logout.</p>
-</div>
-
-<!--user past project-->
-<div class="container">
     <div class="row">
-        <div class="col-8 p-5">
-            <h2>Past Exercises</h2>
-            <h6>You're doing great!</h6>
-            <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item">Focus Techniques for Everyday Use</a>
-                <a href="#" class="list-group-item">Vowel Sounds and Muscle Technique</a>
-                <a href="#" class="list-group-item">Breathing for Better Communication</a>
+        <div class="col-12 p-5 bg-white text-black text-center">
+            <h1>Exercise</h1>
+            <h3>Hello, 
+                @{
+                    var thisSession = Context.Session.GetObjectFromJson<SessionModel>("thisSession");
+                    string Name = thisSession.FirstName + " " + thisSession.LastName;
+                    @Name
+                }
+            </h3>
+            <h6>Every day is good day to get better!</h6>
+        </div>
+    </div>
+
+    <!--user current project-->
+    <div class="container p-5 my-5 bg-dark text-white">
+        <h3>Current Exercise</h3>
+        <p>This is a space to list what the user is currently working on.  It will take the progress on an in-app project from the database and display here for the user.  It will be the last project the user was working on prior to logout.</p>
+    </div>
+
+    <!--user past project-->
+    <div class="container">
+        <div class="row">
+            <div class="col-8 p-5">
+                <h2>Past Exercises</h2>
+                <h6>You're doing great!</h6>
+                <div class="list-group list-group-flush">
+                    <a href="#" class="list-group-item">Focus Techniques for Everyday Use</a>
+                    <a href="#" class="list-group-item">Vowel Sounds and Muscle Technique</a>
+                    <a href="#" class="list-group-item">Breathing for Better Communication</a>
+                </div>
             </div>
         </div>
     </div>
+
 </div>
