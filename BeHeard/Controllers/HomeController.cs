@@ -1,6 +1,7 @@
 ﻿using BeHeard.Application;
 using BeHeard.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -15,14 +16,17 @@ namespace BeHeard.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly BeHeardContextManager _beHeardContextManager;     
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, BeHeardContext context)
         {
             _logger = logger;
+            _beHeardContextManager = new BeHeardContextManager(context);
         }
 
         public IActionResult Index()
         {
+
             return View();
         }
 

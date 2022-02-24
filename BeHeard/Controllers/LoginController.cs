@@ -52,9 +52,37 @@ namespace BeHeard.Controllers
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.Role, role)
             };
-    
-        // NOTE: implement refresh tokens
-        var authenticationResult = _authentication.GenerateTokens(user.Username, claims, DateTime.Now);
+
+            var thisUser = _beHeardContextManager.UserRepository.GetUserByUsername(user.Username);
+            var userProfile = _beHeardContextManager.UserProfileRepository.GetUserProfileByUser(thisUser);
+
+            HttpContext.Session.SetString("FirstName", userProfile.User.FirstName);
+            HttpContext.Session.SetString("LastName", userProfile.User.LastName);
+            HttpContext.Session.SetString("Email", userProfile.User.Email);
+            HttpContext.Session.SetString("Username", userProfile.User.Username);
+
+            SessionModel thisSession = new SessionModel()
+            {
+                FirstName = HttpContext.Session.GetString("FirstName"),
+                LastName = HttpContext.Session.GetString("LastName"),
+                FullName = HttpContext.Session.GetString("FirstName") + HttpContext.Session.GetString("LastName"),
+                Email = HttpContext.Session.GetString("Email"),
+                Username = HttpContext.Session.GetString("Username"),
+                Phone = " ",
+                City = " ",
+                Street = " ",
+                ZipCode = " ",
+                Age = " ",
+                Gender = 1
+            };
+
+   
+            HttpContext.Session.SetObjectAsJson("thisSession", thisSession);
+
+
+
+            // NOTE: implement refresh tokens
+            var authenticationResult = _authentication.GenerateTokens(user.Username, claims, DateTime.Now);
 
             Response.Cookies.Append("token", authenticationResult.AccessToken);
             var home = $"{this.Request.Scheme}://{this.Request.Host}";
