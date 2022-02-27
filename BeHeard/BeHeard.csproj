@@ -33,12 +33,13 @@
     <Folder Include="Domain\" />
     <Folder Include="Entities\" />
     <Folder Include="Extensions\" />
+    <Folder Include="js\" />
     <Folder Include="Properties\" />
     <Folder Include="ResourcePackages\dist\css\" />
     <Folder Include="ResourcePackages\dist\js\" />
     <Folder Include="ResourcePackages\js\dist\" />
     <Folder Include="ResourcePackages\js\src\" />
-    <Folder Include="ResourcePackages\webfonts\" />
+    <Folder Include="ResourcePackages\scss\webfonts\" />
     <Folder Include="Views\Profile\" />
   </ItemGroup>
 
