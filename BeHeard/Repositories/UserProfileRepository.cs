@@ -21,9 +21,9 @@ namespace BeHeard.Repositories
             //return Context.Set<UserProfile>().Where(x => x.User.Id == user.Id).First();
             //return Context.UserProfiles.Where(x => x.User.Id == user.Id).First();
             return Context.UserProfiles
-                    .Include(x => x.Settings)
-                    .Include(x => x.ActivityResults)
-                    .Where(x => x.User== user).First();
+                .Include(x => x.Settings)
+                .Include(x => x.ActivityResults)
+                .First(x => x.User== user);
         }
 
     }

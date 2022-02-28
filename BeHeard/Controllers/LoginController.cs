@@ -19,13 +19,11 @@ namespace BeHeard.Controllers
     {
         private readonly IUserService _userService;
         private readonly IAuthentication _authentication;
-        private readonly BeHeardContext _context;
         private readonly BeHeardContextManager _beHeardContextManager;
 
         public LoginController(IUserService userService, IAuthentication authentication, BeHeardContext context)
         {
-            _context = context;
-            _beHeardContextManager = new BeHeardContextManager(_context);
+            _beHeardContextManager = new BeHeardContextManager(context);
 
             _userService = userService;
             _authentication = authentication;
