@@ -19,13 +19,18 @@
 
 <!--user welcome-->
 <div class="row">
-    <div class="col-8 p-5 bg-white text-black text-lg-center">
-        <h1>Hello Homer</h1>
-        <p>Thanks for stopping by!</p>
+    <div class="col-8 p-5 bg-white text-black text-xl-center">
+        <h1>Hello,
+        @{
+            var thisSession = Context.Session.GetObjectFromJson<SessionModel>("thisSession");
+            string Name = thisSession.FirstName + " " + thisSession.LastName;
+            @Name
+        }
+        </h1>
     </div>
     <div class="col-4 p-5 bg-white text-black" text-center">
         <p>Current Date and Time:</p>
-        <p><span id='date-time'></span>.</p>
+        <p><span id='date-time'></span></p>
     </div>
 </div>
 
@@ -103,6 +108,7 @@
 @section Scripts
 {
     <script src="~/js/chart.js"></script>
+
     <script>
         //  Date and Time 
         var dt = new Date();

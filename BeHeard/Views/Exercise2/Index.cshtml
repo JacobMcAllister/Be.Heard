@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Http
+
+<!--Exercise2-->
+@model BeHeard.Models.Exercise2Model
+
+@{
+
+}
+
+<h1>Empty Exercise</h1>
+
+<p>These are the directions</p>
+<p>More directions</p>
+<p>....</p>
+<p>....</p>
+<p>Enjoy your Exercise!</p>
+
+<div class="User">
+    <h1>
+        Good Job
+        @{
+            var thisSession = Context.Session.GetObjectFromJson<SessionModel>("thisSession");
+            string Name = thisSession.FirstName + " " + thisSession.LastName;
+            @Name
+        }
+    </h1>
+</div>

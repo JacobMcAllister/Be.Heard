@@ -13,7 +13,8 @@
     <div class="row">
         <div class="col-12 p-5 bg-white text-black text-center">
             <h1>Exercise</h1>
-            <h3>Hello, 
+            <h3>
+                Hello,
                 @{
                     var thisSession = Context.Session.GetObjectFromJson<SessionModel>("thisSession");
                     string Name = thisSession.FirstName + " " + thisSession.LastName;
@@ -30,19 +31,57 @@
         <p>This is a space to list what the user is currently working on.  It will take the progress on an in-app project from the database and display here for the user.  It will be the last project the user was working on prior to logout.</p>
     </div>
 
-    <!--user past project-->
-    <div class="container">
-        <div class="row">
-            <div class="col-8 p-5">
-                <h2>Past Exercises</h2>
-                <h6>You're doing great!</h6>
-                <div class="list-group list-group-flush">
-                    <a href="#" class="list-group-item">Focus Techniques for Everyday Use</a>
-                    <a href="#" class="list-group-item">Vowel Sounds and Muscle Technique</a>
-                    <a href="#" class="list-group-item">Breathing for Better Communication</a>
+    <div class="container p-5 my-5 bg-dark text-white">
+        <div class="row justify-content-center">
+            <div class="col-3 m-3 d-flex align-items-center justify-content-center" style="background-color: #fff2ec; height: 200px; border-radius: 8px;">
+                <div class="row text-center">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Exercise1" asp-action="Index">
+                        <div class="col-12">
+                            <i class="fas fa-microphone-alt fa-4x"></i>
+                        </div>
+                        <div class="col-12">
+                            <h3>Exercise 1</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-3 m-3 d-flex align-items-center justify-content-center" style="background-color: #fff2ec; height: 200px; border-radius: 8px;">
+                <div class="row text-center">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Exercise2" asp-action="Index">
+                        <div class="col-12">
+                            <i class="fas fa-microphone-alt fa-4x"></i>
+                        </div>
+                        <div class="col-12">
+                            <h3>Exercise 2</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-3 m-3 d-flex align-items-center justify-content-center" style="background-color: #fff2ec; height: 200px; border-radius: 8px;">
+                <div class="row text-center">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Exercise3" asp-action="Index">
+                        <div class="col-12">
+                            <i class="fas fa-microphone-alt fa-4x"></i>
+                        </div>
+                        <div class="col-12">
+                            <h3>Exercise 3</h3>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
+    <!--user past project-->
+    <div class="container p-5 my-5 bg-dark text-white">
+        <div class="row">
+            <h2>Past Exercises</h2>
+            <h6>You're doing great!</h6>
+            <div class="list-group list-group-flush">
+                    <a href="#" class="list-group-item">Focus Techniques for Everyday Use</a>
+                    <a href="#" class="list-group-item">Vowel Sounds and Muscle Technique</a>
+                    <a href="#" class="list-group-item">Breathing for Better Communication</a>
+            </div>
+        </div>
+    </div>
 </div>
