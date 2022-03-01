@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,13 @@ namespace BeHeard.Application
 
                 context.Result = new RedirectResult("~/landing");
             }
+
+            var thisSession = context.HttpContext.Session.GetObjectFromJson<SessionModel>("thisSession");
+            if (thisSession == null)
+            {
+                context.Result = new RedirectResult("~/landing");
+            }
+
         }
     }
 }
