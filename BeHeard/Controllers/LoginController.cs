@@ -19,13 +19,11 @@ namespace BeHeard.Controllers
     {
         private readonly IUserService _userService;
         private readonly IAuthentication _authentication;
-        private readonly BeHeardContext _context;
         private readonly BeHeardContextManager _beHeardContextManager;
 
         public LoginController(IUserService userService, IAuthentication authentication, BeHeardContext context)
         {
-            _context = context;
-            _beHeardContextManager = new BeHeardContextManager(_context);
+            _beHeardContextManager = new BeHeardContextManager(context);
 
             _userService = userService;
             _authentication = authentication;
@@ -42,9 +40,11 @@ namespace BeHeard.Controllers
         public IActionResult Login(User user)
         {
             // NOTE: Add redirects for failed attempts and nonexistent accounts
+            TempData["Error"] = "Sorry, that 'Username' and 'Password' combination does not match.";
 
             if (!_userService.IsValidUserCredentials(user.Username, user.Password))
-                return Unauthorized();
+                return View("Index");
+                //return Unauthorized();
 
             var role = _userService.GetUserRole(user.Username);
             var claims = new[]
@@ -95,16 +95,25 @@ namespace BeHeard.Controllers
         {
             return View();
         }
+        public IActionResult TermsConditions()
+        {        
+           return View();
+        }
 
         [HttpPost]
-        public IActionResult RegisterAccount(User user)
+        public IActionResult RegisterAccount(User user, int termCheck)
         {
+
 
             var home = $"{this.Request.Scheme}://{this.Request.Host}";
             if (_userService.IsAnExistingUser(user.Username, user.Email)) {
-                return new EmptyResult();
+                TempData["Error"] = "Sorry, that 'Username' or 'Email' is already used.";
+                return View("Registration");
             }
-
+            if (termCheck == 0)
+            {
+                Response.Redirect(home);
+            }
             var newAccount = new User
             {
                 Username = user.Username,
