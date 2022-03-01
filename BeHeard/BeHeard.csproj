@@ -39,7 +39,7 @@
     <Folder Include="ResourcePackages\dist\js\" />
     <Folder Include="ResourcePackages\js\dist\" />
     <Folder Include="ResourcePackages\js\src\" />
-    <Folder Include="ResourcePackages\scss\webfonts\" />
+    <Folder Include="ResourcePackages\webfonts\" />
     <Folder Include="Views\Profile\" />
   </ItemGroup>
 
