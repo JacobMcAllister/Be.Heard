@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20220228085656_AddSubscriptionId.cs" />
+    <Compile Remove="Migrations\20220228085656_AddSubscriptionId.Designer.cs" />
+    <Compile Remove="Migrations\20220228085944_AddUserAddressPhoneAndSettingsPreferencesSubscription.cs" />
+    <Compile Remove="Migrations\20220228085944_AddUserAddressPhoneAndSettingsPreferencesSubscription.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="compilerconfig.json" />
     <Content Remove="wwwroot\js\main.js" />
   </ItemGroup>
