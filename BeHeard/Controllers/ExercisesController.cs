@@ -14,5 +14,20 @@ namespace BeHeard.Controllers
         {
             return View();
         }
+
+        public IActionResult Exercise1()
+        {
+            return View();
+        }
+
+        public IActionResult Exercise2()
+        {
+            return View();
+        }
+
+        public IActionResult Exercise3()
+        {
+            return View();
+        }
     }
 }

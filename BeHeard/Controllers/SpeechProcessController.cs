@@ -12,5 +12,9 @@ namespace BeHeard.Controllers
         {
             return View();
         }
+
+        public void StartRecording() { 
+
+        }
     }
 }

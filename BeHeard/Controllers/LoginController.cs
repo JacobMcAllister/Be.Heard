@@ -40,9 +40,10 @@ namespace BeHeard.Controllers
         public IActionResult Login(User user)
         {
             // NOTE: Add redirects for failed attempts and nonexistent accounts
+            TempData["Error"] = "Sorry, that 'Username' and 'Password' combination do not match any record.";
 
             if (!_userService.IsValidUserCredentials(user.Username, user.Password))
-                return Unauthorized();
+                return View("~/Views/Login/Index.cshtml");
 
             var role = _userService.GetUserRole(user.Username);
             var claims = new[]
@@ -93,16 +94,25 @@ namespace BeHeard.Controllers
         {
             return View();
         }
+        public IActionResult TermsConditions()
+        {        
+           return View();
+        }
 
         [HttpPost]
-        public IActionResult RegisterAccount(User user)
+        public IActionResult RegisterAccount(User user, int termCheck)
         {
+
 
             var home = $"{this.Request.Scheme}://{this.Request.Host}";
             if (_userService.IsAnExistingUser(user.Username, user.Email)) {
-                return new EmptyResult();
+                TempData["Error"] = "Sorry, that 'Username' or 'Email' is already used.";
+                return View("Registration");
             }
-
+            if (termCheck == 0)
+            {
+                Response.Redirect(home);
+            }
             var newAccount = new User
             {
                 Username = user.Username,
