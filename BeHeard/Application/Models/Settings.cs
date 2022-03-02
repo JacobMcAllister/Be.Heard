@@ -7,7 +7,10 @@ namespace BeHeard.Application.Models
 {
     public class Settings
     {
-        public Guid Id { get; set; }
-        public User User { get; set; }
+        public Guid         Id           { get; set; }
+        public int          MasterVolume { get; set; } // what is this even used for
+        public Preferences  Preferences  { get; set; }
+        public Subscription Subscription { get; set; }
+        public User         User         { get; set; }
     }
 }

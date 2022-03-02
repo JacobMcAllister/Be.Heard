@@ -2,12 +2,21 @@
 @{
 }
 
+
 <div class="row justify-content-center">
     <div class="col-6">
         <div class="card">
             <div class="card-header text-center">
                 <h3>Create a Be Heard account</h3>
                 <p>Be Heard helps you rehabilitate your speech. Join now to begin.</p>
+            </div>
+            <div class="text-center">
+                <h3 style="color: red;">
+                    @{
+                        if (TempData["Error"] != null)
+                            @TempData["Error"]
+                    }
+                </h3>
             </div>
             <div class="card-body m-4">
                 <form method="post" enctype="multipart/form-data" asp-controller="Login" asp-action="RegisterAccount">
@@ -24,20 +33,25 @@
                         <input type="text" class="form-control" id="LastName" aria-describedby="LastNameHelp" placeholder="Last Name" name="LastName" />
                     </div>
                     <div class="form-group pb-3">
-                        <label for="username">Email</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter your email" name="Email" />
+                        <label for="Email">Email</label>
+                        <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Enter your email" name="Email" />
                     </div>
+                    <div class="form-group pb-3">
+                        <label for="City">City</label>
+                        <input type="text" class="form-control" id="City" aria-describedby="cityHelp" placeholder="Enter your City" name="City" />
+                    </div>
+
                     @*<div class="form-group pb-3">
-                        <div class="col-auto">
-                            <label for="Phone">Phone Number</label>
-                            <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="Phone" aria-describedby="PhoneNumberHelp" placeholder="123-456-7890" />
-                        </div>
-                        <div class="col-auto">
-                            <span id="phoneformat" class="form-text">
-                                Must be in xxx-xxx-xxxx format.
-                            </span>
-                        </div>
-                    </div>*@
+                            <div class="col-auto">
+                                <label for="Phone">Phone Number</label>
+                                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="Phone" aria-describedby="PhoneNumberHelp" placeholder="123-456-7890" />
+                            </div>
+                            <div class="col-auto">
+                                <span id="phoneformat" class="form-text">
+                                    Must be in xxx-xxx-xxxx format.
+                                </span>
+                            </div>
+                        </div>*@
                     <fieldset class="form-group">
                         <div class="row">
                             <p class="col-form-label col-sm-2 pt-0">Gender</p>
@@ -66,13 +80,13 @@
                     </div>
                 </form>
                 @*<div class="row justify-content-center text-center">
-                    <div class="col-6">
-                        <a href="#">Create an account</a>
-                    </div>
-                    <div class="col-6">
-                        <a href="#">Forgot password?</a>
-                    </div>
-                </div>*@
+                        <div class="col-6">
+                            <a href="#">Create an account</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="#">Forgot password?</a>
+                        </div>
+                    </div>*@
             </div>
         </div>
     </div>

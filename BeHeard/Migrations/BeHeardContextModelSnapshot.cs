@@ -47,10 +47,74 @@ namespace BeHeard.Migrations
                     b.ToTable("ActivityResults");
                 });
 
+            modelBuilder.Entity("BeHeard.Application.Models.Address", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Apartment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ApartmentNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StreetNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Address");
+                });
+
+            modelBuilder.Entity("BeHeard.Application.Models.Preferences", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("ColorBlindMode")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("DarkMode")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("TextToSpeech")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Preferences");
+                });
+
             modelBuilder.Entity("BeHeard.Application.Models.Settings", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("MasterVolume")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("PreferencesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("SubscriptionId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("UserId")
@@ -58,9 +122,27 @@ namespace BeHeard.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PreferencesId");
+
+                    b.HasIndex("SubscriptionId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Settings");
+                });
+
+            modelBuilder.Entity("BeHeard.Application.Models.Subscription", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subscription");
                 });
 
             modelBuilder.Entity("BeHeard.Application.Models.User", b =>
@@ -68,6 +150,12 @@ namespace BeHeard.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AddressId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -84,13 +172,15 @@ namespace BeHeard.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
 
                     b.ToTable("Users");
                 });
@@ -125,9 +215,24 @@ namespace BeHeard.Migrations
 
             modelBuilder.Entity("BeHeard.Application.Models.Settings", b =>
                 {
+                    b.HasOne("BeHeard.Application.Models.Preferences", "Preferences")
+                        .WithMany()
+                        .HasForeignKey("PreferencesId");
+
+                    b.HasOne("BeHeard.Application.Models.Subscription", "Subscription")
+                        .WithMany()
+                        .HasForeignKey("SubscriptionId");
+
                     b.HasOne("BeHeard.Application.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("BeHeard.Application.Models.User", b =>
+                {
+                    b.HasOne("BeHeard.Application.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId");
                 });
 
             modelBuilder.Entity("BeHeard.Application.Models.UserProfile", b =>

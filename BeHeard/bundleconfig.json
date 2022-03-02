@@ -27,19 +27,7 @@
   {
     "outputFileName": "wwwroot/js/recorder.js",
     "inputFiles": [
-      "ResourcePackages/node_modules/recorder-js"
-    ],
-    "minify": {
-      "enabled": false
-    },
-    "sourceMap": false
-  },
-  {
-    "outputFileName": "wwwroot/js/index.js",
-    "inputFiles": [
-      "ResourcePackages/node_modules/models/index.js",
-      "ResourcePackages/node_modules/models/user.js",
-      "ResourcePackages/node_modules/models/blog.js"
+      "ResourcePackages/node_modules/recorder-js/"
     ],
     "minify": {
       "enabled": false
