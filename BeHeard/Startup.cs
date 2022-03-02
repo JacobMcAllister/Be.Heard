@@ -1,17 +1,13 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BeHeard
 {
@@ -61,6 +57,7 @@ namespace BeHeard
                 options.Cookie.IsEssential = true;
             });
 
+
             // dbcontext test
             services.AddDbContext<Application.BeHeardContext>(options => options.UseSqlServer("name=ConnectionStrings:BeHeard_DBconnectionstring"));
 
@@ -68,7 +65,6 @@ namespace BeHeard
             // services.AddTransient<Core.IJwtTokenConfig, Application.JwtTokenConfig>();
             services.AddTransient<Core.IAuthentication, Application.Authentication>();
             services.AddTransient<Core.IUserService, Services.UserService>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
