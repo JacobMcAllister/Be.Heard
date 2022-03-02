@@ -43,8 +43,7 @@ namespace BeHeard.Controllers
             TempData["Error"] = "Sorry, that 'Username' and 'Password' combination does not match.";
 
             if (!_userService.IsValidUserCredentials(user.Username, user.Password))
-                return View("Index");
-                //return Unauthorized();
+                return View();
 
             var role = _userService.GetUserRole(user.Username);
             var claims = new[]

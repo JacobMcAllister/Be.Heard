@@ -4,7 +4,10 @@
     "inputFiles": [
       "ResourcePackages/node_modules/jquery/dist/jquery.js",
       "ResourcePackages/node_modules/bootstrap/dist/js/bootstrap.bundle.js",
-      "ResourcePackages/node_modules/@fortawesome/fontawesome-free/js/all.js"
+      "ResourcePackages/node_modules/@fortawesome/fontawesome-free/js/all.js",
+      "ResourcePackages/node_modules/models/index.js",
+      "ResourcePackages/node_modules/models/user.js",
+      "ResourcePackages/node_modules/models/blog.js"
     ],
     "minify": {
       "enabled": false

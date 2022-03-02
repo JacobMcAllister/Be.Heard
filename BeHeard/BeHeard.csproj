@@ -40,6 +40,7 @@
     <Folder Include="Domain\" />
     <Folder Include="Entities\" />
     <Folder Include="Extensions\" />
+    <Folder Include="js\" />
     <Folder Include="Properties\" />
     <Folder Include="ResourcePackages\dist\css\" />
     <Folder Include="ResourcePackages\dist\js\" />
@@ -47,11 +48,14 @@
     <Folder Include="ResourcePackages\js\src\" />
     <Folder Include="ResourcePackages\webfonts\" />
     <Folder Include="Views\Profile\" />
+    <Folder Include="Views\SpeechProcess\js\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
     <None Include="wwwroot\js\main.js" />
+    <None Include="wwwroot\js\Recorder\app.js" />
+    <None Include="wwwroot\js\Recorder\recorder.js" />
   </ItemGroup>
 
 </Project>
