@@ -23,15 +23,5 @@
       "enabled": false
     },
     "sourceMap": false
-  },
-  {
-    "outputFileName": "wwwroot/js/recorder.js",
-    "inputFiles": [
-      "ResourcePackages/node_modules/recorder-js/"
-    ],
-    "minify": {
-      "enabled": false
-    },
-    "sourceMap": false
   }
 ]

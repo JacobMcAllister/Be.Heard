@@ -21,7 +21,6 @@
     "bootstrap": "^5.0.0",
     "chart.js": "^3.6.0",
     "index.js": "^0.0.3",
-    "jquery": "^3.6.0",
-    "recorder-js": "^1.0.7"
+    "jquery": "^3.6.0"
   }
 }

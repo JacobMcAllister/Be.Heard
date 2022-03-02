@@ -48,11 +48,14 @@
     <Folder Include="ResourcePackages\js\src\" />
     <Folder Include="ResourcePackages\webfonts\" />
     <Folder Include="Views\Profile\" />
+    <Folder Include="Views\SpeechProcess\js\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
     <None Include="wwwroot\js\main.js" />
+    <None Include="wwwroot\js\Recorder\app.js" />
+    <None Include="wwwroot\js\Recorder\recorder.js" />
   </ItemGroup>
 
 </Project>
