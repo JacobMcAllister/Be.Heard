@@ -40,10 +40,10 @@ namespace BeHeard.Controllers
         public IActionResult Login(User user)
         {
             // NOTE: Add redirects for failed attempts and nonexistent accounts
-            TempData["Error"] = "Sorry, that 'Username' and 'Password' combination does not match.";
+            TempData["Error"] = "Sorry, that 'Username' and 'Password' combination do not match any record.";
 
             if (!_userService.IsValidUserCredentials(user.Username, user.Password))
-                return View();
+                return View("~/Views/Login/Index.cshtml");
 
             var role = _userService.GetUserRole(user.Username);
             var claims = new[]
