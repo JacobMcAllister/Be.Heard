@@ -284,8 +284,8 @@ BeHeard/FakesAssemblies/
 BeHeard/*.GhostDoc.xml
 
 # Node.js Tools for Visual Studio
-BeHeard/.ntvs_analysis.dat
-BeHeard/node_modules/
+BeHeard/ResourcePackages/.ntvs_analysis.dat
+BeHeard/ResourcePackages/node_modules/
 
 # Visual Studio 6 build log
 BeHeard/*.plg
