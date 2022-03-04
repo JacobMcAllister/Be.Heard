@@ -1,4 +1,5 @@
-﻿@{
+﻿@model dynamic
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,10 +7,23 @@
     <div class="col">
         <div class="col-12 text-center pb-3">
             <h1 class="display-4">
-                Welcome  @{
+@*                Welcome  @{
                     var thisSession = Context.Session.GetObjectFromJson<SessionModel>("thisSession");
                     string Name = thisSession.FirstName + " " + thisSession.LastName;
                     @Name
+                }
+*@
+
+                @{
+                    try
+                    {
+                        var test = Model.FirstName;
+                        // var test1 = test.userSession;
+                    }
+                    catch
+                    {
+
+                    }
                 }
             </h1>
         </div>

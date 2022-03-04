@@ -21,6 +21,8 @@
     <Compile Remove="Migrations\20220228085656_AddSubscriptionId.Designer.cs" />
     <Compile Remove="Migrations\20220228085944_AddUserAddressPhoneAndSettingsPreferencesSubscription.cs" />
     <Compile Remove="Migrations\20220228085944_AddUserAddressPhoneAndSettingsPreferencesSubscription.Designer.cs" />
+    <Compile Remove="Migrations\20220304104607_InitialModel.cs" />
+    <Compile Remove="Migrations\20220304104607_InitialModel.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

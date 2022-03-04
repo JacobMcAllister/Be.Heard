@@ -80,8 +80,9 @@ namespace BeHeard.Controllers
    
             //HttpContext.Session.SetObjectAsJson("thisSession", thisSession);
 
+            var _user = _beHeardContextManager.UserRepository.GetUserByUsername(user.Username);
             var service = new SessionService(HttpContext);
-            service.Create(user).Save();
+            service.Create(_user).Save();
 
             // NOTE: implement refresh tokens
             var authenticationResult = _authentication.GenerateTokens(user.Username, claims, DateTime.Now);
@@ -122,6 +123,7 @@ namespace BeHeard.Controllers
             //{
             //    Username = user.Username,
             //    Password = user.Password,
+
             //    FirstName = user.FirstName,
             //    LastName = user.LastName,RedirectToAction("Login", user);
             //    Email = user.Email,

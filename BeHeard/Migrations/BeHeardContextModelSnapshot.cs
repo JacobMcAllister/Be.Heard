@@ -105,7 +105,6 @@ namespace BeHeard.Migrations
             modelBuilder.Entity("BeHeard.Application.Models.Settings", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("MasterVolume")
@@ -117,16 +116,11 @@ namespace BeHeard.Migrations
                     b.Property<Guid?>("SubscriptionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PreferencesId");
 
                     b.HasIndex("SubscriptionId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Settings");
                 });
@@ -188,20 +182,14 @@ namespace BeHeard.Migrations
             modelBuilder.Entity("BeHeard.Application.Models.UserProfile", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("SettingsId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("SettingsId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("UserProfiles");
                 });
@@ -215,6 +203,12 @@ namespace BeHeard.Migrations
 
             modelBuilder.Entity("BeHeard.Application.Models.Settings", b =>
                 {
+                    b.HasOne("BeHeard.Application.Models.User", "User")
+                        .WithOne("Settings")
+                        .HasForeignKey("BeHeard.Application.Models.Settings", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BeHeard.Application.Models.Preferences", "Preferences")
                         .WithMany()
                         .HasForeignKey("PreferencesId");
@@ -222,10 +216,6 @@ namespace BeHeard.Migrations
                     b.HasOne("BeHeard.Application.Models.Subscription", "Subscription")
                         .WithMany()
                         .HasForeignKey("SubscriptionId");
-
-                    b.HasOne("BeHeard.Application.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("BeHeard.Application.Models.User", b =>
@@ -237,13 +227,15 @@ namespace BeHeard.Migrations
 
             modelBuilder.Entity("BeHeard.Application.Models.UserProfile", b =>
                 {
+                    b.HasOne("BeHeard.Application.Models.User", "User")
+                        .WithOne("Profile")
+                        .HasForeignKey("BeHeard.Application.Models.UserProfile", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BeHeard.Application.Models.Settings", "Settings")
                         .WithMany()
                         .HasForeignKey("SettingsId");
-
-                    b.HasOne("BeHeard.Application.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

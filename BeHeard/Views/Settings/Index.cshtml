@@ -1,4 +1,4 @@
-﻿@model BeHeard.Models.SessionModel
+﻿@model BeHeard.Application.Models.BeHeardSession
 
 @{
     ViewData["Title"] = "Settings";
@@ -65,7 +65,7 @@
                             <strong class="mb-0">Phone</strong>
                         </div>
                         <div class="col-auto">
-                            <input type="text" class="form-control" value="@Model.Phone">
+                            <input type="text" class="form-control" value="@Model.PhoneNumber">
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                             <strong class="mb-0">Address</strong>
                         </div>
                         <div class="col-auto">
-                            <input type="text" class="form-control" value="@Model.Street">
+                            <input type="text" class="form-control" value="@Model.Address.Street">
                         </div>
                     </div>
                 </div>

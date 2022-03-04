@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BeHeard.Services;
 
 namespace BeHeard.Controllers
 {
@@ -13,8 +14,8 @@ namespace BeHeard.Controllers
         public IActionResult Index()
         {
             var thisSession = HttpContext.Session.GetObjectFromJson<SessionModel>("thisSession");
-
-            return View(thisSession);
+            var service = new SessionService(HttpContext);
+            return View(service.Get());
         }
         public ActionResult Account()
         {

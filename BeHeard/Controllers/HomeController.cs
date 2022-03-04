@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using BeHeard.Services;
 
 namespace BeHeard.Controllers
 {
@@ -27,7 +28,9 @@ namespace BeHeard.Controllers
         public IActionResult Index()
         {
 
-            return View();
+            var service = new SessionService(HttpContext);
+            var session = service.Get();
+            return View(session);
         }
 
         public IActionResult Privacy()

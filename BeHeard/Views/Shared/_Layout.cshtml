@@ -1,3 +1,4 @@
+@using BeHeard.Services
 <!DOCTYPE html>
 
 <html lang="en">
@@ -62,9 +63,11 @@
 
                                 @{ 
                                     var thisSession = Context.Session.GetObjectFromJson<SessionModel>("thisSession");
-                                    string Name = thisSession.FirstName + " " + thisSession.LastName;
-                                    @Name
+                                    var service = new SessionService(Context);
+                                    var session = service.Get();
+                                    // string Name = thisSession.FirstName + " " + thisSession.LastName;
                                 }
+                                @session.FirstName
 
                             </span>
                         </a>
