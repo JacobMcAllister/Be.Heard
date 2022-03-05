@@ -145,10 +145,39 @@ namespace BeHeard.Controllers
             //_beHeardContextManager.UserProfileRepository.Add(userProfile);
             //_beHeardContextManager.SaveChanges();
 
+            var subscription = new Subscription
+            {
+                Type = SubscriptionType.Paid,
+            };
+
+            var preferences = new Preferences
+            {
+                ColorBlindMode = false,
+                DarkMode = true,
+                TextToSpeech = false,
+            };
+
+
+            var settings = new Settings
+            {
+                MasterVolume = 100,
+                Preferences = preferences,
+                Subscription = subscription,
+                User = user,
+            };
+            var profile = new UserProfile
+            {
+                Settings = settings,
+                User = user,
+            };
+
+            user.Settings = settings;
+            user.Profile = profile;
+
             try
             {
-                //_beHeardContextManager.UserRepository.Add(user);
-                //_beHeardContextManager.SaveChanges();
+                _beHeardContextManager.UserRepository.Add(user);
+                _beHeardContextManager.SaveChanges();
                 // return Redirect("~/?NewUser=1");
                 return Login(user, true);
             }
