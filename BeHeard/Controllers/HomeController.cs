@@ -29,8 +29,14 @@ namespace BeHeard.Controllers
         {
 
             var service = new SessionService(HttpContext);
+
             var session = service.Get();
-            return View(session);
+            var model = new HomeViewModel
+            {
+                FirstName = session.FirstName,
+                LastName = session.LastName,
+            };
+            return View(model);
         }
 
         public IActionResult Privacy()
