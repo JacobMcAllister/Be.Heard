@@ -3,10 +3,29 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BeHeard.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Address",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    ApartmentNumber = table.Column<int>(nullable: false),
+                    StreetNumber = table.Column<int>(nullable: false),
+                    Apartment = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    Country = table.Column<string>(nullable: true),
+                    PostalCode = table.Column<string>(nullable: true),
+                    State = table.Column<string>(nullable: true),
+                    Street = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Address", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Preferences",
                 columns: table => new
@@ -38,9 +57,9 @@ namespace BeHeard.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    AddressId = table.Column<Guid>(nullable: true),
                     Gender = table.Column<int>(nullable: false),
                     Age = table.Column<int>(nullable: false),
-                    Address = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
@@ -51,6 +70,12 @@ namespace BeHeard.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_Address_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Address",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,12 +85,17 @@ namespace BeHeard.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     MasterVolume = table.Column<int>(nullable: false),
                     PreferencesId = table.Column<Guid>(nullable: true),
-                    SubscriptionId = table.Column<Guid>(nullable: true),
-                    UserId = table.Column<Guid>(nullable: true)
+                    SubscriptionId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Settings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Settings_Users_Id",
+                        column: x => x.Id,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Settings_Preferences_PreferencesId",
                         column: x => x.PreferencesId,
@@ -78,12 +108,6 @@ namespace BeHeard.Migrations
                         principalTable: "Subscription",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Settings_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -91,22 +115,21 @@ namespace BeHeard.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    UserId = table.Column<Guid>(nullable: true),
                     SettingsId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserProfiles", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_UserProfiles_Users_Id",
+                        column: x => x.Id,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_UserProfiles_Settings_SettingsId",
                         column: x => x.SettingsId,
                         principalTable: "Settings",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_UserProfiles_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -149,19 +172,14 @@ namespace BeHeard.Migrations
                 column: "SubscriptionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Settings_UserId",
-                table: "Settings",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_UserProfiles_SettingsId",
                 table: "UserProfiles",
                 column: "SettingsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserProfiles_UserId",
-                table: "UserProfiles",
-                column: "UserId");
+                name: "IX_Users_AddressId",
+                table: "Users",
+                column: "AddressId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -176,13 +194,16 @@ namespace BeHeard.Migrations
                 name: "Settings");
 
             migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
                 name: "Preferences");
 
             migrationBuilder.DropTable(
                 name: "Subscription");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Address");
         }
     }
 }

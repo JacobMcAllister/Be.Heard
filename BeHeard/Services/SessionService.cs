@@ -1,5 +1,6 @@
 ﻿using BeHeard.Application.Models;
 using BeHeard.Core;
+using BeHeard.Extensions;
 using BeHeard.Models;
 using Microsoft.AspNetCore.Http;
 

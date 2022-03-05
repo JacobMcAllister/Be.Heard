@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BeHeard.Services;
 
 namespace BeHeard.Application
 {
@@ -28,8 +29,14 @@ namespace BeHeard.Application
                 context.Result = new RedirectResult("~/landing");
             }
 
-            var thisSession = context.HttpContext.Session.GetObjectFromJson<SessionModel>("thisSession");
-            if (thisSession == null)
+            //var thisSession = context.HttpContext.Session.GetObjectFromJson<SessionModel>("thisSession");
+            //if (thisSession == null)
+            //{
+            //    context.Result = new RedirectResult("~/landing");
+            //}
+
+            var service = new SessionService(context.HttpContext);
+            if (service.Get() == null)
             {
                 context.Result = new RedirectResult("~/landing");
             }
