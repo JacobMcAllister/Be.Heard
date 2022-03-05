@@ -62,10 +62,8 @@
                             <span class="fs-3 d-none d-sm-inline mx-4">
 
                                 @{ 
-                                    var thisSession = Context.Session.GetObjectFromJson<SessionModel>("thisSession");
                                     var service = new SessionService(Context);
                                     var session = service.Get();
-                                    // string Name = thisSession.FirstName + " " + thisSession.LastName;
                                 }
                                 @session.FirstName
 

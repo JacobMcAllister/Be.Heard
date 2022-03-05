@@ -41,10 +41,10 @@ namespace BeHeard.Controllers
             //    City = "Reno"
             //};
 
-            var thisSession = HttpContext.Session.GetObjectFromJson<SessionModel>("thisSession");
+            // var thisSession = HttpContext.Session.GetObjectFromJson<SessionModel>("thisSession");
 
 
-            return View(thisSession);
+            return View();
             //return View(model);
         }
     }

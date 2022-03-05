@@ -245,8 +245,8 @@
                 <div class="list-group-item">
                     <div class="row align-items-center">
                         <div class="col">
-                            <input type="range" value="24" min="1" max="100" oninput="this.nextElementSibling.value = this.value">
-                            <output>24</output>
+                            <input type="range" value="@Model.Settings.MasterVolume" min="1" max="100" oninput="this.nextElementSibling.value = this.value">
+                            <output>@Model.Settings.MasterVolume</output>
                         </div>
                     </div>
                 </div>
