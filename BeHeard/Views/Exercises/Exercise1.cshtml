@@ -10,6 +10,12 @@
 <h1>Empty Exercise</h1>
 
 <p>These are the directions to the exercise</p>
+<p>Speak your chosen syllable loudly for ~15 seconds</p>
+<p>The meter will fill up according to your volume level</p>
+<p>Don't let the volume drop!</p>
+
+<!-- The canvas that will be used to render the input level -->
+<canvas id="meter" width="500" height="50" style="border: 1px solid black;"></canvas>
 
 <!--Tips for exercise-->
 <div class="container p-5 my-5 bg-dark text-white">
@@ -24,3 +30,218 @@
         </div>
     </div>
 </div>
+
+<script>
+    /*
+    The MIT License (MIT)
+
+    Copyright (c) 2014 Chris Wilson
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+
+    var audioContext = null;
+    var meter = null;
+    var canvasContext = null;
+    var WIDTH = 500;
+    var HEIGHT = 50;
+    var rafID = null;
+
+    window.onload = function () {
+        alert("script");
+
+        // grab our canvas
+        canvasContext = document.getElementById("meter").getContext("2d");
+
+        // monkeypatch Web Audio
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+
+        // grab an audio context
+        audioContext = new AudioContext();
+
+        // Attempt to get audio input
+        try {
+            // monkeypatch getUserMedia
+            navigator.getUserMedia =
+                navigator.getUserMedia ||
+                navigator.webkitGetUserMedia ||
+                navigator.mozGetUserMedia;
+
+            // ask for an audio input
+            navigator.getUserMedia(
+                {
+                    "audio": {
+                        "mandatory": {
+                            "googEchoCancellation": "false",
+                            "googAutoGainControl": "false",
+                            "googNoiseSuppression": "false",
+                            "googHighpassFilter": "false"
+                        },
+                        "optional": []
+                    },
+                }, onMicrophoneGranted, onMicrophoneDenied);
+        } catch (e) {
+            alert('getUserMedia threw exception :' + e);
+        }
+
+    }
+
+    function onMicrophoneDenied() {
+        alert('Stream generation failed.');
+    }
+
+    var mediaStreamSource = null;
+
+    function onMicrophoneGranted(stream) {
+        // Create an AudioNode from the stream.
+        mediaStreamSource = audioContext.createMediaStreamSource(stream);
+
+        // Create a new volume meter and connect it.
+        meter = createAudioMeter(audioContext);
+        mediaStreamSource.connect(meter);
+
+        // kick off the visual updating
+        onLevelChange();
+    }
+
+    function onLevelChange(time) {
+        // clear the background
+        canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
+
+        // check if we're currently clipping
+        if (meter.checkClipping())
+            canvasContext.fillStyle = "red";
+        else
+            canvasContext.fillStyle = "green";
+
+        console.log(meter.volume);
+
+        // draw a bar based on the current volume
+        canvasContext.fillRect(0, 0, meter.volume * WIDTH * 1.4, HEIGHT);
+
+        // set up the next visual callback
+        rafID = window.requestAnimationFrame(onLevelChange);
+
+    }
+
+    function touchStarted() {
+        getAudioContext().resume();
+    }
+
+    // grab our canvas
+    canvasContext = document.getElementById("meter").getContext("2d");
+
+    const stream = navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+    const audioContext = new AudioContext();
+    const mediaStreamAudioSourceNode = audioContext.createMediaStreamSource(stream);
+    const analyserNode = audioContext.createAnalyser();
+    mediaStreamAudioSourceNode.connect(analyserNode);
+
+    const pcmData = new Float32Array(analyserNode.fftSize);
+    const onFrame = () => {
+        analyserNode.getFloatTimeDomainData(pcmData);
+        let sumSquares = 0.0;
+        for (const amplitude of pcmData) { sumSquares += amplitude * amplitude; }
+        volumeMeter = Math.sqrt(sumSquares / pcmData.length);
+        canvasContext.fillRect(0, volumeMeter, 500, 50);
+        window.requestAnimationFrame(onFrame);
+    };
+    window.requestAnimationFrame(onFrame);
+    */
+    //var audioContext = null;
+    var canvasContext = null;
+    var WIDTH = 500;
+    var HEIGHT = 50;
+    var drawID = null;
+    var arraySize = null;
+    var micAnalyser = null;
+
+    // Grab our canvas
+    canvasContext = document.getElementById("meter").getContext("2d");
+
+    // fork getUserMedia for multiple browser versions, for those
+    // that need prefixes
+    navigator.getUserMedia = (navigator.getUserMedia ||
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia ||
+        navigator.msGetUserMedia);
+
+    // Get user mic
+    // const inputMicStream = navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+
+    // Audio  context for processing sound
+    const audioContext = new AudioContext();
+
+    if (navigator.mediaDevices) {
+        console.log('getUserMedia supported.');
+        navigator.getUserMedia (
+            // constraints - only audio needed for this app
+            {
+                audio: true
+            },
+            // Success callback
+            function (stream) {
+                // Create mic stream node
+                const micStreamSourceNode = audioContext.createMediaStreamSource(stream);
+                // Create audio analyser
+                micAnalyser = audioContext.createAnalyser();
+                // Connect
+                micStreamSourceNode.connect(micAnalyser);
+               
+                animateVoice();
+
+            },
+            // Error callback
+            function (err) {
+                console.log('The following gUM error occured: ' + err);
+            }
+        );
+    } else {
+        console.log('getUserMedia not supported on your browser!');
+    }
+
+    function animateVoice() {
+
+        // Create array of mic input data
+        const dataArray = new Float32Array(micAnalyser.fftSize);
+
+        // Clear canvas
+        canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
+
+        function drawVolume() {
+            // Clear canvas
+            canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
+
+            // Fill array
+            micAnalyser.getFloatTimeDomainData(dataArray);
+
+            let sumSquares = 0.0;
+            for (const amplitude of dataArray) { sumSquares += amplitude * amplitude; }
+            volumeVal = Math.sqrt(sumSquares / dataArray.length);
+            console.log(volumeVal);
+            canvasContext.fillStyle = "#ff0000";
+            console.log(WIDTH * volumeVal * 10);
+            canvasContext.fillRect(0, 0, WIDTH * volumeVal * 10, HEIGHT);
+
+            drawID = requestAnimationFrame(drawVolume);
+
+        }
+
+        drawVolume();
+    }
+</script>
