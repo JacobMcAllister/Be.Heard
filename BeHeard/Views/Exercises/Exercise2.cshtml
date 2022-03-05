@@ -2,7 +2,7 @@
 @using BeHeard.Extensions
 
 <!--Exercises-->
-@model BeHeard.Models.ExerciseModel
+@model BeHeard.Models.ExerciseViewModel
 
 @{
 
@@ -17,12 +17,5 @@
 <p>Enjoy your Exercise!</p>
 
 <div class="User">
-    <h1>
-        Good Job
-        @{
-            var thisSession = Context.Session.GetObjectFromJson<SessionModel>("thisSession");
-            string Name = thisSession.FirstName + " " + thisSession.LastName;
-            @Name
-        }
-    </h1>
+    <h1>Good Job @Model.FullName</h1>
 </div>
