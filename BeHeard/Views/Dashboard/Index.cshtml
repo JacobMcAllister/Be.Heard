@@ -21,13 +21,7 @@
 <!--user welcome-->
 <div class="row">
     <div class="col-8 p-5 bg-white text-black text-xl-center">
-        <h1>Hello,
-        @{
-            var thisSession = Context.Session.GetObjectFromJson<SessionModel>("thisSession");
-            string Name = thisSession.FirstName + " " + thisSession.LastName;
-            @Name
-        }
-        </h1>
+        <h1>Hello, @Model.FullName</h1>
     </div>
     <div class="col-4 p-5 bg-white text-black" text-center">
         <p>Current Date and Time:</p>

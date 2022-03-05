@@ -26,7 +26,19 @@ namespace BeHeard.Repositories
                 .Include(x => x.Settings)
                 .Include(x => x.Settings.Subscription)
                 .Include(x => x.ActivityResults)
-                .First(x => x.User== user);
+                .First(x => x.User == user);
+        }
+        public UserProfile GetUserProfileByUsername(string username)
+        {
+            //return Context.Set<UserProfile>().Where(x => x.User.Id == user.Id).First();
+            //return Context.UserProfiles.Where(x => x.User.Id == user.Id).First();
+            return Context.UserProfiles
+                .Include(x => x.User)
+                .Include(x => x.User.Address)
+                .Include(x => x.Settings)
+                .Include(x => x.Settings.Subscription)
+                .Include(x => x.ActivityResults)
+                .First(x => x.User.Username == username);
         }
 
     }
