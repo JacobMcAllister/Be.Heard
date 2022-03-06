@@ -6,10 +6,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="js\**" />
+    <Compile Remove="Views\SpeechProcess\js\**" />
+    <Content Remove="js\**" />
+    <Content Remove="Views\SpeechProcess\js\**" />
+    <EmbeddedResource Remove="js\**" />
+    <EmbeddedResource Remove="Views\SpeechProcess\js\**" />
+    <None Remove="js\**" />
+    <None Remove="Views\SpeechProcess\js\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Migrations\20220228085656_AddSubscriptionId.cs" />
     <Compile Remove="Migrations\20220228085656_AddSubscriptionId.Designer.cs" />
     <Compile Remove="Migrations\20220228085944_AddUserAddressPhoneAndSettingsPreferencesSubscription.cs" />
     <Compile Remove="Migrations\20220228085944_AddUserAddressPhoneAndSettingsPreferencesSubscription.Designer.cs" />
+    <Compile Remove="Migrations\20220304104607_InitialModel.cs" />
+    <Compile Remove="Migrations\20220304104607_InitialModel.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,8 +52,6 @@
   <ItemGroup>
     <Folder Include="Domain\" />
     <Folder Include="Entities\" />
-    <Folder Include="Extensions\" />
-    <Folder Include="js\" />
     <Folder Include="Properties\" />
     <Folder Include="ResourcePackages\dist\css\" />
     <Folder Include="ResourcePackages\dist\js\" />
@@ -48,7 +59,6 @@
     <Folder Include="ResourcePackages\js\src\" />
     <Folder Include="ResourcePackages\webfonts\" />
     <Folder Include="Views\Profile\" />
-    <Folder Include="Views\SpeechProcess\js\" />
   </ItemGroup>
 
   <ItemGroup>

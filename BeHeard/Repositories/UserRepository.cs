@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeHeard.Repositories
 {
@@ -35,7 +36,14 @@ namespace BeHeard.Repositories
         public User GetUserByUsername(string username)
         {
             // return Context.Set<User>().Where(u => u.Username == username).First();
-            return Context.Users.Where(u => u.Username == username).FirstOrDefault();
+            // return Context.Users.Where(u => u.Username == username).FirstOrDefault();
+            return Context.Users
+                .Include(x => x.Settings)
+                .Include(x => x.Settings.Preferences)
+                .Include(x => x.Settings.Subscription)
+                .Include(x => x.Profile)
+                .Include(x => x.Address)
+                .First(x => x.Username == username);
         }
     }
 }

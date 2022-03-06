@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using BeHeard.Services;
 
 namespace BeHeard.Controllers
 {
@@ -27,7 +28,15 @@ namespace BeHeard.Controllers
         public IActionResult Index()
         {
 
-            return View();
+            var service = new SessionService(HttpContext);
+
+            var session = service.Get();
+            var model = new HomeViewModel
+            {
+                FirstName = session.FirstName,
+                LastName = session.LastName,
+            };
+            return View(model);
         }
 
         public IActionResult Privacy()

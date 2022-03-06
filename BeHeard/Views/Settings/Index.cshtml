@@ -1,4 +1,5 @@
-﻿@model BeHeard.Models.SessionModel
+﻿@model BeHeard.Models.SettingsViewModel
+@using BeHeard.Application.Models;
 
 @{
     ViewData["Title"] = "Settings";
@@ -35,7 +36,7 @@
                             <strong class="mb-0">Username</strong>
                         </div>
                         <div class="col-auto">
-                            <input type="text" class="form-control" value="@Model.Username">
+                            <input type="text" class="form-control" value="@Model.Settings.User.Username">
                         </div>
                     </div>
                 </div>
@@ -45,7 +46,7 @@
                             <strong class="mb-0">First Name</strong>
                         </div>
                         <div class="col-auto">
-                            <input type="text" class="form-control" value="@Model.FirstName">
+                            <input type="text" class="form-control" value="@Model.Settings.User.FirstName">
                         </div>
                     </div>
                 </div>
@@ -55,7 +56,7 @@
                             <strong class="mb-0">Last Name</strong>
                         </div>
                         <div class="col-auto">
-                            <input type="text" class="form-control" value="@Model.LastName">
+                            <input type="text" class="form-control" value="@Model.Settings.User.LastName">
                         </div>
                     </div>
                 </div>
@@ -65,7 +66,7 @@
                             <strong class="mb-0">Phone</strong>
                         </div>
                         <div class="col-auto">
-                            <input type="text" class="form-control" value="@Model.Phone">
+                            <input type="text" class="form-control" value="@Model.Settings.User.PhoneNumber">
                         </div>
                     </div>
                 </div>
@@ -75,7 +76,7 @@
                             <strong class="mb-0">Address</strong>
                         </div>
                         <div class="col-auto">
-                            <input type="text" class="form-control" value="@Model.Street">
+                            <input type="text" class="form-control" value="@Model.Address.Street">
                         </div>
                     </div>
                 </div>
@@ -95,7 +96,7 @@
                             <strong class="mb-0">Age</strong>
                         </div>
                         <div class="col-auto">
-                            <input type="text" class="form-control" value="@Model.Age">
+                            <input type="text" class="form-control" value="@Model.Settings.User.Age">
                         </div>
                     </div>
                 </div>
@@ -108,7 +109,7 @@
                             <strong class="mb-0">Email</strong>
                         </div>
                         <div class="col-auto">
-                            <input type="email" class="form-control" value="@Model.Email">
+                            <input type="email" class="form-control" value="@Model.Settings.User.Email">
                         </div>
                     </div>
                 </div>
@@ -244,8 +245,8 @@
                 <div class="list-group-item">
                     <div class="row align-items-center">
                         <div class="col">
-                            <input type="range" value="24" min="1" max="100" oninput="this.nextElementSibling.value = this.value">
-                            <output>24</output>
+                            <input type="range" value="@Model.Settings.MasterVolume" min="1" max="100" oninput="this.nextElementSibling.value = this.value">
+                            <output>@Model.Settings.MasterVolume</output>
                         </div>
                     </div>
                 </div>

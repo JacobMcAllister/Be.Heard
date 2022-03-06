@@ -9,6 +9,7 @@ namespace BeHeard.Core
     public interface IUserProfileRepository : IRepository<UserProfile>
     {
         UserProfile GetUserProfileByUser(User user);
+        UserProfile GetUserProfileByUsername(string username);
 
     }
 }
