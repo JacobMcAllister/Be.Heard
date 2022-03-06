@@ -42,7 +42,7 @@ namespace BeHeard.Controllers
         public IActionResult Login(User user, bool isFirstLogin = false)
         {
             // NOTE: Add redirects for failed attempts and nonexistent accounts
-            TempData["Error"] = "Sorry, that 'Username' and 'Password' combination do not match any record.";
+            TempData["Error"] = "Sorry, that 'Username' and 'Password' combination does not match any record.";
 
             if (!_userService.IsValidUserCredentials(user.Username, user.Password))
                 return View("~/Views/Login/Index.cshtml");

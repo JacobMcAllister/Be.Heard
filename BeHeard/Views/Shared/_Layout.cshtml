@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="~/css/main.min.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-gradient border-bottom box-shadow mb-3">
+    @*<header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BeHeard</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -31,11 +31,11 @@
                 </div>
             </div>
         </nav>
-    </header>
+    </header>*@
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-                <div class="sticky-top d-flex flex-column align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <div class="sticky-top d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span class="fs-1 d-none d-sm-inline">Be Heard</span>
                     </a>
@@ -59,12 +59,11 @@
                     <div class="dropdown pb-4">
                         <a href="#" class="fs-3 d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="https://avatarfiles.alphacoders.com/693/69306.jpg" alt="hugenerd" width="80" height="80" class="rounded-circle">
-                            <span class="d-none d-md-block fs-3 d-none d-sm-inline mx-4">
+                            <span class="fs-3 d-none d-sm-inline mx-4">
 
                                 @{
-                                    var thisSession = Context.Session.GetObjectFromJson<SessionModel>("thisSession");
-                                    string Name = thisSession.FirstName + " " + thisSession.LastName;
-                                    @Name
+                                    var service = new SessionService(Context);
+                                    var session = service.Get();
                                 }
                                 @session.FirstName
 
@@ -86,11 +85,11 @@
             </main>
         </div>
     </div>
-    <footer class="footer mt-auto py-3 bg-danger">
-        <div class="container">
-            <span class="text-muted">Place sticky footer content here.</span>
-        </div>
-    </footer>
+    @*<footer class="footer mt-auto py-3 bg-danger">
+            <div class="container">
+                <span class="text-muted">Place sticky footer content here.</span>
+            </div>
+        </footer>*@
     <script src="~/js/main.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
