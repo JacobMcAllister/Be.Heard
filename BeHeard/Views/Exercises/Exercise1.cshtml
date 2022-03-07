@@ -1,4 +1,6 @@
-﻿@using Microsoft.AspNetCore.Http
+﻿<!--Syllables taken from https://www.yourlocalunitedway.org/sites/main/files/3-common_syllables_packet.pdf-->
+<!--Syllables taken from https://medium.com/wugs/high-frequency-syllables-in-english-ab75159618a0-->
+@using Microsoft.AspNetCore.Http
 
 <!--Exercises-->
 @model BeHeard.Models.ExerciseViewModel
@@ -10,135 +12,268 @@
 <h1>Hello @Model.FullName</h1>
 <h2>Exercise 1</h2>
 
-<p>These are the directions to the exercise</p>
-<p>Speak your chosen syllable loudly for ~15 seconds</p>
-<p>The meter will fill up according to your volume level</p>
-<p>Don't let the volume drop!</p>
-
-<!-- The canvas that will be used to render the input level -->
-<canvas id="meter" width="500" height="50" style="border: 1px solid black;"></canvas>
-<div id="Buttons">
-    <button id="pauseButton" type="button">Pause</button>
-    <!--<button type="button" onclick="pauseMic()">Pause</button>-->
-</div>
-
-
-<!--Tips for exercise-->
-<div class="container p-5 my-5 bg-dark text-white">
+<div class="container">
     <div class="row">
-        <h2>Nice Job @Model.FullName!</h2>
-        <h3>Keep it up!</h3>
-        <h6>Here are some tips for next time!</h6>
-        <div class="list-group list-group-flush">
-            <a href="#" class="list-group-item">Be Sure to Practice Everyday.</a>
-            <a href="#" class="list-group-item">If you get frustrated, take a break!</a>
-            <a href="#" class="list-group-item">Small steps are ok, nobody got where they were going on the first try!</a>
+        <div id="directions">
+            <p>These are the directions to the exercise</p>
+            <p>Speak your chosen syllable loudly for ~15 seconds</p>
+            <p>The meter will fill up according to your volume level</p>
+            <p>Don't let the volume drop!</p>
+        </div>
+        <div id="dropdown">
+            <label for="syllables">Choose a Syllable:</label>
+            <select name="syllable" id="syllable">
+                <option value="a">a</option>
+                <option value="ag">ag</option>
+                <option value="am">am</option>
+                <option value="an">an</option>
+                <option value="at">at</option>
+                <option value="ba">ba</option>
+                <option value="be">be</option>
+                <option value="bi">bi</option>
+                <option value="bor">bor</option>
+                <option value="by">by</option>
+                <option value="cap">cap</option>
+                <option value="cat">cat</option>
+                <option value="cen">cen</option>
+                <option value="cir">cir</option>
+                <option value="co">co</option>
+                <option value="cus">cus</option>
+                <option value="da">da</option>
+                <option value="day">day</option>
+                <option value="ders">ders</option>
+                <option value="dle">dle</option>
+                <option value="ef">ef</option>
+                <option value="et">et</option>
+                <option value="fac">fac</option>
+                <option value="fin">fin</option>
+                <option value="for">for</option>
+                <option value="gen">gen</option>
+                <option value="gle">gle</option>
+                <option value="go">go</option>
+                <option value="grand">grand</option>
+                <option value="har">har</option>
+                <option value="heav">heav</option>
+                <option value="ho">ho</option>
+                <option value="ic">ic</option>
+                <option value="il">il</option>
+                <option value="ings">ings</option>
+                <option value="in">in</option>
+                <option value="it">it</option>
+                <option value="is">is</option>
+                <option value="ket">ket</option>
+                <option value="land">land</option>
+                <option value="lec">lec</option>
+                <option value="lead">lead</option>
+                <option value="let">let</option>
+                <option value="light">light</option>
+                <option value="lo">lo</option>
+                <option value="ly">ly</option>
+                <option value="mag">mag</option>
+                <option value="mal">mal</option>
+                <option value="mar">mar</option>
+                <option value="mat">mat</option>
+                <option value="me">me</option>
+                <option value="ments">ments</option>
+                <option value="mil">mil</option>
+                <option value="min">min</option>
+                <option value="mul">mul</option>
+                <option value="my">my</option>
+                <option value="nal">nal</option>
+                <option value="near">near</option>
+                <option value="ness">ness</option>
+                <option value="new">new</option>
+                <option value="ni">ni</option>
+                <option value="no">no</option>
+                <option value="nore">nore</option>
+                <option value="ob">ob</option>
+                <option value="on">on</option>
+                <option value="of">of</option>
+                <option value="op">op</option>
+                <option value="or">or</option>
+                <option value="ous">ous</option>
+                <option value="out">out</option>
+                <option value="part">part</option>
+                <option value="pen">pen</option>
+                <option value="ples">ples</option>
+                <option value="ply">ply</option>
+                <option value="port">port</option>
+                <option value="pre">pre</option>
+                <option value="ral">ral</option>
+                <option value="ra">ra</option>
+                <option value="rec">rec</option>
+                <option value="ried">ried</option>
+                <option value="ro">ro</option>
+                <option value="sa">sa</option>
+                <option value="sat">sat</option>
+                <option value="sent">sent</option>
+                <option value="ser">ser</option>
+                <option value="set">set</option>
+                <option value="ship">ship</option>
+                <option value="sim">sim</option>
+                <option value="so">so</option>
+                <option value="son">son</option>
+                <option value="south">south</option>
+                <option value="su">su</option>
+                <option value="sub">sub</option>
+                <option value="sup">sup</option>
+                <option value="su">su</option>
+                <option value="ta">ta</option>
+                <option value="te">te</option>
+                <option value="tel">tel</option>
+                <option value="tem">tem</option>
+                <option value="the">the</option>
+                <option value="ti">ti</option>
+                <option value="ting">ting</option>
+                <option value="tive">tive</option>
+                <option value="to">to</option>
+                <option value="tor">tor</option>
+                <option value="tra">tra</option>
+                <option value="tray">tray</option>
+                <option value="tu">tu</option>
+                <option value="tro">tro</option>
+                <option value="u">u</option>
+                <option value="um">um</option>
+                <option value="up">up</option>
+                <option value="us">us</option>
+                <option value="val">val</option>
+                <option value="vel">vel</option>
+                <option value="vi">vi</option>
+                <option value="vid">vid</option>
+                <option value="way">way</option>
+                <option value="west">west</option>
+                <option value="wil">wil</option>
+                <option value="win">win</option>
+                <option value="won">won</option>
+                <option value="work">work</option>
+            </select>
         </div>
     </div>
-</div>
 
-<script>
+    <!-- The canvas that will be used to render the input level -->
+    <canvas id="meter" width="500" height="50" style="border: 1px solid black;"></canvas>
+    <div id="Buttons">
+        <button id="pauseButton" type="button">Pause</button>
+        <!--<button type="button" onclick="pauseMic()">Pause</button>-->
+    </div>
 
-    var canvasContext = null;
-    var WIDTH = 500;
-    var HEIGHT = 50;
-    var drawID = null;
-    var arraySize = null;
-    var micAnalyser = null;
 
-    // Grab our canvas
-    canvasContext = document.getElementById("meter").getContext("2d");
+    <!--Tips for exercise-->
+    <div class="container p-5 my-5 bg-dark text-white">
+        <div class="row">
+            <h2>Nice Job @Model.FullName!</h2>
+            <h3>Keep it up!</h3>
+            <h6>Here are some tips for next time!</h6>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item">Be Sure to Practice Everyday.</a>
+                <a href="#" class="list-group-item">If you get frustrated, take a break!</a>
+                <a href="#" class="list-group-item">Small steps are ok, nobody got where they were going on the first try!</a>
+            </div>
+        </div>
+    </div>
 
-    // fork getUserMedia for multiple browser versions, for those
-    // that need prefixes
-    navigator.getUserMedia = (navigator.getUserMedia ||
-        navigator.webkitGetUserMedia ||
-        navigator.mozGetUserMedia ||
-        navigator.msGetUserMedia);
+    <script>
 
-    // Get user mic
-    // const inputMicStream = navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+        var canvasContext = null;
+        var WIDTH = 500;
+        var HEIGHT = 50;
+        var drawID = null;
+        var arraySize = null;
+        var micAnalyser = null;
 
-    // Audio  context for processing sound
-    var audioContext = new AudioContext();
+        // Grab our canvas
+        canvasContext = document.getElementById("meter").getContext("2d");
 
-    if (navigator.mediaDevices) {
-        console.log('getUserMedia supported.');
-        navigator.getUserMedia (
-            // constraints - only audio needed for this app
-            {
-                audio: true
-            },
-            // Success callback
-            function (stream) {
-                // Create mic stream node
-                const micStreamSourceNode = audioContext.createMediaStreamSource(stream);
-                // Create audio analyser
-                micAnalyser = audioContext.createAnalyser();
-                // Connect
-                micStreamSourceNode.connect(micAnalyser);
+        // fork getUserMedia for multiple browser versions, for those
+        // that need prefixes
+        navigator.getUserMedia = (navigator.getUserMedia ||
+            navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia ||
+            navigator.msGetUserMedia);
 
-                animateVoice();
+        // Get user mic
+        // const inputMicStream = navigator.mediaDevices.getUserMedia({ audio: true, video: false });
 
-            },
-            // Error callback
-            function (err) {
-                console.log('The following gUM error occured: ' + err);
-            }
-        );
-    } else {
-        console.log('getUserMedia not supported on your browser!');
-    }
+        // Audio  context for processing sound
+        var audioContext = new AudioContext();
 
-    function animateVoice() {
+        if (navigator.mediaDevices) {
+            console.log('getUserMedia supported.');
+            navigator.getUserMedia(
+                // constraints - only audio needed for this app
+                {
+                    audio: true
+                },
+                // Success callback
+                function (stream) {
+                    // Create mic stream node
+                    const micStreamSourceNode = audioContext.createMediaStreamSource(stream);
+                    // Create audio analyser
+                    micAnalyser = audioContext.createAnalyser();
+                    // Connect
+                    micStreamSourceNode.connect(micAnalyser);
 
-        // Create array of mic input data
-        const dataArray = new Float32Array(micAnalyser.fftSize);
+                    animateVoice();
 
-        // Clear canvas
-        canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
+                },
+                // Error callback
+                function (err) {
+                    console.log('The following gUM error occured: ' + err);
+                }
+            );
+        } else {
+            console.log('getUserMedia not supported on your browser!');
+        }
 
-        function drawVolume() {
-            var fillVol;
+        function animateVoice() {
+
+            // Create array of mic input data
+            const dataArray = new Float32Array(micAnalyser.fftSize);
+
             // Clear canvas
             canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
 
-            // Fill array
-            micAnalyser.getFloatTimeDomainData(dataArray);
+            function drawVolume() {
+                var fillVol;
+                // Clear canvas
+                canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
 
-            let sumSquares = 0.0;
-            for (const amplitude of dataArray) { sumSquares += amplitude * amplitude; }
-            volumeVal = Math.sqrt(sumSquares / dataArray.length);
-            fillVol = volumeVal * WIDTH * 3.8;
-            console.log(volumeVal);
-            console.log(fillVol);
-            if (fillVol > 175) {
-                canvasContext.fillStyle = "#00ff00";
+                // Fill array
+                micAnalyser.getFloatTimeDomainData(dataArray);
+
+                let sumSquares = 0.0;
+                for (const amplitude of dataArray) { sumSquares += amplitude * amplitude; }
+                volumeVal = Math.sqrt(sumSquares / dataArray.length);
+                fillVol = volumeVal * WIDTH * 3.8;
+                console.log(volumeVal);
+                console.log(fillVol);
+                if (fillVol > 175) {
+                    canvasContext.fillStyle = "#00ff00";
+                }
+                else {
+                    canvasContext.fillStyle = "#ff0000";
+                }
+                canvasContext.fillRect(0, 0, fillVol, HEIGHT);
+
+                drawID = requestAnimationFrame(drawVolume);
+
             }
-            else {
-                canvasContext.fillStyle = "#ff0000";
-            }
-            canvasContext.fillRect(0, 0, fillVol, HEIGHT);
 
-            drawID = requestAnimationFrame(drawVolume);
-
+            drawVolume();
         }
 
-        drawVolume();
-    }
-    
-    document.getElementById("pauseButton").onclick = function () { pause_Play() };
+        document.getElementById("pauseButton").onclick = function () { pause_Play() };
 
-    function pause_Play() {
-        if (audioContext.state === 'running') {
-            audioContext.suspend().then(function () {
-                document.getElementById("pauseButton").innerHTML = 'Play';
-            });
-        } else if (audioContext.state === 'suspended') {
-            audioContext.resume().then(function () {
-                document.getElementById("pauseButton").innerHTML = 'Pause';
-            });
+        function pause_Play() {
+            if (audioContext.state === 'running') {
+                audioContext.suspend().then(function () {
+                    document.getElementById("pauseButton").innerHTML = 'Play';
+                });
+            } else if (audioContext.state === 'suspended') {
+                audioContext.resume().then(function () {
+                    document.getElementById("pauseButton").innerHTML = 'Pause';
+                });
+            }
         }
-    }
 
-</script>
+    </script>
