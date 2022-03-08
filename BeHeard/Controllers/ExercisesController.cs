@@ -32,7 +32,12 @@ namespace BeHeard.Controllers
 
         public IActionResult Exercise1()
         {
-            return View();
+            var service = new SessionService(HttpContext);
+            var model = new ExerciseViewModel
+            {
+                User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
+            };
+            return View(model);
         }
 
         public IActionResult Exercise2()
@@ -47,7 +52,12 @@ namespace BeHeard.Controllers
 
         public IActionResult Exercise3()
         {
-            return View();
+            var service = new SessionService(HttpContext);
+            var model = new ExerciseViewModel
+            {
+                User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
+            };
+            return View(model);
         }
     }
 }
