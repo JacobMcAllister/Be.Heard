@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using BeHeard.Services;
+using BeHeard.Application.Models;
 
 namespace BeHeard.Controllers
 {
@@ -38,16 +39,32 @@ namespace BeHeard.Controllers
             };
             return View(model);
         }
+        public IActionResult FirstLogin(Settings settings)
+        {
+            var service = new SessionService(HttpContext);
+
+            var session = service.Get();
+            var updateUser = _beHeardContextManager.UserRepository.GetUserByUsername(session.Username);
+            updateUser.Settings.Preferences = settings.Preferences;
+
+            _beHeardContextManager.SaveChanges();
+            service.Save();
+
+            return RedirectToAction("Index");
+            
+        }
 
         public IActionResult Privacy()
         {
             return View();
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
+            //return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
