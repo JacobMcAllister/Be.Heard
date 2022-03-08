@@ -23,7 +23,8 @@ namespace BeHeard.Controllers
         public ActionResult Logout()
         {
             Response.Cookies.Delete("token");
-            return View("~/Views/Shared/_LoginPage.cshtml");
+        return RedirectToAction("Index","Landing");
+ 
         }
     }
 }
