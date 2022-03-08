@@ -59,7 +59,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <canvas id="myChart" width="400" height="400"></canvas>
+                <canvas id="myChart"></canvas>
             </div>
             <div class="modal-footer">
                 @*<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>*@
@@ -116,11 +116,50 @@
 
     <!--User Dashboard Charts-->
 
-    <div class="container-xxl py-5">
+    <div class="container-xl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h5 class="section-title ff-secondary text-center text-primary fw-normal">Your Services</h5>
                 <h1 class="mb-5">Explore Yours Services</h1>
+                <!-- Collapse #myResource-->
+                <div class="collapse" id="myResource">
+                    <div class="card card-body">
+                        <h3>School's Out</h3>
+                        <p>
+                            Well, we got no choice
+                            All the girls and boys (girls and boys)
+                            Making all that noise (ooh)
+                            'Cause they found new toys
+                            We can't salute ya
+                            Can't find a flag
+                            If that don't suit ya
+                            That's a drag
+                            School's out for summer
+                            School's out forever
+                            I'm bored to pieces
+                            Well, we got no class
+                            And we got no principals (ooh)
+                            And we got no intelligence
+                            We can't even think of a word that rhymes, well
+                            We can't salute ya
+                            Can't find a flag
+                            If that don't suit ya
+                            That's a drag
+                            School's out for summer
+                            School's out forever
+                            I'm bored to pieces
+                            No more pencils, no more books
+                            No more teachers, dirty looks
+                            Out for summer, out 'til fall
+                            We might not come back at all
+                            School's out for summer (detention)
+                            School's out forever
+                            School's out with fever
+                            School's out completely
+                            School's out for summer
+                        </p>
+                    </div>
+                </div>
             </div>
             <div class="row g-4">
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -148,8 +187,8 @@
                         <div class="p-4">
                             <i class="color-flip fa fa-3x fa-user-friends mb-4"></i>
                             <h5>Resources</h5>
-                            <p>You will find available resources right here.</p>
-                            <a id="myResourceLink" class="stretched-link"></a>
+                            <p>You will find here a collection of resources gathered by the Be Heard team to assist you.</p>
+                            <a id="myResourceLink" href="#myResource" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
@@ -164,48 +203,10 @@
                     </div>
                 </div>
             </div>
-            <!-- Collapse #myResource-->
-            <div class="collapse" id="myResource">
-                <div class="card card-body">
-                    <h3>School's Out</h3>
-                    <p>
-                        Well, we got no choice
-                        All the girls and boys (girls and boys)
-                        Making all that noise (ooh)
-                        'Cause they found new toys
-                        We can't salute ya
-                        Can't find a flag
-                        If that don't suit ya
-                        That's a drag
-                        School's out for summer
-                        School's out forever
-                        I'm bored to pieces
-                        Well, we got no class
-                        And we got no principals (ooh)
-                        And we got no intelligence
-                        We can't even think of a word that rhymes, well
-                        We can't salute ya
-                        Can't find a flag
-                        If that don't suit ya
-                        That's a drag
-                        School's out for summer
-                        School's out forever
-                        I'm bored to pieces
-                        No more pencils, no more books
-                        No more teachers, dirty looks
-                        Out for summer, out 'til fall
-                        We might not come back at all
-                        School's out for summer (detention)
-                        School's out forever
-                        School's out with fever
-                        School's out completely
-                        School's out for summer
-                    </p>
-                </div>
-            </div>
         </div>
     </div>
 </div>
+
 
 <style>
     :root {
