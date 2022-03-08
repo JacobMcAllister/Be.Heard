@@ -159,7 +159,7 @@
                             <i class="fa fa-3x fa-headset mb-4"></i>
                             <h5>Assistance</h5>
                             <p>E-mail one of the team-members to assist you with whatever issues you might be having.</p>
-                            <a href="?assistance" class="stretched-link"> </a>
+                            <a id="myContactLink" href="#myContact" class="stretched-link"> </a>
                         </div>
                     </div>
                 </div>
@@ -203,10 +203,45 @@
                     </p>
                 </div>
             </div>
-        </div>
+            <!-- Collapse #myContact-->
+            <div class="collapse" id="myContact">
+                <div class="card card-body">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                    <label for="name">Your Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                    <label for="email">Your Email</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                    <label for="subject">Subject</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
+                                    <label for="message">Message</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>    
     </div>
 </div>
-
 
 <style>
     :root {
@@ -251,7 +286,7 @@
     <script>
         new WOW().init();
     </script>
-
+    <!--Scripts for Modals-->
     <script type="text/javascript">
         var url = window.location.href;
         if (url.indexOf('?progress') != -1 || url.IndexOf('/?progress') != -1) {
@@ -268,10 +303,19 @@
             });
         }
     </script>
+    <!--Scripts for collapses -->
     <script>
         $(document).ready(function () {
             $("#myResourceLink").click(function () {
+                $("#myContact").collapse("hide");
                 $("#myResource").collapse("toggle");
+            });
+        });
+
+        $(document).ready(function () {
+            $("#myContactLink").click(function () {
+                $("#myResource").collapse("hide");
+                $("#myContact").collapse("toggle");
             });
         });
     </script>
@@ -321,6 +365,7 @@
         });
     </script>*@
 
+    <!--Scripts for charts-->
     <script src="~/js/chart.js"></script>
 
     <script>
