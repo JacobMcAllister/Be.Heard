@@ -8,30 +8,12 @@
     <title>@ViewData["Title"] - BeHeard</title>
     @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     @*<link rel="stylesheet" href="~/css/site.css" />*@
+    <link rel="stylesheet" href="~/css/animate/animate.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.css.map" />
     <link rel="stylesheet" href="~/css/main.min.css" />
 </head>
 <body>
-    @*<header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BeHeard</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>*@
+
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
@@ -47,7 +29,7 @@
                         </li>
                         <li>
                             <a asp-area="" asp-controller="Dashboard" asp-action="Index" class="nav-link px-0 align-middle">
-                                <i class="fs-2 fas fa-columns"></i> <span class="fs-3 ms-1 d-none d-sm-inline">Dashboard</span>
+                                <i class="fs-2 fas fa-book-open"></i> <span class="fs-3 ms-1 d-none d-sm-inline">Dashboard</span>
                             </a>
                         </li>
                         <li>
@@ -60,13 +42,11 @@
                         <a href="#" class="fs-3 d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="https://avatarfiles.alphacoders.com/693/69306.jpg" alt="hugenerd" width="80" height="80" class="rounded-circle">
                             <span class="fs-3 d-none d-sm-inline mx-4">
-
-                                @{
+                                @{ 
                                     var service = new SessionService(Context);
                                     var session = service.Get();
                                 }
                                 @session.FirstName
-
                             </span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">

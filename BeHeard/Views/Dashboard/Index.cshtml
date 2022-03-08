@@ -1,250 +1,406 @@
 ﻿@using BeHeard.Extensions
 @model BeHeard.Models.DashboardViewModel
-@{ 
+
+@*<link rel="stylesheet" href="~/css/animate/animate.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.css.map" />*@
+
+@{
 
 }
 
-@*<div class="row align-items-start vh-100">*@
-@*<div class="row">
-    <div class="col-12 p-5">
-        <h2>Homer's Stats</h2>
-    </div>
-    <div class="col-6 p-3">
-        <canvas id="line-chart"></canvas>
-    </div>
-    <div class="col-6 p-3">
-        <canvas id="pie-chart"></canvas>
-    </div>
-</div>
-*@
 
-<!--user welcome-->
-<div class="row">
-    <div class="col-8 p-5 bg-white text-black text-xl-center">
-        <h1>Hello, @Model.FullName</h1>
-    </div>
-    <div class="col-4 p-5 bg-white text-black" text-center">
-        <p>Current Date and Time:</p>
-        <p><span id='date-time'></span></p>
+<!-- Modal #myProgress -->
+<div id="myProgress" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered  modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Your Exercise Progress</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class=" py-2">
+                    <p class="mt-4 bg-white p-3" id="losinfo"><i class="fa fa-walking" style="color:blue;"></i> Exercises:  <span id="losinfo">Your program weekly progress.</span></p>
+                    <small>Week 1</small>
+                    <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 60%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small>Week 2</small>
+                    <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small>Week 3</small>
+                    <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small>Week 4</small>
+                    <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 90%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small>Week 5</small>
+                    <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>*@
+                <a type="button" class="btn btn-primary" href="/Dashboard">Dismiss</a>
+            </div>
+        </div>
     </div>
 </div>
 
-<!--user dashboard-->
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-8 p-5">
-            <canvas id="line-chart"></canvas>
-            <h2 class="mt-4 bg-white p-3">Goals</h2>>
-            <h6 class="d-flex align-items-center mb-3 fw-bold py-3">Progress</h6>
-            <small>Activity 1</small>
-            <div class="progress mb-3" style="height: 5px">
-                <div class="progress-bar bg-primary" role="progressbar" style="width: 60%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+<!-- Modal #myActivites -->
+<div id="myActivities" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered  modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Your Exercise Progress</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <small>Activity 2</small>
-            <div class="progress mb-3" style="height: 5px">
-                <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="modal-body">
+                <canvas id="myChart"></canvas>
             </div>
-            <small>Activity 3</small>
-            <div class="progress mb-3" style="height: 5px">
-                <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>*@
+                <a type="button" class="btn btn-primary" href="/Dashboard">Dismiss</a>
             </div>
-            <small>Activity 4</small>
-            <div class="progress mb-3" style="height: 5px">
-                <div class="progress-bar bg-primary" role="progressbar" style="width: 90%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <small>Activity 5</small>
-            <div class="progress mb-3" style="height: 5px">
-                <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        </div>
-        <div class="col-4 p-5">
-            <h2>To Do List</h2>
-            <h6>Make a note of what you're working on!</h6>
-            <div class="list-group list-group-numbered">
-                <a href="#" class="list-group-item list-group-item-action">Practice</a>
-                <a href="#" class="list-group-item list-group-item-action">More Practice</a>
-                <a href="#" class="list-group-item list-group-item-action">Packet from Dr. Nick</a>
-                <a href="#" class="list-group-item list-group-item-action">Meeting with Speech Path</a>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6 p-5">
-            <canvas id="pie-chart"></canvas>
-        </div>
-        <div class="col-6 p-5">
-            <h3>Notepad</h3>
-            <div id="container">
-                <textarea id="area" rows="10" cols="50"></textarea>
-            </div>
-            <div id="notepad_controls">
-                <p><a href="#" class="button" button onclick="save()">Save</a>
-                <a href="#" class="button" button onclick="clear()">Clear</a></p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6 p-5">
-            <h2>Contact Information</h2>
-            <h6>Reach out whenever you need help!</h6>
-            <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item">Dr. Moira, 123-456-7890</a>
-                <a href="#" class="list-group-item">Speech Path Clinic, 111-222-3333</a>
-                <a href="#" class="list-group-item">Dr. Nick, 888-726-6660</a>
-            </div>
-        </div>
-        <div class="col-6 p-5 bg-primary text-white text-center">
-            <h6>Word of the day!</h6>
-            <h1 class="text-uppercase">Aphasia</h1>
         </div>
     </div>
 </div>
+
+
+<div class="container mb-2 shadow pt-5">
+
+    <!--User Welcome-->
+
+    <div class="container-xxl pb-3 ">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-4 mx-auto">
+                    <div class="g-3 vh-20 d-none d-lg-block">
+                        <img src="/images/image4.png" class="img-responsive" alt="Responsive image" />
+                    </div>
+                </div>
+                <div class="col-lg-6 pr-lg-2 shadow rounded border bg-white p-lg-3 wow fadeInDown">
+                    <h1 class="mb-4">Welcome to <i class="fa fa-book-open" style="color: dodgerblue;"></i> Dashboard</h1>
+                    <p class="mb-4"><strong>This is where you will find all information on where you are in your exercises, what activities you have done, and more.</strong></p>
+                    <p class="mb-4"><strong>Remember, "practice makes perfect", so check-in here often so you can see how much you've done.'</strong></p>
+                    <div class="row g-4 mb-4">
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                <h1 class="flex-shrink-0 display-5 text-primary mb-0">2/1</h1>
+                                <div class="ps-4">
+                                    <p class="mb-0">Day of</p>
+                                    <h6 class="text-uppercase mb-0">Last Login</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="75" data-time="2000"></span></h1>
+                                <div class="ps-4">
+                                    <p class="mb-0">Total Completed</p>
+                                    <h6 class="text-uppercase mb-0">Activities</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a asp-area="" asp-controller="Exercises" asp-action="Index" class="btn btn-primary py-3 px-5 mt-2">Head to Exercises</a>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </div>
+    </div>
+    <hr style="width:100%" size="3" color="black">
+
+    <!--User Dashboard Charts-->
+
+    <div class="container py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Your Services</h5>
+                <h1 class="mb-5">Explore Yours Services</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="color-flip rounded pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-chart-bar text-primary mb-4"></i>
+                            <h5>Program Progress</h5>
+                            <p>This is where you can see how much of your program you have completed</p>
+                            <a href="?progress" class="stretched-link"> </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="color-flip pt-3" id="color-flip">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-award mb-4"></i>
+                            <h5>Activities</h5>
+                            <p>This is where you can see how many of each activity you have completed</p>
+                            <a href="?activities" class="stretched-link"> </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="color-flip rounded pt-3">
+                        <div class="p-4">
+                            <i class="color-flip fa fa-3x fa-user-friends mb-4"></i>
+                            <h5>Resources</h5>
+                            <p>You will find here a collection of resources gathered by the Be Heard team to assist you.</p>
+                            <a id="myResourceLink" href="#myResource" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="color-flip rounded pt-3" id="color-flip">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-headset mb-4"></i>
+                            <h5>Assistance</h5>
+                            <p>E-mail one of the team-members to assist you with whatever issues you might be having.</p>
+                            <a id="myContactLink" href="#myContact" class="stretched-link"> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Collapse #myResource-->
+            <div class="collapse" id="myResource">
+                <div class="card card-body">
+                    <h3>School's Out</h3>
+                    <p>
+                        Well, we got no choice <br />
+                        All the girls and boys (girls and boys)<br />
+                        Making all that noise (ooh)<br />
+                        'Cause they found new toys<br />
+                        We can't salute ya<br />
+                        Can't find a flag<br />
+                        If that don't suit ya<br />
+                        That's a drag<br />
+                        School's out for summer<br />
+                        School's out forever<br />
+                        I'm bored to pieces<br />
+                        Well, we got no class<br />
+                        And we got no principals (ooh)<br />
+                        And we got no intelligence<br />
+                        We can't even think of a word that rhymes, well<br />
+                        We can't salute ya<br />
+                        Can't find a flag<br />
+                        If that don't suit ya<br />
+                        That's a drag<br />
+                        School's out for summer<br />
+                        School's out forever<br />
+                        I'm bored to pieces<br />
+                        No more pencils, no more books<br />
+                        No more teachers, dirty looks<br />
+                        Out for summer, out 'til fall<br />
+                        We might not come back at all<br />
+                        School's out for summer (detention)<br />
+                        School's out forever<br />
+                        School's out with fever<br />
+                        School's out completely<br />
+                        School's out for summer<br />
+                    </p>
+                </div>
+            </div>
+            <!-- Collapse #myContact-->
+            <div class="collapse" id="myContact">
+                <div class="card card-body">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                    <label for="name">Your Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                    <label for="email">Your Email</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                    <label for="subject">Subject</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
+                                    <label for="message">Message</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+
+<style>
+    :root {
+        --primary: #FEA116;
+        --light: #F1F8FF;
+        --dark: #0F172B;
+    }
+
+    p#losinfo {
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+        p#losinfo span {
+            font-size: 25px;
+            font-weight: normal;
+        }
+
+    .color-flip {
+        box-shadow: 0 0 45px rgba(0, 0, 0, .08);
+        transition: .5s;
+    }
+
+        .color-flip:hover {
+            background: var(--primary);
+        }
+
+        .color-flip * {
+            transition: .5s;
+            transform: rotate(0);
+        }
+
+        .color-flip * {
+            color: var(--dark) !important;
+        }
+</style>
 
 @section Scripts
 {
+    <script src="~/js/wow/wow.min.js"></script>
+
+    <script>
+        new WOW().init();
+    </script>
+    <!--Scripts for Modals-->
+    <script type="text/javascript">
+        var url = window.location.href;
+        if (url.indexOf('?progress') != -1 || url.IndexOf('/?progress') != -1) {
+            $(document).ready(function () {
+                $("#myProgress").modal("show");
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        var url = window.location.href;
+        if (url.indexOf('?activities') != -1 || url.IndexOf('/?activities') != -1) {
+            $(document).ready(function () {
+                $("#myActivities").modal("show");
+            });
+        }
+    </script>
+    <!--Scripts for collapses -->
+    <script>
+        $(document).ready(function () {
+            $("#myResourceLink").click(function () {
+                $("#myContact").collapse("hide");
+                $("#myResource").collapse("toggle");
+            });
+        });
+
+        $(document).ready(function () {
+            $("#myContactLink").click(function () {
+                $("#myResource").collapse("hide");
+                $("#myContact").collapse("toggle");
+            });
+        });
+    </script>
+
+    <!--Script for counter-->
+    <script type="text/javascript">
+
+        (function ($) {
+            $.fn.counter = function () {
+                const $this = $(this),
+                    numberFrom = parseInt($this.attr('data-from')),
+                    numberTo = parseInt($this.attr('data-to')),
+                    delta = numberTo - numberFrom,
+                    deltaPositive = delta > 0 ? true : false,
+                    time = parseInt($this.attr('data-time')),
+                    changeTime = 10;
+
+                let currentNumber = numberFrom,
+                    value = delta * changeTime / time;
+                var interval1;
+                const changeNumber = () => {
+                    currentNumber += value;
+                    //checks if currentNumber reached numberTo
+                    (deltaPositive && currentNumber >= numberTo) || (!deltaPositive && currentNumber <= numberTo) ? currentNumber = numberTo : currentNumber;
+                    this.text(parseInt(currentNumber));
+                    currentNumber == numberTo ? clearInterval(interval1) : currentNumber;
+                }
+
+                interval1 = setInterval(changeNumber, changeTime);
+            }
+        }(jQuery));
+
+
+        $(document).ready(function () {
+
+            $('.count-up').counter();
+            $('.count1').counter();
+            $('.count2').counter();
+            $('.count3').counter();
+            $('.count4').counter();
+
+            new WOW().init();
+
+            setTimeout(function () {
+                $('.count5').counter();
+            }, 3000);
+        });
+    </script>
+
+    <!--Scripts for charts-->
     <script src="~/js/chart.js"></script>
 
     <script>
-        //  Date and Time 
-        var dt = new Date();
-        document.getElementById('date-time').innerHTML = dt;
-
-        function getRandomInt(max) {
-            return Math.floor(Math.random() * max);
-        }
-
-        function numbers(NUMBER_CFG) {
-            var label = []
-            for (var i = 0; i < NUMBER_CFG.count; i++) {
-                label.push(getRandomInt(NUMBER_CFG.max))
-            }
-            return label
-        }
-
-        /*
-        //******Notepad not working yet (11/30)
-        //  Notepad Function
-        localStorage.setItem("note", "Put your notes here...");
-        //var item = localStorage.getItem("note");
-        function check_web_storage_support() {
-            if (typeof (Storage) !== "undefined") {
-                return (true);
-            }
-            else {
-                alert("Web Storage unsupported!");
-                return false;
-            }
-        }
-        function display_saved_note() {
-            if (check_web_storage_support() == true) {
-                result = localStorage.getItem("note");
-            }
-            if (result === null) {
-                result = "No note saved";
-            }
-            document.getElementById('area').value = result;
-        }
-        function save() {
-            if (check_web_storage_support() == true) {
-                var area = document.getElementById("area");
-                if (area.value != '') {
-                    localStorage.setItem("note", area.value);
-                }
-                else {
-                    alert("Nothing to save");
-                }
-            }
-        }
-        function clear() {
-            document.getElementById('area').value = '';
-        }
-        window.onload = function () {
-            display_saved_note();
-        }
-        */
-
-        const DATA_COUNT = 7;
-        const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
-
-        // const labels = Utils.months({ count: 7 });
-        const labels = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
         const data = {
-            labels: labels,
-            datasets: [
-                //{
-                //    label: 'Dataset 1',
-                //    data: Utils.numbers(NUMBER_CFG),
-                //    borderColor: Utils.CHART_COLORS.red,
-                //    backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red, 0.5),
-                //},
-                {
-                    label: 'Weekly Usage',
-                    data: numbers(NUMBER_CFG),
-                    borderColor: 'rgb(54, 162, 235)',
-                    backgroundColor: 'rgb(54, 162, 235)'
-                }
-            ]
+            labels: [
+                'Breathing',
+                'Bar Chaser',
+                'Breathing',
+                'Sentences',
+                'Freqency'
+            ],
+            datasets: [{
+                label: '@Model.User.FirstName Activity Tracker',
+                data: [11, 16, 7, 3, 14],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(75, 192, 192)',
+                    'rgb(255, 205, 86)',
+                    'rgb(201, 203, 207)',
+                    'rgb(54, 162, 235)'
+                ]
+            }]
         };
 
         const config = {
-            type: 'line',
+            type: 'polarArea',
             data: data,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: "Homer's Weekly Usage"
-                    }
-                }
-            },
+            options: {}
         };
-
-        new Chart($('#line-chart'), config);
-
-        const CHART_COLORS = {
-            red: 'rgb(255, 99, 132)',
-            orange: 'rgb(255, 159, 64)',
-            yellow: 'rgb(255, 205, 86)',
-            green: 'rgb(75, 192, 192)',
-            blue: 'rgb(54, 162, 235)',
-        //    purple: 'rgb(153, 102, 255)',
-        //    grey: 'rgb(201, 203, 207)'
-        };
-
-        const DATA_COUNT2 = 5;
-        const NUMBER_CFG2 = { count: DATA_COUNT2, min: 0, max: 100 };
-
-        const data2 = {
-            labels: ['Syllables','Simple Phrases','Simple Words','Complex Words','Complex Phrases'],
-            datasets: [
-                {
-                    label: 'Proficiency',
-                    data: numbers(NUMBER_CFG2),
-                    backgroundColor: Object.values(CHART_COLORS)
-                }
-            ]
-        };
-
-        const config2 = {
-            type: 'doughnut',
-            data: data2,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: "Homer's Proficiency"
-                    }
-                }
-            },
-        };
-        new Chart($('#pie-chart'), config2);
     </script>
+    <script>
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
+
 }
