@@ -74,6 +74,7 @@ namespace BeHeard.Services
                 MasterVolume = 75, // default
                 PhoneNumber  = user.PhoneNumber,
                 Preferences  = null,
+                Settings     = null,
                 Subscription = null,
                 Username     = user.Username,
             };

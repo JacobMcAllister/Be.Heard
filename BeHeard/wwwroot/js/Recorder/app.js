@@ -98,4 +98,39 @@ function createDownloadLink(blob) {
     li.appendChild(link);
     //add the li element to the ordered list 
     recordingsList.appendChild(li);
+
+    var reader = new FileReader();
+
+    // The magic always begins after the Blob is successfully loaded
+    reader.onload = function () {
+        // Since it contains the Data URI, we should remove the prefix and keep only Base64 string
+        var b64 = reader.result.replace(/^data:.+;base64,/, '');
+        console.log(b64); //-> "V2VsY29tZSB0byA8Yj5iYXNlNjQuZ3VydTwvYj4h"
+
+        // Decode the Base64 string and show result just to make sure that everything is OK
+        // var html = atob(b64);
+        // console.log(html);
+
+        $.ajax({
+            type: 'POST',
+            url: 'https://localhost:44333/api/Speech/recognizer',
+            contentType: 'application/json',
+            data: JSON.stringify(b64),
+            // dataType: 'json',
+            success: function(response) {
+                console.log(response);
+                let responseJSON = JSON.parse(response);
+                let modalBody = $('#staticBackdrop').find('.modal-body');
+                modalBody.html(`<div class="mx-auto text-center"><h3>${responseJSON.text}</h3></div>`);
+            },
+            error: function(req, status, error) {
+                alert('error!');
+                console.log(response);
+            }
+        });
+        console.log("processing..");
+    };
+
+    // Since everything is set up, let’s read the Blob and store the result as Data URI
+    reader.readAsDataURL(blob);
 }
