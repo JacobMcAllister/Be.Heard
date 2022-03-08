@@ -21,212 +21,234 @@
         </li>
     </ul>
 </div>
-<div class="containter mb-2" style="padding-top: 5%; margin-left: 5%; margin-right: auto; padding-right: 5%;">
-    <div class="tab-content" id="myTabContent">
-        @*Account Tab*@
-        <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="Account-tab">
-            <h4 class="mb-0 mt-5">Account Settings</h4>
-            <hr class="my-4" />
-            <strong class="mb-1">Personal</strong>
-            <div class="list-group mb-5 shadow">
-                <div class="list-group-item">
-                    <div class="row align-items-center">
-                        <div class="col-1">
-                            <strong class="mb-0">Username</strong>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control" value="@Model.Settings.User.Username">
-                        </div>
-                    </div>
-                </div>
-                <div class="list-group-item">
-                    <div class="row align-items-center">
-                        <div class="col-1">
-                            <strong class="mb-0">First Name</strong>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control" value="@Model.Settings.User.FirstName">
-                        </div>
-                    </div>
-                </div>
-                <div class="list-group-item">
-                    <div class="row align-items-center">
-                        <div class="col-1">
-                            <strong class="mb-0">Last Name</strong>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control" value="@Model.Settings.User.LastName">
-                        </div>
-                    </div>
-                </div>
-                <div class="list-group-item">
-                    <div class="row align-items-center">
-                        <div class="col-1">
-                            <strong class="mb-0">Phone</strong>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control" value="@Model.Settings.User.PhoneNumber">
-                        </div>
-                    </div>
-                </div>
-                <div class="list-group-item">
-                    <div class="row align-items-center">
-                        <div class="col-1">
-                            <strong class="mb-0">Address</strong>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control" value="@Model.Address.Street">
-                        </div>
-                    </div>
-                </div>
-                <div class="list-group-item">
-                    <div class="row align-items-center">
-                        <div class="col-1">
-                            <strong class="mb-0">Sex</strong>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control" value="@Model.Gender">
-                        </div>
-                    </div>
-                </div>
-                <div class="list-group-item">
-                    <div class="row align-items-center">
-                        <div class="col-1">
-                            <strong class="mb-0">Age</strong>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control" value="@Model.Settings.User.Age">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <strong class="mb-0">Account</strong>
-            <div class="list-group mb-5 shadow">
-                <div class="list-group-item">
-                    <div class="row align-items-center">
-                        <div class="col-1">
-                            <strong class="mb-0">Email</strong>
-                        </div>
-                        <div class="col-auto">
-                            <input type="email" class="form-control" value="@Model.Settings.User.Email">
-                        </div>
-                    </div>
-                </div>
-                @*<div class="list-group-item">
+<div class="containter" style="padding-top: 5%; margin-left: 5%; margin-right: auto; padding-right: 5%;">
+    <form method="post" enctype="multipart/form-data" asp-controller="Settings" asp-action="SaveSettings">
+        <div class="tab-content" id="myTabContent">
+            @*Account Tab*@
+            <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="Account-tab">
+                <h4 class="mb-0 mt-5">Account Settings</h4>
+                <hr class="my-4" />
+                <strong class="mb-1">Personal</strong>
+                <div class="list-group mb-5 shadow">
+                    <div class="list-group-item">
                         <div class="row align-items-center">
                             <div class="col-1">
-                                <strong class="mb-0">Password</strong>
+                                <strong class="mb-0">First Name</strong>
                             </div>
-                                <div class="col-auto">
-                                    <input type="password" class="form-control" value="password">
+                            <div class="col-auto">
+                                <input type="text" class="form-control" id="FirstName" aria-describedby="FirstNameHelp" placeholder="@Model.Settings.User.FirstName" name="Settings.User.FirstName" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col-1">
+                                <strong class="mb-0">Last Name</strong>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" id="LastName" aria-describedby="LastNameHelp" placeholder="@Model.Settings.User.LastName" name="Settings.User.LastName" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col-1">
+                                <strong class="mb-0">Phone</strong>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" id="PhoneNumber" aria-describedby="PhoneNumberHelp" placeholder="@Model.Settings.User.PhoneNumber" name="Settings.User.PhoneNumber" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col-1">
+                                <strong class="mb-0">Address</strong>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" id="Street" aria-describedby="StreetHelp" placeholder="@Model.Address.Street" name="Settings.User.PhoneNumber" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col-1">
+                                <strong class="mb-0">Apartment Number</strong>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" id="Street" aria-describedby="PhoneNumberHelp" placeholder="@Model.Address.Apartment" name="Settings.User.Address.Apartment" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col-1">
+                                <strong class="mb-0">Postal Code</strong>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" id="Zip" aria-describedby="PostalNumberHelp" placeholder="@Model.Address.PostalCode" name="Settings.User.Address.PostalCode" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col-1">
+                                <strong class="mb-0">Postal Code</strong>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" id="City" aria-describedby="CityHelp" placeholder="@Model.Address.City" name="Settings.User.Address.City" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col-1">
+                                <strong class="mb-0">Sex</strong>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" id="Sex" aria-describedby="SexHelp" placeholder="@Model.Settings.User.Gender" name="Settings.User.Gender" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col-1">
+                                <strong class="mb-0">Age</strong>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" id="Age" aria-describedby="AgeHelp" placeholder="@Model.Settings.User.Age" name="Settings.User.Age" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <strong class="mb-0">Account</strong>
+                <div class="list-group mb-5 shadow">
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col-1">
+                                <strong class="mb-0">Username</strong>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" id="Username" aria-describedby="UsernameHelp" placeholder="@Model.Settings.User.Username" name="Settings.User.Username" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col-1">
+                                <strong class="mb-0">Email</strong>
+                            </div>
+                            <div class="col-auto">
+                                <input type="email" class="form-control" id="Email" aria-describedby="EmailHelp" placeholder="@Model.Settings.User.Email" name="Settings.User.Email" />
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="list-group-item">
+                            <div class="row align-items-center">
+                                <div class="col-1">
+                                    <strong class="mb-0">Password</strong>
                                 </div>
+                                    <div class="col-auto">
+                                        <input type="password" class="form-control" value="password">
+                                    </div>
+                                </div>
+                        </div>*@
+                </div>
+            </div>
+            @*Subscription Tab*@
+            <div class="tab-pane fade" id="subscription" role="tabpanel" aria-labelledby="subscription-tab">
+                <h4 class="mb-0 mt-5">Subscription Settings</h4>
+                <hr class="my-4" />
+                <div class="list-group mb-5 shadow">
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col-3">
+                                <strong class="mb-0">Current Subscription</strong>
                             </div>
-                    </div>*@
-            </div>
-        </div>
-        @*Subscription Tab*@
-        <div class="tab-pane fade" id="subscription" role="tabpanel" aria-labelledby="subscription-tab">
-            <h4 class="mb-0 mt-5">Subscription Settings</h4>
-            <hr class="my-4" />
-            <div class="list-group mb-5 shadow">
-                <div class="list-group-item">
-                    <div class="row align-items-center">
-                        <div class="col-3">
-                            <strong class="mb-0">Current Subscription</strong>
-                        </div>
-                        <div class="col-auto">
-                            <p class="py-2 ">Free</p>
+                            <div class="col-auto">
+                                <p class="py-2 ">Free</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="list-group-item">
-                    <strong class="mb-0">Subscription Options</strong>
-                    <ul class="list-group col-3">
-                        <li class="list-group-item">
-                            <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-                            Free Subscription
-                        </li>
-                        <li class="list-group-item">
-                            <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-                            Upgrade with established care team
-                        </li>
-                        <li class="list-group-item">
-                            <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-                            Upgrade without care team
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <strong class="mb-1">Payment Type</strong>
-            <div class="list-group mb-5 shadow">
-                <div class="list-group-item">
-                    <div class="row align-items-center">
-                        <div class="col-3">
-                            <strong class="mb-0">Current Payment Method</strong>
-                        </div>
-                        <div class="col-auto">
-                            <p class="py-2 ">N/A</p>
-                        </div>
+                    <div class="list-group-item">
+                        <strong class="mb-0">Subscription Options</strong>
+                        <select class="col-2 custom-select" id="inputGroupSelect03" name="Settings.Subscription.Type">
+                            <option value="1">Free</option>
+                            <option value="2">Without care team</option>
+                            <option value="3">With Care team</option>
+                        </select>
                     </div>
-                </div>
-            </div>
-        </div>
+                    @*<ul class="list-group col-3">
+                            @if (Model.Settings.Subscription.Type == SubscriptionType.Free)
+                            {
+                                <li class="list-group-item">
+                                    <input type="checkbox" class="form-check-input me-1" id="Subscription" aria-describedby="SubscriptionHelp"
+                                           name="Settings.Subscription.Type" value="True" />
+                                </li>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                                    Upgrade with established care team
+                                </li>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                                    Upgrade without care team
+                                </li>
+                            }
 
-        <div class="tab-pane fade" id="preferences" role="tabpanel" aria-labelledby="preferences-tab">
-            <h4 class="mb-0 mt-5">Preference Settings</h4>
-            <hr class="my-4" />
-            <strong class="mb-1">Assistance</strong>
-            <div class="list-group mb-5 shadow">
-                <div class="list-group-item">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <strong class="mb-0">Text to speech</strong>
-                            <p class="text-muted mb-0">Check to enable voice to text to speech narration</p>
-                        </div>
-                        <div class="col-auto">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="alert1" />
-                                <span class="custom-control-label"></span>
-                            </div>
-                        </div>
-                    </div>
+                            <li class="list-group-item">
+                                <input type="checkbox" class="form-check-input me-1" id="Subscription" aria-describedby="SubscriptionHelp"
+                                       placeholder="@Model.Settings.Subscription.Type" name="Settings.Subscription.Type" value="True" />
+                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                                Free Subscription
+                            </li>
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                                Upgrade with established care team
+                            </li>
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                                Upgrade without care team
+                            </li>
+                        </ul>*@
                 </div>
-                <div class="list-group-item">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <strong class="mb-0">Color Blind Mode</strong>
-                            <p class="text-muted mb-0">Check to enable Color Blind Mode</p>
-                        </div>
-                        <div class="col-auto">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="alert2" />
-                                <span class="custom-control-label"></span>
+                <strong class="mb-1">Payment Type</strong>
+                <div class="list-group mb-5 shadow">
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col-3">
+                                <strong class="mb-0">Current Payment Method</strong>
+                            </div>
+                            <div class="col-auto">
+                                <p class="py-2 ">N/A</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <strong class="mb-0">View</strong>
-            <div class="list-group mb-5 shadow">
-                <div class="list-group-item">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <strong class="mb-0">Dark mode</strong>
-                            <p class="text-muted mb-0">Check to enable dark mode</p>
-                        </div>
-                        <div class="col-auto">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="alert1" />
-                                <span class="custom-control-label"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @*<div class="list-group-item">
+            <div class="tab-pane fade" id="preferences" role="tabpanel" aria-labelledby="preferences-tab">
+                <h4 class="mb-0 mt-5">Preference Settings</h4>
+                <hr class="my-4" />
+                <strong class="mb-1">Assistance</strong>
+                <div class="list-group mb-5 shadow">
+                    <div class="list-group-item">
                         <div class="row align-items-center">
                             <div class="col">
-                                <strong class="mb-0">Enable something to be decided</strong>
-                                <p class="text-muted mb-0">A short description of what is being enabled</p>
+                                <strong class="mb-0">Text to speech</strong>
+                                <p class="text-muted mb-0">Check to enable voice to text to speech narration</p>
+                            </div>
+                            <div class="col-auto">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="alert1" />
+                                    <span class="custom-control-label"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <strong class="mb-0">Color Blind Mode</strong>
+                                <p class="text-muted mb-0">Check to enable Color Blind Mode</p>
                             </div>
                             <div class="col-auto">
                                 <div class="custom-control custom-switch">
@@ -235,37 +257,69 @@
                                 </div>
                             </div>
                         </div>
-                    </div>*@
+                    </div>
+                </div>
+                <strong class="mb-0">View</strong>
+                <div class="list-group mb-5 shadow">
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <strong class="mb-0">Dark mode</strong>
+                                <p class="text-muted mb-0">Check to enable dark mode</p>
+                            </div>
+                            <div class="col-auto">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="alert1" />
+                                    <span class="custom-control-label"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="list-group-item">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <strong class="mb-0">Enable something to be decided</strong>
+                                    <p class="text-muted mb-0">A short description of what is being enabled</p>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="alert2" />
+                                        <span class="custom-control-label"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                </div>
             </div>
-        </div>
-        <div class="tab-pane fade" id="sound" role="tabpanel" aria-labelledby="Sound-tab">
-            <strong class="mb-1">Master Volume</strong>
-            <div class="list-group mb-5 shadow">
-                <div class="list-group-item">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <input type="range" value="@Model.Settings.MasterVolume" min="1" max="100" oninput="this.nextElementSibling.value = this.value">
-                            <output>@Model.Settings.MasterVolume</output>
+            <div class="tab-pane fade" id="sound" role="tabpanel" aria-labelledby="Sound-tab">
+                <strong class="mb-1">Master Volume</strong>
+                <div class="list-group mb-5 shadow">
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <input type="range" value="@Model.Settings.MasterVolume" min="1" max="100" oninput="this.nextElementSibling.value = this.value">
+                                <output>@Model.Settings.MasterVolume</output>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-2 text-center">
-            <button type="button" id="save-button" class="btn btn-primary" onclick="SaveToast()">Save</button>
-            <div class="toast" id="Save-Toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-body">
-                    Settings have been saved!
-                </div>
+    </form>
+</div>
+<div class="row">
+    <div class="col-2 text-center">
+        <button type="submit" id="save-button" class="btn btn-primary" onclick="SaveToast()">Save</button>
+        <div class="toast" id="Save-Toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+                Settings have been saved!
             </div>
-            @*execute save settings to player database*@
         </div>
-        <div class="col-2 text-center">
-            <a href="/Profile" type="button" class="btn btn-secondary">Close</a>
-            @*Load the profile view*@
-        </div>
+        @*execute save settings to player database*@
+    </div>
+    <div class="col-2 text-center">
+        <a href="/Profile" type="button" class="btn btn-secondary">Close</a>
+        @*Load the profile view*@
     </div>
 </div>
 <script>

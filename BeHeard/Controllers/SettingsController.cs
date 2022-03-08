@@ -43,9 +43,20 @@ namespace BeHeard.Controllers
         {
             return PartialView("_Preferences");
         }
+
         public ActionResult Subscription()
         {
             return PartialView("_Subscription");
+        }
+
+        public IActionResult SaveSettings(Settings settings) {
+            var service = new SessionService(HttpContext);
+            var session = service.Get();
+            var updateUser = _beHeardContextManager.UserRepository.GetUserByUsername(session.Username);
+            updateUser.Settings = settings;
+            updateUser.Settings.Preferences = settings.Preferences;
+
+            return RedirectToAction("Index");
         }
 
     }
