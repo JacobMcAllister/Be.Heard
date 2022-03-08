@@ -110,11 +110,11 @@ namespace BeHeard.Controllers
 
             user.Settings = settings;
             user.Profile = profile;
-            if (_userService.IsAnExistingUser(user.Username))
-            {
-                TempData["Error"] = "Sorry, that 'Username' and 'Password' combination do not match any record.";
-                return View("~/Views/Login/Registration.cshtml");
-            }
+            //if (_userService.IsAnExistingUser(user.Username))
+            //{
+            //    TempData["Error"] = "Sorry, that 'Username' and 'Password' combination do not match any record.";
+            //    return View("~/Views/Login/Registration.cshtml");
+            //}
             try
             {
                 _beHeardContextManager.UserRepository.Add(user);

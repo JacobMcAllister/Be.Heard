@@ -46,8 +46,13 @@ namespace BeHeard.Controllers
             var session = service.Get();
             var updateUser = _beHeardContextManager.UserRepository.GetUserByUsername(session.Username);
 
-            settings.Preferences.Id = updateUser.Settings.Preferences.Id;
-            updateUser.Settings.Preferences = settings.Preferences;
+            //settings.Preferences.Id = updateUser.Settings.Preferences.Id;
+            if(settings.Preferences.ColorBlindMode == true)
+                updateUser.Settings.Preferences.ColorBlindMode = settings.Preferences.ColorBlindMode;
+            if(settings.Preferences.TextToSpeech == true)
+                updateUser.Settings.Preferences.TextToSpeech = settings.Preferences.TextToSpeech;
+            if(settings.Preferences.DarkMode == true)
+                updateUser.Settings.Preferences.DarkMode = settings.Preferences.DarkMode;
 
             _beHeardContextManager.SaveChanges();
             service.Save();
