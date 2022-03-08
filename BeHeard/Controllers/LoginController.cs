@@ -33,6 +33,7 @@ namespace BeHeard.Controllers
 
         public IActionResult Index()
         {
+            TempData["Error"] = "";
             // This is initial login view
             // no action aside from view
             return View();
@@ -41,9 +42,8 @@ namespace BeHeard.Controllers
         [HttpPost]
         public IActionResult Login(User user, bool isFirstLogin = false)
         {
-            // NOTE: Add redirects for failed attempts and nonexistent accounts
             TempData["Error"] = "Sorry, that 'Username' and 'Password' combination do not match any record.";
-
+            // NOTE: Add redirects for failed attempts and nonexistent accounts
             if (!_userService.IsValidUserCredentials(user.Username, user.Password))
                 return View("~/Views/Login/Index.cshtml");
 
@@ -71,6 +71,7 @@ namespace BeHeard.Controllers
 
         public IActionResult Registration()
         {
+            TempData["Error"] = "";
             return View();
         }
         public IActionResult TermsConditions()
@@ -81,35 +82,39 @@ namespace BeHeard.Controllers
         [HttpPost]
         public IActionResult RegisterAccount(User user, int termCheck)
         {
-            //var subscription = new Subscription
+            var subscription = new Subscription
+            {
+                Type = SubscriptionType.Paid,
+            };
+
+            var preferences = new Preferences
+            {
+                ColorBlindMode = false,
+                DarkMode = false,
+                TextToSpeech = false,
+            };
+
+
+            var settings = new Settings
+            {
+                MasterVolume = 100,
+                Preferences = preferences,
+                Subscription = subscription,
+                User = user,
+            };
+            var profile = new UserProfile
+            {
+                Settings = settings,
+                User = user,
+            };
+
+            user.Settings = settings;
+            user.Profile = profile;
+            //if (_userService.IsAnExistingUser(user.Username))
             //{
-            //    Type = SubscriptionType.Paid,
-            //};
-
-            //var preferences = new Preferences
-            //{
-            //    ColorBlindMode = false,
-            //    DarkMode = true,
-            //    TextToSpeech = false,
-            //};
-
-
-            //var settings = new Settings
-            //{
-            //    MasterVolume = 100,
-            //    Preferences = preferences,
-            //    Subscription = subscription,
-            //    User = user,
-            //};
-            //var profile = new UserProfile
-            //{
-            //    Settings = settings,
-            //    User = user,
-            //};
-
-            //user.Settings = settings;
-            //user.Profile = profile;
-
+            //    TempData["Error"] = "Sorry, that 'Username' and 'Password' combination do not match any record.";
+            //    return View("~/Views/Login/Registration.cshtml");
+            //}
             try
             {
                 _beHeardContextManager.UserRepository.Add(user);
