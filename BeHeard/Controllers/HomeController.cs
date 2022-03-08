@@ -45,6 +45,8 @@ namespace BeHeard.Controllers
 
             var session = service.Get();
             var updateUser = _beHeardContextManager.UserRepository.GetUserByUsername(session.Username);
+
+            settings.Preferences.Id = updateUser.Settings.Preferences.Id;
             updateUser.Settings.Preferences = settings.Preferences;
 
             _beHeardContextManager.SaveChanges();

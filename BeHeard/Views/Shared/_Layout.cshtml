@@ -8,6 +8,8 @@
     <title>@ViewData["Title"] - BeHeard</title>
     @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     @*<link rel="stylesheet" href="~/css/site.css" />*@
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="~/css/main.min.css" />
 </head>
 <body>
@@ -47,7 +49,7 @@
                         </li>
                         <li>
                             <a asp-area="" asp-controller="Dashboard" asp-action="Index" class="nav-link px-0 align-middle">
-                                <i class="fs-2 fas fa-columns"></i> <span class="fs-3 ms-1 d-none d-sm-inline">Dashboard</span>
+                                <i class="fs-2 fas fa-book-open"></i> <span class="fs-3 ms-1 d-none d-sm-inline">Dashboard</span>
                             </a>
                         </li>
                         <li>
@@ -60,13 +62,11 @@
                         <a href="#" class="fs-3 d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="https://avatarfiles.alphacoders.com/693/69306.jpg" alt="hugenerd" width="80" height="80" class="rounded-circle">
                             <span class="fs-3 d-none d-sm-inline mx-4">
-
                                 @{ 
                                     var service = new SessionService(Context);
                                     var session = service.Get();
                                 }
                                 @session.FirstName
-
                             </span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
