@@ -1,17 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BeHeard.Models;
-using Microsoft.AspNetCore.Http;
 using BeHeard.Core;
 using System.Security.Claims;
 using BeHeard.Application;
-using Microsoft.AspNetCore.Authentication;
-using System.Net.Http.Headers;
-using System.Net.Http;
-using System.Runtime.InteropServices.WindowsRuntime;
 using BeHeard.Application.Models;
 using BeHeard.Services;
 
