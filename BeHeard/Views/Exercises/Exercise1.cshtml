@@ -10,7 +10,7 @@
 }
 
 <h1>Hello @Model.FullName</h1>
-<h2>Exercise 1</h2>
+<h2>Week 1 --> Activity 1</h2>
 
 <div class="container">
     <div class="row">
@@ -167,8 +167,7 @@
         <button id="pauseButton" type="button">Pause</button>
         <!--<button type="button" onclick="pauseMic()">Pause</button>-->
     </div>
-    <div>Time Remaining: </div>
-    <div id="Timer">10</div>
+    <div id="Timer"></div>
 
     <!--Tips for exercise-->
     <div class="container p-5 my-5 bg-dark text-white">
@@ -192,6 +191,7 @@
         var drawID = null;
         var arraySize = null;
         var micAnalyser = null;
+        var average_decibel = null;
 
         // Grab our canvas
         canvasContext = document.getElementById("meter").getContext("2d");
@@ -265,6 +265,8 @@
                 else {
                     canvasContext.fillStyle = "#ff0000";
                 }
+                average_decibel += fillVol;
+
                 canvasContext.fillRect(0, 0, fillVol, HEIGHT);
 
                 drawID = requestAnimationFrame(drawVolume);
@@ -279,7 +281,7 @@
         function pause_Play() {
             if (audioContext.state === 'running') {
                 audioContext.suspend().then(function () {
-                    document.getElementById("pauseButton").innerHTML = 'Play';
+                    document.getElementById("pauseButton").innerHTML = 'Resume';
                 });
             } else if (audioContext.state === 'suspended') {
                 audioContext.resume().then(function () {
@@ -291,14 +293,18 @@
         document.getElementById("startButton").onclick = function () { start_timer() };
 
         function start_timer() {
+
             var timeleft = 10;
 
             var downloadTimer = setInterval(function(){
               if(timeleft <= 0){
                 clearInterval(downloadTimer);
                 document.getElementById("Timer").innerHTML = "Finished";
-              } else {
-                document.getElementById("Timer").innerHTML = timeleft + " seconds remaining";
+                average_decibel = average_decibel / 10;
+                percent_decibel = average_decibel / 500;
+                alert("Great job!\nYour average volume was: " + percent_decibel.toFixed(2));
+              } else{
+                document.getElementById("Timer").innerHTML = "Seconds Remaining: " + timeleft;
               }
               timeleft -= 1;
             }, 1000);
