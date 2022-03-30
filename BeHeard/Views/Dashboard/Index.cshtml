@@ -43,7 +43,7 @@
             </div>
             <div class="modal-footer">
                 @*<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>*@
-                <a type="button" class="btn btn-primary" href="/Dashboard">Dismiss</a>
+                <button type ="button" class="btn btn-primary" data-bs-dismiss="modal">Dismiss</button>
             </div>
         </div>
     </div>
@@ -64,7 +64,7 @@
             </div>
             <div class="modal-footer">
                 @*<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>*@
-                <a type="button" class="btn btn-primary" href="/Dashboard">Dismiss</a>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Dismiss</button>
             </div>
         </div>
     </div>
@@ -130,7 +130,7 @@
                             <i class="fa fa-3x fa-chart-bar text-primary mb-4"></i>
                             <h5>Program Progress</h5>
                             <p>This is where you can see how much of your program you have completed</p>
-                            <a href="?progress" class="stretched-link"> </a>
+                            <a id="progressNav" href="#myProgressNav" class="stretched-link"> </a>
                         </div>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                             <i class="fa fa-3x fa-award mb-4 text-primary"></i>
                             <h5>Activities</h5>
                             <p>This is where you can see how many of each activity you have completed</p>
-                            <a href="?activities" class="stretched-link"> </a>
+                            <a id="activitiesNav" href="#myActivitiesLink" class="stretched-link"> </a>
                         </div>
                     </div>
                 </div>
@@ -208,30 +208,25 @@
             <!-- Collapse #myContact-->
             <div class="collapse py-2" id="myContact">
                 <div class="card card-body">
-                    <form>
+                    <form method="post" enctype="multipart/form-data" asp-action="ContactEmail" asp-controller="Dashboard">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                    <label for="name">Your Name</label>
+                                    <input type="text" class="form-control" id="Name" placeholder="Your Name">
+                                    <label for="Name">@Model.FullName</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                    <label for="email">Your Email</label>
+                                    <input type="email" class="form-control" id="Email" placeholder="Your Email">
+                                    <label for="Email">@Model.Profile.User.Email</label>
                                 </div>
                             </div>
+
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="subject" placeholder="Subject">
-                                    <label for="subject">Subject</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
-                                    <label for="message">Message</label>
+                                    <textarea class="form-control" placeholder="Leave a message here" id="Message" style="height: 150px"></textarea>
+                                    <label for="Message">Message</label>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -247,8 +242,7 @@
 
 <style>
     :root {
-        --primary: #FEA116;
-        --light: #F1F8FF;
+        --light: #FF9B6A;
         --dark: #0F172B;
     }
 
@@ -268,7 +262,7 @@
     }
 
         .color-flip:hover {
-            background: var(--primary);
+            background: var(--light);
         }
         .color-flip:hover *{
             color: white;
@@ -293,20 +287,24 @@
     </script>*@
     <!--Scripts for Modals-->
     <script type="text/javascript">
-        var url = window.location.href;
-        if (url.indexOf('?progress') != -1 || url.IndexOf('/?progress') != -1) {
-            $(document).ready(function () {
-                $("#myProgress").modal("show");
-            });
-        }
+        $(function () {
+
+            $('#progressNav').click(function () {
+                $('#myProgress').modal('show');
+                return false;
+            })
+
+        });
     </script>
     <script type="text/javascript">
-        var url = window.location.href;
-        if (url.indexOf('?activities') != -1 || url.IndexOf('/?activities') != -1) {
-            $(document).ready(function () {
-                $("#myActivities").modal("show");
-            });
-        }
+        $(function () {
+
+            $('#activitiesNav').click(function () {
+                $('#myActivities').modal('show');
+                return false;
+            })
+
+        });
     </script>
     <!--Scripts for collapses -->
     <script>
