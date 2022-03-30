@@ -1,8 +1,7 @@
 ﻿@using BeHeard.Extensions
 @model BeHeard.Models.DashboardViewModel
-
 @*<link rel="stylesheet" href="~/css/animate/animate.css" />
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.css.map" />*@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.css.map" />*@
 
 @{
 
@@ -44,7 +43,7 @@
             </div>
             <div class="modal-footer">
                 @*<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>*@
-                <a type="button" class="btn btn-primary" href="/Dashboard">Dismiss</a>
+                <button type ="button" class="btn btn-primary" data-bs-dismiss="modal">Dismiss</button>
             </div>
         </div>
     </div>
@@ -52,18 +51,20 @@
 
 <!-- Modal #myActivites -->
 <div id="myActivities" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered  modal-xl">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Your Exercise Progress</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <canvas id="myChart"></canvas>
+                <div>
+                    <canvas id="myChart" width="400" height="400"></canvas>
+                </div>
             </div>
             <div class="modal-footer">
                 @*<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>*@
-                <a type="button" class="btn btn-primary" href="/Dashboard">Dismiss</a>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Dismiss</button>
             </div>
         </div>
     </div>
@@ -122,41 +123,41 @@
                 <h5 class="section-title ff-secondary text-center text-primary fw-normal">Your Services</h5>
                 <h1 class="mb-5">Explore Yours Services</h1>
             </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="row g-4 pb-2">
+                <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="color-flip rounded pt-3">
                         <div class="p-4">
                             <i class="fa fa-3x fa-chart-bar text-primary mb-4"></i>
                             <h5>Program Progress</h5>
                             <p>This is where you can see how much of your program you have completed</p>
-                            <a href="?progress" class="stretched-link"> </a>
+                            <a id="progressNav" href="#myProgressNav" class="stretched-link"> </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="color-flip pt-3" id="color-flip">
                         <div class="p-4">
-                            <i class="fa fa-3x fa-award mb-4"></i>
+                            <i class="fa fa-3x fa-award mb-4 text-primary"></i>
                             <h5>Activities</h5>
                             <p>This is where you can see how many of each activity you have completed</p>
-                            <a href="?activities" class="stretched-link"> </a>
+                            <a id="activitiesNav" href="#myActivitiesLink" class="stretched-link"> </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="color-flip rounded pt-3">
                         <div class="p-4">
-                            <i class="color-flip fa fa-3x fa-user-friends mb-4"></i>
+                            <i class="color-flip fa fa-3x fa-user-friends text-primary mb-4"></i>
                             <h5>Resources</h5>
                             <p>You will find here a collection of resources gathered by the Be Heard team to assist you.</p>
                             <a id="myResourceLink" href="#myResource" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                     <div class="color-flip rounded pt-3" id="color-flip">
                         <div class="p-4">
-                            <i class="fa fa-3x fa-headset mb-4"></i>
+                            <i class="fa fa-3x fa-headset text-primary mb-4"></i>
                             <h5>Assistance</h5>
                             <p>E-mail one of the team-members to assist you with whatever issues you might be having.</p>
                             <a id="myContactLink" href="#myContact" class="stretched-link"> </a>
@@ -164,9 +165,10 @@
                     </div>
                 </div>
             </div>
+            <hr/>
             <!-- Collapse #myResource-->
-            <div class="collapse" id="myResource">
-                <div class="card card-body">
+            <div class="collapse py-2" id="myResource">
+                <div class="card card-body" id="myCollapse1">
                     <h3>School's Out</h3>
                     <p>
                         Well, we got no choice <br />
@@ -204,32 +206,27 @@
                 </div>
             </div>
             <!-- Collapse #myContact-->
-            <div class="collapse" id="myContact">
+            <div class="collapse py-2" id="myContact">
                 <div class="card card-body">
-                    <form>
+                    <form method="post" enctype="multipart/form-data" asp-action="ContactEmail" asp-controller="Dashboard">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                    <label for="name">Your Name</label>
+                                    <input type="text" class="form-control" id="Name" placeholder="Your Name">
+                                    <label for="Name">@Model.FullName</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                    <label for="email">Your Email</label>
+                                    <input type="email" class="form-control" id="Email" placeholder="Your Email">
+                                    <label for="Email">@Model.Profile.User.Email</label>
                                 </div>
                             </div>
+
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="subject" placeholder="Subject">
-                                    <label for="subject">Subject</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
-                                    <label for="message">Message</label>
+                                    <textarea class="form-control" placeholder="Leave a message here" id="Message" style="height: 150px"></textarea>
+                                    <label for="Message">Message</label>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -239,14 +236,13 @@
                     </form>
                 </div>
             </div>
-        </div>    
+        </div>
     </div>
 </div>
 
 <style>
     :root {
-        --primary: #FEA116;
-        --light: #F1F8FF;
+        --light: #FF9B6A;
         --dark: #0F172B;
     }
 
@@ -266,42 +262,49 @@
     }
 
         .color-flip:hover {
-            background: var(--primary);
+            background: var(--light);
         }
-
+        .color-flip:hover *{
+            color: white;
+        }
         .color-flip * {
             transition: .5s;
             transform: rotate(0);
         }
-
-        .color-flip * {
-            color: var(--dark) !important;
+        .color-flip:hover h1{
+            transform: scale(1.5);
         }
+
+
 </style>
 
 @section Scripts
 {
-    <script src="~/js/wow/wow.min.js"></script>
+    @*<script src="~/js/wow/wow.min.js"></script>
 
     <script>
         new WOW().init();
-    </script>
+    </script>*@
     <!--Scripts for Modals-->
     <script type="text/javascript">
-        var url = window.location.href;
-        if (url.indexOf('?progress') != -1 || url.IndexOf('/?progress') != -1) {
-            $(document).ready(function () {
-                $("#myProgress").modal("show");
-            });
-        }
+        $(function () {
+
+            $('#progressNav').click(function () {
+                $('#myProgress').modal('show');
+                return false;
+            })
+
+        });
     </script>
     <script type="text/javascript">
-        var url = window.location.href;
-        if (url.indexOf('?activities') != -1 || url.IndexOf('/?activities') != -1) {
-            $(document).ready(function () {
-                $("#myActivities").modal("show");
-            });
-        }
+        $(function () {
+
+            $('#activitiesNav').click(function () {
+                $('#myActivities').modal('show');
+                return false;
+            })
+
+        });
     </script>
     <!--Scripts for collapses -->
     <script>
@@ -318,10 +321,18 @@
                 $("#myContact").collapse("toggle");
             });
         });
+
+        $('#myResource').on('shown.bs.collapse', function () {
+            this.scrollIntoView();
+        });
+
+        $('#myContact').on('shown.bs.collapse', function () {
+            this.scrollIntoView();
+        });
     </script>
 
     <!--Script for counter-->
-    <script type="text/javascript">
+    @*<script type="text/javascript">
 
         (function ($) {
             $.fn.counter = function () {
@@ -363,7 +374,7 @@
                 $('.count5').counter();
             }, 3000);
         });
-    </script>
+    </script>*@
 
     <!--Scripts for charts-->
     <script src="~/js/chart.js"></script>
@@ -402,5 +413,4 @@
             config
         );
     </script>
-
 }
