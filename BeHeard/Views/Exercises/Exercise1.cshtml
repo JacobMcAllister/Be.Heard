@@ -301,8 +301,8 @@
                 clearInterval(downloadTimer);
                 document.getElementById("Timer").innerHTML = "Finished";
                 average_decibel = average_decibel / 10;
-                percent_decibel = average_decibel / 500;
-                alert("Great job!\nYour average volume was: " + percent_decibel.toFixed(2));
+                percent_decibel = (average_decibel / 500) * 1.8;
+                alert("Great job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + percent_decibel.toFixed(2) + " dba");
               } else{
                 document.getElementById("Timer").innerHTML = "Seconds Remaining: " + timeleft;
               }
