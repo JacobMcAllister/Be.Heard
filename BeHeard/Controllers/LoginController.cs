@@ -75,6 +75,7 @@ namespace BeHeard.Controllers
         [HttpPost]
         public IActionResult RegisterAccount(User user, int termCheck)
         {
+            user.icon = "face1.png";
             var subscription = new Subscription
             {
                 Type = SubscriptionType.Paid,
