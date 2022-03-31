@@ -19,6 +19,7 @@ namespace BeHeard.Application.Models
         public string      PhoneNumber { get; set; }
         public string      Username    { get; set; }
         public UserProfile Profile     { get; set; }
+        public DateTime    Date   { get; set; }
     }
 
     public enum Gender

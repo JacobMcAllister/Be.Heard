@@ -47,7 +47,9 @@ namespace BeHeard.Controllers
 
             var authenticatedUser = _beHeardContextManager.UserRepository.GetUserByUsername(user.Username);
             var service = new SessionService(HttpContext);
+
             service.Create(authenticatedUser).Save();
+
 
             // NOTE: implement refresh tokens
             var authenticationResult = _authentication.GenerateTokens(user.Username, claims, DateTime.Now);

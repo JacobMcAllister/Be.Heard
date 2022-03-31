@@ -12,5 +12,11 @@ namespace BeHeard.Models
         public User User { get; set; }
         public UserProfile Profile { get; set; }
         public string FullName => $"{User.FirstName} {User.LastName}";
+
+        public int activityTotal => Profile.ActivityResults[0].Counter +
+            Profile.ActivityResults[1].Counter +
+            Profile.ActivityResults[2].Counter +
+            Profile.ActivityResults[3].Counter;
+
     }
 }
