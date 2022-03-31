@@ -13,6 +13,7 @@
         public string       LastName     { get; set; }
         public string       PhoneNumber  { get; set; }
         public string       Username     { get; set; }
+        public string icon { get; set; }
         public Subscription Subscription { get; set; }
     }
 }
