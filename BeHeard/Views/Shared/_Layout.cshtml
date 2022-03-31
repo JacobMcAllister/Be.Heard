@@ -1,4 +1,15 @@
-@using BeHeard.Services
+@using BeHeard.Services;
+@*@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    var service = new SessionService(HttpContextAccessor.HttpContext);
+    var icon = service.Get().icon;
+}*@
+@{
+    var service = new SessionService(Context);
+    var session = service.Get();
+}
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -40,12 +51,8 @@
                     <hr>
                     <div class="dropdown pb-4">
                         <a href="#" class="fs-3 d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://avatarfiles.alphacoders.com/693/69306.jpg" alt="hugenerd" width="80" height="80" class="rounded-circle">
+                            <img src="/images/@session.icon" alt="hugenerd" width="80" height="80" class="rounded-circle">
                             <span class="fs-3 d-none d-sm-inline mx-4">
-                                @{
-                                    var service = new SessionService(Context);
-                                    var session = service.Get();
-                                }
                                 @session.FirstName
                             </span>
                         </a>
