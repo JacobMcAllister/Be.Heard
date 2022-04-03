@@ -1,4 +1,15 @@
-@using BeHeard.Services
+@using BeHeard.Services;
+@*@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    var service = new SessionService(HttpContextAccessor.HttpContext);
+    var icon = service.Get().icon;
+}*@
+@{
+    var service = new SessionService(Context);
+    var session = service.Get();
+}
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -40,12 +51,8 @@
                     <hr>
                     <div class="dropdown pb-4">
                         <a href="#" class="fs-3 d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://avatarfiles.alphacoders.com/693/69306.jpg" alt="hugenerd" width="80" height="80" class="rounded-circle">
+                            <img src="/images/@session.icon" alt="hugenerd" width="80" height="80" class="rounded-circle">
                             <span class="fs-3 d-none d-sm-inline mx-4">
-                                @{ 
-                                    var service = new SessionService(Context);
-                                    var session = service.Get();
-                                }
                                 @session.FirstName
                             </span>
                         </a>
@@ -70,7 +77,55 @@
                 <span class="text-muted">Place sticky footer content here.</span>
             </div>
         </footer>*@
+    <script src="~/js/wow/wow.min.js"></script>
+
+    <script>
+        new WOW().init();
+    </script>
     <script src="~/js/main.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+
+        (function ($) {
+            $.fn.counter = function () {
+                const $this = $(this),
+                    numberFrom = parseInt($this.attr('data-from')),
+                    numberTo = parseInt($this.attr('data-to')),
+                    delta = numberTo - numberFrom,
+                    deltaPositive = delta > 0 ? true : false,
+                    time = parseInt($this.attr('data-time')),
+                    changeTime = 10;
+
+                let currentNumber = numberFrom,
+                    value = delta * changeTime / time;
+                var interval1;
+                const changeNumber = () => {
+                    currentNumber += value;
+                    //checks if currentNumber reached numberTo
+                    (deltaPositive && currentNumber >= numberTo) || (!deltaPositive && currentNumber <= numberTo) ? currentNumber = numberTo : currentNumber;
+                    this.text(parseInt(currentNumber));
+                    currentNumber == numberTo ? clearInterval(interval1) : currentNumber;
+                }
+
+                interval1 = setInterval(changeNumber, changeTime);
+            }
+        }(jQuery));
+
+
+        $(document).ready(function () {
+
+            $('.count-up').counter();
+            $('.count1').counter();
+            $('.count2').counter();
+            $('.count3').counter();
+            $('.count4').counter();
+
+            new WOW().init();
+
+            setTimeout(function () {
+                $('.count5').counter();
+            }, 3000);
+        });
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

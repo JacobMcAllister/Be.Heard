@@ -47,7 +47,9 @@ namespace BeHeard.Controllers
 
             var authenticatedUser = _beHeardContextManager.UserRepository.GetUserByUsername(user.Username);
             var service = new SessionService(HttpContext);
+
             service.Create(authenticatedUser).Save();
+
 
             // NOTE: implement refresh tokens
             var authenticationResult = _authentication.GenerateTokens(user.Username, claims, DateTime.Now);
@@ -73,6 +75,7 @@ namespace BeHeard.Controllers
         [HttpPost]
         public IActionResult RegisterAccount(User user, int termCheck)
         {
+            user.icon = "face1.png";
             var subscription = new Subscription
             {
                 Type = SubscriptionType.Paid,

@@ -77,6 +77,7 @@ namespace BeHeard.Services
                 Settings     = null,
                 Subscription = null,
                 Username     = user.Username,
+                icon         = user.icon
             };
             return this;
         }

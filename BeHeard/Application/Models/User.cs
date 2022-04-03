@@ -12,6 +12,7 @@ namespace BeHeard.Application.Models
         public Guid        Id          { get; set; }
         public int         Age         { get; set; }
         public Settings    Settings    { get; set; }
+        public string icon { get; set; }
         public string      Email       { get; set; }
         public string      FirstName   { get; set; }
         public string      LastName    { get; set; }
@@ -19,6 +20,8 @@ namespace BeHeard.Application.Models
         public string      PhoneNumber { get; set; }
         public string      Username    { get; set; }
         public UserProfile Profile     { get; set; }
+        public DateTime    Date   { get; set; }
+
     }
 
     public enum Gender

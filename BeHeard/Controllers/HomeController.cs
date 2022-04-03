@@ -36,23 +36,19 @@ namespace BeHeard.Controllers
             {
                 FirstName = session.FirstName,
                 LastName = session.LastName,
+                //User = _beHeardContextManager.UserRepository.GetUserByUsername(session.Username),
             };
             return View(model);
         }
-        public IActionResult FirstLogin(Settings settings)
+        public IActionResult FirstLogin(User user)
         {
             var service = new SessionService(HttpContext);
 
             var session = service.Get();
             var updateUser = _beHeardContextManager.UserRepository.GetUserByUsername(session.Username);
 
+            updateUser.icon = user.icon;
             //settings.Preferences.Id = updateUser.Settings.Preferences.Id;
-            if(settings.Preferences.ColorBlindMode == true)
-                updateUser.Settings.Preferences.ColorBlindMode = settings.Preferences.ColorBlindMode;
-            if(settings.Preferences.TextToSpeech == true)
-                updateUser.Settings.Preferences.TextToSpeech = settings.Preferences.TextToSpeech;
-            if(settings.Preferences.DarkMode == true)
-                updateUser.Settings.Preferences.DarkMode = settings.Preferences.DarkMode;
 
             _beHeardContextManager.SaveChanges();
             service.Save();
