@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Appsettings since database information is differnet for each developer
+BeHeard/appsettings.json
+
 # User-specific files
 BeHeard/*.rsuser
 BeHeard/*.suo

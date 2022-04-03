@@ -60,6 +60,7 @@
   <ItemGroup>
     <Folder Include="Domain\" />
     <Folder Include="Entities\" />
+    <Folder Include="Migrations" />
     <Folder Include="Migrations\" />
     <Folder Include="Properties\" />
     <Folder Include="ResourcePackages\dist\css\" />
