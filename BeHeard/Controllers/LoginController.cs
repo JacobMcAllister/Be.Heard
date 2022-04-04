@@ -14,6 +14,9 @@ using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
+using BeHeard.Core;
+using System.Security.Claims;
+using BeHeard.Application;
 using BeHeard.Application.Models;
 using BeHeard.Services;
 
@@ -58,7 +61,9 @@ namespace BeHeard.Controllers
 
             var authenticatedUser = _beHeardContextManager.UserRepository.GetUserByUsername(user.Username);
             var service = new SessionService(HttpContext);
+
             service.Create(authenticatedUser).Save();
+
 
             // NOTE: implement refresh tokens
             var authenticationResult = _authentication.GenerateTokens(user.Username, claims, DateTime.Now);
@@ -86,9 +91,13 @@ namespace BeHeard.Controllers
         {
             string pass = "";
             if (user.Password != null)
+            {
                 pass = PasswordService.hashPassword(user.Password);
                 user.Password = pass;
-
+            }
+            
+            user.icon = "face1.png";
+            
             var subscription = new Subscription
             {
                 Type = SubscriptionType.Paid,

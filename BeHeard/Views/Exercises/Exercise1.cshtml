@@ -10,20 +10,21 @@
 }
 
 <h1>Hello @Model.FullName</h1>
-<h2>Exercise 1</h2>
+<h2>Week 1 --> Activity 1</h2>
 
 <div class="container">
     <div class="row">
         <div id="directions">
             <p>These are the directions to the exercise</p>
-            <p>Speak your chosen syllable loudly for ~15 seconds</p>
+            <p>Speak your chosen syllable loudly for 10 seconds</p>
             <p>The meter will fill up according to your volume level</p>
             <p>Don't let the volume drop!</p>
         </div>
         <div id="dropdown">
             <label for="syllables">Choose a Syllable:</label>
             <select name="syllable" id="syllable">
-                <option value="a">a</option>
+                <option value="a">A</option>
+                <!--
                 <option value="ag">ag</option>
                 <option value="am">am</option>
                 <option value="an">an</option>
@@ -43,6 +44,9 @@
                 <option value="day">day</option>
                 <option value="ders">ders</option>
                 <option value="dle">dle</option>
+                -->
+                <option value="e">E</option>
+                <!--
                 <option value="ef">ef</option>
                 <option value="et">et</option>
                 <option value="fac">fac</option>
@@ -86,6 +90,9 @@
                 <option value="ni">ni</option>
                 <option value="no">no</option>
                 <option value="nore">nore</option>
+                -->
+                <option value="o">O</option>
+                <!--
                 <option value="ob">ob</option>
                 <option value="on">on</option>
                 <option value="of">of</option>
@@ -132,7 +139,9 @@
                 <option value="tray">tray</option>
                 <option value="tu">tu</option>
                 <option value="tro">tro</option>
-                <option value="u">u</option>
+                -->
+                <option value="u">U</option>
+                <!--
                 <option value="um">um</option>
                 <option value="up">up</option>
                 <option value="us">us</option>
@@ -146,6 +155,7 @@
                 <option value="win">win</option>
                 <option value="won">won</option>
                 <option value="work">work</option>
+                -->
             </select>
         </div>
     </div>
@@ -153,10 +163,11 @@
     <!-- The canvas that will be used to render the input level -->
     <canvas id="meter" width="500" height="50" style="border: 1px solid black;"></canvas>
     <div id="Buttons">
+        <button id="startButton" type="button">Start</button>
         <button id="pauseButton" type="button">Pause</button>
         <!--<button type="button" onclick="pauseMic()">Pause</button>-->
     </div>
-
+    <div id="Timer"></div>
 
     <!--Tips for exercise-->
     <div class="container p-5 my-5 bg-dark text-white">
@@ -180,6 +191,7 @@
         var drawID = null;
         var arraySize = null;
         var micAnalyser = null;
+        var average_decibel = null;
 
         // Grab our canvas
         canvasContext = document.getElementById("meter").getContext("2d");
@@ -253,6 +265,8 @@
                 else {
                     canvasContext.fillStyle = "#ff0000";
                 }
+                average_decibel += fillVol;
+
                 canvasContext.fillRect(0, 0, fillVol, HEIGHT);
 
                 drawID = requestAnimationFrame(drawVolume);
@@ -267,7 +281,7 @@
         function pause_Play() {
             if (audioContext.state === 'running') {
                 audioContext.suspend().then(function () {
-                    document.getElementById("pauseButton").innerHTML = 'Play';
+                    document.getElementById("pauseButton").innerHTML = 'Resume';
                 });
             } else if (audioContext.state === 'suspended') {
                 audioContext.resume().then(function () {
@@ -276,4 +290,23 @@
             }
         }
 
+        document.getElementById("startButton").onclick = function () { start_timer() };
+
+        function start_timer() {
+
+            var timeleft = 10;
+
+            var downloadTimer = setInterval(function(){
+              if(timeleft <= 0){
+                clearInterval(downloadTimer);
+                document.getElementById("Timer").innerHTML = "Finished";
+                average_decibel = average_decibel / 10;
+                percent_decibel = (average_decibel / 500) * 1.8;
+                alert("Great job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + percent_decibel.toFixed(2) + " dba");
+              } else{
+                document.getElementById("Timer").innerHTML = "Seconds Remaining: " + timeleft;
+              }
+              timeleft -= 1;
+            }, 1000);
+        }   
     </script>

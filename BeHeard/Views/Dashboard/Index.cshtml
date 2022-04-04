@@ -90,7 +90,7 @@
                     <div class="row g-4 mb-4">
                         <div class="col-sm-6">
                             <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                <h1 class="flex-shrink-0 display-5 text-primary mb-0">2/1</h1>
+                                <h1 class="flex-shrink-0 display-5 text-primary mb-0">@Model.User.Date.Month / @Model.User.Date.Day</h1>
                                 <div class="ps-4">
                                     <p class="mb-0">Day of</p>
                                     <h6 class="text-uppercase mb-0">Last Login</h6>
@@ -167,42 +167,13 @@
             </div>
             <hr/>
             <!-- Collapse #myResource-->
-            <div class="collapse py-2" id="myResource">
+            <div class="panel-collapse collapse show py-2" id="myResource">
                 <div class="card card-body" id="myCollapse1">
-                    <h3>School's Out</h3>
-                    <p>
-                        Well, we got no choice <br />
-                        All the girls and boys (girls and boys)<br />
-                        Making all that noise (ooh)<br />
-                        'Cause they found new toys<br />
-                        We can't salute ya<br />
-                        Can't find a flag<br />
-                        If that don't suit ya<br />
-                        That's a drag<br />
-                        School's out for summer<br />
-                        School's out forever<br />
-                        I'm bored to pieces<br />
-                        Well, we got no class<br />
-                        And we got no principals (ooh)<br />
-                        And we got no intelligence<br />
-                        We can't even think of a word that rhymes, well<br />
-                        We can't salute ya<br />
-                        Can't find a flag<br />
-                        If that don't suit ya<br />
-                        That's a drag<br />
-                        School's out for summer<br />
-                        School's out forever<br />
-                        I'm bored to pieces<br />
-                        No more pencils, no more books<br />
-                        No more teachers, dirty looks<br />
-                        Out for summer, out 'til fall<br />
-                        We might not come back at all<br />
-                        School's out for summer (detention)<br />
-                        School's out forever<br />
-                        School's out with fever<br />
-                        School's out completely<br />
-                        School's out for summer<br />
-                    </p>
+                    <h3>Speech Therapist In Your Area</h3>
+                      <!-- The slide-out panel for showing place details -->
+                      <div id="panel">Click any marker to see details.</div>
+                      <!-- Map appears here -->
+                      <div id="map" style="height:500px; width:100%;"></div>                
                 </div>
             </div>
             <!-- Collapse #myContact-->
@@ -212,17 +183,22 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="Name" placeholder="Your Name">
+                                    <input type="text" class="form-control" id="Name" placeholder="Enter Your Name">
                                     <label for="Name">@Model.FullName</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="Email" placeholder="Your Email">
-                                    <label for="Email">@Model.Profile.User.Email</label>
+                                    <input type="email" class="form-control" id="Email" placeholder="Enter Your Email">
+                                    <label for="Email">@Model.User.Email</label>
                                 </div>
                             </div>
-
+                             <div class="col-md-12">
+                                <div class="form-floating">
+                                <input type="text" class="form-control" id="Subject" placeholder="Enter Your Subject">
+                                    <label for="Subject">Subject</label>
+                                </div>
+                            </div>
                             <div class="col-12">
                                 <div class="form-floating">
                                     <textarea class="form-control" placeholder="Leave a message here" id="Message" style="height: 150px"></textarea>
@@ -280,11 +256,202 @@
 
 @section Scripts
 {
-    @*<script src="~/js/wow/wow.min.js"></script>
+      <script>
+    /* Note: This example requires that you consent to location sharing when
+     * prompted by your browser. If you see the error "Geolocation permission
+     * denied.", it means you probably did not give permission for the browser * to locate you. */
+    let pos;
+    let map;
+    let bounds;
+    let infoWindow;
+    let currentInfoWindow;
+    let service;
+    let infoPane;
+    function initMap() {
+      // Initialize variables
+      bounds = new google.maps.LatLngBounds();
+      infoWindow = new google.maps.InfoWindow;
+      currentInfoWindow = infoWindow;
+      /* TODO: Step 4A3: Add a generic sidebar */
+      infoPane = document.getElementById('panel');
 
-    <script>
-        new WOW().init();
-    </script>*@
+      // Try HTML5 geolocation
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: pos,
+            zoom: 15
+          });
+          bounds.extend(pos);
+
+          infoWindow.setPosition(pos);
+          infoWindow.setContent('Location found.');
+          infoWindow.open(map);
+          map.setCenter(pos);
+
+          // Call Places Nearby Search on user's location
+          getNearbyPlaces(pos);
+        }, () => {
+          // Browser supports geolocation, but user has denied permission
+          handleLocationError(true, infoWindow);
+        });
+      } else {
+        // Browser doesn't support geolocation
+        handleLocationError(false, infoWindow);
+      }
+    }
+
+    // Handle a geolocation error
+    function handleLocationError(browserHasGeolocation, infoWindow) {
+      // Set default location to Sydney, Australia
+      pos = { lat: -33.856, lng: 151.215 };
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: pos,
+        zoom: 15
+      });
+
+      // Display an InfoWindow at the map center
+      infoWindow.setPosition(pos);
+      infoWindow.setContent(browserHasGeolocation ?
+        'Geolocation permissions denied. Using default location.' :
+        'Error: Your browser doesn\'t support geolocation.');
+      infoWindow.open(map);
+      currentInfoWindow = infoWindow;
+
+      // Call Places Nearby Search on the default location
+      getNearbyPlaces(pos);
+    }
+
+    // Perform a Places Nearby Search Request
+    function getNearbyPlaces(position) {
+      let request = {
+        location: position,
+        rankBy: google.maps.places.RankBy.DISTANCE,
+        keyword: 'Speech Therapist'
+      };
+
+      service = new google.maps.places.PlacesService(map);
+      service.nearbySearch(request, nearbyCallback);
+    }
+
+    // Handle the results (up to 20) of the Nearby Search
+    function nearbyCallback(results, status) {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        createMarkers(results);
+      }
+    }
+
+    // Set markers at the location of each place result
+    function createMarkers(places) {
+      places.forEach(place => {
+        let marker = new google.maps.Marker({
+          position: place.geometry.location,
+          map: map,
+          title: place.name
+        });
+
+        /* TODO: Step 4B: Add click listeners to the markers */
+        // Add click listener to each marker
+        google.maps.event.addListener(marker, 'click', () => {
+          let request = {
+            placeId: place.place_id,
+            fields: ['name', 'formatted_address', 'geometry', 'rating',
+              'website', 'photos']
+          };
+
+          /* Only fetch the details of a place when the user clicks on a marker.
+           * If we fetch the details for all place results as soon as we get
+           * the search response, we will hit API rate limits. */
+          service.getDetails(request, (placeResult, status) => {
+            showDetails(placeResult, marker, status)
+          });
+        });
+
+        // Adjust the map bounds to include the location of this marker
+        bounds.extend(place.geometry.location);
+      });
+      /* Once all the markers have been placed, adjust the bounds of the map to
+       * show all the markers within the visible area. */
+      map.fitBounds(bounds);
+    }
+
+    /* TODO: Step 4C: Show place details in an info window */
+    // Builds an InfoWindow to display details above the marker
+    function showDetails(placeResult, marker, status) {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        let placeInfowindow = new google.maps.InfoWindow();
+        let rating = "None";
+        if (placeResult.rating) rating = placeResult.rating;
+        placeInfowindow.setContent('<div><strong>' + placeResult.name +
+          '</strong><br>' + 'Rating: ' + rating + '</div>');
+        placeInfowindow.open(marker.map, marker);
+        currentInfoWindow.close();
+        currentInfoWindow = placeInfowindow;
+        showPanel(placeResult);
+      } else {
+        console.log('showDetails failed: ' + status);
+      }
+    }
+
+    /* TODO: Step 4D: Load place details in a sidebar */
+    // Displays place details in a sidebar
+    function showPanel(placeResult) {
+      // If infoPane is already open, close it
+      if (infoPane.classList.contains("open")) {
+        infoPane.classList.remove("open");
+      }
+
+      // Clear the previous details
+      while (infoPane.lastChild) {
+        infoPane.removeChild(infoPane.lastChild);
+      }
+
+      /* TODO: Step 4E: Display a Place Photo with the Place Details */
+      // Add the primary photo, if there is one
+      if (placeResult.photos) {
+        let firstPhoto = placeResult.photos[0];
+        let photo = document.createElement('img');
+        photo.classList.add('hero');
+        photo.src = firstPhoto.getUrl();
+        infoPane.appendChild(photo);
+      }
+
+      // Add place details with text formatting
+      let name = document.createElement('h1');
+      name.classList.add('place');
+      name.textContent = placeResult.name;
+      infoPane.appendChild(name);
+      if (placeResult.rating) {
+        let rating = document.createElement('p');
+        rating.classList.add('details');
+        rating.textContent = `Rating: ${placeResult.rating} \u272e`;
+        infoPane.appendChild(rating);
+      }
+      let address = document.createElement('p');
+      address.classList.add('details');
+      address.textContent = placeResult.formatted_address;
+      infoPane.appendChild(address);
+      if (placeResult.website) {
+        let websitePara = document.createElement('p');
+        let websiteLink = document.createElement('a');
+        let websiteUrl = document.createTextNode(placeResult.website);
+        websiteLink.appendChild(websiteUrl);
+        websiteLink.title = placeResult.website;
+        websiteLink.href = placeResult.website;
+        websitePara.appendChild(websiteLink);
+        infoPane.appendChild(websitePara);
+      }
+
+      // Open the infoPane
+      infoPane.classList.add("open");
+    }
+  </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPtNCrXg1rFEqv8oR3xrcDkRIekYeXUus&libraries=places&callback=initMap"></script>
+
     <!--Scripts for Modals-->
     <script type="text/javascript">
         $(function () {
