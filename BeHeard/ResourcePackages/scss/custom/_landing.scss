@@ -1,0 +1,31 @@
+@import "variables";
+
+.bh-first-content {
+  padding-top: 12em;
+  padding-bottom: 12em;
+}
+.bh-first-content img {
+  height: 348px;
+  width: 330px;
+  object-fit: cover;
+}
+.bh-orange-faded-content {
+  background-color: $bh-orange-faded;
+}
+#Goals .container {
+  padding: 10em 0 10em 0;
+}
+#GoalsContent img {
+  object-fit: cover;
+}
+#TheTeamContent .card {
+  background-image: $bh-card-orange-light-gradient;
+  border-radius: $bh-card-border-radius;
+  border-color: $bh-purple-dark;
+  border-width: 1.5px;
+}
+#TheTeamContent .card .card-footer {
+  background-color: $bh-purple-dark;
+  border-radius: 15px;
+  height: 3em;
+}

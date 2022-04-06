@@ -69,6 +69,7 @@
     <Folder Include="ResourcePackages\js\src\" />
     <Folder Include="ResourcePackages\webfonts\" />
     <Folder Include="Views\Profile\" />
+    <Folder Include="wwwroot\assets" />
   </ItemGroup>
 
   <ItemGroup>

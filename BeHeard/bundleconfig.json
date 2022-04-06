@@ -12,6 +12,16 @@
     "sourceMap": false
   },
   {
+    "outputFileName": "wwwroot/js/landing.js",
+    "inputFiles": [
+      "Scripts/landing.js"
+    ],
+    "minify": {
+      "enabled": false
+    },
+    "sourceMap": false
+  },
+  {
     "outputFileName": "wwwroot/js/chart.js",
     "inputFiles": [
       "ResourcePackages/node_modules/chart.js/dist/chart.js"

@@ -1,0 +1,15 @@
+@import "variables";
+
+#notification {
+  color: white;
+  background-color: $bh-blue;
+}
+#notification .row {
+  height: 2.6em;
+}
+#notification a {
+  color: white;
+}
+#notification a:hover {
+  text-decoration: underline;
+}
