@@ -1,0 +1,11 @@
+@import "variables";
+
+.bh-primary-btn {
+  color: white;
+  background-color: $bh-orange;
+  border-color: $bh-orange;
+}
+.bh-primary-btn:hover {
+  background-color: $bh-blue;
+  border-color: $bh-blue;
+}
