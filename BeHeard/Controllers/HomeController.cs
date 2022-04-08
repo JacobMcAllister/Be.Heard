@@ -36,7 +36,7 @@ namespace BeHeard.Controllers
             {
                 FirstName = session.FirstName,
                 LastName = session.LastName,
-                User = _beHeardContextManager.UserRepository.GetUserByUsername(session.Username),
+                //User = _beHeardContextManager.UserRepository.GetUserByUsername(session.Username),
             };
             return View(model);
         }

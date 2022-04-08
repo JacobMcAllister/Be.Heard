@@ -83,7 +83,7 @@ namespace BeHeard.Services
             //    // return _users.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
             //else return false;
 
-            var user = _beHeardContextManager.UserRepository.GetUserByCredentials(new AuthorizationRequest { Username = username, Password = password});
+            var user = _beHeardContextManager.UserRepository.GetUserByCredentials(new AuthorizationRequest { Username = username, Password = PasswordService.hashPassword(password) });
             if (user != null) return true;
             else return false;
         }

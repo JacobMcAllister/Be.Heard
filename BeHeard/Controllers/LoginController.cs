@@ -1,5 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BeHeard.Models;
+using Microsoft.AspNetCore.Http;
+using BeHeard.Core;
+using System.Security.Claims;
+using BeHeard.Application;
+using Microsoft.AspNetCore.Authentication;
+using System.Net.Http.Headers;
+using System.Net.Http;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Cryptography;
 using BeHeard.Core;
 using System.Security.Claims;
 using BeHeard.Application;
@@ -75,6 +89,15 @@ namespace BeHeard.Controllers
         [HttpPost]
         public IActionResult RegisterAccount(User user, int termCheck)
         {
+            string pass = "";
+            if (user.Password != null)
+            {
+                pass = PasswordService.hashPassword(user.Password);
+                user.Password = pass;
+            }
+            
+            user.icon = "face1.png";
+            
             var subscription = new Subscription
             {
                 Type = SubscriptionType.Paid,
