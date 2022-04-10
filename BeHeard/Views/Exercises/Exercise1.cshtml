@@ -164,7 +164,8 @@
     <canvas id="meter" width="500" height="50" style="border: 1px solid black;"></canvas>
     <div id="Buttons">
         <button id="startButton" type="button">Start</button>
-        <button id="pauseButton" type="button">Pause</button>
+        <button id="pauseButton" type="button" onclick="Pause()">Pause</button>
+        <button id="resumeButton" type="button" onclick="Resume()">Resume</button>
         <!--<button type="button" onclick="pauseMic()">Pause</button>-->
     </div>
     <div id="Timer"></div>
@@ -192,6 +193,11 @@
         var arraySize = null;
         var micAnalyser = null;
         var average_decibel = null;
+        var micStreamSourceNode = null;
+        var isPaused = false;
+        var isRecording = false;
+        var fillVol = 0;
+        var timeleft = null;
 
         // Grab our canvas
         canvasContext = document.getElementById("meter").getContext("2d");
@@ -219,13 +225,13 @@
                 // Success callback
                 function (stream) {
                     // Create mic stream node
-                    const micStreamSourceNode = audioContext.createMediaStreamSource(stream);
+                    micStreamSourceNode = audioContext.createMediaStreamSource(stream);
                     // Create audio analyser
                     micAnalyser = audioContext.createAnalyser();
                     // Connect
-                    micStreamSourceNode.connect(micAnalyser);
+                    //micStreamSourceNode.connect(micAnalyser);
 
-                    animateVoice();
+                    //animateVoice();
 
                 },
                 // Error callback
@@ -246,38 +252,55 @@
             canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
 
             function drawVolume() {
-                var fillVol;
-                // Clear canvas
-                canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
+                if (isRecording) {
+                    
+                    // Clear canvas
+                    canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
 
-                // Fill array
-                micAnalyser.getFloatTimeDomainData(dataArray);
+                    // Fill array
+                    micAnalyser.getFloatTimeDomainData(dataArray);
 
-                let sumSquares = 0.0;
-                for (const amplitude of dataArray) { sumSquares += amplitude * amplitude; }
-                volumeVal = Math.sqrt(sumSquares / dataArray.length);
-                fillVol = volumeVal * WIDTH * 3.8;
-                console.log(volumeVal);
-                console.log(fillVol);
-                if (fillVol > 175) {
-                    canvasContext.fillStyle = "#00ff00";
+                    let sumSquares = 0.0;
+                    for (const amplitude of dataArray) { sumSquares += amplitude * amplitude; }
+                    volumeVal = Math.sqrt(sumSquares / dataArray.length);
+                    fillVol = volumeVal * WIDTH * 3.8;
+                    //console.log(volumeVal);
+                    //console.log(fillVol);
+                    if (fillVol > 175) {
+                        canvasContext.fillStyle = "#00ff00";
+                    }
+                    else {
+                        canvasContext.fillStyle = "#ff0000";
+                    }
+                    average_decibel += fillVol;
+
+                    canvasContext.fillRect(0, 0, fillVol, HEIGHT);
+
+                    drawID = requestAnimationFrame(drawVolume);
                 }
-                else {
-                    canvasContext.fillStyle = "#ff0000";
-                }
-                average_decibel += fillVol;
-
-                canvasContext.fillRect(0, 0, fillVol, HEIGHT);
-
-                drawID = requestAnimationFrame(drawVolume);
-
             }
 
             drawVolume();
         }
 
-        document.getElementById("pauseButton").onclick = function () { pause_Play() };
+        function Pause() {
+            isPaused = true;
+            isRecording = false;
+            if (audioContext.state === 'running') {
+                audioContext.suspend();
+            }
+        }
 
+        function Resume() {
+            isPaused = false;
+            isRecording = true;
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+        }
+
+        /*
+        document.getElementById("pauseButton").onclick = function () { pause_Play() };
         function pause_Play() {
             if (audioContext.state === 'running') {
                 audioContext.suspend().then(function () {
@@ -289,24 +312,91 @@
                 });
             }
         }
+        */
 
         document.getElementById("startButton").onclick = function () { start_timer() };
 
         function start_timer() {
 
-            var timeleft = 10;
+            // Connect
+            micStreamSourceNode.connect(micAnalyser);
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
 
-            var downloadTimer = setInterval(function(){
-              if(timeleft <= 0){
-                clearInterval(downloadTimer);
-                document.getElementById("Timer").innerHTML = "Finished";
-                average_decibel = average_decibel / 10;
-                percent_decibel = (average_decibel / 500) * 1.8;
-                alert("Great job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + percent_decibel.toFixed(2) + " dba");
-              } else{
-                document.getElementById("Timer").innerHTML = "Seconds Remaining: " + timeleft;
-              }
-              timeleft -= 1;
-            }, 1000);
+            timeleft = 10;
+            fillVol = 0;
+            average_decibel = 0;
+            isRecording = true;
+
+            //animateVoice();
+
+            function timeDetails() {
+                animateVoice();
+
+                if (!isPaused) {
+                    if(timeleft < 0) {
+                        micStreamSourceNode.disconnect(micAnalyser);
+                        isRecording = false;
+
+                        clearInterval(downloadTimer);
+                        document.getElementById("Timer").innerHTML = "Finished";
+
+                        // Average of 10 sec
+                        average_decibel = average_decibel / 10;
+                        console.log(average_decibel);
+                        // Average in meter
+                        percent_decibel = (((average_decibel / 500) * 1.8) / 500) * 100;
+                        let output;
+                        let loud = false;
+
+                        switch(true) {
+                            case (percent_decibel > 0 && percent_decibel < 20.0):
+                                output = "~20";
+                                break;
+                            case (percent_decibel > 20.1 && percent_decibel < 25.0):
+                                output = "~30";
+                                break;
+                            case (percent_decibel > 25.1 && percent_decibel < 35.0):
+                                output = "~40";
+                                break;
+                            case (percent_decibel > 35.1 && percent_decibel < 40.0):
+                                output = "~50";
+                                break;
+                            case (percent_decibel > 40.1 && percent_decibel < 45.0):
+                                output = "~60";
+                                break;
+                            case (percent_decibel > 45.1 && percent_decibel < 50.0):
+                                output = "~70";
+                                break;
+                            case (percent_decibel > 50.1 && percent_decibel < 55.0):
+                                output = "~80";
+                                break;
+                            case (percent_decibel > 55.1 && percent_decibel < 60.0):
+                                output = "~90";
+                                break;
+                            case (percent_decibel > 60.1 && percent_decibel < 65.0):
+                                output = "~100";
+                                break;
+                            case (percent_decibel > 65.1):
+                                loud = true;
+                                output = "greater then 100";
+                                break;
+                        }
+
+                        if (loud) {
+                            alert("Wow!\n'Normal' voice volume is around 50-60 dba.\nYour volume was" + output + "dba !")
+                        } else {
+                            alert("Great Job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + output + " dba");
+                        }
+
+                    } else {
+                        document.getElementById("Timer").innerHTML = "Seconds Remaining: " + timeleft;
+                    }
+                    timeleft--;
+                }
+            }
+
+            var downloadTimer = setInterval(timeDetails, 1000);
         }   
     </script>
