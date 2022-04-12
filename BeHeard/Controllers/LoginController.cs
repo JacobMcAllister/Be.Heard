@@ -1,23 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BeHeard.Models;
-using Microsoft.AspNetCore.Http;
 using BeHeard.Core;
 using System.Security.Claims;
 using BeHeard.Application;
-using Microsoft.AspNetCore.Authentication;
-using System.Net.Http.Headers;
-using System.Net.Http;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Security.Cryptography;
-using BeHeard.Core;
-using System.Security.Claims;
-using BeHeard.Application;
+using BeHeard.Application.Helpers;
 using BeHeard.Application.Models;
+using BeHeard.Models;
 using BeHeard.Services;
 
 namespace BeHeard.Controllers
@@ -79,7 +67,12 @@ namespace BeHeard.Controllers
         public IActionResult Registration()
         {
             TempData["Error"] = "";
-            return View();
+            var model = new RegistrationViewModel
+            {
+                States = Localization.Los,
+                AlexImageUrl = "/images/image1.png"
+            };
+            return View(model);
         }
         public IActionResult TermsConditions()
         {        

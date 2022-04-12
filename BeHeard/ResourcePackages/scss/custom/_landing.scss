@@ -5,15 +5,22 @@
   padding-bottom: 12em;
 }
 .bh-first-content img {
-  height: 348px;
+  height: 363px;
   width: 330px;
   object-fit: cover;
+}
+.ease-object {
+  transform: translateY(var(--ty));
 }
 .bh-orange-faded-content {
   background-color: $bh-orange-faded;
 }
 #Goals .container {
   padding: 10em 0 10em 0;
+}
+section#Goals {
+  -webkit-box-shadow: 0px -2px 15px 2px rgba(0,0,0,var(--op));
+  box-shadow: 0px -2px 15px 2px rgba(0,0,0,var(--op));
 }
 #GoalsContent img {
   object-fit: cover;
