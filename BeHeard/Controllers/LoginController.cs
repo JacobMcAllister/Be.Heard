@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-<<<<<<< HEAD
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +13,6 @@ using Microsoft.AspNetCore.Authentication;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Security.Cryptography;
-=======
->>>>>>> main
 using BeHeard.Core;
 using System.Security.Claims;
 using BeHeard.Application;
