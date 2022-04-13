@@ -1,15 +1,18 @@
 ﻿var canvasContext = null;
-var WIDTH = 500;
+var WIDTH = 300;
 var HEIGHT = 50;
 var drawID = null;
 var arraySize = null;
 var micAnalyser = null;
-var average_decibel = null;
+var total_decibel = null;
 var micStreamSourceNode = null;
 var isPaused = false;
 var isRecording = false;
 var fillVol = 0;
 var timeleft = null;
+var average_over_time = null;
+var average_over_meter = null;
+var counter = 0;
 
 // Grab our canvas
 canvasContext = document.getElementById("meter").getContext("2d");
@@ -75,16 +78,17 @@ function animateVoice() {
             let sumSquares = 0.0;
             for (const amplitude of dataArray) { sumSquares += amplitude * amplitude; }
             volumeVal = Math.sqrt(sumSquares / dataArray.length);
-            fillVol = volumeVal * WIDTH * 2;
+            fillVol = volumeVal * WIDTH * 2.2;
             //console.log(volumeVal);
             //console.log(fillVol);
-            if (fillVol > 175) {
+            if (fillVol > 100) {
                 canvasContext.fillStyle = "#00ff00";
             }
             else {
                 canvasContext.fillStyle = "#ff0000";
             }
-            average_decibel += fillVol;
+            total_decibel += fillVol;
+            counter += 1;
 
             canvasContext.fillRect(0, 0, fillVol, HEIGHT);
 
@@ -138,7 +142,7 @@ function start_timer() {
 
     timeleft = 10;
     fillVol = 0;
-    average_decibel = 0;
+    total_decibel = 0;
     isRecording = true;
 
     //animateVoice();
@@ -158,10 +162,17 @@ function start_timer() {
                 document.getElementById("Timer").innerHTML = "Finished";
 
                 // Average of 10 sec
-                average_decibel = average_decibel / 10;
-                console.log(average_decibel);
-                // Average in meter
-                percent_decibel = (((average_decibel / 500) * 1.8) / 500) * 100;
+                average_over_time = total_decibel / 10;
+
+                // Average per sec of meter
+                average_over_meter = average_over_time / WIDTH;
+
+                //console.log("total hits = " + counter);
+                //console.log("total = " + total_decibel);
+                //console.log("average / 10 = " + average_over_time);
+
+                // Percent of meter
+                percent_decibel = (average_over_meter / WIDTH) * 100;
                 let output;
                 let loud = false;
 
@@ -200,9 +211,9 @@ function start_timer() {
                 }
 
                 if (loud) {
-                    alert("Wow!\n'Normal' voice volume is around 50-60 dba.\nYour volume was" + output + "dba !")
+                    alert("Wow!\n'Normal' voice volume is around 50-60 dba.\nYour volume was" + output + "dba!")
                 } else {
-                    alert("Great Job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + output + " dba");
+                    alert("Great Job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + output + " dba.");
                 }
 
             } else {

@@ -59,5 +59,15 @@ namespace BeHeard.Controllers
             };
             return View(model);
         }
+
+        public IActionResult breathing()
+        {
+            var service = new SessionService(HttpContext);
+            var model = new ExerciseViewModel
+            {
+                User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
+            };
+            return View(model);
+        }
     }
 }
