@@ -339,6 +339,9 @@
                         micStreamSourceNode.disconnect(micAnalyser);
                         isRecording = false;
 
+                        // Clear canvas
+                        canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
+
                         clearInterval(downloadTimer);
                         document.getElementById("Timer").innerHTML = "Finished";
 
