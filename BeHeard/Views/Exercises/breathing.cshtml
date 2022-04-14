@@ -10,42 +10,32 @@
 <h1>Hello @Model.FullName</h1>
 <h2>Breathing Exercises</h2>
 
-<div id="directions">
-    <p>This exercise is to establish strong breathing techniques as well as correct diaphragm position!</p>
-    <p>Breath in for <strong>4</strong> seconds.</p>
-    <p>Breath out for <strong>10</strong> seconds.</p>
+<div class="container" id="directions">
+    <div>
+        <p>This exercise is to establish strong breathing techniques as well as correct diaphragm position!</p>
+        <p>Breath in for <strong>4</strong> seconds.</p>
+        <p>Breath out for <strong>10</strong> seconds.</p>
+    </div>
 </div>
 
  <div id="Buttons">
     <button id="startButton" type="button">Start</button>
 </div>
 
-<div id="time_remaining"></div>
-<div id="timer"></div>
+<div class="container">
+    <div>
+        <p>Time Remaining: <strong><span id="time_remaining"></span></strong></p>
+    </div>
+</div>
+<div class="container">
+    <div>
+        <p>Action: <strong><span id="timer"></span></strong></p>
+    </div>
+</div>
 
-<script>
-var timer = null;
 
-document.getElementById("startButton").onclick = function () { start_timer() };
-
-function start_timer() {
-    timer = 14;
-
-    function timeDetails() {
-        if (timer > 10) {
-            document.getElementById("timer").innerHTML = "Breathe In";
-        }
-        else if (timer <= 10 && timer > 0) {
-            document.getElementById("timer").innerHTML = "Breathe Out";
-        }
-        else {
-            clearInterval(downloadTimer);
-            document.getElementById("timer").innerHTML = "Relax";
-        }
-        document.getElementById("time_remaining").innerHTML = timer;
-        timer--;
-    }
-
-    var downloadTimer = setInterval(timeDetails, 1000);
+@section Scripts
+{
+    <script type="text/javascript" src="~/js/breathing.js"></script>
 }
-</script>
+

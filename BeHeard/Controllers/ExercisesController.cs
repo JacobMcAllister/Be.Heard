@@ -30,7 +30,7 @@ namespace BeHeard.Controllers
             return View(model);
         }
 
-        public IActionResult week1_e1()
+        public IActionResult volume_chasing()
         {
             var service = new SessionService(HttpContext);
             var model = new ExerciseViewModel

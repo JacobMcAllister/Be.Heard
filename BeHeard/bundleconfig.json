@@ -4,7 +4,7 @@
     "inputFiles": [
       "ResourcePackages/node_modules/jquery/dist/jquery.js",
       "ResourcePackages/node_modules/bootstrap/dist/js/bootstrap.bundle.js",
-      "ResourcePackages/node_modules/@fortawesome/fontawesome-free/js/all.js",
+      "ResourcePackages/node_modules/@fortawesome/fontawesome-free/js/all.js"
     ],
     "minify": {
       "enabled": false
@@ -26,16 +26,6 @@
     "outputFileName": "wwwroot/js/chart.js",
     "inputFiles": [
       "ResourcePackages/node_modules/chart.js/dist/chart.js"
-    ],
-    "minify": {
-      "enabled": false
-    },
-    "sourceMap": false
-  },
-  {
-    "outputFileName": "wwwroot/js/week1.js",
-    "inputFiles": [
-      "Scripts/week1_e1.js"
     ],
     "minify": {
       "enabled": false
