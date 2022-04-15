@@ -18,10 +18,27 @@
         <p>There is a time limit of 30 seconds, but don't worry, time is <strong>not</strong> important.</p>
     </div>
 </div>
-
-
-
-
+<br />
+<div id="dropdown">
+    <label for="rote options">Choose your category:</label>
+        <select name="option" id="option">
+            <option value="0">Cities</option>
+            <option value="1">Directions</option>
+            <option value="2">Phone Numbers</option>
+            <option value="3">Common Requests</option>
+            <option value="4">Meal Orders</option>
+        </select>
+</div>
+<br />
+<div class="container">
+    <div id="sentence_id">
+        <h3>Choose your sentence!</h3>
+        <div id="random_button">
+            <button id="random" type="button" onclick="getSentence()">Randomize</button>
+        </div>
+        <div id="random_sentence" style="font-size:25px"></div>
+    </div>
+</div>
 
 <div>
 <!-- The canvas that will be used to render the input level -->

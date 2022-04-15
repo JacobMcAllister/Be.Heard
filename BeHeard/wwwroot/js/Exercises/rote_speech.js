@@ -1,7 +1,4 @@
-﻿// List #30, #31, #32 from Harvard sentences
-// cs.columbia.edu/~hgs/audio.harvard.html
-
-var canvasContext = null;
+﻿var canvasContext = null;
 var WIDTH = 300;
 var HEIGHT = 50;
 var drawID = null;
@@ -20,19 +17,95 @@ var counter = 0;
 var sentence_Choice = null;
 var last_sentence = 15;
 var current_sentence = null;
+var option = null;
+var option_choice = null;
 
-const sentences = [
-    "The mute muffled the high tones of the horn. Slide the box into the empty space. The store walls were lined with colored frocks.",
-    "The gold ring fits only a pierced ear. The plant grew large and green in the window. The peace league met to discuss their plans.",
-    "The old pan was covered with hard fudge. The beam dropped down on the workmen's head. The rise to fame of a person takes luck.",
-    "Watch the log float in the wide river. Pink clouds floated with the breeze. Paper is scarce so write with much care.",
-    "The node on the stalk of wheat grew daily. She danced like a swan, tall and graceful. The quick fox jumped on the sleeping cat.",
-    "Write fast, if you want to finish early. The tube was blown and the tire flat and useless. The nozzle of the fire hose was bright brass.",
-    "His shirt was clean but one button was gone. Let's all join as we sing the last chorus. Time brings us many changes.",
-    "The barrel of beer was a brew of malt and hops. The last switch cannot be turned off. The purple tie was ten years old.",
-    "Tin cans are absent from store shelves. The fight will end in just six minutes. Men think and plan and sometimes act.",
-    "The heap of fallen leaves was set on fire. It is late morning on the old wall clock. Scrw the round cap on as tight as needed."
+const cities = [
+    "I live in Reno, Nevada.  By car, Reno is about 2 hours away from Sacramento.  By plane, Reno is about 1 hour away from Las Vegas.",
+    "The White House is in Washington D.C.  The Queen of England lives in London.  The Chancellor of Germany resides in Berlin.",
+    "The capital of Japan is Tokyo.  I have always wanted to visit Kyoto.  I have heard that Osaka is also a nice place to visit.",
+    "San Francisco is home to the baseball Giants.  New York is home to the football Giants.  There is also a Giants baseball team in Tokyo.",
+    "Kingman is a small town in Arizona.  Elko is an even smaller town in Nevada.  New Harmony is much smaller than both in Utah."
 ];
+const directions = [
+    "To get to school, I must turn left down Main street, then take a right on Broadway.  If I have gotten to twenty third street, then I know I have gone too far.",
+    "The nice woman said the bus stop is three blocks down seventh avenue and then turn right on C street.  I hope I do not forget C street.",
+    "If I am traveling down Glendale boulevard, eventually I will need to turn right at the movie theater.  The movie theater is on John Wayne street, that is funny.",
+    "To get to the airport, I must get on the freeway at Keystone avenue.  Then I must take the freeway past Wells boulevard.  If I miss the turn onto the three ninety five highway, I'll have to circle around.",
+    "My house is on Barbara drive.  To get there from here, I need to go down Pennsylvania drive and turn left on Montana drive.  Barbara is just on the right."
+]
+const phoneNumbers = [
+    "My phone number is one two three, four five six, seven eight nine zero.  What a mouthful.  But remember, one two three, four five six, seven eight nine zero.",
+    "The cab company phone number is easy to remember.  Three three three, thirty three thirty three.  The owner must like the number three.",
+    "Always remember, in an emergency, call nine one one.  It is only three digits, nine one one.  You cannot forget, nine one one.",
+    "I wrote down Dave's number and I think it was four five five, six eight nine one.  I called and he did not answer.  I hope it is nine one and not one nine.",
+    "Did you write down the number for the soccer coach?  Yes I did, seven seven five, eight three nine, four five one two.  Remember, seven seven five for the area code."
+]
+const commonRequests = [
+    "Hey, could you please open the window?  It is getting really hot in the car.  Sure, no problem.",
+    "Please pass the ketchup.  I sure do love putting ketchup on my french fries.  I heard that Pat Mahomes puts ketchup on everything.",
+    "Will that be paper or plastic for your groceries?  Paper please, I use the bags to cover my text books.",
+    "Can you watch my dog while I am away?  Oh, I am sorry.  I am also going out of town for vacation then.",
+    "Excuse me!  I just need to go past, my seat for the movie is on the other side of you.  Oh, sure thing."
+]
+const mealOrders = [
+    "I will have the cheeseburger for dinner.  For my side, I will have a salad with caesar dressing.  Oh, and I would like a coca-cola to drink.",
+    "For breakfast, I will have two eggs, over easy, bacon, and a side of sourdough toast.  Nice and simple breakfast for me.",
+    "Nothing is better for lunch on a busy day than a sub sandwich.  I like my sandwish with salami, turkey, and ham.  Oh, and do not forget the mayo and mustard please.",
+    "My favorite thing to order at a baseball game is a hot dog with relish, mustard, ketchup, and onions.  Then, I go to the popcorn stand and order a large buttery popcorn!",
+    "When I am at a fancy restaurant, I order the steak, medium rare, with vegetables and a baked potato.  Actually, my favorite thing is to order dessert, one giant hot fudge sundae."
+]
+
+const options = ["cities", "directions", "phoneNumbers", "commonRequests", "mealOrders"]
+
+//  Random number between min and max
+function random_Int(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+//  Get random sentence
+function get_Randomsentence(option_array) {
+    let loop = true;
+
+    sentence_Choice = random_Int(0, 4);
+    current_sentence = sentence_Choice;
+    if (current_sentence === last_sentence) {
+        while (loop) {
+            sentence_Choice = random_Int(0, 4);
+            current_sentence = sentence_Choice;
+            if (current_sentence != last_sentence) {
+                loop = false
+            }
+        }
+    }
+
+    last_sentence = current_sentence;
+    console.log(sentence_Choice);
+    document.getElementById("random_sentence").innerHTML = option_array[sentence_Choice];
+}
+
+function getSentence() {
+    option = document.getElementById("option");
+    option_choice = options[option.value];
+
+    switch (option_choice) {
+        case "cities":
+            get_Randomsentence(cities);
+            break;
+        case "directions":
+            get_Randomsentence(directions);
+            break;
+        case "phoneNumbers":
+            get_Randomsentence(phoneNumbers);
+            break;
+        case "commonRequests":
+            get_Randomsentence(commonRequests);
+            break;
+        case "mealOrders":
+            get_Randomsentence(mealOrders);
+            break;
+    }
+}
 
 // Grab our canvas
 canvasContext = document.getElementById("meter").getContext("2d");
@@ -46,7 +119,6 @@ navigator.getUserMedia = (navigator.getUserMedia ||
 
 // Get user mic
 // const inputMicStream = navigator.mediaDevices.getUserMedia({ audio: true, video: false });
-
 // Audio  context for processing sound
 var audioContext = new AudioContext();
 
@@ -252,28 +324,3 @@ function start_timer() {
     var downloadTimer = setInterval(timeDetails, 1000);
 }
 
-//  Random number between 0 and 9
-function random_Int( min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
-
-//  Get random sentence
-function get_Randomsentence() {
-    let loop = true;
-
-    sentence_Choice = random_Int(0, 9);
-    current_sentence = sentence_Choice;
-    if (current_sentence === last_sentence) {
-        while (loop) {
-            sentence_Choice = random_Int(0, 9);
-            current_sentence = sentence_Choice;
-            if (current_sentence != last_sentence) {
-                loop = false
-            }
-        }
-    }
-
-    last_sentence = current_sentence;
-    console.log(sentence_Choice);
-    document.getElementById("random_sentence").innerHTML = sentences[sentence_Choice];
-}
