@@ -9,11 +9,14 @@
   width: 330px;
   object-fit: cover;
 }
-.ease-object {
-  transform: translateY(var(--ty));
+#HeroContent img.ease-object {
+  transform: translateY(var(--img-translate));
 }
 .bh-orange-faded-content {
   background-color: $bh-orange-faded;
+}
+#Goals.ease-object {
+  transform: translateY(var(--goals-sect-translate));
 }
 #Goals .container {
   padding: 10em 0 10em 0;
@@ -24,6 +27,10 @@ section#Goals {
 }
 #GoalsContent img {
   object-fit: cover;
+}
+#TheTeam.ease-object {
+  opacity: 0;
+  transform: translateY(var(--team-sect-translate));
 }
 #TheTeamContent .card {
   background-image: $bh-card-orange-light-gradient;

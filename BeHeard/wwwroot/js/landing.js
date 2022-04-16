@@ -41,24 +41,26 @@ $(document).ready(() => {
            to: 'top-top',
            direct: true,
            props: {
-               '--ty': {
+               '--img-translate': {
                    from: '0',
-                   to: `${alternate*offset+4}px`,
+                   to: `${alternate*offset}px`,
                    timing: timing
                }
            }
        }));
     });
+    
     let GoalsSection = document.getElementById('Goals');
     easeObjects.push(basicScroll.create({
         elem: GoalsSection,
-        from: `0`,
-        to: 'top-top',
+        from: `top-bottom`,
+        to: 'middle-middle',
         direct: false,
         props: {
-            '--ty': {
+            '--goals-sect-translate': {
                 from: '0',
-                to: `-${$('section#Goals').offset().top / 2}px`,
+                // to: `-${$('section#Goals').offset().top}px`,
+                to: `-${$(GoalsSection).height() * 0.1}px`,
                 timing: GoalsSection.getAttribute('data-timing')
             },
             '--op': {
@@ -69,8 +71,24 @@ $(document).ready(() => {
         }
     }));
     
+    let TheTeamSection = document.getElementById('TheTeam');
+    easeObjects.push(basicScroll.create({
+        elem: TheTeamSection,
+        from: 'top-bottom',
+        to: 'top-middle',
+        direct: false,
+        props: {
+            '--team-sect-translate': {
+                from: `${$(GoalsSection).offset().top - $(GoalsSection).height() + 30}px`,
+                // to: `-${$(TheTeamSection).offset().top}px`,
+                to: `-${$(TheTeamSection).height() * 0.5}px`,
+                timing: TheTeamSection.getAttribute('data-timing')
+            }
+        }
+    }));
+    
     $(document).on('scroll', () => {
-       if ($(document).scrollTop() >= $('section#Goals').position().top * 0.5) {
+       if ($(document).scrollTop() >= $('section#Goals').position().top * 0.15) {
            let time = 250;
            GoalsContentImages.each((i,e) => {
                setTimeout(() => {
@@ -81,6 +99,12 @@ $(document).ready(() => {
                }, time);
                time += 250;
            });
+       }
+       
+       if ($(document).scrollTop() >= $(GoalsSection).position().top) {
+           $(TheTeamSection).animate({
+               opacity: 1
+           }, 500);
        }
     });
     

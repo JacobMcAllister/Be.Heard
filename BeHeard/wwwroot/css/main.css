@@ -19683,12 +19683,16 @@ readers do not read off random characters that represent icons */
   object-fit: cover;
 }
 
-.ease-object {
-  transform: translateY(var(--ty));
+#HeroContent img.ease-object {
+  transform: translateY(var(--img-translate));
 }
 
 .bh-orange-faded-content {
   background-color: #e7cfc3;
+}
+
+#Goals.ease-object {
+  transform: translateY(var(--goals-sect-translate));
 }
 
 #Goals .container {
@@ -19702,6 +19706,11 @@ section#Goals {
 
 #GoalsContent img {
   object-fit: cover;
+}
+
+#TheTeam.ease-object {
+  opacity: 0;
+  transform: translateY(var(--team-sect-translate));
 }
 
 #TheTeamContent .card {
