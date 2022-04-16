@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeHeard.Migrations
 {
     [DbContext(typeof(BeHeardContext))]
-    [Migration("20220403033740_Initial")]
-    partial class Initial
+    [Migration("20220412182629_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

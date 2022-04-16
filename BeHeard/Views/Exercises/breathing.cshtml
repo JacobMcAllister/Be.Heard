@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNetCore.Http
+
+<!--Exercises-->
+@model BeHeard.Models.ExerciseViewModel
+
+@{
+
+}
+
+<h1>Hello @Model.FullName</h1>
+<h2>Exercise - Breathing</h2>
+
+<div class="container" id="directions">
+    <div>
+        <p>Welcome to the breathing exercise!</p>
+        <p>In this exercise, follow the on screen directions to strengthen your core and improve your breathing.</p>
+        <p>This exercise is to establish strong breathing techniques as well as correct diaphragm position!</p>
+        <p style="font-size:20px">Breath in for <strong>4</strong> seconds.</p>
+        <p style="font-size:20px">Breath out for <strong>10</strong> seconds.</p>
+    </div>
+</div>
+
+ <div id="Buttons">
+    <button id="startButton" type="button">Start</button>
+</div>
+
+<div class="container">
+    <div>
+        <p>Time Remaining: <strong><span id="time_remaining"></span></strong></p>
+    </div>
+</div>
+<div class="container">
+    <div>
+        <p>Action: <strong><span id="timer"></span></strong></p>
+    </div>
+</div>
+
+<div>
+    <div class="container p-5 my-5 bg-dark text-white">
+        <div class="row">
+            <h2>Nice Job @Model.FullName!</h2>
+            <h3>Keep it up!</h3>
+            <h6>Here are some tips for next time!</h6>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item">Stand up straight and really fill your belly with air!</a>
+                <a href="#" class="list-group-item">Don't mind the timer too much, it's just a guide!</a>
+                <a href="#" class="list-group-item">The goal of this is build strong diaphragm support, you're doing great!</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/js/Exercises/breathing.js"></script>
+}
+

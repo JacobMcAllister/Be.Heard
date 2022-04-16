@@ -1,0 +1,326 @@
+﻿var canvasContext = null;
+var WIDTH = 300;
+var HEIGHT = 50;
+var drawID = null;
+var arraySize = null;
+var micAnalyser = null;
+var total_decibel = null;
+var micStreamSourceNode = null;
+var isPaused = false;
+var isRecording = false;
+var userStopped = false;
+var fillVol = 0;
+var timeDuration= null;
+var average_over_time = null;
+var average_over_meter = null;
+var counter = 0;
+var sentence_Choice = null;
+var last_sentence = 15;
+var current_sentence = null;
+var option = null;
+var option_choice = null;
+
+const cities = [
+    "I live in Reno, Nevada.  By car, Reno is about 2 hours away from Sacramento.  By plane, Reno is about 1 hour away from Las Vegas.",
+    "The White House is in Washington D.C.  The Queen of England lives in London.  The Chancellor of Germany resides in Berlin.",
+    "The capital of Japan is Tokyo.  I have always wanted to visit Kyoto.  I have heard that Osaka is also a nice place to visit.",
+    "San Francisco is home to the baseball Giants.  New York is home to the football Giants.  There is also a Giants baseball team in Tokyo.",
+    "Kingman is a small town in Arizona.  Elko is an even smaller town in Nevada.  New Harmony is much smaller than both in Utah."
+];
+const directions = [
+    "To get to school, I must turn left down Main street, then take a right on Broadway.  If I have gotten to twenty third street, then I know I have gone too far.",
+    "The nice woman said the bus stop is three blocks down seventh avenue and then turn right on C street.  I hope I do not forget C street.",
+    "If I am traveling down Glendale boulevard, eventually I will need to turn right at the movie theater.  The movie theater is on John Wayne street, that is funny.",
+    "To get to the airport, I must get on the freeway at Keystone avenue.  Then I must take the freeway past Wells boulevard.  If I miss the turn onto the three ninety five highway, I'll have to circle around.",
+    "My house is on Barbara drive.  To get there from here, I need to go down Pennsylvania drive and turn left on Montana drive.  Barbara is just on the right."
+]
+const phoneNumbers = [
+    "My phone number is one two three, four five six, seven eight nine zero.  What a mouthful.  But remember, one two three, four five six, seven eight nine zero.",
+    "The cab company phone number is easy to remember.  Three three three, thirty three thirty three.  The owner must like the number three.",
+    "Always remember, in an emergency, call nine one one.  It is only three digits, nine one one.  You cannot forget, nine one one.",
+    "I wrote down Dave's number and I think it was four five five, six eight nine one.  I called and he did not answer.  I hope it is nine one and not one nine.",
+    "Did you write down the number for the soccer coach?  Yes I did, seven seven five, eight three nine, four five one two.  Remember, seven seven five for the area code."
+]
+const commonRequests = [
+    "Hey, could you please open the window?  It is getting really hot in the car.  Sure, no problem.",
+    "Please pass the ketchup.  I sure do love putting ketchup on my french fries.  I heard that Pat Mahomes puts ketchup on everything.",
+    "Will that be paper or plastic for your groceries?  Paper please, I use the bags to cover my text books.",
+    "Can you watch my dog while I am away?  Oh, I am sorry.  I am also going out of town for vacation then.",
+    "Excuse me!  I just need to go past, my seat for the movie is on the other side of you.  Oh, sure thing."
+]
+const mealOrders = [
+    "I will have the cheeseburger for dinner.  For my side, I will have a salad with caesar dressing.  Oh, and I would like a coca-cola to drink.",
+    "For breakfast, I will have two eggs, over easy, bacon, and a side of sourdough toast.  Nice and simple breakfast for me.",
+    "Nothing is better for lunch on a busy day than a sub sandwich.  I like my sandwish with salami, turkey, and ham.  Oh, and do not forget the mayo and mustard please.",
+    "My favorite thing to order at a baseball game is a hot dog with relish, mustard, ketchup, and onions.  Then, I go to the popcorn stand and order a large buttery popcorn!",
+    "When I am at a fancy restaurant, I order the steak, medium rare, with vegetables and a baked potato.  Actually, my favorite thing is to order dessert, one giant hot fudge sundae."
+]
+
+const options = ["cities", "directions", "phoneNumbers", "commonRequests", "mealOrders"]
+
+//  Random number between min and max
+function random_Int(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+//  Get random sentence
+function get_Randomsentence(option_array) {
+    let loop = true;
+
+    sentence_Choice = random_Int(0, 4);
+    current_sentence = sentence_Choice;
+    if (current_sentence === last_sentence) {
+        while (loop) {
+            sentence_Choice = random_Int(0, 4);
+            current_sentence = sentence_Choice;
+            if (current_sentence != last_sentence) {
+                loop = false
+            }
+        }
+    }
+
+    last_sentence = current_sentence;
+    console.log(sentence_Choice);
+    document.getElementById("random_sentence").innerHTML = option_array[sentence_Choice];
+}
+
+function getSentence() {
+    option = document.getElementById("option");
+    option_choice = options[option.value];
+
+    switch (option_choice) {
+        case "cities":
+            get_Randomsentence(cities);
+            break;
+        case "directions":
+            get_Randomsentence(directions);
+            break;
+        case "phoneNumbers":
+            get_Randomsentence(phoneNumbers);
+            break;
+        case "commonRequests":
+            get_Randomsentence(commonRequests);
+            break;
+        case "mealOrders":
+            get_Randomsentence(mealOrders);
+            break;
+    }
+}
+
+// Grab our canvas
+canvasContext = document.getElementById("meter").getContext("2d");
+
+// fork getUserMedia for multiple browser versions, for those
+// that need prefixes
+navigator.getUserMedia = (navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia ||
+    navigator.msGetUserMedia);
+
+// Get user mic
+// const inputMicStream = navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+// Audio  context for processing sound
+var audioContext = new AudioContext();
+
+if (navigator.mediaDevices) {
+    console.log('getUserMedia supported.');
+    navigator.getUserMedia(
+        // constraints - only audio needed for this app
+        {
+            audio: true
+        },
+        // Success callback
+        function (stream) {
+            // Create mic stream node
+            micStreamSourceNode = audioContext.createMediaStreamSource(stream);
+            // Create audio analyser
+            micAnalyser = audioContext.createAnalyser();
+            // Connect
+            //micStreamSourceNode.connect(micAnalyser);
+
+            //animateVoice();
+
+        },
+        // Error callback
+        function (err) {
+            console.log('The following gUM error occured: ' + err);
+        }
+    );
+} else {
+    console.log('getUserMedia not supported on your browser!');
+}
+
+function animateVoice() {
+
+    // Create array of mic input data
+    const dataArray = new Float32Array(micAnalyser.fftSize);
+
+    // Clear canvas
+    canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
+
+    function drawVolume() {
+        if (isRecording) {
+
+            // Clear canvas
+            canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
+
+            // Fill array
+            micAnalyser.getFloatTimeDomainData(dataArray);
+
+            let sumSquares = 0.0;
+            for (const amplitude of dataArray) { sumSquares += amplitude * amplitude; }
+            volumeVal = Math.sqrt(sumSquares / dataArray.length);
+
+            // Increase factor for phrased speech
+            fillVol = volumeVal * WIDTH * 3.2;
+            //console.log(volumeVal);
+            //console.log(fillVol);
+            if (fillVol > 50) {
+                canvasContext.fillStyle = "#00ff00";
+            }
+            else {
+                canvasContext.fillStyle = "#ff0000";
+            }
+            total_decibel += fillVol;
+            counter += 1;
+
+            canvasContext.fillRect(0, 0, fillVol, HEIGHT);
+
+            drawID = requestAnimationFrame(drawVolume);
+        }
+    }
+
+    drawVolume();
+}
+
+function Stop() {
+    userStopped = true;
+}
+
+function Pause() {
+    isPaused = true;
+    isRecording = false;
+    if (audioContext.state === 'running') {
+        audioContext.suspend();
+    }
+}
+
+function Resume() {
+    isPaused = false;
+    isRecording = true;
+    if (audioContext.state === 'suspended') {
+        audioContext.resume();
+    }
+}
+
+/*
+document.getElementById("pauseButton").onclick = function () { pause_Play() };
+function pause_Play() {
+    if (audioContext.state === 'running') {
+        audioContext.suspend().then(function () {
+            document.getElementById("pauseButton").innerHTML = 'Resume';
+        });
+    } else if (audioContext.state === 'suspended') {
+        audioContext.resume().then(function () {
+            document.getElementById("pauseButton").innerHTML = 'Pause';
+        });
+    }
+}
+*/
+
+function start_timer() {
+
+    // Connect
+    micStreamSourceNode.connect(micAnalyser);
+    if (audioContext.state === 'suspended') {
+        audioContext.resume();
+    }
+
+    timeDuration = 0;
+    fillVol = 0;
+    total_decibel = 0;
+    average_over_time = 0;
+    average_over_meter = 0;
+    userStopped = false;
+    isRecording = true;
+
+    //animateVoice();
+
+    function timeDetails() {
+        animateVoice();
+
+        if (!isPaused) {
+            if (userStopped || timeDuration == 30) {
+                micStreamSourceNode.disconnect(micAnalyser);
+                isRecording = false;
+
+                // Clear canvas
+                canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
+
+                clearInterval(downloadTimer);
+
+                // Average of time duration in sec
+                average_over_time = total_decibel / timeDuration;
+
+                // Average per sec of meter
+                average_over_meter = average_over_time / WIDTH;
+
+                // Percent of meter
+                percent_decibel = (average_over_meter / WIDTH) * 100;
+
+                //console.log("total time = " + timeDuration);
+                //console.log("total = " + total_decibel);
+                //console.log("average /" + timeDuration + " = " + average_over_time);
+                //console.log("percent = " + percent_decibel);
+
+                let output;
+                let loud = false;
+
+                switch (true) {
+                    case (percent_decibel > 0 && percent_decibel < 20.0):
+                        output = "~20";
+                        break;
+                    case (percent_decibel > 20.1 && percent_decibel < 25.0):
+                        output = "~30";
+                        break;
+                    case (percent_decibel > 25.1 && percent_decibel < 35.0):
+                        output = "~40";
+                        break;
+                    case (percent_decibel > 35.1 && percent_decibel < 40.0):
+                        output = "~50";
+                        break;
+                    case (percent_decibel > 40.1 && percent_decibel < 45.0):
+                        output = "~60";
+                        break;
+                    case (percent_decibel > 45.1 && percent_decibel < 50.0):
+                        output = "~70";
+                        break;
+                    case (percent_decibel > 50.1 && percent_decibel < 55.0):
+                        output = "~80";
+                        break;
+                    case (percent_decibel > 55.1 && percent_decibel < 60.0):
+                        output = "~90";
+                        break;
+                    case (percent_decibel > 60.1 && percent_decibel < 65.0):
+                        output = "~100";
+                        break;
+                    case (percent_decibel > 65.1):
+                        loud = true;
+                        output = " greater then 100";
+                        break;
+                }
+
+                if (loud) {
+                    alert("Wow!\n'Normal' voice volume is around 50-60 dba.\nYour volume was" + output + "dba!")
+                } else {
+                    alert("Great Job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + output + " dba.");
+                }
+            }
+
+            timeDuration++;
+        }
+    }
+
+    var downloadTimer = setInterval(timeDetails, 1000);
+}
+

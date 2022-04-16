@@ -37,7 +37,11 @@
 
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
+    <Content Remove="wwwroot\js\breathing.js" />
     <Content Remove="wwwroot\js\main.js" />
+    <Content Remove="wwwroot\js\rote_speech.js" />
+    <Content Remove="wwwroot\js\volume_chasing.js" />
+    <Content Remove="wwwroot\js\volume_phrasing.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -73,9 +77,13 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
+    <None Include="wwwroot\js\Exercises\breathing.js" />
     <None Include="wwwroot\js\main.js" />
     <None Include="wwwroot\js\Recorder\app.js" />
     <None Include="wwwroot\js\Recorder\recorder.js" />
+    <None Include="wwwroot\js\Exercises\rote_speech.js" />
+    <None Include="wwwroot\js\Exercises\volume_phrasing.js" />
+    <None Include="wwwroot\js\Exercises\volume_chasing.js" />
   </ItemGroup>
 
 </Project>
