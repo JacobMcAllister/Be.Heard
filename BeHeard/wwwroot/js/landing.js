@@ -59,8 +59,7 @@ $(document).ready(() => {
         props: {
             '--goals-sect-translate': {
                 from: '0',
-                // to: `-${$('section#Goals').offset().top}px`,
-                to: `-${$(GoalsSection).height() * 0.1}px`,
+                to: `-${$(GoalsSection).height() * 0.25}px`,
                 timing: GoalsSection.getAttribute('data-timing')
             },
             '--op': {
@@ -79,9 +78,13 @@ $(document).ready(() => {
         direct: false,
         props: {
             '--team-sect-translate': {
-                from: `${$(GoalsSection).offset().top - $(GoalsSection).height() + 30}px`,
-                // to: `-${$(TheTeamSection).offset().top}px`,
-                to: `-${$(TheTeamSection).height() * 0.5}px`,
+                from: `${$(GoalsSection).position().top - $(GoalsSection).height() - 100}px`,
+                to: `-${$(TheTeamSection).height()}px`,
+                timing: TheTeamSection.getAttribute('data-timing')
+            },
+            '--team-op': {
+                from: '0',
+                to: '2.3',
                 timing: TheTeamSection.getAttribute('data-timing')
             }
         }
@@ -101,11 +104,11 @@ $(document).ready(() => {
            });
        }
        
-       if ($(document).scrollTop() >= $(GoalsSection).position().top) {
-           $(TheTeamSection).animate({
-               opacity: 1
-           }, 500);
-       }
+       // if ($(document).scrollTop() >= $(GoalsSection).position().top + 50) {
+       //     $(TheTeamSection).animate({
+       //         opacity: 1
+       //     }, 400);
+       // }
     });
     
     easeObjects.forEach((easeObject) => easeObject.start())

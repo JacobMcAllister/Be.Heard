@@ -19636,6 +19636,7 @@ readers do not read off random characters that represent icons */
 }
 
 .bh-btn-primary:hover {
+  color: white;
   background-color: #0b3954;
   border-color: #0b3954;
 }
@@ -19709,7 +19710,7 @@ section#Goals {
 }
 
 #TheTeam.ease-object {
-  opacity: 0;
+  opacity: var(--team-op);
   transform: translateY(var(--team-sect-translate));
 }
 
@@ -19736,10 +19737,18 @@ section#RegistrationForm {
   color: #0b3954;
 }
 
-#RegistrationSubmitButtonContainer button {
-  background-color: #fc6801;
-  border-color: #fc6801;
-  color: white;
+section#LoginForm {
+  margin: 4em 0 19em;
+}
+
+#LoginHeader {
+  border-top: 2px solid #0b3954;
+  padding-top: 1.5em;
+  color: #0b3954;
+}
+
+#LoginSecondaryControl a {
+  color: #0b3954;
 }
 
 /*# sourceMappingURL=main.css.map */

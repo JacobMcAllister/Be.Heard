@@ -29,7 +29,7 @@ section#Goals {
   object-fit: cover;
 }
 #TheTeam.ease-object {
-  opacity: 0;
+  opacity: (var(--team-op));
   transform: translateY(var(--team-sect-translate));
 }
 #TheTeamContent .card {
