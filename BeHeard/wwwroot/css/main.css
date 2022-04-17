@@ -19751,4 +19751,8 @@ section#LoginForm {
   color: #0b3954;
 }
 
+#LoginErrorMessage {
+  color: #8a4f7d;
+}
+
 /*# sourceMappingURL=main.css.map */

@@ -51,6 +51,12 @@
                 <div id="LoginHeader" class="text-center">
                     <div id="LoginLogo">
                         <img class="w-50" src="~/assets/BeHeardLogo-01.png" alt="Be Heard Logo"/>
+                        <p id="LoginErrorMessage">
+                            @if (TempData["Error"] != null)
+                            {
+                                @TempData["Error"]
+                            }
+                        </p>
                     </div>
                 </div>
                 <form method="post" enctype="multipart/form-data" asp-controller="Login" asp-action="Login">
