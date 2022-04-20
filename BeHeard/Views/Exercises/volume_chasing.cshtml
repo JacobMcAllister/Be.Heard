@@ -8,18 +8,48 @@
 @{
 
 }
-
-<h1>Hello @Model.FullName</h1>
-<h2>Exercise - Volume Chasing</h2>
-
+<!DOCTYPE html>
+<html>
+<body onload="difficulty_dropdown()">
+<br />
+<div style="text-align:center;outline-style:solid;outline-color:black;">
+    <h1>Hello @Model.FullName</h1>
+    <h2>Exercise - Volume Chasing</h2>
+</div>
+<div class="navbar" id="myNavbar">
+    <a class="link" asp-area="" asp-controller="Exercises" asp-action="breathing">Breathing Exercise</a>
+    <a class="link" asp-area="" asp-controller="Exercises" asp-action="volume_phrasing">Phrasing Exercise</a>
+    <a class="link" asp-area="" asp-controller="Exercises" asp-action="rote_speech">Rote Speech Exercise</a>
+</div>
+<br />
 <div class="container">
     <div class="row">
-        <div id="directions">
-            <p>Welcome to volume chasing!</p>
-            <p>Choose a syllable and speak it loudy for 10 seconds.</p>
-            <p>The meter will fill up according to your volume level.</p>
-            <p>Don't let the volume drop!</p>
+        <div class="column" style="width:50%;">
+            <div id="directions">
+                <p>Welcome to volume chasing!</p>
+                <p>Choose a syllable and speak it loudy for 10 seconds.</p>
+                <p>The meter will fill up according to your volume level.</p>
+                <p>Don't let the volume drop!</p>
+            </div>
         </div>
+        <div class="column" style="width:50%;">
+            <div id="diff_directions">
+                <p>Choose the difficulty of the exercise in the dropdown!</p>
+            </div>
+            <div id="diff_dropdown">
+                <label for="difficulties">Choose a Difficulty: </label>
+                <select name="difficulty" id="diff_option" onchange="difficulty_dropdown()">
+                    <option value="easy">easy</option>
+                    <option value="medium">medium</option>
+                    <option value="hard">hard</option>
+                    <option value="impossible">impossible</option>
+                </select>
+            </div>
+            <div id="diff_alert"></div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
         <div id="dropdown">
             <label for="syllables">Choose a Syllable:</label>
             <select name="syllable" id="syllable">
@@ -159,17 +189,69 @@
             </select>
         </div>
     </div>
-
-    <!-- The canvas that will be used to render the input level -->
-    <canvas id="meter" width="300" height="50" style="border: 1px solid black;"></canvas>
-    <div id="Buttons">
-        <button id="startButton" type="button">Start</button>
-        <button id="pauseButton" type="button" onclick="Pause()">Pause</button>
-        <button id="resumeButton" type="button" onclick="Resume()">Resume</button>
-        <!--<button type="button" onclick="pauseMic()">Pause</button>-->
+    <br />
+    <div class="row">
+        <div class="column" style="width:50%;">
+            <br />
+            <!-- The canvas that will be used to render the input level -->
+            <canvas id="meter" width="300" height="50" style="border: 1px solid black;"></canvas>
+            <div id="Buttons">
+                <button id="startButton" type="button">Start</button>
+                <button id="pauseButton" type="button" onclick="Pause()">Pause</button>
+                <button id="resumeButton" type="button" onclick="Resume()">Resume</button>
+                <!--<button type="button" onclick="pauseMic()">Pause</button>-->
+            </div>
+            <div id="Timer"></div>
+        </div>
+        <div class="column" style="width:50%;">
+            <div id="database_area">
+                <table style="width:100%;">
+                    <caption style="caption-side:top;">@Model.FullName, Volume Chasing Exercise Results</caption>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Difficulty</th>
+                            <th>Syllable</th>
+                            <th>Volume Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>04/25/22</td>
+                            <td>Easy</td>
+                            <td>A</td>
+                            <td>~30 dba</td>
+                        </tr>
+                        <tr>
+                            <td>04/26/22</td>
+                            <td>Easy</td>
+                            <td>A</td>
+                            <td>~40 dba</td>
+                        </tr>
+                        <tr>
+                            <td>04/28/22</td>
+                            <td>Easy</td>
+                            <td>O</td>
+                            <td>~30 dba</td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <div id="Timer"></div>
-
+ 
     <!--Tips for exercise-->
     <div class="container p-5 my-5 bg-dark text-white">
         <div class="row">
@@ -177,13 +259,16 @@
             <h3>Keep it up!</h3>
             <h6>Here are some tips for next time!</h6>
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item">Be Sure to Practice Everyday.</a>
-                <a href="#" class="list-group-item">If you get frustrated, take a break!</a>
-                <a href="#" class="list-group-item">Small steps are ok, nobody got where they were going on the first try!</a>
+                <a class="list-group-item">Be Sure to Practice Everyday.</a>
+                <a class="list-group-item">If you get frustrated, take a break!</a>
+                <a class="list-group-item">Small steps are ok, nobody got where they were going on the first try!</a>
             </div>
         </div>
     </div>
 </div>
+
+</body>
+</html>
 
 @section Scripts
 {

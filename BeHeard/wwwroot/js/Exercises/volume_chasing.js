@@ -9,10 +9,15 @@ var micStreamSourceNode = null;
 var isPaused = false;
 var isRecording = false;
 var fillVol = 0;
-var timeleft = null;
+var timeleft = 10;
 var average_over_time = null;
 var average_over_meter = null;
 var counter = 0;
+var difficulty = null;
+var diff_value = null;
+var scaling_factor = 2.2;
+var target_fillVol = 100;
+var total_time = 0;
 
 // Grab our canvas
 canvasContext = document.getElementById("meter").getContext("2d");
@@ -78,10 +83,10 @@ function animateVoice() {
             let sumSquares = 0.0;
             for (const amplitude of dataArray) { sumSquares += amplitude * amplitude; }
             volumeVal = Math.sqrt(sumSquares / dataArray.length);
-            fillVol = volumeVal * WIDTH * 2.2;
+            fillVol = volumeVal * WIDTH * scaling_factor;
             //console.log(volumeVal);
             //console.log(fillVol);
-            if (fillVol > 100) {
+            if (fillVol > target_fillVol) {
                 canvasContext.fillStyle = "#00ff00";
             }
             else {
@@ -140,7 +145,7 @@ function start_timer() {
         audioContext.resume();
     }
 
-    timeleft = 10;
+    total_time = timeleft;
     fillVol = 0;
     total_decibel = 0;
     isRecording = true;
@@ -161,8 +166,8 @@ function start_timer() {
                 clearInterval(downloadTimer);
                 document.getElementById("Timer").innerHTML = "Finished";
 
-                // Average of 10 sec
-                average_over_time = total_decibel / 10;
+                // Average over duration of seconds
+                average_over_time = total_decibel / total_time;
 
                 // Average per sec of meter
                 average_over_meter = average_over_time / WIDTH;
@@ -224,4 +229,52 @@ function start_timer() {
     }
 
     var downloadTimer = setInterval(timeDetails, 1000);
+}
+
+function diff_alert(case_num) {
+    switch (case_num) {
+        case 1:
+            document.getElementById("diff_alert").innerHTML = "Standard time, standard volume target.  Aim for volume!";
+            break;
+        case 2:
+            document.getElementById("diff_alert").innerHTML = "Increased time, increased volume target.  Develope vocal control!";
+            break;
+        case 3:
+            document.getElementById("diff_alert").innerHTML = "Time increase to 15 seconds, volume target greatly increased.  Utilize the pause and resume buttons!  Do your best!";
+            break;
+        case 4:
+            document.getElementById("diff_alert").innerHTML = "Time increased to 20 seconds, max out the volume bar.  Utilize the pause and resume buttons.  Give it all you've got!";
+            break;
+    }
+}
+function difficulty_dropdown() {
+    difficulty = document.getElementById("diff_option");
+    diff_value = difficulty.value;
+
+    function alter_difficulty(value) {
+        switch (true) {
+            case (value == 'easy'):
+                target_fillVol = 100;
+                timeleft = 10;
+                diff_alert(1);
+                break;
+            case (value == 'medium'):
+                target_fillVol = 125;
+                timeleft = 12;
+                diff_alert(2);
+                break;
+            case (value == 'hard'):
+                target_fillVol = 200;
+                timeleft = 15;
+                diff_alert(3);
+                break;
+            case (value == 'impossible'):
+                target_fillVol = WIDTH;
+                timeleft = 20;
+                diff_alert(4);
+                break;
+        }
+    }
+
+    alter_difficulty(diff_value);
 }
