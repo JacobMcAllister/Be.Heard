@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace BeHeard.Migrations
 {
     [DbContext(typeof(BeHeardContext))]
@@ -15,15 +17,19 @@ namespace BeHeard.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.21")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("BeHeard.Application.Models.ActivityResult", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Counter")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -151,6 +157,9 @@ namespace BeHeard.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -170,6 +179,9 @@ namespace BeHeard.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("icon")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -216,6 +228,12 @@ namespace BeHeard.Migrations
                     b.HasOne("BeHeard.Application.Models.Subscription", "Subscription")
                         .WithMany()
                         .HasForeignKey("SubscriptionId");
+
+                    b.Navigation("Preferences");
+
+                    b.Navigation("Subscription");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BeHeard.Application.Models.User", b =>
@@ -223,6 +241,8 @@ namespace BeHeard.Migrations
                     b.HasOne("BeHeard.Application.Models.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId");
+
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("BeHeard.Application.Models.UserProfile", b =>
@@ -236,6 +256,22 @@ namespace BeHeard.Migrations
                     b.HasOne("BeHeard.Application.Models.Settings", "Settings")
                         .WithMany()
                         .HasForeignKey("SettingsId");
+
+                    b.Navigation("Settings");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BeHeard.Application.Models.User", b =>
+                {
+                    b.Navigation("Profile");
+
+                    b.Navigation("Settings");
+                });
+
+            modelBuilder.Entity("BeHeard.Application.Models.UserProfile", b =>
+                {
+                    b.Navigation("ActivityResults");
                 });
 #pragma warning restore 612, 618
         }

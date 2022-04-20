@@ -11,5 +11,10 @@ namespace BeHeard.Models
         public User User { get; set; }
         public IEnumerable<ActivityResult> ActivityResults { get; set; }
         public string FullName => $"{User.FirstName} {User.LastName}";
+
+        public int activityTotal => ActivityResults.ElementAt(0).Counter +
+            ActivityResults.ElementAt(1).Counter + 
+            ActivityResults.ElementAt(2).Counter + 
+            ActivityResults.ElementAt(3).Counter;
     }
 }

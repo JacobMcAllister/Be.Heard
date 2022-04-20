@@ -9,8 +9,8 @@
 <!-- Modal -->
 <div class="m-4">
     <div id="myModal" class="modal fade" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content modal-xl">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+            <div class="modal-content ">
                 <div class="modal-header">
                     <h5 class="modal-title">Your Account Has Been Created!</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -25,7 +25,7 @@
                                 <div></div>
                                 <div class="rounded h-auto border border-dark">
                                     <p class="fw-bold fs-5">Welcome!</p>
-                                    <p>We just have a few more things to get sorted out for you.  You can change these anytime in your account settings.</p>
+                                    <p>Now that you are here, let us give you a user image.</p>
                                 </div>
                                 <div></div>
                             </div>
@@ -34,47 +34,45 @@
                     </div>
                     <hr style="width:100%" size="3" color="black">
                     <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="FirstLogin">
-                        <div class="row">
-                            <div class="list-group">
-                                <div class="list-group-item">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <strong class="mb-0">Text to speech</strong>
-                                            <p class="text-muted mb-0">Check to enable voice to text to speech narration</p>
-                                        </div>
-                                        <div class="col-auto">
-                                            <input type="checkbox" class="form-check-input" name="Preferences.TextToSpeech" value="true" />
-                                            <span class="form-check-label"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-group-item">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <strong class="mb-0">Color Blind Mode</strong>
-                                            <p class="text-muted mb-0">Check to enable Color Blind Mode</p>
-                                        </div>
-                                        <div class="col-auto">
-                                            <input type="checkbox" class="form-check-input" name="Preferences.ColorBlindMode" value="true" />
-                                            <span class="form-check-label"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-group-item">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <strong class="mb-0">Dark mode</strong>
-                                            <p class="text-muted mb-0">Check to enable dark mode</p>
-                                        </div>
-                                        <div class="col-auto">
-                                            <input type="checkbox" class="form-check-input" name="Preferences.DarkMode" value="true" />
-                                            <span class="form-check-label"></span>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="row d-flex justify-content-center">
+                            <div class="form-check col-md-3 mx-2">
+                              <input class="form-check-input" type="radio" name="icon" id="face1" value="face1.png" checked>
+                              <label class="form-check-label" for="face1">
+                                <img src="/images/face1.png" class="img-responsive h-100" alt="Responsive image" />
+                              </label>
+                            </div>
+                            <div class="form-check col-md-3 mx-auto">
+                              <input class="form-check-input" type="radio" name="icon" id="face2" value="face2.png" >
+                              <label class="form-check-label" for="face2">
+                                <img src="/images/face2.png" class="img-responsive h-100" alt="Responsive image" />
+                              </label>
                             </div>
                         </div>
-                        <p class="text-secondary text-center"><small>If you don't save, your changes will be set to defaults.</small></p>
+                        <div class="row d-flex justify-content-center">
+                            <div class="form-check col-md-3 mx-2">
+                              <input class="form-check-input" type="radio" name="icon" id="face3" value="face3.png">
+                              <label class="form-check-label" for="face3">
+                                <img src="/images/face3.png" class="img-responsive h-100" alt="Responsive image" />
+                              </label>
+                            </div>
+                            <div class="form-check col-md-3 mx-auto">
+                              <input class="form-check-input" type="radio" name="icon" id="face4" value="face4.png">
+                              <label class="form-check-label" for="face4">
+                                <img src="/images/face4.png" class="img-responsive h-100" alt="Responsive image" />
+                              </label>
+                            </div>
+                        </div> 
+                        <div class="row d-flex justify-content-center">
+                            <div class="form-check col-md-3 mx-2">
+                              <input class="form-check-input" type="radio" name="icon" id="face5" value="face5.png">
+                              <label class="form-check-label" for="face5">
+                                <img src="/images/face5.png" class="img-responsive h-100" alt="Responsive image" />
+                              </label>
+                            </div>
+                        </div>
+                        <hr style="width:100%" size="3" color="black">
+                        <p class="text-secondary text-center"><small>If you don't save, the default image will be selected.</small></p>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-primary">Save changes</button>
