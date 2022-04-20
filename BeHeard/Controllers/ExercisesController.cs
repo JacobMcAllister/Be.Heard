@@ -30,7 +30,7 @@ namespace BeHeard.Controllers
             return View(model);
         }
 
-        public IActionResult Exercise1()
+        public IActionResult volume_chasing()
         {
             var service = new SessionService(HttpContext);
             var model = new ExerciseViewModel
@@ -51,6 +51,36 @@ namespace BeHeard.Controllers
         }
 
         public IActionResult Exercise3()
+        {
+            var service = new SessionService(HttpContext);
+            var model = new ExerciseViewModel
+            {
+                User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
+            };
+            return View(model);
+        }
+
+        public IActionResult breathing()
+        {
+            var service = new SessionService(HttpContext);
+            var model = new ExerciseViewModel
+            {
+                User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
+            };
+            return View(model);
+        }
+
+        public IActionResult volume_phrasing()
+        {
+            var service = new SessionService(HttpContext);
+            var model = new ExerciseViewModel
+            {
+                User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
+            };
+            return View(model);
+        }
+
+        public IActionResult rote_speech()
         {
             var service = new SessionService(HttpContext);
             var model = new ExerciseViewModel

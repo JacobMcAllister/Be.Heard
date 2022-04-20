@@ -1,0 +1,38 @@
+@import "variables";
+
+.bh-first-content {
+  padding-top: 12em;
+  padding-bottom: 12em;
+}
+.bh-first-content img {
+  height: 363px;
+  width: 330px;
+  object-fit: cover;
+}
+.ease-object {
+  transform: translateY(var(--ty));
+}
+.bh-orange-faded-content {
+  background-color: $bh-orange-faded;
+}
+#Goals .container {
+  padding: 10em 0 10em 0;
+}
+section#Goals {
+  -webkit-box-shadow: 0px -2px 15px 2px rgba(0,0,0,var(--op));
+  box-shadow: 0px -2px 15px 2px rgba(0,0,0,var(--op));
+}
+#GoalsContent img {
+  object-fit: cover;
+}
+#TheTeamContent .card {
+  background-image: $bh-card-orange-light-gradient;
+  border-radius: $bh-card-border-radius;
+  border-color: $bh-purple-dark;
+  border-width: 1.5px;
+}
+#TheTeamContent .card .card-footer {
+  background-color: $bh-purple-dark;
+  border-radius: 15px;
+  height: 3em;
+}

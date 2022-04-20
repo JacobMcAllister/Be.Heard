@@ -1,4 +1,4 @@
-﻿// node modules
+// node modules
 @import "../../ResourcePackages/node_modules/bootstrap/scss/bootstrap";
 @import "../../ResourcePackages/node_modules/@fortawesome/fontawesome-free/scss/brands";
 @import "../../ResourcePackages/node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
@@ -7,3 +7,9 @@
 @import "../../ResourcePackages/node_modules/@fortawesome/fontawesome-free/scss/v4-shims";
 
 // custom
+@import "custom/text";
+@import "custom/buttons";
+@import "custom/navbar";
+@import "custom/notification";
+@import "custom/landing";
+@import "custom/registration";

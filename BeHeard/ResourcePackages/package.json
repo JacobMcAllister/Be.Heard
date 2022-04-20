@@ -18,6 +18,7 @@
   "homepage": "https://github.com/JacobMcAllister/Be.Heard#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
+    "basicscroll": "^3.0.4",
     "bootstrap": "^5.0.0",
     "chart.js": "^3.6.0",
     "jquery": "^3.6.0"

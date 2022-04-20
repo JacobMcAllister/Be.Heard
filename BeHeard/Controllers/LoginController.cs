@@ -3,7 +3,9 @@ using System;
 using BeHeard.Core;
 using System.Security.Claims;
 using BeHeard.Application;
+using BeHeard.Application.Helpers;
 using BeHeard.Application.Models;
+using BeHeard.Models;
 using BeHeard.Services;
 
 namespace BeHeard.Controllers
@@ -65,7 +67,12 @@ namespace BeHeard.Controllers
         public IActionResult Registration()
         {
             TempData["Error"] = "";
-            return View();
+            var model = new RegistrationViewModel
+            {
+                States = Localization.Los,
+                AlexImageUrl = "/images/image1.png"
+            };
+            return View(model);
         }
         public IActionResult TermsConditions()
         {        

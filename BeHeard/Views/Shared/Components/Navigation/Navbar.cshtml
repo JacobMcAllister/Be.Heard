@@ -1,0 +1,33 @@
+@model BeHeard.Widgets.Models.NavigationModel;
+
+<nav class="navbar navbar-light navbar-expand-lg p-3">
+    <div class="container">
+        <a class="navbar-brand" href="@Model.Home"><img class="img-fluid" alt="Be Heard logo" src="~/assets/BeHeardLogo-01.png"/></a>
+        
+        @* Bootstrap nav element toggling function *@
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#NavBarContent" aria-controls="NavBarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse me-auto" id="NavBarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="@Model.Home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="@Model.About">About</a></li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="@Model.SignIn">Sign in</a></li>
+                <li><a class="btn btn-primary bh-btn-primary" href="@Model.CreateAccount">Create account</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+@* Notification *@
+@* NOTE: Should be its own widget. *@
+<div class="container-fluid" id="notification">
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <p class="pt-2">Are you a medical provider? <a href="@Model.MedicalProviderRegistration">Register here.</a></p>
+        </div>
+    </div> 
+</div>

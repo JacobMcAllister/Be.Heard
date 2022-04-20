@@ -10,14 +10,14 @@
 }
 
 <h1>Hello @Model.FullName</h1>
-<h2>Week 1 --> Activity 1</h2>
+<h2>Exercise - Volume Chasing</h2>
 
 <div class="container">
     <div class="row">
         <div id="directions">
-            <p>These are the directions to the exercise</p>
-            <p>Speak your chosen syllable loudly for 10 seconds</p>
-            <p>The meter will fill up according to your volume level</p>
+            <p>Welcome to volume chasing!</p>
+            <p>Choose a syllable and speak it loudy for 10 seconds.</p>
+            <p>The meter will fill up according to your volume level.</p>
             <p>Don't let the volume drop!</p>
         </div>
         <div id="dropdown">
@@ -161,10 +161,11 @@
     </div>
 
     <!-- The canvas that will be used to render the input level -->
-    <canvas id="meter" width="500" height="50" style="border: 1px solid black;"></canvas>
+    <canvas id="meter" width="300" height="50" style="border: 1px solid black;"></canvas>
     <div id="Buttons">
         <button id="startButton" type="button">Start</button>
-        <button id="pauseButton" type="button">Pause</button>
+        <button id="pauseButton" type="button" onclick="Pause()">Pause</button>
+        <button id="resumeButton" type="button" onclick="Resume()">Resume</button>
         <!--<button type="button" onclick="pauseMic()">Pause</button>-->
     </div>
     <div id="Timer"></div>
@@ -182,131 +183,9 @@
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-
-        var canvasContext = null;
-        var WIDTH = 500;
-        var HEIGHT = 50;
-        var drawID = null;
-        var arraySize = null;
-        var micAnalyser = null;
-        var average_decibel = null;
-
-        // Grab our canvas
-        canvasContext = document.getElementById("meter").getContext("2d");
-
-        // fork getUserMedia for multiple browser versions, for those
-        // that need prefixes
-        navigator.getUserMedia = (navigator.getUserMedia ||
-            navigator.webkitGetUserMedia ||
-            navigator.mozGetUserMedia ||
-            navigator.msGetUserMedia);
-
-        // Get user mic
-        // const inputMicStream = navigator.mediaDevices.getUserMedia({ audio: true, video: false });
-
-        // Audio  context for processing sound
-        var audioContext = new AudioContext();
-
-        if (navigator.mediaDevices) {
-            console.log('getUserMedia supported.');
-            navigator.getUserMedia(
-                // constraints - only audio needed for this app
-                {
-                    audio: true
-                },
-                // Success callback
-                function (stream) {
-                    // Create mic stream node
-                    const micStreamSourceNode = audioContext.createMediaStreamSource(stream);
-                    // Create audio analyser
-                    micAnalyser = audioContext.createAnalyser();
-                    // Connect
-                    micStreamSourceNode.connect(micAnalyser);
-
-                    animateVoice();
-
-                },
-                // Error callback
-                function (err) {
-                    console.log('The following gUM error occured: ' + err);
-                }
-            );
-        } else {
-            console.log('getUserMedia not supported on your browser!');
-        }
-
-        function animateVoice() {
-
-            // Create array of mic input data
-            const dataArray = new Float32Array(micAnalyser.fftSize);
-
-            // Clear canvas
-            canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
-
-            function drawVolume() {
-                var fillVol;
-                // Clear canvas
-                canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
-
-                // Fill array
-                micAnalyser.getFloatTimeDomainData(dataArray);
-
-                let sumSquares = 0.0;
-                for (const amplitude of dataArray) { sumSquares += amplitude * amplitude; }
-                volumeVal = Math.sqrt(sumSquares / dataArray.length);
-                fillVol = volumeVal * WIDTH * 3.8;
-                console.log(volumeVal);
-                console.log(fillVol);
-                if (fillVol > 175) {
-                    canvasContext.fillStyle = "#00ff00";
-                }
-                else {
-                    canvasContext.fillStyle = "#ff0000";
-                }
-                average_decibel += fillVol;
-
-                canvasContext.fillRect(0, 0, fillVol, HEIGHT);
-
-                drawID = requestAnimationFrame(drawVolume);
-
-            }
-
-            drawVolume();
-        }
-
-        document.getElementById("pauseButton").onclick = function () { pause_Play() };
-
-        function pause_Play() {
-            if (audioContext.state === 'running') {
-                audioContext.suspend().then(function () {
-                    document.getElementById("pauseButton").innerHTML = 'Resume';
-                });
-            } else if (audioContext.state === 'suspended') {
-                audioContext.resume().then(function () {
-                    document.getElementById("pauseButton").innerHTML = 'Pause';
-                });
-            }
-        }
-
-        document.getElementById("startButton").onclick = function () { start_timer() };
-
-        function start_timer() {
-
-            var timeleft = 10;
-
-            var downloadTimer = setInterval(function(){
-              if(timeleft <= 0){
-                clearInterval(downloadTimer);
-                document.getElementById("Timer").innerHTML = "Finished";
-                average_decibel = average_decibel / 10;
-                percent_decibel = (average_decibel / 500) * 1.8;
-                alert("Great job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + percent_decibel.toFixed(2) + " dba");
-              } else{
-                document.getElementById("Timer").innerHTML = "Seconds Remaining: " + timeleft;
-              }
-              timeleft -= 1;
-            }, 1000);
-        }   
-    </script>
+@section Scripts
+{
+    <script type="text/javascript" src="~/js/Exercises/volume_chasing.js"></script>
+}
