@@ -1,39 +1,48 @@
 ﻿<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div id="controls">
-    <div class="row align-items-center vh-100">
-        <div class="col align-items-center">
-            <div class="row text-center m-2 h-auto" style="background-color: darkgrey; border-radius: 8px">
-                <button type="button" class="btn btn-primary" id="recordButton">
-                    <div class="col-12">
-                        <i class="fas fa-microphone-alt fa-4x"></i>
+   <div class="container-fluid"> 
+        <div class="row align-items-center">
+            <div class="col-6 align-items-center">
+                <div class="col align-items-center shadow rounded border bg-white p-lg-3">
+                    <div class="row text-center m-2 h-auto" style="background-color: darkgrey; border-radius: 8px">
+                        <button type="button" class="btn btn-primary" id="recordButton">
+                            <div class="col-12">
+                                <i class="fas fa-microphone-alt fa-4x"></i>
+                            </div>
+                            <div class="col-12">
+                                <h3>Start Recording</h3>
+                            </div>
+                        </button>
                     </div>
-                    <div class="col-12">
-                        <h3>Start Recording</h3>
+                    <div class="row text-center m-2 h-auto" style="background-color: darkgrey; border-radius: 8px">
+                        <button type="button" class="btn btn-primary" id="stopButton">
+                            <div class="col-12">
+                                <i class="fa-solid fa-stop fa-4x"></i>
+                            </div>
+                            <div class="col-12">
+                                <h3>Stop Recording</h3>
+                            </div>
+                        </button>
                     </div>
-                </button>
+                    <div class="row text-center m-2 h-auto" style="background-color: darkgrey; border-radius: 8px">
+                        <button type="button" class="btn btn-primary" id="pauseButton">
+                            <div class="col-12">
+                                <i class="bi bi-stop fa-4x"></i>
+                            </div>
+                            <div class="col-12">
+                                <h3>Pause Recording</h3>
+                            </div>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="row text-center m-2 h-auto" style="background-color: darkgrey; border-radius: 8px">
-                <button type="button" class="btn btn-primary" id="stopButton">
-                    <div class="col-12">
-                        <i class="fa-solid fa-stop fa-4x"></i>
-                    </div>
-                    <div class="col-12">
-                        <h3>Stop Recording</h3>
-                    </div>
-                </button>
+            <div class="col-6 align-items-center shadow rounded border bg-white p-lg-3">
+                <p>
+                    This is a test placeholder.
+                </p>
             </div>
-            <div class="row text-center m-2 h-auto" style="background-color: darkgrey; border-radius: 8px">
-                <button type="button" class="btn btn-primary" id="pauseButton">
-                    <div class="col-12">
-                        <i class="bi bi-stop fa-4x"></i>
-                    </div>
-                    <div class="col-12">
-                        <h3>Pause Recording</h3>
-                    </div>
-                </button>
-            </div>
-            <div class="row text-center m-2 h-auto" style="background-color: darkgrey; border-radius: 8px">
+            <div class="row m-2 text-center shadow rounded border bg-white p-lg-3">
                 <h3>Recordings</h3>
                 <ol id="recordingsList"></ol>
             </div>
