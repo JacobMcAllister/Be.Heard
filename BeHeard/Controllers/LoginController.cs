@@ -12,7 +12,7 @@ using BeHeard.Application;
 using Microsoft.AspNetCore.Authentication;
 using System.Net.Http.Headers;
 using System.Net.Http;
-using System.Runtime.InteropServices.WindowsRuntime;
+//using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
 using BeHeard.Core;
 using System.Security.Claims;

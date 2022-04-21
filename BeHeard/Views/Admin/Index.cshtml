@@ -1,0 +1,270 @@
+﻿@model Int32
+<!-- Modal -->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div id='myModalContent'></div>
+</div>
+
+
+<div class="container mb-2 shadow pt-5 bg-white">
+
+    <!--Admin Welcome-->
+
+    <div class="container-xxl py-5 pb-2">
+        <div class="container ">
+                    <h1 class="mb-4">Welcome to the Admin <i class="fa fa-hammer" style="color: dodgerblue;"></i> Dashboard</h1>
+                    <p class="mb-4"><strong>Here you will find all available activies and your program exercises.</strong></p>
+                    <p class="mb-4"><strong>Remember, "practice makes perfect", so keep stay active and involved in your program and engage in warm-up activities.'</strong></p>
+                    <div class="row g-4 mb-4">
+@*                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                <h1 class="flex-shrink-0 display-5 text-primary mb-0">2/1</h1>
+                                <div class="ps-4">
+                                    <p class="mb-0">day of</p>
+                                    <h6 class="text-uppercase mb-0">last login</h6>
+                                </div>
+                            </div>
+                        </div>*@
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="@Model" data-time="2000"></span></h1>
+                                <div class="ps-4">
+                                    <p class="mb-0">Total</p>
+                                    <h6 class="text-uppercase mb-0">Users</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+
+    <hr style="width:100%" size="3" color="black">
+
+    <div class="container py-5">
+        <div class="container">
+             <div class="row g-4 pb-2">
+                <div class="position-relative d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="color-flip rounded pt-3" id="color-flip">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-user text-primary mb-4"></i>
+                            <h5>User</h5>
+                            <p>Edit/Display/Search for current Be Heard users.</p>
+                            <a id="userDetails" href="#userDetails" class="stretched-link"> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                <!-- Collapse #userDetailsCollapse-->
+        <div class="panel-collapse collapse py-2" id="userDetailsCollapse">
+            <div class="card card-body" id="myCollapse1">
+                <div class="container-xxl shadow overflow-auto" style="max-height:800px;">
+                    <h1>Loaded User Database</h1>
+                    Find by Name: <input type="text" id="searchField" name="searchString"/>
+                    <input id="searchButton" type="submit" class="btn btn-success text-white" />
+                    <hr style="width:100%" size="3" color="black">
+                    <div id="divUserDetails">
+                        <!--- Render Content --->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<style>
+    :root {
+        --light: #FF9B6A;
+        --dark: #0F172B;
+    }
+
+    p#losinfo {
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+        p#losinfo span {
+            font-size: 25px;
+            font-weight: normal;
+        }
+
+    .color-flip {
+        box-shadow: 0 0 45px rgba(0, 0, 0, .08);
+        transition: .5s;
+    }
+
+        .color-flip:hover {
+            background: var(--light);
+        }
+        .color-flip:hover *{
+            color: white;
+        }
+        .color-flip * {
+            transition: .5s;
+            transform: rotate(0);
+        }
+        .color-flip:hover h1{
+            transform: scale(1.5);
+        }
+
+
+</style>
+
+
+
+@section Scripts
+{
+       
+@*    <script type="text/javascript">
+    $('.openBtn').on('click',function(){
+        $('.modal-body').load('show',function(){
+           $(document).ready(function () {
+                    $("#myModal").modal("show");
+                });
+        });
+    });
+    </script>*@
+
+    <script>
+        var URLs = {show: '../Admin/Show', edit: '../Admin/Edit', delete: '../Admin/Delete'}
+        var buttons = {show: '.btnDetail', edit: '.btnEdit', delete: '.btnDelete'}
+  
+
+        function modalCall(URLs, buttons){
+            $(function () {
+                $(buttons).click(function () {
+                    var $buttonClicked = $(this);
+                    var id = $buttonClicked.attr('data-id');
+                    var options = { "backdrop": "static", keyboard: true };
+                    $.ajax({
+                        type: "GET",
+                        url: URLs,
+                        contentType: "application/json; charset=utf-8",
+                        data: { "Id": id },
+                        datatype: "json",
+                        success: function (data) {
+                            $('#myModalContent').html(data);
+                            $('#myModal').modal(options);
+                            $('#myModal').modal('show');                    
+                        },
+                        error: function () {
+                            alert("Dynamic content load failed.");
+                        }
+                    });
+                });
+            });
+        };
+
+        function deleteCall(buttons){
+            $(function () {
+                $(buttons).click(function () {
+                    var $buttonClicked = $(this);
+                    var id = $buttonClicked.attr('data-id');
+                    var options = { "backdrop": "static", keyboard: true };
+                    $.ajax({
+                       type: "GET",
+                        url: '../Admin/Delete',
+                        contentType: "application/json; charset=utf-8",
+                        data: { "Id": id },
+                        datatype: "json",
+                        success: function(response) {
+                            alert("Success")
+                            $("#divUserDetails").load("/Admin/UserTable");
+                        },
+                        error: function () {
+                            alert("Dynamic content load failed.");
+                        }
+                    });
+                });
+             });
+        };
+
+        $(document).ready(function () {
+            
+
+            if (window.location.href.indexOf("?saveUpdate") > -1 || window.location.href.indexOf("?deleted") > -1 ) {
+
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: '/Admin/UserTable',
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    success: function (data) {
+                        $('#divUserDetails').html(data);
+                        $("#userDetailsCollapse").collapse("toggle");
+                        $('#userDetailsCollapse').on('shown.bs.collapse', function () {
+                            this.scrollIntoView();
+                        });
+                            //  Load Modals
+                            modalCall(URLs.show, buttons.show);
+                            modalCall(URLs.edit, buttons.edit);
+                            deleteCall(buttons.delete);
+                        },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            }
+
+           $("#userDetails").click(function () {
+
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: '/Admin/UserTable',
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    success: function (data) {
+                        $('#divUserDetails').html(data);
+                        $("#userDetailsCollapse").collapse("toggle");
+                        $('#userDetailsCollapse').on('shown.bs.collapse', function () {
+                            this.scrollIntoView();
+                        });
+                            //  Load Modals
+                            modalCall(URLs.show, buttons.show);
+                            modalCall(URLs.edit, buttons.edit);
+                            deleteCall(buttons.delete);
+                        },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+
+            var searchUrl = "../Admin/UserTable";
+            $("#searchButton").click(function () {
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: searchUrl,
+                    contentType: "application/json; charset=utf-8",
+                    data: {
+                        searchField: $('#searchField').val()
+                    },
+                    datatype: "json",
+                    success: function (result) {
+                        $('#divUserDetails').html(result);
+                        $('#userDetailsCollapse').on('shown.bs.collapse', function () {
+                        this.scrollIntoView();
+                    });
+                            //  Load Modals
+                            modalCall(URLs.show, buttons.show);
+                            modalCall(URLs.edit, buttons.edit);
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+
+        });
+           
+
+    </script>
+}

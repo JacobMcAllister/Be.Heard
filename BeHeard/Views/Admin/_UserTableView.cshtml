@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "UserTable";
+}
+
+
+<div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int count = 1;}
+
+        @foreach (var user in @Model){
+        <tr>
+            <th scope="row">@count</th>
+            <td>@user.FirstName</td>
+            <td>@user.LastName</td>
+            <td>@user.Username</td>
+            <td>
+    @*            <button asp-page-handler="delete" asp-route-id="@user.username" onclick="return confirm('are you sure you want to delete?')" class="btn btn-danger btn-sm">delete</button>  
+            <a asp-page="edit" asp-route-id="@user.username" class="btn btn-success btn-sm text-white">edit</a>
+    *@      
+            <input type="button" name="Id" value="Delete" onclick="location.href='@Url.Action("Delete", "Admin")'"/>
+            <button data-id='@user.Id' class="btn btn-danger btn-sm btnDelete text-white">Delete</button>           
+            <button data-id='@user.Id' class="btn btn-success btn-sm btnEdit text-white">Edit</button>
+            <button data-id='@user.Id' class="btn btn-success btn-sm btnDetail text-white">Show</button>
+            
+            @*<a asp-action="Show" value="@user" class="btn btn-success btn-sm text-white">Show</a>*@
+            </td>
+        </tr>
+        count++;
+        }
+    </tbody>
+</table>
+</div>
