@@ -1,0 +1,71 @@
+﻿@using Microsoft.AspNetCore.Http
+
+<!--Exercises-->
+@model BeHeard.Models.ExerciseViewModel
+
+@{
+
+}
+
+<h1>Hello @Model.FullName</h1>
+<h2>Exercise - Rote Speech</h2>
+
+<div class="container">
+    <div id="instructions">
+        <p>Welcome to the rote speech and volume exercise!</p>
+        <p>In this exercise, you will choose from an assortment of common, everday phrases and speak those phrases back.</p>
+        <p>Your goal is to speak the phrases clearly and concisely.</p>
+        <p>There is a time limit of 30 seconds, but don't worry, time is <strong>not</strong> important.</p>
+    </div>
+</div>
+<br />
+<div id="dropdown">
+    <label for="rote options">Choose your category:</label>
+        <select name="option" id="option">
+            <option value="0">Cities</option>
+            <option value="1">Directions</option>
+            <option value="2">Phone Numbers</option>
+            <option value="3">Common Requests</option>
+            <option value="4">Meal Orders</option>
+        </select>
+</div>
+<br />
+<div class="container">
+    <div id="sentence_id">
+        <h3>Choose your sentence!</h3>
+        <div id="random_button">
+            <button id="random" type="button" onclick="getSentence()">Randomize</button>
+        </div>
+        <div id="random_sentence" style="font-size:25px"></div>
+    </div>
+</div>
+
+<div>
+<!-- The canvas that will be used to render the input level -->
+    <canvas id="meter" width="300" height="50" style="border: 1px solid black;"></canvas>
+    <div id="Buttons">
+        <button id="startButton" type="button" onclick="start_timer()">Start</button>
+        <button id="stopButton" type="button" onclick="Stop()">Stop</button>
+        <button id="pauseButton" type="button" onclick="Pause()">Pause</button>
+        <button id="resumeButton" type="button" onclick="Resume()">Resume</button>
+    </div>
+
+     <!--Tips for exercise-->
+    <div class="container p-5 my-5 bg-dark text-white">
+        <div class="row">
+            <h2>Nice Job @Model.FullName!</h2>
+            <h3>Keep it up!</h3>
+            <h6>Here are some tips for next time!</h6>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item">This exercise is purely functional, we know it's not interesting, but keep it up!</a>
+                <a href="#" class="list-group-item">If you get frustrated, take a break!</a>
+                <a href="#" class="list-group-item">On your own, practice your address, your car make, model and year, or the name of your job!</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/js/Exercises/rote_speech.js"></script>
+}

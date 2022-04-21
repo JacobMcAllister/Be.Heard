@@ -1,0 +1,15 @@
+@import "variables";
+
+section#RegistrationForm {
+  margin: 4em 0 8em;
+}
+#FormHeader {
+  border-top: 2px solid $bh-blue;
+  padding-top: 1.5em;
+  color: $bh-blue;
+}
+#RegistrationSubmitButtonContainer button {
+  background-color: $bh-orange;
+  border-color: $bh-orange;
+  color: white;
+}

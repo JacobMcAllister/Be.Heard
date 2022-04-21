@@ -1,14 +1,18 @@
 ﻿@{
     var routeUrl = ViewContext.RouteData.Values["Controller"].ToString();
-    var pages = new List<string> { "Login", "Logout" };
+    // var pages = new List<string> { "Login", "Logout" };
+    var pages = new List<string> { "Logout" };
     if (pages.Any(routeUrl.Contains))
     {
         Layout = "_NoNavLayout";
     }
     else
     {
-        if (routeUrl.Contains("Landing"))
+        if (routeUrl.Contains("Landing") || 
+            routeUrl.Contains("Login"))
+        {
             Layout = "_LandingLayout";
+        }
         else
             Layout = "_Layout";
     }
