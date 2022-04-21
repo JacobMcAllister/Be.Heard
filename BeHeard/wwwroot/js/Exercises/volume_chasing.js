@@ -247,6 +247,7 @@ function diff_alert(case_num) {
             break;
     }
 }
+
 function difficulty_dropdown() {
     difficulty = document.getElementById("diff_option");
     diff_value = difficulty.value;
