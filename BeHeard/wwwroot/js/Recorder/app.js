@@ -81,11 +81,14 @@ function stopRecording() {
     //create the wav blob and pass it on to createDownloadLink 
     rec.exportWAV(createDownloadLink);
 }
+var au = document.createElement('audio');
+var li = document.createElement('li');
+var link = document.createElement('a');
 function createDownloadLink(blob) {
     var url = URL.createObjectURL(blob);
-    var au = document.createElement('audio');
-    var li = document.createElement('li');
-    var link = document.createElement('a');
+    //var au = document.createElement('audio');
+    //var li = document.createElement('li');
+    //var link = document.createElement('a');
     //add controls to the <audio> element 
     au.controls = true;
     au.src = url;
@@ -97,7 +100,6 @@ function createDownloadLink(blob) {
     li.appendChild(au);
     li.appendChild(link);
     //add the li element to the ordered list 
-    recordingsList.appendChild(li);
 
     var reader = new FileReader();
 
@@ -122,10 +124,20 @@ function createDownloadLink(blob) {
                 let responseJSON = JSON.parse(response);
                 let modalBody = $('#staticBackdrop').find('.modal-body');
                 modalBody.html(`<div class="mx-auto text-center"><h3>${responseJSON.text}</h3></div>`);
+                modelCommunication.response_sentence = responseJSON.text;
+                //Only add the recording if it was successful
+                recordingsList.appendChild(li);
+                updateScore();
             },
-            error: function(req, status, error) {
-                alert('error!');
-                console.log(response);
+            error: function (req, status, error) {
+                let modalBody = $('#staticBackdrop').find('.modal-body');
+                modalBody.html(`<div class="mx-auto text-center">
+                                    <h3>${"Error processing speech, most likely the server is down, or is not running locally."}</h3>
+                                    <button class="btn-primary" onclick="contactAdmin()">Contact Admin</button>
+                                    <img src='/images/image3.png'>
+                                </div>`);
+                //alert('error!');
+                console.log("ML_MODEL_ERROR: response given " + error);
             }
         });
         console.log("processing..");
