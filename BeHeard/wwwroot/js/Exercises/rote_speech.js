@@ -18,7 +18,12 @@ var sentence_Choice = null;
 var last_sentence = 15;
 var current_sentence = null;
 var option = null;
-var option_choice = null;
+var option_Choice = null;
+var target_fillVol = 50;
+var difficulty = null;
+var diff_value = null;
+var db_sentenceChoice = null;
+var db_catChoice = null;
 
 const cities = [
     "I live in Reno, Nevada.  By car, Reno is about 2 hours away from Sacramento.  By plane, Reno is about 1 hour away from Las Vegas.",
@@ -81,14 +86,16 @@ function get_Randomsentence(option_array) {
 
     last_sentence = current_sentence;
     console.log(sentence_Choice);
+    db_sentenceChoice = sentence_Choice;
     document.getElementById("random_sentence").innerHTML = option_array[sentence_Choice];
 }
 
 function getSentence() {
     option = document.getElementById("option");
-    option_choice = options[option.value];
+    option_Choice = options[option.value];
+    db_catChoice = option_Choice;
 
-    switch (option_choice) {
+    switch (option_Choice) {
         case "cities":
             get_Randomsentence(cities);
             break;
@@ -172,10 +179,10 @@ function animateVoice() {
             volumeVal = Math.sqrt(sumSquares / dataArray.length);
 
             // Increase factor for phrased speech
-            fillVol = volumeVal * WIDTH * 3.2;
+            fillVol = volumeVal * WIDTH * 3;
             //console.log(volumeVal);
             //console.log(fillVol);
-            if (fillVol > 50) {
+            if (fillVol > target_fillVol) {
                 canvasContext.fillStyle = "#00ff00";
             }
             else {
@@ -324,3 +331,47 @@ function start_timer() {
     var downloadTimer = setInterval(timeDetails, 1000);
 }
 
+function diff_alert(case_num) {
+    switch (case_num) {
+        case 1:
+            document.getElementById("diff_alert").innerHTML = "Go for a standard volume target, perhaps your normal inside voice volume level.";
+            break;
+        case 2:
+            document.getElementById("diff_alert").innerHTML = "Increased volume target, perhaps to a friend outside or far away.  Develope vocal control!";
+            break;
+        case 3:
+            document.getElementById("diff_alert").innerHTML = "Much higher volume target, focus on volume control and clarity.  Do your best!";
+            break;
+        case 4:
+            document.getElementById("diff_alert").innerHTML = "Really try to max out the volume bar.  Utilize the pause and resume buttons.  Give it all you've got!";
+            break;
+    }
+}
+
+function difficulty_dropdown() {
+    difficulty = document.getElementById("diff_option");
+    diff_value = difficulty.value;
+
+    function alter_difficulty(value) {
+        switch (true) {
+            case (value == 'easy'):
+                target_fillVol = 50
+                diff_alert(1);
+                break;
+            case (value == 'medium'):
+                target_fillVol = 100;
+                diff_alert(2);
+                break;
+            case (value == 'hard'):
+                target_fillVol = 200;
+                diff_alert(3);
+                break;
+            case (value == 'impossible'):
+                target_fillVol = WIDTH;
+                diff_alert(4);
+                break;
+        }
+    }
+
+    alter_difficulty(diff_value);
+}
