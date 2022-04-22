@@ -52,14 +52,16 @@
             </div>
             <div class="row m-2 text-center shadow rounded border bg-white p-lg-3">
                 <h3>Recordings</h3>
-                <div class="col 4 m-2 align-content-center">
+                <div class="col 3 m-2 align-content-center">
                     <p id="recordingsList"></p>
                 </div>
-                <div class="col 4 m-2 align-content-center">
-                    <p id="scoreList"></p>
+                <div class="col-3 m-2 align-content-center">
+                    <p class="score-list" id="scoreList"></p>
+                </div>
+                <div class="col 3 m-2 align-content-center">
                     <div class="image-container">
                         <img src="/images/alex_with_empty_bubble.png" style="max-width: 600px" alt="img">
-                        <div class="top-left" id=speech_bubble>Top Left Placeholder</div>
+                        <div class="top-left" id="speech_bubble">Hi I'm Alex</div>
                     </div>
                 </div> 
             </div>
@@ -87,6 +89,10 @@
 
 <style>
     /* Container holding the image and the text */
+.score-list > * {
+    margin: 30px 0;
+}
+
 .image-container {
   position: relative;
   text-align: center;
@@ -104,8 +110,8 @@
 .top-left {
   position: absolute;
   max-width: 175px;
-  top: 30px;
-  left: 110px;
+  top: 18px;
+  left: 60px;
   color: black;
 }
 
@@ -957,8 +963,10 @@
             var scores_element = document.createElement('scores');
             var scores_value = levenshteinDistance(modelCommunication.response_sentence, sentence_selection);
             console.log("Score: " + scores_value);
-            scores_element.innerHTML = "Score: " + scores_value + "\n";
-            scoreList.appendChild(scores_element);
+            scores_element.innerHTML = "Sentence: " + sentence_selection + "<br />Score: " + scores_value + "<br />";
+            //scores_element.style.outline = "#4CAF50 solid 10px";
+            //scores_element.style.borderStyle = "solid";
+            document.getElementById('scoreList').appendChild(scores_element);
             switch (true) {
                 case (scores_value > 20):
                     speech_bubble_element.innerHTML = "Practice does not make perfect, but practice does make permanent.";

@@ -81,14 +81,11 @@ function stopRecording() {
     //create the wav blob and pass it on to createDownloadLink 
     rec.exportWAV(createDownloadLink);
 }
-var au = document.createElement('audio');
-var li = document.createElement('li');
-var link = document.createElement('a');
 function createDownloadLink(blob) {
     var url = URL.createObjectURL(blob);
-    //var au = document.createElement('audio');
-    //var li = document.createElement('li');
-    //var link = document.createElement('a');
+    var au = document.createElement('audio');
+    var li = document.createElement('li');
+    var link = document.createElement('a');
     //add controls to the <audio> element 
     au.controls = true;
     au.src = url;
@@ -100,7 +97,6 @@ function createDownloadLink(blob) {
     li.appendChild(au);
     li.appendChild(link);
     //add the li element to the ordered list 
-
     var reader = new FileReader();
 
     // The magic always begins after the Blob is successfully loaded
