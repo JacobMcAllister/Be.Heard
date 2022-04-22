@@ -6,53 +6,128 @@
 @{
 
 }
-
-<h1>Hello @Model.FullName</h1>
-<h2>Exercise - Volume Phrasing</h2>
-
-<div class="container">
-    <div id="instructions">
-        <p>Welcome to the volume and phrasing portion of your treatment plan!</p>
-        <p>In this exercise, you will be randomly assigned a set of sentences.</p>
-        <p>Your goal is to speak the sentences clearly and concisely.</p>
-        <p>There is a time limit of 30 seconds, but don't worry, time is <strong>not</strong> important.</p>
-    </div>
+<!DOCTYPE html>
+<html>
+<body onload="difficulty_dropdown();">
+<br />
+<div id="header" style="outline-style:solid;outline-color:black;text-align:center;">
+    <h1>Hello @Model.FullName</h1>
+    <h2>Exercise - Volume Phrasing</h2>
 </div>
-
+<div class="navbar" id="myNavbar">
+    <a class="link" asp-area="" asp-controller="Exercises" asp-action="volume_chasing">Volume Chasing</a>
+    <a class="link" asp-area="" asp-controller="Exercises" asp-action="breathing">Breathing Exercise</a>
+    <a class="link" asp-area="" asp-controller="Exercises" asp-action="rote_speech">Rote Speech Exercise</a>
+</div>
+<br />
 <div class="container">
-    <div id="sentence_id">
-        <h3>Choose your sentence!</h3>
-        <div id="random_button">
-            <button id="random" type="button" onclick="get_Randomsentence()">Randomize</button>
+    <div class="row">
+        <div id="instructions" class="column" style="width:50%;">
+            <p>Welcome to the volume and phrasing portion of your treatment plan!</p>
+            <p>In this exercise, you will be randomly assigned a set of sentences.</p>
+            <p>Your goal is to speak the sentences clearly and concisely.</p>
+            <p>There is a time limit of 30 seconds, but don't worry, time is <strong>not</strong> important.</p>
         </div>
-        <div id="random_sentence" style="font-size:25px"></div>
+        <div id="difficulty_choice" class="column" style="width:50%;">
+            <div id="diff_instructions">
+                <p>Choose the difficulty of the exercise in the dropdown!</p>
+            </div>
+            <div id="diff_dropdown">
+                <label for="difficulties">Choose a Difficulty: </label>
+                <select name="difficulty" id="diff_option" onchange="difficulty_dropdown()">
+                    <option value="easy">easy</option>
+                    <option value="medium">medium</option>
+                    <option value="hard">hard</option>
+                    <option value="impossible">impossible</option>
+                </select>
+            </div>
+            <div id="diff_alert"></div>
+        </div>
     </div>
-</div>
-
-<div>
-<!-- The canvas that will be used to render the input level -->
-    <canvas id="meter" width="300" height="50" style="border: 1px solid black;"></canvas>
-    <div id="Buttons">
-        <button id="startButton" type="button" onclick="start_timer()">Start</button>
-        <button id="stopButton" type="button" onclick="Stop()">Stop</button>
-        <button id="pauseButton" type="button" onclick="Pause()">Pause</button>
-        <button id="resumeButton" type="button" onclick="Resume()">Resume</button>
+    <br />
+    <div class="container">
+        <div id="sentence_id">
+            <h3>Choose your sentence!</h3>
+            <div id="random_button">
+                <button id="random" type="button" onclick="get_Randomsentence()">Randomize</button>
+            </div>
+            <div id="random_sentence" style="font-size:25px"></div>
+        </div>
     </div>
-
-<!--Tips for exercise-->
+    <br />
+    <div>
+    <!-- The canvas that will be used to render the input level -->
+        <canvas id="meter" width="300" height="50" style="border: 1px solid black;"></canvas>
+        <div id="Buttons">
+            <button id="startButton" type="button" onclick="start_timer()">Start</button>
+            <button id="stopButton" type="button" onclick="Stop()">Stop</button>
+            <button id="pauseButton" type="button" onclick="Pause()">Pause</button>
+            <button id="resumeButton" type="button" onclick="Resume()">Resume</button>
+        </div>
+    </div>
+    <br />
+    <div id="database_area">
+        <table style="width:100%;">
+            <caption style="caption-side:top;">@Model.FullName, Volume Phrasing Exercise Results</caption>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Difficulty</th>
+                    <th>Sentence Set</th>
+                    <th>Volume Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>04/25/22</td>
+                    <td>Easy</td>
+                    <td>9</td>
+                    <td>~30 dba</td>
+                </tr>
+                <tr>
+                    <td>04/26/22</td>
+                    <td>Easy</td>
+                    <td>3</td>
+                    <td>~40 dba</td>
+                </tr>
+                <tr>
+                    <td>04/28/22</td>
+                    <td>Easy</td>
+                    <td>3</td>
+                    <td>~30 dba</td>
+                </tr>
+                <tr>
+                    <td>04/29/22</td>
+                    <td>Medium</td>
+                    <td>1</td>
+                    <td>~40 dba</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--Tips for exercise-->
     <div class="container p-5 my-5 bg-dark text-white">
         <div class="row">
             <h2>Nice Job @Model.FullName!</h2>
             <h3>Keep it up!</h3>
             <h6>Here are some tips for next time!</h6>
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item">Utilize the pause button if you're having a hard time!</a>
-                <a href="#" class="list-group-item">Get a new random sentence if you don't like the current one!</a>
-                <a href="#" class="list-group-item">Shoot for clear speech, but don't worry if you're struggling!  You got this!</a>
+                <a class="list-group-item">Utilize the pause button if you're having a hard time!</a>
+                <a class="list-group-item">Get a new random sentence if you don't like the current one!</a>
+                <a class="list-group-item">Shoot for clear speech, but don't worry if you're struggling!  You got this!</a>
             </div>
         </div>
     </div>
 </div>
+
+</body>
+</html>
 
 @section Scripts
 {

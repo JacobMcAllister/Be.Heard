@@ -20,88 +20,90 @@
     <a class="link" asp-area="" asp-controller="Exercises" asp-action="rote_speech">Rote Speech Exercise</a>
 </div>
 <br />
-<div class="row">
-    <div class="column" id="directions" style="width:50%;">
-        <p>Welcome to the breathing exercise!</p>
-        <p>In this exercise, follow the on screen directions to strengthen your core and improve your breathing.</p>
-        <p>This exercise is to establish strong breathing techniques as well as correct diaphragm position!</p>
-        <p style="font-size:20px">Breathe in for <strong><span id="breathin"></span></strong> seconds.</p>
-        <p style="font-size:20px">Breathe out for <strong><span id="breathout"></span></strong> seconds.</p>
-    </div>
-    <div class="column" style="width:50%">
-        <div id="diff_directions">
-            <p>Choose the difficulty of the exercise in the dropdown!</p>
+<div class="container">
+    <div class="row">
+        <div class="column" id="directions" style="width:50%;">
+            <p>Welcome to the breathing exercise!</p>
+            <p>In this exercise, follow the on screen directions to strengthen your core and improve your breathing.</p>
+            <p>This exercise is to establish strong breathing techniques as well as correct diaphragm position!</p>
+            <p style="font-size:20px">Breathe in for <strong><span id="breathin"></span></strong> seconds.</p>
+            <p style="font-size:20px">Breathe out for <strong><span id="breathout"></span></strong> seconds.</p>
         </div>
-            <div id="diff_dropdown">
-                <label for="difficulties">Choose a Difficulty: </label>
-                <select name="difficulty" id="diff_option" onchange="difficulty_dropdown()">
-                    <option value="easy">easy</option>
-                    <option value="medium">medium</option>
-                    <option value="hard">hard</option>
-                    <option value="impossible">impossible</option>
-                </select>
+        <div class="column" style="width:50%">
+            <div id="diff_directions">
+                <p>Choose the difficulty of the exercise in the dropdown!</p>
             </div>
-       <div id="diff_alert"></div>
-    </div>
-</div>
-<br />
-<div id="Buttons" class="row">
-    <div class="column" style="width:50%;">
-        <button id="startButton" type="button">Start</button>
-        <div id="time_countdown">
-            <p>Time Remaining: <strong><span id="time_remaining"></span></strong></p>
-        </div>
-        <div id="action">
-            <p>Action: <strong><span id="timer"></span></strong></p>
+                <div id="diff_dropdown">
+                    <label for="difficulties">Choose a Difficulty: </label>
+                    <select name="difficulty" id="diff_option" onchange="difficulty_dropdown()">
+                        <option value="easy">easy</option>
+                        <option value="medium">medium</option>
+                        <option value="hard">hard</option>
+                        <option value="impossible">impossible</option>
+                    </select>
+                </div>
+           <div id="diff_alert"></div>
         </div>
     </div>
-    <div class="column" style="width:50%;">
-        <div id="database_area">
-            <table style="width:100%;">
-                <caption style="caption-side:top;">@Model.FullName, Breathing Exercise Results</caption>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Difficulty</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>04/25/22</td>
-                        <td>Easy</td>
-                    </tr>
-                    <tr>
-                        <td>04/26/22</td>
-                        <td>Easy</td>
-                    </tr>
-                    <tr>
-                        <td>04/28/22</td>
-                        <td>Medium</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                </tbody>
-            </table>
+    <br />
+    <div id="Buttons" class="row">
+        <div class="column" style="width:50%;">
+            <button id="startButton" type="button">Start</button>
+            <div id="time_countdown">
+                <p>Time Remaining: <strong><span id="time_remaining"></span></strong></p>
+            </div>
+            <div id="action">
+                <p>Action: <strong><span id="timer"></span></strong></p>
+            </div>
+        </div>
+        <div class="column" style="width:50%;">
+            <div id="database_area">
+                <table style="width:100%;">
+                    <caption style="caption-side:top;">@Model.FullName, Breathing Exercise Results</caption>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Difficulty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>04/25/22</td>
+                            <td>Easy</td>
+                        </tr>
+                        <tr>
+                            <td>04/26/22</td>
+                            <td>Easy</td>
+                        </tr>
+                        <tr>
+                            <td>04/28/22</td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-<br />
-<div>
-    <div class="container p-5 my-5 bg-dark text-white">
-        <div class="row">
-            <h2>Nice Job @Model.FullName!</h2>
-            <h3>Keep it up!</h3>
-            <h6>Here are some tips for next time!</h6>
-            <div class="list-group list-group-flush">
-                <a class="list-group-item">Stand up straight and really fill your belly with air!</a>
-                <a class="list-group-item">Don't mind the timer too much, it's just a guide!</a>
-                <a class="list-group-item">The goal of this is build strong diaphragm support, you're doing great!</a>
+    <br />
+    <div>
+        <div class="container p-5 my-5 bg-dark text-white">
+            <div class="row">
+                <h2>Nice Job @Model.FullName!</h2>
+                <h3>Keep it up!</h3>
+                <h6>Here are some tips for next time!</h6>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item">Stand up straight and really fill your belly with air!</a>
+                    <a class="list-group-item">Don't mind the timer too much, it's just a guide!</a>
+                    <a class="list-group-item">The goal of this is build strong diaphragm support, you're doing great!</a>
+                </div>
             </div>
         </div>
     </div>

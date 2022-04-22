@@ -13,6 +13,7 @@ var isPaused = false;
 var isRecording = false;
 var userStopped = false;
 var fillVol = 0;
+var target_fillVol = 50;
 var timeDuration= null;
 var average_over_time = null;
 var average_over_meter = null;
@@ -20,6 +21,9 @@ var counter = 0;
 var sentence_Choice = null;
 var last_sentence = 15;
 var current_sentence = null;
+var difficulty = null;
+var diff_value = null;
+var db_sentenceChoice = null;
 
 const sentences = [
     "The mute muffled the high tones of the horn. Slide the box into the empty space. The store walls were lined with colored frocks.",
@@ -103,7 +107,7 @@ function animateVoice() {
             fillVol = volumeVal * WIDTH * 3.2;
             //console.log(volumeVal);
             //console.log(fillVol);
-            if (fillVol > 50) {
+            if (fillVol > target_fillVol) {
                 canvasContext.fillStyle = "#00ff00";
             }
             else {
@@ -275,5 +279,51 @@ function get_Randomsentence() {
 
     last_sentence = current_sentence;
     console.log(sentence_Choice);
+    db_sentenceChoice = sentence_Choice;
     document.getElementById("random_sentence").innerHTML = sentences[sentence_Choice];
+}
+
+function diff_alert(case_num) {
+    switch (case_num) {
+        case 1:
+            document.getElementById("diff_alert").innerHTML = "Go for a standard volume target, perhaps your normal inside voice volume level.";
+            break;
+        case 2:
+            document.getElementById("diff_alert").innerHTML = "Increased volume target, perhaps to a friend outside or far away.  Develope vocal control!";
+            break;
+        case 3:
+            document.getElementById("diff_alert").innerHTML = "Much higher volume target, focus on volume control and clarity.  Do your best!";
+            break;
+        case 4:
+            document.getElementById("diff_alert").innerHTML = "Really try to max out the volume bar.  Utilize the pause and resume buttons.  Give it all you've got!";
+            break;
+    }
+}
+
+function difficulty_dropdown() {
+    difficulty = document.getElementById("diff_option");
+    diff_value = difficulty.value;
+
+    function alter_difficulty(value) {
+        switch (true) {
+            case (value == 'easy'):
+                target_fillVol = 50
+                diff_alert(1);
+                break;
+            case (value == 'medium'):
+                target_fillVol = 100;
+                diff_alert(2);
+                break;
+            case (value == 'hard'):
+                target_fillVol = 200;
+                diff_alert(3);
+                break;
+            case (value == 'impossible'):
+                target_fillVol = WIDTH;
+                diff_alert(4);
+                break;
+        }
+    }
+
+    alter_difficulty(diff_value);
 }
