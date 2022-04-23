@@ -22,17 +22,16 @@
         <div class="column" style="width:50%;text-align:center">
             <div id="directions">
                 <h3>Directions</h3>
-                <p>Welcome to volume chasing!</p>
                 <p>Choose a difficulty from the difficulty dropdown to the right.</p>
                 <p>Choose a syllable from the syllable dropdown to the right.</p>
-                <p>Speak your chosen syllable loudly for <span id="diff_span"></span> seconds.</p>
+                <p>Press the start button and speak your chosen syllable loudly for <span id="diff_span"></span> seconds.</p>
                 <p>The meter will fill up according to your volume level.</p>
-                <p>Don't let the volume drop!</p>
+                <p>Don't let the volume drop and use the pause button if you need to!</p>
             </div>
         </div>
         <div class="column" style="width:50%;text-align:center;">
-            <br />
             <div id="diff_directions">
+                <h3>Difficulty</h3>
                 <p>Choose the difficulty of the exercise in the dropdown!</p>
             </div>
             <div id="diff_dropdown">
@@ -47,7 +46,7 @@
             <br />
             <div id="diff_alert"></div>
             <br />
-            <br />
+            <h3>Syllable</h3>
             <div id="dropdown">
                 <label for="syllables">Choose a Syllable:</label>
                 <select name="syllable" id="syllable" onchange="">
@@ -57,10 +56,11 @@
                     <option value="u">U</option>
                 </select>
             </div>
+            <br />
         </div>
     </div>
     <br />
-    <div class="row">
+    <div class="row" style="outline-style:solid;outline-color:black;">
         <div class="column" style="width:50%;">
             <br />
             <!-- The canvas that will be used to render the input level -->

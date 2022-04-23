@@ -16,19 +16,21 @@
 </div>
 <br />
 <div class="container">
-    <div class="row">
-        <div class="column" id="directions" style="width:50%;">
-            <p>Welcome to the breathing exercise!</p>
+    <div class="row" style="outline-style:solid;outline-color:black;">
+        <div class="column" id="directions" style="width:50%;text-align:center;">
+            <h3>Directions</h3>
             <p>In this exercise, follow the on screen directions to strengthen your core and improve your breathing.</p>
             <p>This exercise is to establish strong breathing techniques as well as correct diaphragm position!</p>
-            <p style="font-size:20px">Breathe in for <strong><span id="breathin"></span></strong> seconds.</p>
-            <p style="font-size:20px">Breathe out for <strong><span id="breathout"></span></strong> seconds.</p>
+            <p>Choose a difficulty from the difficulty dropdown to the right.</p>
+            <p>Press the start button to begin.</p>
         </div>
-        <div class="column" style="width:50%">
+        <div class="column" style="width:50%;text-align:center;">
             <div id="diff_directions">
+                <h3>Difficulty</h3>
                 <p>Choose the difficulty of the exercise in the dropdown!</p>
             </div>
                 <div id="diff_dropdown">
+                    <br />
                     <label for="difficulties">Choose a Difficulty: </label>
                     <select name="difficulty" id="diff_option" onchange="difficulty_dropdown()">
                         <option value="easy">easy</option>
@@ -37,19 +39,28 @@
                         <option value="impossible">impossible</option>
                     </select>
                 </div>
+                <br />
+                <br />
            <div id="diff_alert"></div>
         </div>
     </div>
     <br />
-    <div id="Buttons" class="row">
+    <div class="row" style="outline-style:solid;outline-color:black;text-align:center;">
+        <h3>Breathing Action</h3>
+        <p style="font-size:20px">Breathe in for <strong><span id="breathin"></span></strong> seconds.</p>
+        <p style="font-size:20px">Breathe out for <strong><span id="breathout"></span></strong> seconds.</p>
+    </div>
+    <br />
+    <div id="Buttons" class="row" style="outline-style:solid;outline-color:black;">
         <div class="column" style="width:50%;">
-            <button id="startButton" type="button">Start</button>
+            <br />
             <div id="time_countdown">
                 <p>Time Remaining: <strong><span id="time_remaining"></span></strong></p>
             </div>
             <div id="action">
                 <p>Action: <strong><span id="timer"></span></strong></p>
             </div>
+            <button id="startButton" type="button">Start</button>
         </div>
         <div class="column" style="width:50%;">
             <div id="database_area">
@@ -99,7 +110,7 @@
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="activity-box text-center rounded overflow-hidden position-relative">
                         <div class="m-4">
-                            <h1><i class="fa fa-lungs"></i></h1>
+                            <h1><i class="fa fa-feather"></i></h1>
                         </div>
                         <h5 class="mb-0">Volume Chasing Exercise</h5>
                         <small>Strengthen the diaphragm</small>

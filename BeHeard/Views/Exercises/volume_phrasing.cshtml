@@ -12,26 +12,26 @@
 <br />
 <div id="header" style="outline-style:solid;outline-color:black;text-align:center;">
     <h1>Hello @Model.FullName</h1>
-    <h2>Exercise - Volume Phrasing</h2>
-</div>
-<div class="navbar" id="myNavbar">
-    <a class="link" asp-area="" asp-controller="Exercises" asp-action="volume_chasing">Volume Chasing Exercise</a>
-    <a class="link" asp-area="" asp-controller="Exercises" asp-action="breathing">Breathing Exercise</a>
-    <a class="link" asp-area="" asp-controller="Exercises" asp-action="rote_speech">Rote Speech Exercise</a>
+    <h2>Exercise - Phrasing</h2>
 </div>
 <br />
 <div class="container">
-    <div class="row">
-        <div id="instructions" class="column" style="width:50%;">
-            <p>Welcome to the volume and phrasing portion of your treatment plan!</p>
+    <div class="row" style="outline-style:solid;outline-color:black;">
+        <div id="instructions" class="column" style="width:50%;text-align:center;">
+            <h3>Directions</h3>
             <p>In this exercise, you will be randomly assigned a set of sentences.</p>
+            <p>Choose your difficulty from the dropdown on the right.</p>
+            <p>Press the randomize button to receive your sentence set.</p>
+            <p>Press the start button and begin reading.  Then press the stop button when you're finished.</p>
             <p>Your goal is to speak the sentences clearly and concisely.</p>
             <p>There is a time limit of 30 seconds, but don't worry, time is <strong>not</strong> important.</p>
         </div>
-        <div id="difficulty_choice" class="column" style="width:50%;">
+        <div id="difficulty_choice" class="column" style="width:50%;text-align:center;">
             <div id="diff_instructions">
+                <h3>Difficulty</h3>
                 <p>Choose the difficulty of the exercise in the dropdown!</p>
             </div>
+            <br />
             <div id="diff_dropdown">
                 <label for="difficulties">Choose a Difficulty: </label>
                 <select name="difficulty" id="diff_option" onchange="difficulty_dropdown()">
@@ -41,93 +41,185 @@
                     <option value="impossible">impossible</option>
                 </select>
             </div>
+            <br />
             <div id="diff_alert"></div>
         </div>
     </div>
     <br />
-    <div class="container">
-        <div id="sentence_id">
-            <h3>Choose your sentence!</h3>
-            <div id="random_button">
-                <button id="random" type="button" onclick="get_Randomsentence()">Randomize</button>
+    <div class="row" style="outline-style:solid;outline-color:black;">
+        <div>
+            <div id="sentence_id">
+                <h3>Choose your sentence!</h3>
+                <div id="random_button">
+                    <button id="random" type="button" onclick="get_Randomsentence()">Randomize</button>
+                </div>
+                <div id="random_sentence" style="font-size:25px"></div>
+                <br />
             </div>
-            <div id="random_sentence" style="font-size:25px"></div>
+        </div>
+        <br />
+        <div>
+        <!-- The canvas that will be used to render the input level -->
+            <canvas id="meter" width="300" height="50" style="border: 1px solid black;"></canvas>
+            <div id="Buttons">
+                <button id="startButton" type="button" onclick="start_timer()">Start</button>
+                <button id="stopButton" type="button" onclick="Stop()">Stop</button>
+                <button id="pauseButton" type="button" onclick="Pause()">Pause</button>
+                <button id="resumeButton" type="button" onclick="Resume()">Resume</button>
+            </div>
+            <br />
         </div>
     </div>
     <br />
+    <div class="row" style="outline-style:solid;outline-color:black;">
+        <div id="database_area">
+            <table style="width:100%;">
+                <caption style="caption-side:top;">@Model.FullName, Volume Phrasing Exercise Results</caption>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Difficulty</th>
+                        <th>Sentence Set</th>
+                        <th>Volume Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>04/25/22</td>
+                        <td>Easy</td>
+                        <td>9</td>
+                        <td>~30 dba</td>
+                    </tr>
+                    <tr>
+                        <td>04/26/22</td>
+                        <td>Easy</td>
+                        <td>3</td>
+                        <td>~40 dba</td>
+                    </tr>
+                    <tr>
+                        <td>04/28/22</td>
+                        <td>Easy</td>
+                        <td>3</td>
+                        <td>~30 dba</td>
+                    </tr>
+                    <tr>
+                        <td>04/29/22</td>
+                        <td>Medium</td>
+                        <td>1</td>
+                        <td>~40 dba</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+    <!-- Exercises -->
+    <div class="container-xxl pb-3">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Links</h5>
+                <h1 class="mb-5">Other Exercises</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="activity-box text-center rounded overflow-hidden position-relative">
+                        <div class="m-4">
+                            <h1><i class="fa fa-feather"></i></h1>
+                        </div>
+                        <h5 class="mb-0">Volume Chasing Exercise</h5>
+                        <small>Strengthen the diaphragm</small>
+                        <div class="justify-content-center mt-3">
+                            <hr />
+                            <strong>Click here to traverse to the volume chasing exercise.</strong>
+                            <strong>This exercise is to practice using a vowel sound at a target volume.</strong>
+                        </div>
+                        <a class="stretched-link" asp-area="" asp-controller="Exercises" asp-action="volume_chasing"></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="activity-box text-center rounded overflow-hidden position-relative">
+                        <div class="m-4">
+                            <h1><i class="fa fa-lungs"></i></h1>
+                        </div>
+                        <h5 class="mb-0">Breathing Exercise</h5>
+                        <small>Strengthen the diaphragm</small>
+                        <div class="justify-content-center mt-3">
+                            <hr />
+                            <strong>Click here to traverse to the breathing exercise.</strong>
+                            <strong>Good breathing techniques and a strong core will help immensely in your speech.</strong>
+                        </div>
+                        <a class="stretched-link" asp-area="" asp-controller="Exercises" asp-action="breathing"></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="activity-box text-center rounded overflow-hidden position-relative">
+                        <div class="m-4">
+                            <h1><i class="fa fa-adjust"></i></h1>
+                        </div>
+                        <h5 class="mb-0">Rote Speech Exercise</h5>
+                        <small>Odds and Ends</small>
+                        <div class="justify-content-center mt-3">
+                            <hr />
+                            <strong>Click here to traverse to the rote speech exercise.</strong>
+                            <strong>This exercise should incorporate all previous exercises, high volume, clarity, strong breathing, and phrasing in everyday sentences.</strong>
+                        </div>
+                        <a class="stretched-link" asp-area="" asp-controller="Exercises" asp-action="rote_speech"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
     <div>
-    <!-- The canvas that will be used to render the input level -->
-        <canvas id="meter" width="300" height="50" style="border: 1px solid black;"></canvas>
-        <div id="Buttons">
-            <button id="startButton" type="button" onclick="start_timer()">Start</button>
-            <button id="stopButton" type="button" onclick="Stop()">Stop</button>
-            <button id="pauseButton" type="button" onclick="Pause()">Pause</button>
-            <button id="resumeButton" type="button" onclick="Resume()">Resume</button>
-        </div>
-    </div>
-    <br />
-    <div id="database_area">
-        <table style="width:100%;">
-            <caption style="caption-side:top;">@Model.FullName, Volume Phrasing Exercise Results</caption>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Difficulty</th>
-                    <th>Sentence Set</th>
-                    <th>Volume Level</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>04/25/22</td>
-                    <td>Easy</td>
-                    <td>9</td>
-                    <td>~30 dba</td>
-                </tr>
-                <tr>
-                    <td>04/26/22</td>
-                    <td>Easy</td>
-                    <td>3</td>
-                    <td>~40 dba</td>
-                </tr>
-                <tr>
-                    <td>04/28/22</td>
-                    <td>Easy</td>
-                    <td>3</td>
-                    <td>~30 dba</td>
-                </tr>
-                <tr>
-                    <td>04/29/22</td>
-                    <td>Medium</td>
-                    <td>1</td>
-                    <td>~40 dba</td>
-                </tr>
-                <tr>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <!--Tips for exercise-->
-    <div class="container p-5 my-5 bg-dark text-white">
-        <div class="row">
-            <h2>Nice Job @Model.FullName!</h2>
-            <h3>Keep it up!</h3>
-            <h6>Here are some tips for next time!</h6>
-            <div class="list-group list-group-flush">
-                <a class="list-group-item">Utilize the pause button if you're having a hard time!</a>
-                <a class="list-group-item">Get a new random sentence if you don't like the current one!</a>
-                <a class="list-group-item">Shoot for clear speech, but don't worry if you're struggling!  You got this!</a>
+        <div class="container p-5 my-5 bg-dark text-white">
+            <div class="row">
+                <h2>Nice Job @Model.FullName!</h2>
+                <h3>Keep it up!</h3>
+                <h6>Here are some tips for next time!</h6>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item">Stand up straight and really fill your belly with air!</a>
+                    <a class="list-group-item">Don't mind the timer too much, it's just a guide!</a>
+                    <a class="list-group-item">The goal of this is build strong diaphragm support, you're doing great!</a>
+                </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
-
 </body>
 </html>
+
+<style>
+    /*** Team ***/
+    .activity-box {
+        box-shadow: 0 0 40px rgba(0, 0, 0, .08);
+        height: calc(100% - 250px);
+        min-height: 150px;
+        transition: .5s;
+    }
+
+        .activity-box h1 {
+            color: dodgerblue;
+            transition: .5s;
+        }
+
+        .activity-box:hover h1 {
+            transform: scale(1.5);
+        }
+
+        .activity-box:hover {
+            height: 100%;
+        }
+
+        .activity-box .btn {
+            border-radius: 38px 38px 0 0;
+        }
+</style>
 
 @section Scripts
 {
