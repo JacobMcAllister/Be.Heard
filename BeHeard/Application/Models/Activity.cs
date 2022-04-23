@@ -9,11 +9,7 @@ namespace BeHeard.Application.Models
     {
         // public Guid Id { get; set; }
         string Prompt { get; set; }
-        public ActivityLevel Level { get; set; }
+        public ActivityLevel Difficulty { get; set; }
     }
 
-    public enum ActivityLevel
-    {
-        Beginner, Intermediate, Advanced
-    }
 }
