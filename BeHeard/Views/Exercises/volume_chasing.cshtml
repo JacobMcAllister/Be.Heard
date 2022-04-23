@@ -16,23 +16,22 @@
     <h1>Hello @Model.FullName</h1>
     <h2>Exercise - Volume Chasing</h2>
 </div>
-<div class="navbar" id="myNavbar">
-    <a class="link" asp-area="" asp-controller="Exercises" asp-action="breathing">Breathing Exercise</a>
-    <a class="link" asp-area="" asp-controller="Exercises" asp-action="volume_phrasing">Phrasing Exercise</a>
-    <a class="link" asp-area="" asp-controller="Exercises" asp-action="rote_speech">Rote Speech Exercise</a>
-</div>
 <br />
 <div class="container">
-    <div class="row">
-        <div class="column" style="width:50%;">
+    <div class="row" style="outline-style:solid;outline-color:black;">
+        <div class="column" style="width:50%;text-align:center">
             <div id="directions">
+                <h3>Directions</h3>
                 <p>Welcome to volume chasing!</p>
-                <p>Choose a syllable and speak it loudy for 10 seconds.</p>
+                <p>Choose a difficulty from the difficulty dropdown to the right.</p>
+                <p>Choose a syllable from the syllable dropdown to the right.</p>
+                <p>Speak your chosen syllable loudly for <span id="diff_span"></span> seconds.</p>
                 <p>The meter will fill up according to your volume level.</p>
                 <p>Don't let the volume drop!</p>
             </div>
         </div>
-        <div class="column" style="width:50%;">
+        <div class="column" style="width:50%;text-align:center;">
+            <br />
             <div id="diff_directions">
                 <p>Choose the difficulty of the exercise in the dropdown!</p>
             </div>
@@ -45,148 +44,19 @@
                     <option value="impossible">impossible</option>
                 </select>
             </div>
+            <br />
             <div id="diff_alert"></div>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div id="dropdown">
-            <label for="syllables">Choose a Syllable:</label>
-            <select name="syllable" id="syllable">
-                <option value="a">A</option>
-                <!--
-                <option value="ag">ag</option>
-                <option value="am">am</option>
-                <option value="an">an</option>
-                <option value="at">at</option>
-                <option value="ba">ba</option>
-                <option value="be">be</option>
-                <option value="bi">bi</option>
-                <option value="bor">bor</option>
-                <option value="by">by</option>
-                <option value="cap">cap</option>
-                <option value="cat">cat</option>
-                <option value="cen">cen</option>
-                <option value="cir">cir</option>
-                <option value="co">co</option>
-                <option value="cus">cus</option>
-                <option value="da">da</option>
-                <option value="day">day</option>
-                <option value="ders">ders</option>
-                <option value="dle">dle</option>
-                -->
-                <option value="e">E</option>
-                <!--
-                <option value="ef">ef</option>
-                <option value="et">et</option>
-                <option value="fac">fac</option>
-                <option value="fin">fin</option>
-                <option value="for">for</option>
-                <option value="gen">gen</option>
-                <option value="gle">gle</option>
-                <option value="go">go</option>
-                <option value="grand">grand</option>
-                <option value="har">har</option>
-                <option value="heav">heav</option>
-                <option value="ho">ho</option>
-                <option value="ic">ic</option>
-                <option value="il">il</option>
-                <option value="ings">ings</option>
-                <option value="in">in</option>
-                <option value="it">it</option>
-                <option value="is">is</option>
-                <option value="ket">ket</option>
-                <option value="land">land</option>
-                <option value="lec">lec</option>
-                <option value="lead">lead</option>
-                <option value="let">let</option>
-                <option value="light">light</option>
-                <option value="lo">lo</option>
-                <option value="ly">ly</option>
-                <option value="mag">mag</option>
-                <option value="mal">mal</option>
-                <option value="mar">mar</option>
-                <option value="mat">mat</option>
-                <option value="me">me</option>
-                <option value="ments">ments</option>
-                <option value="mil">mil</option>
-                <option value="min">min</option>
-                <option value="mul">mul</option>
-                <option value="my">my</option>
-                <option value="nal">nal</option>
-                <option value="near">near</option>
-                <option value="ness">ness</option>
-                <option value="new">new</option>
-                <option value="ni">ni</option>
-                <option value="no">no</option>
-                <option value="nore">nore</option>
-                -->
-                <option value="o">O</option>
-                <!--
-                <option value="ob">ob</option>
-                <option value="on">on</option>
-                <option value="of">of</option>
-                <option value="op">op</option>
-                <option value="or">or</option>
-                <option value="ous">ous</option>
-                <option value="out">out</option>
-                <option value="part">part</option>
-                <option value="pen">pen</option>
-                <option value="ples">ples</option>
-                <option value="ply">ply</option>
-                <option value="port">port</option>
-                <option value="pre">pre</option>
-                <option value="ral">ral</option>
-                <option value="ra">ra</option>
-                <option value="rec">rec</option>
-                <option value="ried">ried</option>
-                <option value="ro">ro</option>
-                <option value="sa">sa</option>
-                <option value="sat">sat</option>
-                <option value="sent">sent</option>
-                <option value="ser">ser</option>
-                <option value="set">set</option>
-                <option value="ship">ship</option>
-                <option value="sim">sim</option>
-                <option value="so">so</option>
-                <option value="son">son</option>
-                <option value="south">south</option>
-                <option value="su">su</option>
-                <option value="sub">sub</option>
-                <option value="sup">sup</option>
-                <option value="su">su</option>
-                <option value="ta">ta</option>
-                <option value="te">te</option>
-                <option value="tel">tel</option>
-                <option value="tem">tem</option>
-                <option value="the">the</option>
-                <option value="ti">ti</option>
-                <option value="ting">ting</option>
-                <option value="tive">tive</option>
-                <option value="to">to</option>
-                <option value="tor">tor</option>
-                <option value="tra">tra</option>
-                <option value="tray">tray</option>
-                <option value="tu">tu</option>
-                <option value="tro">tro</option>
-                -->
-                <option value="u">U</option>
-                <!--
-                <option value="um">um</option>
-                <option value="up">up</option>
-                <option value="us">us</option>
-                <option value="val">val</option>
-                <option value="vel">vel</option>
-                <option value="vi">vi</option>
-                <option value="vid">vid</option>
-                <option value="way">way</option>
-                <option value="west">west</option>
-                <option value="wil">wil</option>
-                <option value="win">win</option>
-                <option value="won">won</option>
-                <option value="work">work</option>
-                -->
-            </select>
+            <br />
+            <br />
+            <div id="dropdown">
+                <label for="syllables">Choose a Syllable:</label>
+                <select name="syllable" id="syllable" onchange="">
+                    <option value="a">A</option>
+                    <option value="e">E</option>
+                    <option value="o">O</option>
+                    <option value="u">U</option>
+                </select>
+            </div>
         </div>
     </div>
     <br />
@@ -251,24 +121,109 @@
             </div>
         </div>
     </div>
- 
-    <!--Tips for exercise-->
-    <div class="container p-5 my-5 bg-dark text-white">
-        <div class="row">
-            <h2>Nice Job @Model.FullName!</h2>
-            <h3>Keep it up!</h3>
-            <h6>Here are some tips for next time!</h6>
-            <div class="list-group list-group-flush">
-                <a class="list-group-item">Be Sure to Practice Everyday.</a>
-                <a class="list-group-item">If you get frustrated, take a break!</a>
-                <a class="list-group-item">Small steps are ok, nobody got where they were going on the first try!</a>
+    <br />
+    <!-- Exercises -->
+    <div class="container-xxl pb-3">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Links</h5>
+                <h1 class="mb-5">Other Exercises</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="activity-box text-center rounded overflow-hidden position-relative">
+                        <div class="m-4">
+                            <h1><i class="fa fa-lungs"></i></h1>
+                        </div>
+                        <h5 class="mb-0">Breathing Exercise</h5>
+                        <small>Strengthen the diaphragm</small>
+                        <div class="justify-content-center mt-3">
+                            <hr />
+                            <strong>Click here to traverse to the breathing exercise.</strong>
+                            <strong>Good breathing techniques and a strong core will help immensely in your speech.</strong>
+                        </div>
+                        <a class="stretched-link" asp-area="" asp-controller="Exercises" asp-action="breathing"></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="activity-box text-center rounded overflow-hidden position-relative">
+                        <div class="m-4">
+                            <h1><i class="fa fa-language"></i></h1>
+                        </div>
+                        <h5 class="mb-0">Phrasing Exercise</h5>
+                        <small>Random Sentence Sets</small>
+                        <div class="justify-content-center mt-3">
+                            <hr />
+                            <strong>Click here to traverse to the phrasing exercise.</strong>
+                            <strong>The goal of this exercise is to speak random sentence sets at a standard volume.</strong>
+                        </div>
+                        <a class="stretched-link" asp-area="" asp-controller="Exercises" asp-action="volume_phrasing"></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="activity-box text-center rounded overflow-hidden position-relative">
+                        <div class="m-4">
+                            <h1><i class="fa fa-adjust"></i></h1>
+                        </div>
+                        <h5 class="mb-0">Rote Speech Exercise</h5>
+                        <small>Odds and Ends</small>
+                        <div class="justify-content-center mt-3">
+                            <hr />
+                            <strong>Click here to traverse to the rote speech exercise.</strong>
+                            <strong>This exercise should incorporate all previous exercises, high volume, clarity, strong breathing, and phrasing in everyday sentences.</strong>
+                        </div>
+                        <a class="stretched-link" asp-area="" asp-controller="Exercises" asp-action="rote_speech"></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <!--
+    <div>
+        <div class="container p-5 my-5 bg-dark text-white">
+            <div class="row">
+                <h2>Nice Job @Model.FullName!</h2>
+                <h3>Keep it up!</h3>
+                <h6>Here are some tips for next time!</h6>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item">Stand up straight and really fill your belly with air!</a>
+                    <a class="list-group-item">Don't mind the timer too much, it's just a guide!</a>
+                    <a class="list-group-item">The goal of this is build strong diaphragm support, you're doing great!</a>
+                </div>
+            </div>
+        </div>
+    </div> -->
 </div>
 
 </body>
 </html>
+
+<style>
+    /*** Team ***/
+    .activity-box {
+        box-shadow: 0 0 40px rgba(0, 0, 0, .08);
+        height: calc(100% - 250px);
+        min-height: 150px;
+        transition: .5s;
+    }
+
+        .activity-box h1 {
+            color: dodgerblue;
+            transition: .5s;
+        }
+
+        .activity-box:hover h1 {
+            transform: scale(1.5);
+        }
+
+        .activity-box:hover {
+            height: 100%;
+        }
+
+        .activity-box .btn {
+            border-radius: 38px 38px 0 0;
+        }
+</style>
 
 @section Scripts
 {

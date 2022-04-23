@@ -257,21 +257,25 @@ function difficulty_dropdown() {
             case (value == 'easy'):
                 target_fillVol = 100;
                 timeleft = 10;
+                document.getElementById("diff_span").innerHTML = timeleft;
                 diff_alert(1);
                 break;
             case (value == 'medium'):
                 target_fillVol = 125;
                 timeleft = 12;
+                document.getElementById("diff_span").innerHTML = timeleft;
                 diff_alert(2);
                 break;
             case (value == 'hard'):
                 target_fillVol = 200;
                 timeleft = 15;
+                document.getElementById("diff_span").innerHTML = timeleft;
                 diff_alert(3);
                 break;
             case (value == 'impossible'):
                 target_fillVol = WIDTH;
                 timeleft = 20;
+                document.getElementById("diff_span").innerHTML = timeleft;
                 diff_alert(4);
                 break;
         }
