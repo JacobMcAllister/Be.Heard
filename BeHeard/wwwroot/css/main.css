@@ -19656,6 +19656,54 @@ readers do not read off random characters that represent icons */
   object-fit: cover;
 }
 
+#SideNav {
+  background-color: #08283a;
+  color: white;
+}
+
+.bh-nav-link-light {
+  color: white;
+}
+
+.bh-nav-link-light:hover {
+  color: #ffd4b7;
+}
+
+#SideNavLogoWrapper {
+  padding: 1.8em 0 1em 0;
+}
+
+#SideNavLogo {
+  padding: 0.5em;
+}
+
+#SpecialAccessMenu {
+  margin-top: 2.5em;
+}
+
+#SpecialAccessMenu li:first-child {
+  padding: 0 1em 0.5em 1em;
+  font-weight: 600;
+}
+
+#UserAction {
+  padding: 1em;
+}
+
+#UserAction .dropdown-toggle {
+  color: white;
+  text-decoration: none;
+}
+
+#UserAction .dropdown-toggle:hover {
+  color: #ffd4b7;
+}
+
+#UserAvatar {
+  text-align: center;
+  width: 1.85em;
+}
+
 #notification {
   color: white;
   background-color: #0b3954;

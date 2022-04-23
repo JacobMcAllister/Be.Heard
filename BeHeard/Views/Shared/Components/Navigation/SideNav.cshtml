@@ -1,0 +1,59 @@
+@model BeHeard.Widgets.Models.SideNavigationModel
+
+@using BeHeard.Services
+@{
+    var service = new SessionService(Context);
+    var user = service.Get();
+}
+
+<div class="col-auto sticky-top vh-100">
+    <div id="SideNavLogoWrapper">
+        <a href="/" class="">
+            <img id="SideNavLogo" class="img-fluid" alt="Be Heard Logo" src="/assets/BeHeardLogo-light-01.png"/>
+        </a>
+    </div>
+    <ul id="UserMenu" class="nav flex-column">
+        <li class="nav-item">
+            <a href="@Model.Home" class="nav-link bh-nav-link-light">
+                <i class="@Model.HomeIcon fa-fw fs-6"></i> <span>Home</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="@Model.Dashboard" class="nav-link bh-nav-link-light">
+                <i class="@Model.DashboardIcon fa-fw fs-6"></i> <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="@Model.Exercises" class="nav-link bh-nav-link-light">
+                <i class="@Model.ExercisesIcon fa-fw fs-6"></i> <span>Exercise</span>
+            </a>
+        </li>
+    </ul>
+    <ul id="SpecialAccessMenu" class="nav flex-column">
+        <li class="nav-item">
+            <h6>Special Access</h6>
+        </li>
+        <li class="nav-item">
+            <a href="@Model.MedicalProvider" class="nav-link bh-nav-link-light">
+                <i class="@Model.MedicalProviderIcon fa-fw fs-6"></i> <span>Medical Provider</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="@Model.Admin" class="nav-link bh-nav-link-light">
+                <i class="@Model.AdminIcon fa-fw fs-6"></i> <span>Admin</span>
+            </a>
+        </li>
+    </ul>
+    <div id="UserAction" class="dropdown fixed-bottom">
+        <a href="#" class="dropdown-toggle" id="UserActionDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="/images/@user.icon" alt="User Avatar" id="UserAvatar" class="rounded-circle" /> 
+            <span class="">@user.FirstName</span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="UserActionDropdown">
+            <li><a href="/Settings" class="dropdown-item">Settings</a></li> 
+            <li><a href="/Profile" class="dropdown-item">Profile</a></li> 
+            <li><hr class="dropdown-divider" /></li> 
+            <li><a class="dropdown-item" asp-controller="Logout" asp-action="Logout">Sign out</a></li> 
+        </ul>
+    </div>
+</div> 
