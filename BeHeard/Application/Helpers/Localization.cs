@@ -17,7 +17,7 @@ public static class Localization
         new State("CO", "Colorado"),
         new State("CT", "Connecticut"),
         new State("DE", "Delaware"),
-        new State("DC", "District Of Columbia"),
+        //new State("DC", "District Of Columbia"),
         new State("FL", "Florida"),
         new State("GA", "Georgia"),
         new State("HI", "Hawaii"),

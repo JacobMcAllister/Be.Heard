@@ -59,5 +59,6 @@ namespace BeHeard.Repositories
         {
             return Context.Set<TEntity>().Count();
         }
+
     }
 }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BeHeard.Services;
 using BeHeard.Application.Models;
+using BeHeard.Application.Helpers;
 
 namespace BeHeard.Controllers
 {
@@ -72,6 +73,7 @@ namespace BeHeard.Controllers
 
             return PartialView(redirectLocation, model);
         }
+
         [HttpPost]
         public ActionResult SaveEdit(EditViewModel model)
         {
@@ -83,15 +85,14 @@ namespace BeHeard.Controllers
             user.PhoneNumber = model.Settings.User.PhoneNumber;
             user.Email = model.Settings.User.Email;
             user.Gender = model.Settings.User.Gender;
-            user.Password = model.Settings.User.Password;
             user.Username = model.Settings.User.Username;
-
+            user.Age = model.Settings.User.Age;
             //  Set Address Changes.
             user.Address.Street = model.Settings.User.Address.Street;
             user.Address.City = model.Settings.User.Address.City;
             user.Address.PostalCode = model.Settings.User.Address.PostalCode;
             user.Address.Country = model.Settings.User.Address.Country;
-            user.Address.State = model.Settings.User.Address.State;
+            //user.Address.State = model.Settings.User.Address.State;
 
             //user.Address = model.Address;
             //user.Profile = _beHeardContextManager.UserProfileRepository.Get(user.Id);
@@ -102,6 +103,48 @@ namespace BeHeard.Controllers
             string redirectLocation = "Index?saveUpdate=" + user.Id.ToString();
 
             return Redirect(redirectLocation);
+        }
+
+        public ActionResult Demographics(string searchField)
+        {
+            var users = _beHeardContextManager.UserRepository.GetAllUsers();
+
+            //if (!String.IsNullOrEmpty(searchField))
+            //{
+            //    model = model.Where(u => u.LastName.Contains(searchField)
+            //                   || u.FirstName.Contains(searchField) || u.Username.Contains(searchField));
+            //    model = model.ToList();
+            //}
+            //List<State> States = Localization.Los;
+
+            var model = new DemographicsViewModel {
+                stateCount = new List<int> {0},
+                ageCountMale = new List<int> { 0 },
+                ageCountFemale = new List<int> { 0 },
+
+            };
+
+            foreach (State state in model.States)
+            {
+                model.stateCount.Add(users.Where(c => c.Address.State.Contains(state.Abbreviation)).Count());
+            }
+
+            model.ageCountMale.Add(users.Where(c => c.Age < 19 & c.Gender == 0).Count());
+            model.ageCountMale.Add(users.Where(c => c.Age < 40 & c.Age > 18 & c.Gender == 0).Count());
+            model.ageCountMale.Add(users.Where(c => c.Age < 60 & c.Age > 39 & c.Gender == 0).Count());
+            model.ageCountMale.Add(users.Where(c => c.Age < 80 & c.Age > 59 & c.Gender == 0).Count());
+            model.ageCountMale.Add(users.Where(c => c.Age >79 & c.Gender == 0).Count());
+
+            model.ageCountFemale.Add(users.Where(c => c.Age < 19 & c.Gender != 0).Count());
+            model.ageCountFemale.Add(users.Where(c => c.Age < 40 & c.Age > 18 & c.Gender != 0).Count());
+            model.ageCountFemale.Add(users.Where(c => c.Age < 60 & c.Age > 39 & c.Gender != 0).Count());
+            model.ageCountFemale.Add(users.Where(c => c.Age < 80 & c.Age > 59 & c.Gender != 0).Count());
+            model.ageCountFemale.Add(users.Where(c => c.Age > 79 & c.Gender != 0).Count());
+
+
+            string redirectLocation = "_DemographicsView";
+
+            return PartialView(redirectLocation, model);
         }
 
     }
