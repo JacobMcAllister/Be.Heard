@@ -58,6 +58,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.6" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
@@ -71,7 +72,6 @@
     <Folder Include="ResourcePackages\js\dist\" />
     <Folder Include="ResourcePackages\js\src\" />
     <Folder Include="ResourcePackages\webfonts\" />
-    <Folder Include="Views\Profile\" />
     <Folder Include="wwwroot\assets" />
   </ItemGroup>
 

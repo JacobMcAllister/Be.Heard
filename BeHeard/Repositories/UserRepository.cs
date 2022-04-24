@@ -16,6 +16,14 @@ namespace BeHeard.Repositories
         {
         }
 
+        public IEnumerable<User> GetAllUsers()
+        {
+
+                return Context.Users
+                    .Include(a => a.Address)
+                    .ToList();
+        }
+
         public User GetUserByCredentials(AuthorizationRequest credentials)
         {
             //return Context.Set<User>()
