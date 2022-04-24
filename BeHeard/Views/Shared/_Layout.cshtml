@@ -11,10 +11,10 @@
 <body>
 <section id="app" class="container-fluid">
     <div class="row">
-        <section id="SideNav" class="col-2">
+        <section id="SideNav" class="col-sm-12 col-md-1 col-lg-2">
             @await Component.InvokeAsync("Navigation", "side")
         </section>
-        <main role="main" class="col-10">
+        <main role="main" class="col-sm-12 col-md-11 col-lg-10">
             @RenderBody()
         </main>
     </div> 

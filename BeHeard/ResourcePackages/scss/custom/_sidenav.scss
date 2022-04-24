@@ -4,6 +4,9 @@
   background-color: $bh-blue-dark;
   color: white;
 }
+.nav-item > a > span {
+  display: inline-block;
+}
 .bh-nav-link-light {
   color: white;
 }
@@ -36,4 +39,10 @@
 #UserAvatar {
   text-align: center;
   width: 1.85em;
+}
+#MobileNavBarToggle {
+  color: white;
+}
+#MobileNavBarContent ul li a {
+  color: white;
 }

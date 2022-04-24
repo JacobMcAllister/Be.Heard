@@ -6,48 +6,51 @@
     var user = service.Get();
 }
 
-<div class="col-auto sticky-top vh-100">
+<div id="SideNavWrapper" class="d-none d-sm-none d-md-block col-auto sticky-top vh-100">
     <div id="SideNavLogoWrapper">
-        <a href="/" class="">
-            <img id="SideNavLogo" class="img-fluid" alt="Be Heard Logo" src="/assets/BeHeardLogo-light-01.png"/>
+        <a href="/" class="d-md-none d-lg-block">
+            <img id="SideNavLogoWithText" class="img-fluid" alt="Be Heard Logo With Text" src="~/assets/BeHeardLogo-light-01.png"/>
+        </a>
+        <a href="/" class="d-lg-none d-md-block">
+            <img id="SideNavLogo" class="img-fluid" alt="Be Heard Logo" src="~/assets/BeHeardLogo-02.png"/>
         </a>
     </div>
     <ul id="UserMenu" class="nav flex-column">
         <li class="nav-item">
             <a href="@Model.Home" class="nav-link bh-nav-link-light">
-                <i class="@Model.HomeIcon fa-fw fs-6"></i> <span>Home</span>
+                <i class="@Model.HomeIcon fa-fw fs-6"></i> <span class="d-xs-none d-sm-none d-md-none d-lg-inline-block">Home</span>
             </a>
         </li>
         <li class="nav-item">
             <a href="@Model.Dashboard" class="nav-link bh-nav-link-light">
-                <i class="@Model.DashboardIcon fa-fw fs-6"></i> <span>Dashboard</span>
+                <i class="@Model.DashboardIcon fa-fw fs-6"></i> <span class="d-xs-none d-sm-none d-md-none d-lg-inline-block">Dashboard</span>
             </a>
         </li>
         <li class="nav-item">
             <a href="@Model.Exercises" class="nav-link bh-nav-link-light">
-                <i class="@Model.ExercisesIcon fa-fw fs-6"></i> <span>Exercise</span>
+                <i class="@Model.ExercisesIcon fa-fw fs-6"></i> <span class="d-xs-none d-sm-none d-md-none d-lg-inline-block">Exercise</span>
             </a>
         </li>
     </ul>
     <ul id="SpecialAccessMenu" class="nav flex-column">
-        <li class="nav-item">
+        <li class="nav-item d-xs-none d-sm-none d-md-none d-lg-inline-block">
             <h6>Special Access</h6>
         </li>
         <li class="nav-item">
             <a href="@Model.MedicalProvider" class="nav-link bh-nav-link-light">
-                <i class="@Model.MedicalProviderIcon fa-fw fs-6"></i> <span>Medical Provider</span>
+                <i class="@Model.MedicalProviderIcon fa-fw fs-6"></i> <span class="d-xs-none d-sm-none d-md-none d-lg-inline-block">Specialist</span>
             </a>
         </li>
         <li class="nav-item">
             <a href="@Model.Admin" class="nav-link bh-nav-link-light">
-                <i class="@Model.AdminIcon fa-fw fs-6"></i> <span>Admin</span>
+                <i class="@Model.AdminIcon fa-fw fs-6"></i> <span class="d-xs-none d-sm-none d-md-none d-lg-inline-block">Admin</span>
             </a>
         </li>
     </ul>
     <div id="UserAction" class="dropdown fixed-bottom">
         <a href="#" class="dropdown-toggle" id="UserActionDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="/images/@user.icon" alt="User Avatar" id="UserAvatar" class="rounded-circle" /> 
-            <span class="">@user.FirstName</span>
+            <span class="d-xs-none d-sm-none d-md-none d-lg-inline-block">@user.FirstName</span>
         </a>
         <ul class="dropdown-menu" aria-labelledby="UserActionDropdown">
             <li><a href="/Settings" class="dropdown-item">Settings</a></li> 
@@ -56,4 +59,29 @@
             <li><a class="dropdown-item" asp-controller="Logout" asp-action="Logout">Sign out</a></li> 
         </ul>
     </div>
-</div> 
+</div>
+
+<nav id="MobileNavBar" class="d-md-none d-sm-block navbar navbar-dark navbar-expand-lg p-3">
+    <div class="container-fluid">
+        <a class="navbar-brand" href=""><img class="img-fluid" alt="Be Heard logo" src="~/assets/BeHeardLogo-light-01.png"/></a>
+        
+        @* Bootstrap nav element toggling function *@
+        <button id="MobileNavBarToggle" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#MobileNavBarContent" aria-controls="NavBarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-lg fa-bars"></i>
+        </button>
+        
+        <div class="collapse navbar-collapse me-auto" id="MobileNavBarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="@Model.Home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="@Model.Dashboard">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="@Model.Exercises">Exercises</a></li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="@Model.MedicalProvider">Specialist</a></li>
+                <li class="nav-item"><a class="nav-link" href="@Model.Admin">Admin</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script src="~/js/sidenav.js" defer></script>

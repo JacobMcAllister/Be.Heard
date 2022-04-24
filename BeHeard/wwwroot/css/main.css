@@ -19689,6 +19689,10 @@ readers do not read off random characters that represent icons */
   color: white;
 }
 
+.nav-item > a > span {
+  display: inline-block;
+}
+
 .bh-nav-link-light {
   color: white;
 }
@@ -19730,6 +19734,14 @@ readers do not read off random characters that represent icons */
 #UserAvatar {
   text-align: center;
   width: 1.85em;
+}
+
+#MobileNavBarToggle {
+  color: white;
+}
+
+#MobileNavBarContent ul li a {
+  color: white;
 }
 
 #notification {
