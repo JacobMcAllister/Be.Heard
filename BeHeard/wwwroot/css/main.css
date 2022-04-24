@@ -19656,6 +19656,34 @@ readers do not read off random characters that represent icons */
   object-fit: cover;
 }
 
+#SignInLink {
+  margin-right: 1em;
+}
+
+.navbar-toggler {
+  outline: transparent !important;
+  border-color: transparent !important;
+  background-color: transparent !important;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.navbar-toggler[aria-expanded*=false] {
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+.navbar-toggler[aria-expanded*=true] {
+  -webkit-transform: rotate(-180deg);
+  -moz-transform: rotate(-180deg);
+  -o-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+}
+
 #SideNav {
   background-color: #08283a;
   color: white;
@@ -19721,11 +19749,18 @@ readers do not read off random characters that represent icons */
   text-decoration: underline;
 }
 
-.bh-first-content {
-  padding-top: 12em;
-  padding-bottom: 12em;
+@media (min-width: 991px) {
+  .bh-first-content {
+    padding-top: 12em;
+    padding-bottom: 12em;
+  }
 }
-
+@media (max-width: 991px) {
+  .bh-first-content {
+    padding-top: 5em;
+    padding-bottom: 10em;
+  }
+}
 .bh-first-content img {
   height: 363px;
   width: 330px;

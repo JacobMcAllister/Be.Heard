@@ -53,13 +53,13 @@ $(document).ready(() => {
     let GoalsSection = document.getElementById('Goals');
     easeObjects.push(basicScroll.create({
         elem: GoalsSection,
-        from: `top-bottom`,
-        to: 'middle-middle',
+        from: 'top-middle',
+        to: 'top-top',
         direct: false,
         props: {
             '--goals-sect-translate': {
                 from: '0',
-                to: `-${$(GoalsSection).height() * 0.25}px`,
+                to: '-200px',
                 timing: GoalsSection.getAttribute('data-timing')
             },
             '--op': {
@@ -72,19 +72,19 @@ $(document).ready(() => {
     
     let TheTeamSection = document.getElementById('TheTeam');
     easeObjects.push(basicScroll.create({
-        elem: TheTeamSection,
-        from: 'top-bottom',
-        to: 'top-middle',
+        elem: GoalsSection,
+        from: 'top-top',
+        to: 'middle-top',
         direct: false,
         props: {
             '--team-sect-translate': {
-                from: `${$(GoalsSection).position().top - $(GoalsSection).height() - 100}px`,
-                to: `-${$(TheTeamSection).height()}px`,
+                from: '0',
+                to: '-250px',
                 timing: TheTeamSection.getAttribute('data-timing')
             },
             '--team-op': {
                 from: '0',
-                to: '2.3',
+                to: '1',
                 timing: TheTeamSection.getAttribute('data-timing')
             }
         }
@@ -103,12 +103,6 @@ $(document).ready(() => {
                time += 250;
            });
        }
-       
-       // if ($(document).scrollTop() >= $(GoalsSection).position().top + 50) {
-       //     $(TheTeamSection).animate({
-       //         opacity: 1
-       //     }, 400);
-       // }
     });
     
     easeObjects.forEach((easeObject) => easeObject.start())
