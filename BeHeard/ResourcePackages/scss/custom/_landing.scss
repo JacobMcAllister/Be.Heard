@@ -1,8 +1,16 @@
 @import "variables";
 
-.bh-first-content {
-  padding-top: 12em;
-  padding-bottom: 12em;
+@media (min-width: 991px) {
+  .bh-first-content {
+    padding-top: 12em;
+    padding-bottom: 12em;
+  }
+}
+@media (max-width: 991px) {
+  .bh-first-content {
+    padding-top: 5em;
+    padding-bottom: 10em;
+  }
 }
 .bh-first-content img {
   height: 363px;
@@ -29,8 +37,8 @@ section#Goals {
   object-fit: cover;
 }
 #TheTeam.ease-object {
-  opacity: (var(--team-op));
-  transform: translateY(var(--team-sect-translate));
+   opacity: (var(--team-op));
+   transform: translateY(var(--team-sect-translate));
 }
 #TheTeamContent .card {
   background-image: $bh-card-orange-light-gradient;
