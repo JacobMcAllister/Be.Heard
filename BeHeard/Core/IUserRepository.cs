@@ -11,5 +11,6 @@ namespace BeHeard.Core
         User GetUserByUsername(string username);
         User GetUserByEmail(string email);
         User GetUserByCredentials(AuthorizationRequest credentials);
+        IEnumerable<User> GetAllUsers();
     }
 }

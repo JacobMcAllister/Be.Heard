@@ -1,18 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BeHeard.Models;
-using Microsoft.AspNetCore.Http;
-using BeHeard.Core;
-using System.Security.Claims;
-using BeHeard.Application;
-using Microsoft.AspNetCore.Authentication;
-using System.Net.Http.Headers;
-using System.Net.Http;
-using System.Security.Cryptography;
 using BeHeard.Core;
 using System.Security.Claims;
 using BeHeard.Application;
@@ -48,7 +35,7 @@ namespace BeHeard.Controllers
         [HttpPost]
         public IActionResult Login(User user, bool isFirstLogin = false)
         {
-            TempData["Error"] = "Sorry, that 'Username' and 'Password' combination do not match any record.";
+            //TempData["Error"] = "Sorry, that 'Username' and 'Password' combination do not match any record.";
             // NOTE: Add redirects for failed attempts and nonexistent accounts
             if (!_userService.IsValidUserCredentials(user.Username, user.Password))
                 return View("~/Views/Login/Index.cshtml");

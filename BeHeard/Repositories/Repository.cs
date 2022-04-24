@@ -51,5 +51,14 @@ namespace BeHeard.Repositories
         {
             Context.Set<TEntity>().RemoveRange(entities);
         }
+        public void Update(TEntity entity)
+        {
+            Context.Set<TEntity>().Update(entity);
+        }
+        public int Count()
+        {
+            return Context.Set<TEntity>().Count();
+        }
+
     }
 }

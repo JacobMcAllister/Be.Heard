@@ -1,0 +1,234 @@
+﻿
+@{
+    ViewData["Title"] = "Demographics";
+}
+@using BeHeard.Application.Helpers
+@model BeHeard.Models.DemographicsViewModel
+
+
+
+
+
+
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-house-user me-1"></i>
+        Current User Location Distribution
+    </div>
+        <label for="State"></label>
+        <select class="form-select" aria-label="SelectState" id="State" name="Address.State">
+            <option value="">State - Users</option>
+            @{ int count = 1;}
+            @foreach (var state in Model.States)
+            {
+                <option value="@state.Abbreviation">@state.Name - @Model.stateCount[count++] </option>
+            }
+        </select>
+        <div id="chartdiv" class="my-5" style="width:100%; height:500px;"></div>
+</div>
+<hr/>
+<div class="card mb-4">
+    <div class="card-header">
+       <i class="fas fa-chart-bar me-1"></i>
+       Current User Age Distribution
+    </div>
+    <div class="card-body"><canvas id="myBarChart" style="width:100%; height:50px;"></canvas></div>
+</div>
+
+
+
+
+
+
+<script>
+
+    var ctx = document.getElementById("myBarChart");
+    var myLineChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ["0-17", "18-39", "40-59", "60-79", "80+"],
+        datasets: [
+            {
+              label: "Users",
+              backgroundColor: "rgb(75, 192, 192)",
+              borderColor: "rgba(2,117,216,1)",
+              data: [@Model.ageCountMale[1] + @Model.ageCountFemale[1],
+                 @Model.ageCountMale[2] + @Model.ageCountFemale[2], 
+                 @Model.ageCountMale[3] + @Model.ageCountFemale[3], 
+                 @Model.ageCountMale[4] + @Model.ageCountFemale[4], 
+                 @Model.ageCountMale[5] + @Model.ageCountFemale[5]],
+            },
+                        {
+              label: "Males",
+              backgroundColor: "rgba(2,117,216,1)",
+              borderColor: "rgba(2,117,216,1)",
+              data: [@Model.ageCountMale[1], @Model.ageCountMale[2], @Model.ageCountMale[3], @Model.ageCountMale[4], @Model.ageCountMale[5]],
+            },
+                        {
+              label: "Females",
+              backgroundColor: "rgb(255, 99, 132)",
+              borderColor: "rgba(2,117,216,1)",
+              data: [@Model.ageCountFemale[1], @Model.ageCountFemale[2], @Model.ageCountFemale[3], @Model.ageCountFemale[4], @Model.ageCountFemale[5]],
+            },
+
+        ],
+      },
+      options: {
+        scales: {
+          xAxes: [{
+            time: {
+              unit: 'Age Range'
+            },
+            gridLines: {
+              display: false
+            },
+            ticks: {
+              maxTicksLimit: 6
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              min: 0,
+              max: 15000,
+              maxTicksLimit: 5
+            },
+            gridLines: {
+              display: true
+            }
+          }],
+        },
+        legend: {
+          display: true
+        }
+      }
+    });
+</script>
+
+
+<!--Scripts for HeatMap-->
+
+<script>
+    am5.ready(function() {
+
+    // Create root
+    var root = am5.Root.new("chartdiv"); 
+
+    // Set themes
+    root.setThemes([
+        am5themes_Animated.new(root)
+    ]);
+
+    // Create chart
+    var chart = root.container.children.push(am5map.MapChart.new(root, {
+        panX: "rotateX",
+        panY: "none",
+        wheelY: "none",
+        projection: am5map.geoAlbersUsa(),
+        layout: root.horizontalLayout
+    }));
+
+    // Create polygon series
+    var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
+        geoJSON: am5geodata_usaLow,
+        valueField: "value",
+        calculateAggregates: true
+    }));
+
+    polygonSeries.mapPolygons.template.setAll({
+        tooltipText: "{name}: {value}"
+    });
+
+    polygonSeries.set("heatRules", [{
+        target: polygonSeries.mapPolygons.template,
+        dataField: "value",
+        min: am5.color(0xff621f),
+        max: am5.color(0x661f00),
+        key: "fill"
+    }]);
+
+    polygonSeries.mapPolygons.template.events.on("pointerover", function(ev) {
+        heatLegend.showValue(ev.target.dataItem.get("value"));
+    });
+
+    polygonSeries.data.setAll([
+        { id: "US-AL", value: @Model.stateCount[1]},
+        { id: "US-AK", value: @Model.stateCount[2] },
+        { id: "US-AZ", value: @Model.stateCount[3] },
+        { id: "US-AR", value: @Model.stateCount[4] },
+        { id: "US-CA", value: @Model.stateCount[5] },
+        { id: "US-CO", value: @Model.stateCount[6] },
+        { id: "US-CT", value: @Model.stateCount[7] },
+        { id: "US-DE", value: @Model.stateCount[8] },
+        { id: "US-FL", value: @Model.stateCount[9] },
+        { id: "US-GA", value: @Model.stateCount[10] },
+        { id: "US-HI", value: @Model.stateCount[11] },
+        { id: "US-ID", value: @Model.stateCount[12] },
+        { id: "US-IL", value: @Model.stateCount[13] },
+        { id: "US-IN", value: @Model.stateCount[14] },
+        { id: "US-IA", value: @Model.stateCount[15] },
+        { id: "US-KS", value: @Model.stateCount[16] },
+        { id: "US-KY", value: @Model.stateCount[17] },
+        { id: "US-LA", value: @Model.stateCount[18] },
+        { id: "US-ME", value: @Model.stateCount[19] },
+        { id: "US-MD", value: @Model.stateCount[20] },
+        { id: "US-MA", value: @Model.stateCount[21] },
+        { id: "US-MI", value: @Model.stateCount[22] },
+        { id: "US-MN", value: @Model.stateCount[23] },
+        { id: "US-MS", value: @Model.stateCount[24] },
+        { id: "US-MO", value: @Model.stateCount[25] },
+        { id: "US-MT", value: @Model.stateCount[26] },
+        { id: "US-NE", value: @Model.stateCount[27] },
+        { id: "US-NV", value: @Model.stateCount[28] },
+        { id: "US-NH", value: @Model.stateCount[29] },
+        { id: "US-NJ", value: @Model.stateCount[30] },
+        { id: "US-NM", value: @Model.stateCount[31] },
+        { id: "US-NY", value: @Model.stateCount[32] },
+        { id: "US-NC", value: @Model.stateCount[33] },
+        { id: "US-ND", value: @Model.stateCount[34] },
+        { id: "US-OH", value: @Model.stateCount[35] },
+        { id: "US-OK", value: @Model.stateCount[36] },
+        { id: "US-OR", value: @Model.stateCount[37] },
+        { id: "US-PA", value: @Model.stateCount[38] },
+        { id: "US-RI", value: @Model.stateCount[39] },
+        { id: "US-SC", value: @Model.stateCount[40] },
+        { id: "US-SD", value: @Model.stateCount[41] },
+        { id: "US-TN", value: @Model.stateCount[42] },
+        { id: "US-TX", value: @Model.stateCount[43] },
+        { id: "US-UT", value: @Model.stateCount[44] },
+        { id: "US-VT", value: @Model.stateCount[45] },
+        { id: "US-VA", value: @Model.stateCount[46] },
+        { id: "US-WA", value: @Model.stateCount[47] },
+        { id: "US-WV", value: @Model.stateCount[48] },
+        { id: "US-WI", value: @Model.stateCount[49] },
+        { id: "US-WY", value: @Model.stateCount[50] }
+    ]);
+
+    var heatLegend = chart.children.push(am5.HeatLegend.new(root, {
+        orientation: "vertical",
+        startColor: am5.color(0xff621f),
+        endColor: am5.color(0x661f00),
+        startText: "Lowest",
+        endText: "Highest",
+        stepCount: 5
+    }));
+
+    heatLegend.startLabel.setAll({
+        fontSize: 12,
+        fill: heatLegend.get("startColor")
+    });
+
+    heatLegend.endLabel.setAll({
+        fontSize: 12,
+        fill: heatLegend.get("endColor")
+    });
+
+    // change this to template when possible
+    polygonSeries.events.on("datavalidated", function () {
+        heatLegend.set("startValue", polygonSeries.getPrivate("valueLow"));
+        heatLegend.set("endValue", polygonSeries.getPrivate("valueHigh"));
+    });
+
+    }); // end am5.ready()
+
+</script>
