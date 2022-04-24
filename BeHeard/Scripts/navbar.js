@@ -9,7 +9,7 @@ $(document).ready(function() {
     let navLinksUrls = $('#NavBarContent').find('a');
     navLinksUrls.each((i, e) => {
         let url = window.location.origin + $(e).attr('href');
-        if (window.location.href === url) {
+        if (window.location.href.toLowerCase() === url.toLowerCase()) {
             if (i === 3) { // NOTE: fix later...
                 return false;
             }
@@ -22,7 +22,6 @@ $(document).ready(function() {
             return false;
         }
     });
-    
 });
 
 document.addEventListener('DOMContentLoaded', function () {
