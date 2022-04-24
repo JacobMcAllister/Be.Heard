@@ -25,17 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20220228085656_AddSubscriptionId.cs" />
-    <Compile Remove="Migrations\20220228085656_AddSubscriptionId.Designer.cs" />
-    <Compile Remove="Migrations\20220228085944_AddUserAddressPhoneAndSettingsPreferencesSubscription.cs" />
-    <Compile Remove="Migrations\20220228085944_AddUserAddressPhoneAndSettingsPreferencesSubscription.Designer.cs" />
-    <Compile Remove="Migrations\20220304104607_InitialModel.cs" />
-    <Compile Remove="Migrations\20220304104607_InitialModel.Designer.cs" />
-    <Compile Remove="Migrations\20220311073508_InitialCreate.cs" />
-    <Compile Remove="Migrations\20220311073508_InitialCreate.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="compilerconfig.json" />
     <Content Remove="wwwroot\js\breathing.js" />
     <Content Remove="wwwroot\js\main.js" />
@@ -64,7 +53,6 @@
   <ItemGroup>
     <Folder Include="Domain\" />
     <Folder Include="Entities\" />
-    <Folder Include="Migrations\" />
     <Folder Include="Properties\" />
     <Folder Include="ResourcePackages\dist\css\" />
     <Folder Include="ResourcePackages\dist\js\" />

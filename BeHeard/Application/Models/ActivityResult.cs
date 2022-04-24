@@ -24,7 +24,7 @@ namespace BeHeard.Application.Models
     }
     public enum Syllable
     {
-        A, E, O, U
+        A, E, O, U, NONE
     }
     public enum Exercise
     {
@@ -32,6 +32,6 @@ namespace BeHeard.Application.Models
     }
     public enum Category
     {
-        Cities, Directions, PhoneNumbers, CommonRequests, MealOrders 
+        Cities, Directions, PhoneNumbers, CommonRequests, MealOrders, NONE
     }
 }

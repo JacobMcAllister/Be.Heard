@@ -140,10 +140,13 @@ namespace BeHeard.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Frequency = table.Column<double>(type: "float", nullable: false),
-                    Decibel = table.Column<double>(type: "float", nullable: false),
+                    SentenceSet = table.Column<int>(type: "int", nullable: false),
+                    Decibel = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Counter = table.Column<int>(type: "int", nullable: false),
-                    Level = table.Column<int>(type: "int", nullable: false),
+                    Difficulty = table.Column<int>(type: "int", nullable: false),
+                    Syllable = table.Column<int>(type: "int", nullable: false),
+                    Exercise = table.Column<int>(type: "int", nullable: false),
+                    Category = table.Column<int>(type: "int", nullable: false),
                     UserProfileId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
