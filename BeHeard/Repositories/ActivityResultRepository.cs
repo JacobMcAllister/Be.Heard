@@ -22,5 +22,6 @@ namespace BeHeard.Repositories
                 .First()
                 .ActivityResults;
         }
+
     }
 }
