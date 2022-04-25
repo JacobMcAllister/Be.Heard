@@ -166,14 +166,17 @@ function pause_Play() {
 }
 */
 
+document.getElementById("startButton").onclick = function () { start_timer() };
+
 function start_timer() {
+    let exercise_timer;
 
     // Connect
     micStreamSourceNode.connect(micAnalyser);
     if (audioContext.state === 'suspended') {
         audioContext.resume();
     }
-
+    exercise_timer = timeleft;
     total_time = timeleft;
     fillVol = 0;
     total_decibel = 0;
@@ -185,7 +188,7 @@ function start_timer() {
         animateVoice();
 
         if (!isPaused) {
-            if (timeleft < 0) {
+            if (exercise_timer < 0) {
                 micStreamSourceNode.disconnect(micAnalyser);
                 isRecording = false;
 
@@ -245,19 +248,20 @@ function start_timer() {
                 }
 
                 if (loud) {
-                    updateDB(output);
+                    UpdateDB(output);
                     alert("Wow!\n'Normal' voice volume is around 50-60 dba.\nYour volume was" + output + "dba!")
-                    document.location.reload();
+                    //document.location.reload();
                 } else {
                     UpdateDB(output);
                     alert("Great Job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + output + " dba.");
-                    document.location.reload();
+                    //document.location.reload();
                 }
 
             } else {
-                document.getElementById("Timer").innerHTML = "Seconds Remaining: " + timeleft;
+                console.log(exercise_timer);
+                document.getElementById("Timer").innerHTML = "Seconds Remaining: " + exercise_timer;
             }
-            timeleft--;
+            exercise_timer--;
         }
     }
 
