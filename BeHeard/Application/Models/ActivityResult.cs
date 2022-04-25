@@ -16,6 +16,7 @@ namespace BeHeard.Application.Models
         public Syllable Syllable { get; set; }
         public Exercise Exercise { get; set; }
         public Category Category { get; set; }
+        public Guid UserProfileId { get; set; }
     }
 
     public enum ActivityLevel

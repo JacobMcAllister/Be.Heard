@@ -35,14 +35,12 @@ function UpdateDB(volume) {
         url: "UpdateDBwResults",
         type: "POST",
         data: {
-            /*
             Decibel: volume,
             viewSyllable: syllablechoice,
             viewDifficulty: diff_value,
             viewExercise: "VolumeChasing",
             viewCategory: "NONE",
             SentenceSet: SentenceSet
-            */
         }
     })
 }
@@ -168,8 +166,6 @@ function pause_Play() {
 }
 */
 
-document.getElementById("startButton").onclick = function () { start_timer() };
-
 function start_timer() {
 
     // Connect
@@ -211,7 +207,7 @@ function start_timer() {
 
                 // Percent of meter
                 percent_decibel = (average_over_meter / WIDTH) * 100;
-                let output;
+                var output;
                 let loud = false;
 
                 switch (true) {
@@ -244,16 +240,18 @@ function start_timer() {
                         break;
                     case (percent_decibel > 65.1):
                         loud = true;
-                        output = " greater then 100";
+                        output = ">100";
                         break;
                 }
 
                 if (loud) {
-                    updateDB(loud);
+                    updateDB(output);
                     alert("Wow!\n'Normal' voice volume is around 50-60 dba.\nYour volume was" + output + "dba!")
+                    document.location.reload();
                 } else {
-                    UpdateDB(loud);
+                    UpdateDB(output);
                     alert("Great Job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + output + " dba.");
+                    document.location.reload();
                 }
 
             } else {

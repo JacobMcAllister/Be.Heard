@@ -28,6 +28,7 @@ namespace BeHeard.Controllers
     {
         private readonly IBeHeardContextManager _contextManager;
 
+       
         public ExercisesController(BeHeardContext context)
         {
             _contextManager = new BeHeardContextManager(context);
@@ -104,36 +105,19 @@ namespace BeHeard.Controllers
         }
 
         [HttpPost]
-        //public IActionResult UpdateDBwResults(User user, ActivityResult activityresult, string Decibel, string viewExercise, string viewSyllable, string viewDifficulty, string viewCategory, int SentenceSet)
-        public IActionResult UpdateDBwResults()
+        public IActionResult UpdateDBwResults(string Decibel, string viewExercise, string viewSyllable, string viewDifficulty, string viewCategory, int SentenceSet)
         {
+            var activityresult = new ActivityResult();
+
             var service = new SessionService(HttpContext);
-            var user = _contextManager.UserRepository.GetUserByUsername(ServiceFilterAttribute.Get().Username);
-            
-        /*
-            IEnumerable<ActivityResult> results = _contextManager.ActivityResultRepository.GetActivityResultsByUser(user);
-            activityresult = results.FirstOrDefault();
+            var user = _contextManager.UserRepository.GetUserByUsername(service.Get().Username);
+            //IEnumerable<ActivityResult> results = _contextManager.ActivityResultRepository.GetActivityResultsByUser(user);
+            //List<ActivityResult> results_ToList = results.ToList();
 
             activityresult.Date = DateTime.Now;
-            activityresult.Counter = 0;
-            activityresult.Decibel = Decibel;
             activityresult.SentenceSet = SentenceSet;
-
-            switch(viewExercise)
-            {
-                case "VolumeChasing":
-                    activityresult.Exercise = Exercise.VolumeChasing;
-                    break;
-                case "Breathing":
-                    activityresult.Exercise = Exercise.Breathing;
-                    break;
-                case "Phrasing":
-                    activityresult.Exercise = Exercise.Phrasing;
-                    break;
-                case "RoteSpeech":
-                    activityresult.Exercise = Exercise.Rote;
-                    break;
-            }
+            activityresult.Decibel = Decibel;
+            activityresult.Counter = 1;
             switch (viewDifficulty)
             {
                 case "Easy":
@@ -149,6 +133,39 @@ namespace BeHeard.Controllers
                     activityresult.Difficulty = ActivityLevel.Impossible;
                     break;
             };
+            switch (viewSyllable)
+            {
+                case "A":
+                    activityresult.Syllable = Syllable.A;
+                    break;
+                case "E":
+                    activityresult.Syllable = Syllable.E;
+                    break;
+                case "O":
+                    activityresult.Syllable = Syllable.O;
+                    break;
+                case "U":
+                    activityresult.Syllable = Syllable.U;
+                    break;
+                case "NONE":
+                    activityresult.Syllable = Syllable.NONE;
+                    break;
+            }
+            switch (viewExercise)
+            {
+                case "VolumeChasing":
+                    activityresult.Exercise = Exercise.VolumeChasing;
+                    break;
+                case "Breathing":
+                    activityresult.Exercise = Exercise.Breathing;
+                    break;
+                case "Phrasing":
+                    activityresult.Exercise = Exercise.Phrasing;
+                    break;
+                case "RoteSpeech":
+                    activityresult.Exercise = Exercise.Rote;
+                    break;
+            }
             switch (viewCategory)
             {
                 case "Cities":
@@ -170,24 +187,9 @@ namespace BeHeard.Controllers
                     activityresult.Category = Category.NONE;
                     break;
             }
-            switch (viewSyllable)
-            {
-                case "A":
-                    activityresult.Syllable = Syllable.A;
-                    break;
-                case "E":
-                    activityresult.Syllable = Syllable.E;
-                    break;
-                case "O":
-                    activityresult.Syllable = Syllable.O;
-                    break;
-                case "U":
-                    activityresult.Syllable = Syllable.U;
-                    break;
-                case "NONE":
-                    activityresult.Syllable = Syllable.NONE;
-                    break;
-            }
+            activityresult.UserProfileId = user.Id;
+            //results_ToList.Add(activityresult);
+            //IEnumerable<ActivityResult> finalResults = results_ToList.AsEnumerable();
 
             try
             {
@@ -199,8 +201,6 @@ namespace BeHeard.Controllers
             {
                 return BadRequest();
             }
-            */
-            return new EmptyResult();
         }
     }
 }
