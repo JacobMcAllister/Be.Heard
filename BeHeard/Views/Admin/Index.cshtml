@@ -6,96 +6,99 @@
     <div id='myModalContent'></div>
 </div>
 
+<body style="background-color: #ffcab0;">
 
-<div class="container mb-2 shadow pt-5 bg-white">
+    <div class="container mb-2 shadow pt-5 bg-white h-100" style="">
 
-    <!--Admin Welcome-->
+        <!--Admin Welcome-->
 
-    <div class="container-xxl py-5 pb-2">
-        <div class="container ">
-                    <h1 class="mb-4">Welcome to the Admin <i class="fa fa-hammer" style="color: dodgerblue;"></i> Dashboard</h1>
-                    <p class="mb-4"><strong>Here you will find all available activies and your program exercises.</strong></p>
-                    <div class="row g-4 mb-4">
-@*                        <div class="col-sm-6">
-                            <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                <h1 class="flex-shrink-0 display-5 text-primary mb-0">2/1</h1>
-                                <div class="ps-4">
-                                    <p class="mb-0">day of</p>
-                                    <h6 class="text-uppercase mb-0">last login</h6>
+        <div class="container-xxl py-5 pb-2">
+            <div class="container ">
+                        <h1 class="mb-4">Welcome to the Admin <i class="fa fa-hammer" style="color: dodgerblue;"></i> Dashboard</h1>
+                        <p class="mb-4"><strong>Here you will find all available activies and your program exercises.</strong></p>
+                        <div class="row g-4 mb-4">
+    @*                        <div class="col-sm-6">
+                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0">2/1</h1>
+                                    <div class="ps-4">
+                                        <p class="mb-0">day of</p>
+                                        <h6 class="text-uppercase mb-0">last login</h6>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>*@
-                        <div class="col-sm-6">
-                            <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="@Model" data-time="2000"></span></h1>
-                                <div class="ps-4">
-                                    <p class="mb-0">Total</p>
-                                    <h6 class="text-uppercase mb-0">Users</h6>
+                            </div>*@
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="@Model" data-time="2000"></span></h1>
+                                    <div class="ps-4">
+                                        <p class="mb-0">Total</p>
+                                        <h6 class="text-uppercase mb-0">Users</h6>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+            </div>
         </div>
-    </div>
 
-    <hr style="width:100%" size="3" color="black">
+        <hr style="width:100%" size="3" color="black">
 
-    <div class="container py-5">
-        <div class="container">
-             <div class="row g-4 pb-2 mx-3">
-                <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="color-flip rounded pt-3" id="color-flip">
-                        <div class="p-4">
-                            <i class="fa fa-3x fa-user text-primary mb-4"></i>
-                            <h5>User</h5>
-                            <p>Edit/Display/Search for current Be Heard users.</p>
-                            <a id="userDetails" href="#userDetails" class="stretched-link"> </a>
+        <div class="container py-5">
+            <div class="container">
+                 <div class="row g-4 pb-2 mx-3">
+                    <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                        <div class="color-flip rounded pt-3" id="color-flip">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-user text-primary mb-4"></i>
+                                <h5>User</h5>
+                                <p>Edit/Display/Search for current Be Heard users.</p>
+                                <a id="userDetails" href="#userDetails" class="stretched-link"> </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="color-flip rounded pt-3" id="color-flip">
-                        <div class="p-4">
-                            <i class="fa fa-3x fa-chart-pie text-primary mb-4"></i>
-                            <h5>Demographics</h5>
-                            <p>Visual analytics on the Be Heard user group.</p>
-                            <a id="demographicsDetails" href="#demographicsDetails" class="stretched-link"> </a>
+                    <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                        <div class="color-flip rounded pt-3" id="color-flip">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-chart-pie text-primary mb-4"></i>
+                                <h5>Demographics</h5>
+                                <p>Visual analytics on the Be Heard user group.</p>
+                                <a id="demographicsDetails" href="#demographicsDetails" class="stretched-link"> </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <hr style="width:100%" size="3" color="black">
 
-                <!-- Collapse #userDetailsCollapse-->
-        <div class="panel-collapse collapse py-2" id="userDetailsCollapse">
-            <div class="card card-body" id="myCollapse1">
-                <div class="container-xxl shadow overflow-auto" style="max-height:800px;">
-                    <h1>Loaded User Database - @Model - Users Successfully </h1>
-                    Find by Name: <input type="text" id="searchField" name="searchString"/>
-                    <input id="searchButton" type="submit" class="btn btn-success text-white" />
-                    <hr style="width:100%" size="3" color="black">
-                    <div id="divUserDetails">
-                        <!--- Render Content --->
+                    <!-- Collapse #userDetailsCollapse-->
+            <div class="panel-collapse collapse py-2" id="userDetailsCollapse">
+                <div class="card card-body" id="myCollapse1">
+                    <div class="container-xxl shadow overflow-auto" style="max-height:800px;">
+                        <h1>Loaded User Database - @Model - Users Successfully </h1>
+                        Find by Name: <input type="text" id="searchField" name="searchString"/>
+                        <input id="searchButton" type="submit" class="btn btn-success text-white" />
+                        <hr style="width:100%" size="3" color="black">
+                        <div id="divUserDetails">
+                            <!--- Render Content --->
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-                        <!-- Collapse #demographicsCollapse-->
-        <div class="panel-collapse collapse py-2" id="demographicsCollapse">
-            <div class="card card-body" id="myCollapse1">
-                <div class="container shadow">
-                    <h1>Loaded Demographics - @Model - Users Successfully</h1>
-                    <hr/>
-                    <div id="divDemographicsDetails" overflow-y: hidden;>
+                            <!-- Collapse #demographicsCollapse-->
+            <div class="panel-collapse collapse py-2" id="demographicsCollapse">
+                <div class="card card-body" id="myCollapse1">
+                    <div class="container shadow">
+                        <h1>Loaded Demographics - @Model - Users Successfully</h1>
+                        <hr/>
+                        <div id="divDemographicsDetails" overflow-y: hidden;>
                         
-                        <!--- Render Content --->
+                            <!--- Render Content --->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+</body>
 <style>
     :root {
         --light: #FF9B6A;

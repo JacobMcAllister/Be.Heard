@@ -5,193 +5,197 @@
 @model BeHeard.Models.ExerciseViewModel
 <!--user welcome-->
 
-<div class="container mb-2 shadow pt-5 bg-white">
 
-    <!--User Welcome-->
+<body style="background-color: #ffcab0;">
 
-    <div class="container-xxl py-5 pb-2">
-        <div class="container position-relative">
-            <div class="row g-5 align-items-center bg-image wow zoomIn" style="background-image: url('/images/family_col-01.png'); background-repeat: no-repeat; height: 700px; background-position: top; background-size: cover; ">
-                <div class="col-lg-6 shadow rounded border bg-white p-lg-3 position-absolute bottom-0 start-0">
-                    <h1 class="mb-4">Welcome to <i class="fa fa-boxes" style="color: dodgerblue;"></i> Exercises</h1>
-                    <p class="mb-4"><strong>Here you will find all available activies and your program exercises.</strong></p>
-                    <p class="mb-4"><strong>Remember, "practice makes perfect", so keep stay active and involved in your program and engage in warm-up activities.'</strong></p>
-                    <div class="row g-4 mb-4">
-                        <div class="col-sm-6">
-                            <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                <h1 class="flex-shrink-0 display-5 text-primary mb-0">2/1</h1>
-                                <div class="ps-4">
-                                    <p class="mb-0">Day of</p>
-                                    <h6 class="text-uppercase mb-0">Last Login</h6>
+    <div class="container mb-2 shadow pt-5 bg-white h-100">
+
+        <!--User Welcome-->
+
+        <div class="container-xxl py-5 pb-2">
+            <div class="container position-relative">
+                <div class="row g-5 align-items-center bg-image wow zoomIn" style="background-image: url('/images/family_col-01.png'); background-repeat: no-repeat; height: 700px; background-position: top; background-size: cover; ">
+                    <div class="col-lg-6 shadow rounded border bg-white p-lg-3 position-absolute bottom-0 start-0">
+                        <h1 class="mb-4">Welcome to <i class="fa fa-boxes" style="color: dodgerblue;"></i> Exercises</h1>
+                        <p class="mb-4"><strong>Here you will find all available activies and your program exercises.</strong></p>
+                        <p class="mb-4"><strong>Remember, "practice makes perfect", so keep stay active and involved in your program and engage in warm-up activities.'</strong></p>
+                        <div class="row g-4 mb-4">
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0">2/1</h1>
+                                    <div class="ps-4">
+                                        <p class="mb-0">Day of</p>
+                                        <h6 class="text-uppercase mb-0">Last Login</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="75" data-time="2000"></span></h1>
+                                    <div class="ps-4">
+                                        <p class="mb-0">Total Completed</p>
+                                        <h6 class="text-uppercase mb-0">Activities</h6>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="75" data-time="2000"></span></h1>
-                                <div class="ps-4">
-                                    <p class="mb-0">Total Completed</p>
-                                    <h6 class="text-uppercase mb-0">Activities</h6>
-                                </div>
+                        <a asp-area="" asp-controller="Exercises" asp-action="Index" class="btn btn-primary py-3 px-5 mt-2">Continue Where You Left Off</a>
+                    </div>
+                    @*<div class="col-lg-4 mx-auto">
+                            <div class="g-3 vh-20 d-none d-lg-block">
+                                <img src="/images/family_col-01.png" class="img-responsive" alt="Responsive image" />
+                            </div>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+        <hr style="width:100%" size="3" color="black">
+
+        <!-- Activites -->
+        <div class="container-xxl pt-5 pb-3">
+            <div class="container">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">Activities</h5>
+                    <h1 class="mb-5">Made For You</h1>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="activity-box text-center rounded overflow-hidden position-relative">
+                            <div class="m-4">
+                                <h1><i class="fa fa-feather"></i></h1>
+                            </div>
+                            <h5 class="mb-0">Vowel Training</h5>
+                            <small>Maintain the Decibel Level</small>
+                            <div class="justify-content-center mt-3">
+                                <hr />
+                                <strong>An engaging activitiy to help you focus on maintaining a higher decibel level while speaking.</strong>
+                                <strong>Do your best to keep the bar green while practicing specific sounds.</strong>
+                            </div>
+                            <a href="" class="stretched-link"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="activity-box text-center rounded overflow-hidden position-relative">
+                            <div class="m-4">
+                                <h1><i class="fa fa-lungs"></i></h1>
+                            </div>
+                            <h5 class="mb-0">Breathing</h5>
+                            <small>Diaphragmatic Breathing Tool</small>
+                            <div class="justify-content-center mt-3">
+                                <hr />
+                                <strong>A visual-aid tool to assist you with prompts and advice.</strong>
+                                <strong>Diaphragmatic breathing means actively pulling the diaphragm down with each inward breath. In this way, diaphragmatic breathing helps the lungs fill more efficiently.</strong>
+                                <a href="" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
-                    <a asp-area="" asp-controller="Exercises" asp-action="Index" class="btn btn-primary py-3 px-5 mt-2">Continue Where You Left Off</a>
-                </div>
-                @*<div class="col-lg-4 mx-auto">
-                        <div class="g-3 vh-20 d-none d-lg-block">
-                            <img src="/images/family_col-01.png" class="img-responsive" alt="Responsive image" />
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="activity-box text-center rounded overflow-hidden position-relative">
+                            <div class="m-4">
+                                <h1><i class="fa fa-language"></i></h1>
+                            </div>
+                            <h5 class="mb-0">Phrasing</h5>
+                            <small>Well Spoken Sentences with Pauses</small>
+                            <div class="justify-content-center mt-3">
+                                <hr />
+                                <strong>Focus on your decibel level while we provide you with sentences.</strong>
+                                <strong>Focus on projection and understanding as you progress through sentences designed specifically to provide you with an opportunity to improve.</strong>
+                                <a href="" class="stretched-link"></a>
+                            </div>
                         </div>
-                    </div>*@
+                    </div>
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                        <div class="activity-box text-center rounded overflow-hidden position-relative">
+                            <div class="m-4">
+                                <h1><i class="fa fa-adjust"></i></h1>
+                            </div>
+                            <h5 class="mb-0">Functionality</h5>
+                            <small>Practical and Functional Language</small>
+                            <div class="justify-content-center mt-3">
+                                <hr />
+                                <strong>Repeatedly practice speech with sentences or phrases using rote learning.</strong>
+                                <strong>This tool will assist you by providing common language from everyday use.</strong>
+                                <a href="" class="stretched-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <hr style="width:100%" size="3" color="black">
 
-    <!-- Activites -->
-    <div class="container-xxl pt-5 pb-3">
-        <div class="container">
-            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Activities</h5>
-                <h1 class="mb-5">Made For You</h1>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="activity-box text-center rounded overflow-hidden position-relative">
-                        <div class="m-4">
-                            <h1><i class="fa fa-feather"></i></h1>
-                        </div>
-                        <h5 class="mb-0">Vowel Training</h5>
-                        <small>Maintain the Decibel Level</small>
-                        <div class="justify-content-center mt-3">
-                            <hr />
-                            <strong>An engaging activitiy to help you focus on maintaining a higher decibel level while speaking.</strong>
-                            <strong>Do your best to keep the bar green while practicing specific sounds.</strong>
-                        </div>
-                        <a href="" class="stretched-link"></a>
-                    </div>
+        <!-- Exercises -->
+        <div class="container-xxl pb-3">
+            <div class="container">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">Exercises</h5>
+                    <h1 class="mb-5">Weekly 1 Hour Sessions</h1>
                 </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="activity-box text-center rounded overflow-hidden position-relative">
-                        <div class="m-4">
-                            <h1><i class="fa fa-lungs"></i></h1>
-                        </div>
-                        <h5 class="mb-0">Breathing</h5>
-                        <small>Diaphragmatic Breathing Tool</small>
-                        <div class="justify-content-center mt-3">
-                            <hr />
-                            <strong>A visual-aid tool to assist you with prompts and advice.</strong>
-                            <strong>Diaphragmatic breathing means actively pulling the diaphragm down with each inward breath. In this way, diaphragmatic breathing helps the lungs fill more efficiently.</strong>
-                            <a href="" class="stretched-link"></a>
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="activity-box text-center rounded overflow-hidden position-relative">
+                            <div class="m-4">
+                                <h1><i class="fa fa-feather"></i></h1>
+                            </div>
+                            <h5 class="mb-0">Volume Chasing</h5>
+                            <small>Vowels at the Target Volume</small>
+                            <div class="justify-content-center mt-3">
+                                <hr />
+                                <strong>This exercise is to practice using a vowel sound at a target volume.</strong>
+                                <strong>Low target volume eventually increasing to everyday volume.</strong>
+                            </div>
+                            <a class="stretched-link" asp-area="" asp-controller="Exercises" asp-action="volume_chasing"></a>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="activity-box text-center rounded overflow-hidden position-relative">
-                        <div class="m-4">
-                            <h1><i class="fa fa-language"></i></h1>
-                        </div>
-                        <h5 class="mb-0">Phrasing</h5>
-                        <small>Well Spoken Sentences with Pauses</small>
-                        <div class="justify-content-center mt-3">
-                            <hr />
-                            <strong>Focus on your decibel level while we provide you with sentences.</strong>
-                            <strong>Focus on projection and understanding as you progress through sentences designed specifically to provide you with an opportunity to improve.</strong>
-                            <a href="" class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="activity-box text-center rounded overflow-hidden position-relative">
-                        <div class="m-4">
-                            <h1><i class="fa fa-adjust"></i></h1>
-                        </div>
-                        <h5 class="mb-0">Functionality</h5>
-                        <small>Practical and Functional Language</small>
-                        <div class="justify-content-center mt-3">
-                            <hr />
-                            <strong>Repeatedly practice speech with sentences or phrases using rote learning.</strong>
-                            <strong>This tool will assist you by providing common language from everyday use.</strong>
-                            <a href="" class="stretched-link"></a>
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="activity-box text-center rounded overflow-hidden position-relative">
+                            <div class="m-4">
+                                <h1><i class="fa fa-lungs"></i></h1>
+                            </div>
+                            <h5 class="mb-0">Breathing</h5>
+                            <small>Strengthen the diaphragm</small>
+                            <div class="justify-content-center mt-3">
+                                <hr />
+                                <strong>This exercise is all about strengthening the diaphragm.</strong>
+                                <strong>Good breathing techniques and a strong core will help immensely in speech.</strong>
+                            </div>
+                            <a class="stretched-link" asp-area="" asp-controller="Exercises" asp-action="breathing"></a>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Exercises -->
-    <div class="container-xxl pb-3">
-        <div class="container">
-            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Exercises</h5>
-                <h1 class="mb-5">Weekly 1 Hour Sessions</h1>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="activity-box text-center rounded overflow-hidden position-relative">
-                        <div class="m-4">
-                            <h1><i class="fa fa-feather"></i></h1>
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="activity-box text-center rounded overflow-hidden position-relative">
+                            <div class="m-4">
+                                <h1><i class="fa fa-language"></i></h1>
+                            </div>
+                            <h5 class="mb-0">Phrasing</h5>
+                            <small>Practical Sentences</small>
+                            <div class="justify-content-center mt-3">
+                                <hr />
+                                <strong>The goal of this exercise is to speak random, practical sentences at a standard volume.</strong>
+                                <strong>The exercise is essentially untimed so the focus is on maintaining clarity with a high volume.</strong>
+                            </div>
+                            <a class="stretched-link" asp-area="" asp-controller="Exercises" asp-action="volume_phrasing"></a>
                         </div>
-                        <h5 class="mb-0">Volume Chasing</h5>
-                        <small>Vowels at the Target Volume</small>
-                        <div class="justify-content-center mt-3">
-                            <hr />
-                            <strong>This exercise is to practice using a vowel sound at a target volume.</strong>
-                            <strong>Low target volume eventually increasing to everyday volume.</strong>
-                        </div>
-                        <a class="stretched-link" asp-area="" asp-controller="Exercises" asp-action="volume_chasing"></a>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="activity-box text-center rounded overflow-hidden position-relative">
-                        <div class="m-4">
-                            <h1><i class="fa fa-lungs"></i></h1>
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                        <div class="activity-box text-center rounded overflow-hidden position-relative">
+                            <div class="m-4">
+                                <h1><i class="fa fa-adjust"></i></h1>
+                            </div>
+                            <h5 class="mb-0">Rote Speech</h5>
+                            <small>Odds and Ends</small>
+                            <div class="justify-content-center mt-3">
+                                <hr />
+                                <strong>The rote speech exercise is to get practice with even more practical phrases and everyday speech.</strong>
+                                <strong>This exercise should incorporate all previous exercises, high volume, clarity, strong breathing, and phrasing.</strong>
+                            </div>
+                            <a class="stretched-link" asp-area="" asp-controller="Exercises" asp-action="rote_speech"></a>
                         </div>
-                        <h5 class="mb-0">Breathing</h5>
-                        <small>Strengthen the diaphragm</small>
-                        <div class="justify-content-center mt-3">
-                            <hr />
-                            <strong>This exercise is all about strengthening the diaphragm.</strong>
-                            <strong>Good breathing techniques and a strong core will help immensely in speech.</strong>
-                        </div>
-                        <a class="stretched-link" asp-area="" asp-controller="Exercises" asp-action="breathing"></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="activity-box text-center rounded overflow-hidden position-relative">
-                        <div class="m-4">
-                            <h1><i class="fa fa-language"></i></h1>
-                        </div>
-                        <h5 class="mb-0">Phrasing</h5>
-                        <small>Practical Sentences</small>
-                        <div class="justify-content-center mt-3">
-                            <hr />
-                            <strong>The goal of this exercise is to speak random, practical sentences at a standard volume.</strong>
-                            <strong>The exercise is essentially untimed so the focus is on maintaining clarity with a high volume.</strong>
-                        </div>
-                        <a class="stretched-link" asp-area="" asp-controller="Exercises" asp-action="volume_phrasing"></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="activity-box text-center rounded overflow-hidden position-relative">
-                        <div class="m-4">
-                            <h1><i class="fa fa-adjust"></i></h1>
-                        </div>
-                        <h5 class="mb-0">Rote Speech</h5>
-                        <small>Odds and Ends</small>
-                        <div class="justify-content-center mt-3">
-                            <hr />
-                            <strong>The rote speech exercise is to get practice with even more practical phrases and everyday speech.</strong>
-                            <strong>This exercise should incorporate all previous exercises, high volume, clarity, strong breathing, and phrasing.</strong>
-                        </div>
-                        <a class="stretched-link" asp-area="" asp-controller="Exercises" asp-action="rote_speech"></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</body>
 
 <!-- Old Code -->
 
