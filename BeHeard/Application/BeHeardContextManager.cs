@@ -19,7 +19,6 @@ namespace BeHeard.Application
         }
 
         public IUserRepository UserRepository { get; private set; }
-
         public IUserProfileRepository UserProfileRepository { get; private set; }
 
         public IActivityResultRepository ActivityResultRepository { get; private set; }

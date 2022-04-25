@@ -1,0 +1,16 @@
+@import "variables";
+
+section#LoginForm {
+  margin: 4em 0 19em;
+}
+#LoginHeader {
+  border-top: 2px solid $bh-blue;
+  padding-top: 1.5em;
+  color: $bh-blue;
+}
+#LoginSecondaryControl a {
+  color: $bh-blue;
+}
+#LoginErrorMessage {
+  color: $bh-purple;
+}

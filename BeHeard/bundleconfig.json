@@ -23,6 +23,36 @@
     "sourceMap": false
   },
   {
+    "outputFileName": "wwwroot/js/app.js",
+    "inputFiles": [
+      "Scripts/app.js"
+    ],
+    "minify": {
+      "enabled": false
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/navbar.js",
+    "inputFiles": [
+      "Scripts/navbar.js"
+    ],
+    "minify": {
+      "enabled": false
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/sidenav.js",
+    "inputFiles": [
+      "Scripts/sidenav.js"
+    ],
+    "minify": {
+      "enabled": false
+    },
+    "sourceMap": false
+  },
+  {
     "outputFileName": "wwwroot/js/chart.js",
     "inputFiles": [
       "ResourcePackages/node_modules/chart.js/dist/chart.js"

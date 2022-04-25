@@ -1,19 +1,30 @@
 @import "variables";
 
-.bh-first-content {
-  padding-top: 12em;
-  padding-bottom: 12em;
+@media (min-width: 991px) {
+  .bh-first-content {
+    padding-top: 12em;
+    padding-bottom: 12em;
+  }
+}
+@media (max-width: 991px) {
+  .bh-first-content {
+    padding-top: 5em;
+    padding-bottom: 10em;
+  }
 }
 .bh-first-content img {
   height: 363px;
   width: 330px;
   object-fit: cover;
 }
-.ease-object {
-  transform: translateY(var(--ty));
+#HeroContent img.ease-object {
+  transform: translateY(var(--img-translate));
 }
 .bh-orange-faded-content {
   background-color: $bh-orange-faded;
+}
+#Goals.ease-object {
+  transform: translateY(var(--goals-sect-translate));
 }
 #Goals .container {
   padding: 10em 0 10em 0;
@@ -24,6 +35,10 @@ section#Goals {
 }
 #GoalsContent img {
   object-fit: cover;
+}
+#TheTeam.ease-object {
+   opacity: (var(--team-op));
+   transform: translateY(var(--team-sect-translate));
 }
 #TheTeamContent .card {
   background-image: $bh-card-orange-light-gradient;
