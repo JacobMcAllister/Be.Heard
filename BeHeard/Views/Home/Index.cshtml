@@ -60,7 +60,7 @@
                 </div>
                 <div class="col 3 m-2 align-content-center">
                     <div class="image-container">
-                        <img src="/images/alex_with_empty_bubble.png" style="max-width: 600px; width:inherit; height:inherit" alt="img">
+                        <img src="/images/alex_with_empty_bubble.png" style="width:inherit; height:inherit" alt="img">
                         <div class="top-left"><div class="centered" id="speech_bubble" style="max-height:100px;width:100%;">Hi I'm Alex</div></div>
                     </div>
                 </div> 
@@ -93,7 +93,7 @@
 }
 
 .image-container {
-  max-width: 600px;
+  max-width: 506.99px;
   outline: solid;
   position: relative;
   color: white;
@@ -965,9 +965,9 @@
 
         function updateScore(){
             var scores_element = document.createElement('scores');
-            var scores_value = levenshteinDistance(modelCommunication.response_sentence, sentence_selection);
+            var scores_value = levenshteinDistance(modelCommunication.response_sentence, sentence_selection.replace(',', ""));
             console.log("Score: " + scores_value);
-            scores_element.innerHTML = "Sentence: " + sentence_selection + "<br />Result: " + modelCommunication.response_sentence + "<br />Score: " + scores_value + "<hr><br/>";
+            scores_element.innerHTML = "Sentence: " + sentence_selection + "<br />Result: " + modelCommunication.response_sentence + "<br />Score: " + Math.floor((1/(scores_value - 1)) * 100) + "<hr><br/>";
             //scores_element.style.outline = "#4CAF50 solid 10px";
             //scores_element.style.borderStyle = "solid";
             document.getElementById('scoreList').appendChild(scores_element);
@@ -975,10 +975,10 @@
                 case (scores_value > 20):
                     speech_bubble_element.innerHTML = "Practice makes permanent.";
                     break;
-                case ((scores_value < 20) && (scores_value > 10)):
+                case ((scores_value < 20) && (scores_value > 5)):
                     speech_bubble_element.innerHTML = "You are doing a great job!";
                     break;
-                case (scores_value < 10):
+                case (scores_value < 5):
                     speech_bubble_element.innerHTML = "That sentence was near perfect!";
                     break;
                 default:
