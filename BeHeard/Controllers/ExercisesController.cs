@@ -104,8 +104,13 @@ namespace BeHeard.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateDBwResults(User user, ActivityResult activityresult, string Decibel, string viewExercise, string viewSyllable, string viewDifficulty, string viewCategory, int SentenceSet)
+        //public IActionResult UpdateDBwResults(User user, ActivityResult activityresult, string Decibel, string viewExercise, string viewSyllable, string viewDifficulty, string viewCategory, int SentenceSet)
+        public IActionResult UpdateDBwResults()
         {
+            var service = new SessionService(HttpContext);
+            var user = _contextManager.UserRepository.GetUserByUsername(ServiceFilterAttribute.Get().Username);
+            
+        /*
             IEnumerable<ActivityResult> results = _contextManager.ActivityResultRepository.GetActivityResultsByUser(user);
             activityresult = results.FirstOrDefault();
 
@@ -194,6 +199,8 @@ namespace BeHeard.Controllers
             {
                 return BadRequest();
             }
+            */
+            return new EmptyResult();
         }
     }
 }

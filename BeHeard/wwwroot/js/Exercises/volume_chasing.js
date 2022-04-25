@@ -18,10 +18,11 @@ var diff_value = null;
 var scaling_factor = 2.2;
 var target_fillVol = 100;
 var total_time = 0;
+var syllable1 = null;
 var syllablechoice = null;
 
 // DB Fields
-var SentenceSet = null;
+var SentenceSet = -1;
 var Decibel = null;
 var Syllable = null;
 var Difficulty = null;
@@ -31,21 +32,25 @@ var Category = null;
 function UpdateDB(volume) {
 
     $.ajax({
-        url: "/ExercisesController/UpdateDBwResults",
+        url: "UpdateDBwResults",
         type: "POST",
         data: {
+            /*
             Decibel: volume,
             viewSyllable: syllablechoice,
             viewDifficulty: diff_value,
-            viewExercise: VolumeChasing,
-            viewCategory: NONE,
+            viewExercise: "VolumeChasing",
+            viewCategory: "NONE",
             SentenceSet: SentenceSet
+            */
         }
     })
 }
 
+
 // Grab Syllable
-syllablechoice = document.getElementById("dropdown").value;
+syllable1 = document.getElementById("dropdown");
+syllablechoice = syllable1.value;
 
 // Grab our canvas
 canvasContext = document.getElementById("meter").getContext("2d");
@@ -284,25 +289,25 @@ function difficulty_dropdown() {
 
     function alter_difficulty(value) {
         switch (true) {
-            case (value == 'easy'):
+            case (value == 'Easy'):
                 target_fillVol = 100;
                 timeleft = 10;
                 document.getElementById("diff_span").innerHTML = timeleft;
                 diff_alert(1);
                 break;
-            case (value == 'medium'):
+            case (value == 'Medium'):
                 target_fillVol = 125;
                 timeleft = 12;
                 document.getElementById("diff_span").innerHTML = timeleft;
                 diff_alert(2);
                 break;
-            case (value == 'hard'):
+            case (value == 'Hard'):
                 target_fillVol = 200;
                 timeleft = 15;
                 document.getElementById("diff_span").innerHTML = timeleft;
                 diff_alert(3);
                 break;
-            case (value == 'impossible'):
+            case (value == 'Impossible'):
                 target_fillVol = WIDTH;
                 timeleft = 20;
                 document.getElementById("diff_span").innerHTML = timeleft;
