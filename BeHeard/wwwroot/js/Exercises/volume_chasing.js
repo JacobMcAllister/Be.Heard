@@ -18,6 +18,34 @@ var diff_value = null;
 var scaling_factor = 2.2;
 var target_fillVol = 100;
 var total_time = 0;
+var syllablechoice = null;
+
+// DB Fields
+var SentenceSet = null;
+var Decibel = null;
+var Syllable = null;
+var Difficulty = null;
+var Exercise = null;
+var Category = null;
+
+function UpdateDB(volume) {
+
+    $.ajax({
+        url: "/ExercisesController/UpdateDBwResults",
+        type: "POST",
+        data: {
+            Decibel: volume,
+            viewSyllable: syllablechoice,
+            viewDifficulty: diff_value,
+            viewExercise: VolumeChasing,
+            viewCategory: NONE,
+            SentenceSet: SentenceSet
+        }
+    })
+}
+
+// Grab Syllable
+syllablechoice = document.getElementById("dropdown").value;
 
 // Grab our canvas
 canvasContext = document.getElementById("meter").getContext("2d");
@@ -216,8 +244,10 @@ function start_timer() {
                 }
 
                 if (loud) {
+                    updateDB(loud);
                     alert("Wow!\n'Normal' voice volume is around 50-60 dba.\nYour volume was" + output + "dba!")
                 } else {
+                    UpdateDB(loud);
                     alert("Great Job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + output + " dba.");
                 }
 
