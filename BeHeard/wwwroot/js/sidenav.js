@@ -1,4 +1,11 @@
 $(document).ready(function(){
+    // Persist user actions at bottom of viewport
+    let userAction = $('#UserAction');
+    let initialHeight = $('#UserAction').height();
+    userAction.data('height', initialHeight);
+    PersistUserActionToBottomOfParent();
+    window.addEventListener('resize', PersistUserActionToBottomOfParent);
+    
     // nav UX current page
     let userMenuList = $('#UserMenu').find('li');
     let specialAccessMenuList = $('#SpecialAccessMenu').find('li').not(':first-child');
@@ -46,3 +53,13 @@ document.addEventListener('DOMContentLoaded', function () {
             .toggleClass('fa-times');
     });
 });
+
+function PersistUserActionToBottomOfParent() {
+    let userAction = $('#UserAction');
+    userAction.height(userAction.data('height')); // reset
+    let userActionPosition = $('#UserAction').position().top + $('#UserAction').height();
+    let offset = window.innerHeight - userActionPosition;
+    if (offset > 0) {
+        userAction.height(offset);
+    }
+}
