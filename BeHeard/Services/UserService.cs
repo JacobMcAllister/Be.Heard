@@ -87,6 +87,11 @@ namespace BeHeard.Services
             if (user != null) return true;
             else return false;
         }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            return _beHeardContextManager.UserRepository.GetAllUsers();
+        }
     }
 
     public static class UserRoles

@@ -19720,6 +19720,7 @@ readers do not read off random characters that represent icons */
 
 #UserAction {
   padding: 1em;
+  opacity: 0;
 }
 
 #UserAction .dropdown-toggle {
@@ -19848,6 +19849,48 @@ section#LoginForm {
 
 #LoginErrorMessage {
   color: #8a4f7d;
+}
+
+#MedicalProvider ul {
+  padding-top: 1.7em;
+}
+
+#MedicalProvider ul li:not(:first-child) {
+  opacity: 0;
+  top: 50px;
+}
+
+#MedicalProvider li img {
+  width: 4em;
+  padding-top: 0.3em;
+}
+
+#MedicalProvider li a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#MedicalProvider li a > span {
+  padding: 1em 1em;
+}
+
+#MedicalProvider li div > h6, #MedicalProvider li div > .h6 {
+  padding: 1em 0;
+}
+
+#MedicalProvider li div span > h6, #MedicalProvider li div span > .h6,
+#MedicalProvider li div span > p {
+  margin: 0;
+}
+
+#MedicalProvider ul > li:first-child {
+  border-left: none;
+  border-right: none;
+}
+
+#MedicalProvider ul > li:first-child h6, #MedicalProvider ul > li:first-child .h6 {
+  padding: 0;
+  margin: 0;
 }
 
 /*# sourceMappingURL=main.css.map */
