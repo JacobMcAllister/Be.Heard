@@ -12,7 +12,7 @@ public class NavigationViewComponent : ViewComponent
         {
             var model = new SideNavigationModel
             {
-                Admin               = null,
+                Admin               = Url.Action("Index", "Admin"),
                 AdminIcon           = "fas fa-user-lock",
                 Dashboard           = Url.Action("Index", "Dashboard"),
                 DashboardIcon       = "fas fa-th-large",
