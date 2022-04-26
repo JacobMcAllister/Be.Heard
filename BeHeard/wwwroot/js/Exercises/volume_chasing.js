@@ -18,6 +18,37 @@ var diff_value = null;
 var scaling_factor = 2.2;
 var target_fillVol = 100;
 var total_time = 0;
+var syllable1 = null;
+var syllablechoice = null;
+
+// DB Fields
+var SentenceSet = -1;
+var Decibel = null;
+var Syllable = null;
+var Difficulty = null;
+var Exercise = null;
+var Category = null;
+
+function UpdateDB(volume) {
+
+    $.ajax({
+        url: "UpdateDBwResults",
+        type: "POST",
+        data: {
+            Decibel: volume,
+            viewSyllable: syllablechoice,
+            viewDifficulty: diff_value,
+            viewExercise: "VolumeChasing",
+            viewCategory: "NONE",
+            SentenceSet: SentenceSet
+        }
+    })
+}
+
+
+// Grab Syllable
+syllable1 = document.getElementById("dropdown");
+syllablechoice = syllable1.value;
 
 // Grab our canvas
 canvasContext = document.getElementById("meter").getContext("2d");
@@ -138,13 +169,14 @@ function pause_Play() {
 document.getElementById("startButton").onclick = function () { start_timer() };
 
 function start_timer() {
+    let exercise_timer;
 
     // Connect
     micStreamSourceNode.connect(micAnalyser);
     if (audioContext.state === 'suspended') {
         audioContext.resume();
     }
-
+    exercise_timer = timeleft;
     total_time = timeleft;
     fillVol = 0;
     total_decibel = 0;
@@ -156,7 +188,7 @@ function start_timer() {
         animateVoice();
 
         if (!isPaused) {
-            if (timeleft < 0) {
+            if (exercise_timer < 0) {
                 micStreamSourceNode.disconnect(micAnalyser);
                 isRecording = false;
 
@@ -178,7 +210,7 @@ function start_timer() {
 
                 // Percent of meter
                 percent_decibel = (average_over_meter / WIDTH) * 100;
-                let output;
+                var output;
                 let loud = false;
 
                 switch (true) {
@@ -211,20 +243,25 @@ function start_timer() {
                         break;
                     case (percent_decibel > 65.1):
                         loud = true;
-                        output = " greater then 100";
+                        output = ">100";
                         break;
                 }
 
                 if (loud) {
+                    UpdateDB(output);
                     alert("Wow!\n'Normal' voice volume is around 50-60 dba.\nYour volume was" + output + "dba!")
+                    //document.location.reload();
                 } else {
+                    UpdateDB(output);
                     alert("Great Job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + output + " dba.");
+                    //document.location.reload();
                 }
 
             } else {
-                document.getElementById("Timer").innerHTML = "Seconds Remaining: " + timeleft;
+                console.log(exercise_timer);
+                document.getElementById("Timer").innerHTML = "Seconds Remaining: " + exercise_timer;
             }
-            timeleft--;
+            exercise_timer--;
         }
     }
 
@@ -254,25 +291,25 @@ function difficulty_dropdown() {
 
     function alter_difficulty(value) {
         switch (true) {
-            case (value == 'easy'):
+            case (value == 'Easy'):
                 target_fillVol = 100;
                 timeleft = 10;
                 document.getElementById("diff_span").innerHTML = timeleft;
                 diff_alert(1);
                 break;
-            case (value == 'medium'):
+            case (value == 'Medium'):
                 target_fillVol = 125;
                 timeleft = 12;
                 document.getElementById("diff_span").innerHTML = timeleft;
                 diff_alert(2);
                 break;
-            case (value == 'hard'):
+            case (value == 'Hard'):
                 target_fillVol = 200;
                 timeleft = 15;
                 document.getElementById("diff_span").innerHTML = timeleft;
                 diff_alert(3);
                 break;
-            case (value == 'impossible'):
+            case (value == 'Impossible'):
                 target_fillVol = WIDTH;
                 timeleft = 20;
                 document.getElementById("diff_span").innerHTML = timeleft;
