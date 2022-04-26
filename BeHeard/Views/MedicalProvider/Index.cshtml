@@ -1,3 +1,11 @@
 @model BeHeard.Models.MedicalProviderViewModel
 
-<h1>this is a test.</h1>
+<section id="MedicalProvider">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                @await Component.InvokeAsync("PatientList")
+            </div>
+        </div> 
+    </div>
+</section>
