@@ -118,106 +118,104 @@
 
         <!--User Dashboard Charts-->
 
-        <div class="container py-5">
-            <div class="container">
-                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">Your Services</h5>
-                    <h1 class="mb-5">Explore Yours Services</h1>
-                </div>
-                <div class="row g-4 pb-2">
-                    <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="color-flip rounded pt-3">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-chart-bar text-primary mb-4"></i>
-                                <h5>Program Progress</h5>
-                                <p>This is where you can see how much of your program you have completed</p>
-                                <a id="progressNav" href="#myProgressNav" class="stretched-link"> </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="color-flip pt-3" id="color-flip">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-award mb-4 text-primary"></i>
-                                <h5>Activities</h5>
-                                <p>This is where you can see how many of each activity you have completed</p>
-                                <a id="activitiesNav" href="#myActivitiesLink" class="stretched-link"> </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="color-flip rounded pt-3">
-                            <div class="p-4">
-                                <i class="color-flip fa fa-3x fa-user-friends text-primary mb-4"></i>
-                                <h5>Resources</h5>
-                                <p>You will find here a collection of resources gathered by the Be Heard team to assist you.</p>
-                                <a id="myResourceLink" href="#myResource" class="stretched-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="color-flip rounded pt-3" id="color-flip">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-headset text-primary mb-4"></i>
-                                <h5>Assistance</h5>
-                                <p>E-mail one of the team-members to assist you with whatever issues you might be having.</p>
-                                <a id="myContactLink" href="#myContact" class="stretched-link"> </a>
-                            </div>
+    <div class="container py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Your Services</h5>
+                <h1 class="mb-5">Explore Your Services</h1>
+            </div>
+            <div class="row g-4 pb-2">
+                <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="color-flip rounded pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-chart-bar text-primary mb-4"></i>
+                            <h5>Program Progress</h5>
+                            <p>This is where you can see how much of your program you have completed</p>
+                            <a id="progressNav" href="#myProgressNav" class="stretched-link"> </a>
                         </div>
                     </div>
                 </div>
-                <hr/>
-                <!-- Collapse #myResource-->
-                <div class="panel-collapse collapse show py-2" id="myResource">
-                    <div class="card card-body" id="myCollapse1">
-                        <h3>Speech Therapist In Your Area</h3>
-                          <!-- The slide-out panel for showing place details -->
-                          <div id="panel">Click any marker to see details.</div>
-                          <!-- Map appears here -->
-                          <div id="map" style="height:500px; width:100%;"></div>                
+                <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="color-flip pt-3" id="color-flip">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-award mb-4 text-primary"></i>
+                            <h5>Activities</h5>
+                            <p>This is where you can see how many of each activity you have completed</p>
+                            <a id="activitiesNav" href="#myActivitiesLink" class="stretched-link"> </a>
+                        </div>
                     </div>
                 </div>
-                <!-- Collapse #myContact-->
-                <div class="collapse py-2" id="myContact">
-                    <div class="card card-body">
-                        <form method="post" enctype="multipart/form-data" asp-action="ContactEmail" asp-controller="Dashboard">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="Name" placeholder="Enter Your Name">
-                                        <label for="Name">@Model.FullName</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control" id="Email" placeholder="Enter Your Email">
-                                        <label for="Email">@Model.User.Email</label>
-                                    </div>
-                                </div>
-                                 <div class="col-md-12">
-                                    <div class="form-floating">
-                                    <input type="text" class="form-control" id="Subject" placeholder="Enter Your Subject">
-                                        <label for="Subject">Subject</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Leave a message here" id="Message" style="height: 150px"></textarea>
-                                        <label for="Message">Message</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="color-flip rounded pt-3">
+                        <div class="p-4">
+                            <i class="color-flip fa fa-3x fa-user-friends text-primary mb-4"></i>
+                            <h5>Resources</h5>
+                            <p>You will find here a collection of resources gathered by the Be Heard team to assist you.</p>
+                            <a id="myResourceLink" href="#myResource" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="color-flip rounded pt-3" id="color-flip">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-headset text-primary mb-4"></i>
+                            <h5>Assistance</h5>
+                            <p>E-mail one of the team-members to assist you with whatever issues you might be having.</p>
+                            <a id="myContactLink" href="#myContact" class="stretched-link"> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <!-- Collapse #myResource-->
+            <div class="panel-collapse collapse show py-2" id="myResource">
+                <div class="card card-body" id="myCollapse1">
+                    <h3>Speech Therapist In Your Area</h3>
+                      <!-- The slide-out panel for showing place details -->
+                      <div id="panel">Click any marker to see details.</div>
+                      <!-- Map appears here -->
+                      <div id="map" style="height:500px; width:100%;"></div>                
+                </div>
+            </div>
+            <!-- Collapse #myContact-->
+            <div class="collapse py-2" id="myContact">
+                <div class="card card-body">
+                    <form method="post" enctype="multipart/form-data" asp-action="ContactEmail" asp-controller="Dashboard">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="Name" placeholder="Enter Your Name">
+                                    <label for="Name">@Model.FullName</label>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="Email" placeholder="Enter Your Email">
+                                    <label for="Email">@Model.User.Email</label>
+                                </div>
+                            </div>
+                             <div class="col-md-12">
+                                <div class="form-floating">
+                                <input type="text" class="form-control" id="Subject" placeholder="Enter Your Subject">
+                                    <label for="Subject">Subject</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a message here" id="Message" style="height: 150px"></textarea>
+                                    <label for="Message">Message</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</body>
-
+</div>
 
 <style>
     :root {
@@ -259,6 +257,8 @@
 
 @section Scripts
 {
+    <script src="~/js/app.js"></script>
+    
 <script>
     /* Note: This example requires that you consent to location sharing when
      * prompted by your browser. If you see the error "Geolocation permission

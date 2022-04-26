@@ -1,0 +1,48 @@
+@import "variables";
+
+#SideNav {
+  background-color: $bh-blue-dark;
+  color: white;
+}
+.nav-item > a > span {
+  display: inline-block;
+}
+.bh-nav-link-light {
+  color: white;
+}
+.bh-nav-link-light:hover {
+  color: $bh-orange-light;
+}
+#SideNavLogoWrapper {
+  padding: 1.8em 0 1em 0;
+}
+#SideNavLogo {
+  padding: 0.5em;
+}
+#SpecialAccessMenu {
+  margin-top: 2.5em;
+}
+#SpecialAccessMenu li:first-child {
+  padding: 0 1em 0.5em 1em;
+  font-weight: 600;
+}
+#UserAction {
+  padding: 1em;
+}
+#UserAction .dropdown-toggle {
+  color: white;
+  text-decoration: none;
+}
+#UserAction .dropdown-toggle:hover {
+  color: $bh-orange-light;
+}
+#UserAvatar {
+  text-align: center;
+  width: 1.85em;
+}
+#MobileNavBarToggle {
+  color: white;
+}
+#MobileNavBarContent ul li a {
+  color: white;
+}

@@ -13,7 +13,8 @@
         public string       LastName     { get; set; }
         public string       PhoneNumber  { get; set; }
         public string       Username     { get; set; }
-        public string icon { get; set; }
+        public string icon { get; set; } // Better name is 'Avatar'
         public Subscription Subscription { get; set; }
+        // public BeHeardRole Role { get; }
     }
 }

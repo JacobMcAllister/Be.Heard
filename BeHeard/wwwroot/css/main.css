@@ -19636,6 +19636,7 @@ readers do not read off random characters that represent icons */
 }
 
 .bh-btn-primary:hover {
+  color: white;
   background-color: #0b3954;
   border-color: #0b3954;
 }
@@ -19655,6 +19656,94 @@ readers do not read off random characters that represent icons */
   object-fit: cover;
 }
 
+#SignInLink {
+  margin-right: 1em;
+}
+
+.navbar-toggler {
+  outline: transparent !important;
+  border-color: transparent !important;
+  background-color: transparent !important;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.navbar-toggler[aria-expanded*=false] {
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+.navbar-toggler[aria-expanded*=true] {
+  -webkit-transform: rotate(-180deg);
+  -moz-transform: rotate(-180deg);
+  -o-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+}
+
+#SideNav {
+  background-color: #08283a;
+  color: white;
+}
+
+.nav-item > a > span {
+  display: inline-block;
+}
+
+.bh-nav-link-light {
+  color: white;
+}
+
+.bh-nav-link-light:hover {
+  color: #ffd4b7;
+}
+
+#SideNavLogoWrapper {
+  padding: 1.8em 0 1em 0;
+}
+
+#SideNavLogo {
+  padding: 0.5em;
+}
+
+#SpecialAccessMenu {
+  margin-top: 2.5em;
+}
+
+#SpecialAccessMenu li:first-child {
+  padding: 0 1em 0.5em 1em;
+  font-weight: 600;
+}
+
+#UserAction {
+  padding: 1em;
+}
+
+#UserAction .dropdown-toggle {
+  color: white;
+  text-decoration: none;
+}
+
+#UserAction .dropdown-toggle:hover {
+  color: #ffd4b7;
+}
+
+#UserAvatar {
+  text-align: center;
+  width: 1.85em;
+}
+
+#MobileNavBarToggle {
+  color: white;
+}
+
+#MobileNavBarContent ul li a {
+  color: white;
+}
+
 #notification {
   color: white;
   background-color: #0b3954;
@@ -19672,23 +19761,34 @@ readers do not read off random characters that represent icons */
   text-decoration: underline;
 }
 
-.bh-first-content {
-  padding-top: 12em;
-  padding-bottom: 12em;
+@media (min-width: 991px) {
+  .bh-first-content {
+    padding-top: 12em;
+    padding-bottom: 12em;
+  }
 }
-
+@media (max-width: 991px) {
+  .bh-first-content {
+    padding-top: 5em;
+    padding-bottom: 10em;
+  }
+}
 .bh-first-content img {
   height: 363px;
   width: 330px;
   object-fit: cover;
 }
 
-.ease-object {
-  transform: translateY(var(--ty));
+#HeroContent img.ease-object {
+  transform: translateY(var(--img-translate));
 }
 
 .bh-orange-faded-content {
   background-color: #e7cfc3;
+}
+
+#Goals.ease-object {
+  transform: translateY(var(--goals-sect-translate));
 }
 
 #Goals .container {
@@ -19702,6 +19802,11 @@ section#Goals {
 
 #GoalsContent img {
   object-fit: cover;
+}
+
+#TheTeam.ease-object {
+  opacity: var(--team-op);
+  transform: translateY(var(--team-sect-translate));
 }
 
 #TheTeamContent .card {
@@ -19727,10 +19832,22 @@ section#RegistrationForm {
   color: #0b3954;
 }
 
-#RegistrationSubmitButtonContainer button {
-  background-color: #fc6801;
-  border-color: #fc6801;
-  color: white;
+section#LoginForm {
+  margin: 4em 0 19em;
+}
+
+#LoginHeader {
+  border-top: 2px solid #0b3954;
+  padding-top: 1.5em;
+  color: #0b3954;
+}
+
+#LoginSecondaryControl a {
+  color: #0b3954;
+}
+
+#LoginErrorMessage {
+  color: #8a4f7d;
 }
 
 /*# sourceMappingURL=main.css.map */

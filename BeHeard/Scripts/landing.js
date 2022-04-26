@@ -40,24 +40,25 @@ $(document).ready(() => {
            to: 'top-top',
            direct: true,
            props: {
-               '--ty': {
+               '--img-translate': {
                    from: '0',
-                   to: `${alternate*offset+4}px`,
+                   to: `${alternate*offset}px`,
                    timing: timing
                }
            }
        }));
     });
+    
     let GoalsSection = document.getElementById('Goals');
     easeObjects.push(basicScroll.create({
         elem: GoalsSection,
-        from: `0`,
+        from: 'top-middle',
         to: 'top-top',
         direct: false,
         props: {
-            '--ty': {
+            '--goals-sect-translate': {
                 from: '0',
-                to: `-${$('section#Goals').offset().top / 2}px`,
+                to: '-200px',
                 timing: GoalsSection.getAttribute('data-timing')
             },
             '--op': {
@@ -68,8 +69,28 @@ $(document).ready(() => {
         }
     }));
     
+    let TheTeamSection = document.getElementById('TheTeam');
+    easeObjects.push(basicScroll.create({
+        elem: GoalsSection,
+        from: 'top-top',
+        to: 'middle-top',
+        direct: false,
+        props: {
+            '--team-sect-translate': {
+                from: '0',
+                to: '-250px',
+                timing: TheTeamSection.getAttribute('data-timing')
+            },
+            '--team-op': {
+                from: '0',
+                to: '1',
+                timing: TheTeamSection.getAttribute('data-timing')
+            }
+        }
+    }));
+    
     $(document).on('scroll', () => {
-       if ($(document).scrollTop() >= $('section#Goals').position().top * 0.5) {
+       if ($(document).scrollTop() >= $('section#Goals').position().top * 0.15) {
            let time = 250;
            GoalsContentImages.each((i,e) => {
                setTimeout(() => {
