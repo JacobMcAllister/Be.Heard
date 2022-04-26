@@ -20,7 +20,7 @@ public class NavigationViewComponent : ViewComponent
                 ExercisesIcon       = "fas fa-dumbbell",
                 Home                = Url.Action("Index", "Home"),
                 HomeIcon            = "fas fa-house-user",
-                MedicalProvider     = null,
+                MedicalProvider     = Url.Action("Index", "MedicalProvider"),
                 MedicalProviderIcon = "fas fa-user-md"
             };
             return Task.FromResult<IViewComponentResult>(View("SideNav", model));
