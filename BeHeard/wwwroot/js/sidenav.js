@@ -62,4 +62,5 @@ function PersistUserActionToBottomOfParent() {
     if (offset > 0) {
         userAction.height(offset);
     }
+    userAction.css('opacity', 1);
 }
