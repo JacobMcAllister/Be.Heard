@@ -96,11 +96,11 @@ function random_Int(min, max) {
 function get_Randomsentence(option_array) {
     let loop = true;
 
-    sentence_Choice = random_Int(0, 4);
+    sentence_Choice = random_Int(0, 5);
     current_sentence = sentence_Choice;
     if (current_sentence === last_sentence) {
         while (loop) {
-            sentence_Choice = random_Int(0, 4);
+            sentence_Choice = random_Int(0, 5);
             current_sentence = sentence_Choice;
             if (current_sentence != last_sentence) {
                 loop = false

@@ -11,7 +11,7 @@
 
 <!DOCTYPE html>
 <html>
-<body onload="difficulty_dropdown()">
+<body onload="difficulty_dropdown();grab_syllable();">
 <br />
 <div class="col text-center align-items-center shadow rounded border bg-white wow fadeInDown">
     <h1>Hello @Model.FullName</h1>
@@ -50,7 +50,7 @@
             <h3>Syllable</h3>
             <div id="dropdown">
                 <label for="syllables">Choose a Syllable:</label>
-                <select name="syllable" id="syllable" onchange="">
+                <select name="syllable" id="syllable" onchange="grab_syllable()">
                     <option value="A">A</option>
                     <option value="E">E</option>
                     <option value="O">O</option>

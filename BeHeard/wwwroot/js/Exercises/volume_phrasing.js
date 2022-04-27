@@ -49,16 +49,16 @@ function UpdateDB(volume) {
 }
 
 const sentences = [
-    "The mute muffled the high tones of the horn. Slide the box into the empty space. The store walls were lined with colored frocks.",
-    "The gold ring fits only a pierced ear. The plant grew large and green in the window. The peace league met to discuss their plans.",
-    "The old pan was covered with hard fudge. The beam dropped down on the workmen's head. The rise to fame of a person takes luck.",
-    "Watch the log float in the wide river. Pink clouds floated with the breeze. Paper is scarce so write with much care.",
-    "The node on the stalk of wheat grew daily. She danced like a swan, tall and graceful. The quick fox jumped on the sleeping cat.",
-    "Write fast, if you want to finish early. The tube was blown and the tire flat and useless. The nozzle of the fire hose was bright brass.",
-    "His shirt was clean but one button was gone. Let's all join as we sing the last chorus. Time brings us many changes.",
-    "The barrel of beer was a brew of malt and hops. The last switch cannot be turned off. The purple tie was ten years old.",
-    "Tin cans are absent from store shelves. The fight will end in just six minutes. Men think and plan and sometimes act.",
-    "The heap of fallen leaves was set on fire. It is late morning on the old wall clock. Scrw the round cap on as tight as needed."
+    "The mute muffled the high tones of the horn.\nSlide the box into the empty space.\nThe store walls were lined with colored frocks.",
+    "The gold ring fits only a pierced ear.\nThe plant grew large and green in the window.\nThe peace league met to discuss their plans.",
+    "The old pan was covered with hard fudge.\nThe beam dropped down on the workmen's head.\nThe rise to fame of a person takes luck.",
+    "Watch the log float in the wide river.\nPink clouds floated with the breeze.\nPaper is scarce so write with much care.",
+    "The node on the stalk of wheat grew daily.\nShe danced like a swan, tall and graceful.\nThe quick fox jumped on the sleeping cat.",
+    "Write fast, if you want to finish early.\nThe tube was blown and the tire flat and useless.\nThe nozzle of the fire hose was bright brass.",
+    "His shirt was clean but one button was gone.\nLet's all join as we sing the last chorus.\nTime brings us many changes.",
+    "The barrel of beer was a brew of malt and hops.\nThe last switch cannot be turned off.\nThe purple tie was ten years old.",
+    "Tin cans are absent from store shelves.\nThe fight will end in just six minutes.\nMen think and plan and sometimes act.",
+    "The heap of fallen leaves was set on fire.\nIt is late morning on the old wall clock.\nScrew the round cap on as tight as needed."
 ];
 
 // Grab our canvas
