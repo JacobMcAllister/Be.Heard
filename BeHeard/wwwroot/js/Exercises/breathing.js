@@ -1,9 +1,14 @@
 ﻿var timer = 14;
+var timer_sec = 14000;
 var breatheIn = 7;
+var breatheIn_sec = 7000;
+var breatheOut_sec = 7000;
 var breatheOut = 7;
 var difficulty = null;
 var diff_val = null;
 var downloadTimer = null;
+var container = document.getElementById("breathing_anim");
+var text = document.getElementById("text");
 
 // DB Fields
 var SentenceSet = -1;
@@ -143,3 +148,18 @@ function difficulty_dropdown() {
 
     alter_difficulty(diff_value);
 }
+
+breathe_animation();
+
+function breathe_animation() {
+    text.innerHTML = "Breathe In";
+    container.className = 'container grow';
+
+    setTimeout(() => {
+        text.innerHTML = "Breathe Out";
+        container.className = 'container shrink';
+
+    }, breatheIn_sec)
+}
+
+setInterval(breathe_animation, timer_sec)
