@@ -53,6 +53,16 @@
     "sourceMap": false
   },
   {
+    "outputFileName": "wwwroot/js/patient-list.js",
+    "inputFiles": [
+      "Scripts/patient-list.js"
+    ],
+    "minify": {
+      "enabled": false
+    },
+    "sourceMap": false
+  },
+  {
     "outputFileName": "wwwroot/js/chart.js",
     "inputFiles": [
       "ResourcePackages/node_modules/chart.js/dist/chart.js"
