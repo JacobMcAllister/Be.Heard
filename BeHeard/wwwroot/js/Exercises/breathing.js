@@ -163,3 +163,5 @@ function breathe_animation() {
 }
 
 setInterval(breathe_animation, timer_sec)
+
+//animation: rotate 14s linear forwards infinite;
