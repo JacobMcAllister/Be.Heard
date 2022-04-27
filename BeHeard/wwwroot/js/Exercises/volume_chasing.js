@@ -49,6 +49,7 @@ function UpdateDB(volume) {
 // Grab Syllable
 syllable1 = document.getElementById("dropdown");
 syllablechoice = syllable1.value;
+Syllable = syllablechoice;
 
 // Grab our canvas
 canvasContext = document.getElementById("meter").getContext("2d");
@@ -309,7 +310,7 @@ function difficulty_dropdown() {
                 document.getElementById("diff_span").innerHTML = timeleft;
                 diff_alert(3);
                 break;
-            case (value == 'Impossible'):
+            case (value == 'Extreme'):
                 target_fillVol = WIDTH;
                 timeleft = 20;
                 document.getElementById("diff_span").innerHTML = timeleft;

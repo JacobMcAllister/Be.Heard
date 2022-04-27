@@ -34,10 +34,10 @@
             <div id="diff_dropdown">
                 <label for="difficulties">Choose a Difficulty: </label>
                 <select name="difficulty" id="diff_option" onchange="difficulty_dropdown()">
-                    <option value="easy">easy</option>
-                    <option value="medium">medium</option>
-                    <option value="hard">hard</option>
-                    <option value="impossible">impossible</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                    <option value="Extreme">Extreme</option>
                 </select>
             </div>
             <br />
@@ -65,7 +65,7 @@
                 <div id="random_button">
                     <button id="random" type="button" onclick="getSentence()">Randomize</button>
                 </div>
-                <div id="random_sentence" style="font-size:25px"></div>
+                <div id="random_sentence" style="font-size:25px;white-space:pre-line;"></div>
                 <br />
             </div>
         </div>
@@ -86,7 +86,7 @@
     <div class="row text-center align-items-center shadow rounded border bg-white wow fadeInDown">
         <div id="database_area">
             <table style="width:100%;">
-                <caption style="caption-side:top;">@Model.FullName, Volume Phrasing Exercise Results</caption>
+                <caption style="caption-side:top;text-align:center;">@Model.FullName, Volume Phrasing Exercise Results</caption>
                 <thead>
                     <tr>
                         <th>Date</th>

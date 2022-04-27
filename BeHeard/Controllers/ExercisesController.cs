@@ -129,8 +129,8 @@ namespace BeHeard.Controllers
                 case "Hard":
                     activityresult.Difficulty = ActivityLevel.Hard;
                     break;
-                case "Impossible":
-                    activityresult.Difficulty = ActivityLevel.Impossible;
+                case "Extreme":
+                    activityresult.Difficulty = ActivityLevel.Extreme;
                     break;
             };
             switch (viewSyllable)
@@ -162,7 +162,7 @@ namespace BeHeard.Controllers
                 case "Phrasing":
                     activityresult.Exercise = Exercise.Phrasing;
                     break;
-                case "RoteSpeech":
+                case "Rote":
                     activityresult.Exercise = Exercise.Rote;
                     break;
             }

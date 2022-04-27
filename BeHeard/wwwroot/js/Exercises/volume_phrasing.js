@@ -23,7 +23,30 @@ var last_sentence = 15;
 var current_sentence = null;
 var difficulty = null;
 var diff_value = null;
-var db_sentenceChoice = null;
+
+// DB Fields
+var SentenceSet = -1;
+var Decibel = null;
+var Syllable = null;
+var Difficulty = null;
+var Exercise = null;
+var Category = null;
+
+function UpdateDB(volume) {
+
+    $.ajax({
+        url: "UpdateDBwResults",
+        type: "POST",
+        data: {
+            Decibel: volume,
+            viewSyllable: "NONE",
+            viewDifficulty: diff_value,
+            viewExercise: "Phrasing",
+            viewCategory: "NONE",
+            SentenceSet: SentenceSet
+        }
+    })
+}
 
 const sentences = [
     "The mute muffled the high tones of the horn. Slide the box into the empty space. The store walls were lined with colored frocks.",
@@ -238,13 +261,15 @@ function start_timer() {
                         break;
                     case (percent_decibel > 65.1):
                         loud = true;
-                        output = " greater then 100";
+                        output = ">100";
                         break;
                 }
 
                 if (loud) {
+                    UpdateDB(output);
                     alert("Wow!\n'Normal' voice volume is around 50-60 dba.\nYour volume was" + output + "dba!")
                 } else {
+                    UpdateDB(output);
                     alert("Great Job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + output + " dba.");
                 }
             }
@@ -279,7 +304,7 @@ function get_Randomsentence() {
 
     last_sentence = current_sentence;
     console.log(sentence_Choice);
-    db_sentenceChoice = sentence_Choice;
+    SentenceSet = sentence_Choice;
     document.getElementById("random_sentence").innerHTML = sentences[sentence_Choice];
 }
 
@@ -306,19 +331,19 @@ function difficulty_dropdown() {
 
     function alter_difficulty(value) {
         switch (true) {
-            case (value == 'easy'):
+            case (value == 'Easy'):
                 target_fillVol = 50
                 diff_alert(1);
                 break;
-            case (value == 'medium'):
+            case (value == 'Medium'):
                 target_fillVol = 100;
                 diff_alert(2);
                 break;
-            case (value == 'hard'):
+            case (value == 'Hard'):
                 target_fillVol = 200;
                 diff_alert(3);
                 break;
-            case (value == 'impossible'):
+            case (value == 'Extreme'):
                 target_fillVol = WIDTH;
                 diff_alert(4);
                 break;
