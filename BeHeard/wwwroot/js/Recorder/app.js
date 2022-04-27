@@ -91,7 +91,7 @@ function createDownloadLink(blob) {
     au.src = url;
     //link the a element to the blob 
     link.href = url;
-    link.download = new Date().toISOString() + '.wav';
+    link.download = 'Download Recording';
     link.innerHTML = link.download;
     //add the new audio and a elements to the li element 
     li.appendChild(au);
@@ -122,8 +122,8 @@ function createDownloadLink(blob) {
                 modalBody.html(`<div class="mx-auto text-center"><h3>${responseJSON.text}</h3></div>`);
                 modelCommunication.response_sentence = responseJSON.text;
                 //Only add the recording if it was successful
-                recordingsList.appendChild(li);
-                updateScore();
+                //recordingsList.appendChild(li);
+                updateScore(li);
             },
             error: function (req, status, error) {
                 let modalBody = $('#staticBackdrop').find('.modal-body');
