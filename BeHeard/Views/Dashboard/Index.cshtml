@@ -1,12 +1,5 @@
 ﻿@using BeHeard.Extensions
 @model BeHeard.Models.DashboardViewModel
-@*<link rel="stylesheet" href="~/css/animate/animate.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.css.map" />*@
-
-@{
-
-}
-
 
 <!-- Modal #myProgress -->
 <div id="myProgress" class="modal fade" tabindex="-1">
@@ -70,53 +63,52 @@
     </div>
 </div>
 
-<body style="background-color: #ffcab0;">
 
-    <div class="container mb-2 shadow pt-5 bg-white h-100">
+<div class="container mb-2 shadow pt-5 bg-white h-100">
 
-        <!--User Welcome-->
+    <!--User Welcome-->
 
-        <div class="container-xxl pb-3 ">
-            <div class="container">
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-4 mx-auto">
-                        <div class="g-3 vh-20 d-none d-lg-block">
-                            <img src="/images/image4.png" class="img-responsive" alt="Responsive image" />
-                        </div>
+    <div class="container-xxl pb-3 ">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-4 mx-auto">
+                    <div class="g-3 vh-20 d-none d-lg-block">
+                        <img src="/images/image4.png" class="img-responsive" alt="Responsive image" />
                     </div>
-                    <div class="col-lg-6 pr-lg-2 shadow rounded border bg-white p-lg-3 wow fadeInDown">
-                        <h1 class="mb-4">Welcome to <i class="fa fa-book-open" style="color: dodgerblue;"></i> Dashboard</h1>
-                        <p class="mb-4"><strong>This is where you will find all information on where you are in your exercises, what activities you have done, and more.</strong></p>
-                        <p class="mb-4"><strong>Remember, "practice makes perfect", so check-in here often so you can see how much you've done.'</strong></p>
-                        <div class="row g-4 mb-4">
-                            <div class="col-sm-6">
-                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0">@Model.User.Date.Month / @Model.User.Date.Day</h1>
-                                    <div class="ps-4">
-                                        <p class="mb-0">Day of</p>
-                                        <h6 class="text-uppercase mb-0">Last Login</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="75" data-time="2000"></span></h1>
-                                    <div class="ps-4">
-                                        <p class="mb-0">Total Completed</p>
-                                        <h6 class="text-uppercase mb-0">Activities</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <a asp-area="" asp-controller="Exercises" asp-action="Index" class="btn btn-primary py-3 px-5 mt-2">Head to Exercises</a>
-                    </div>
-                    <div class="col-1"></div>
                 </div>
+                <div class="col-lg-6 pr-lg-2 shadow rounded border bg-white p-lg-3 wow fadeInDown">
+                    <h1 class="mb-4">Welcome to <i class="fa fa-book-open" style="color: dodgerblue;"></i> Dashboard</h1>
+                    <p class="mb-4"><strong>This is where you will find all information on where you are in your exercises, what activities you have done, and more.</strong></p>
+                    <p class="mb-4"><strong>Remember, "practice makes perfect", so check-in here often so you can see how much you've done.'</strong></p>
+                    <div class="row g-4 mb-4">
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                <h1 class="flex-shrink-0 display-5 text-primary mb-0">@Model.User.Date.Month / @Model.User.Date.Day</h1>
+                                <div class="ps-4">
+                                    <p class="mb-0">Day of</p>
+                                    <h6 class="text-uppercase mb-0">Last Login</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="75" data-time="2000"></span></h1>
+                                <div class="ps-4">
+                                    <p class="mb-0">Total Completed</p>
+                                    <h6 class="text-uppercase mb-0">Activities</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a asp-area="" asp-controller="Exercises" asp-action="Index" class="btn btn-primary py-3 px-5 mt-2">Head to Exercises</a>
+                </div>
+                <div class="col-1"></div>
             </div>
         </div>
-        <hr style="width:100%" size="3" color="black">
+    </div>
+    <hr style="width:100%" size="3" color="black">
 
-        <!--User Dashboard Charts-->
+    <!--User Dashboard Charts-->
 
     <div class="container py-5">
         <div class="container">
@@ -171,10 +163,10 @@
             <div class="panel-collapse collapse show py-2" id="myResource">
                 <div class="card card-body" id="myCollapse1">
                     <h3>Speech Therapist In Your Area</h3>
-                      <!-- The slide-out panel for showing place details -->
-                      <div id="panel">Click any marker to see details.</div>
-                      <!-- Map appears here -->
-                      <div id="map" style="height:500px; width:100%;"></div>                
+                        <!-- The slide-out panel for showing place details -->
+                        <div id="panel">Click any marker to see details.</div>
+                        <!-- Map appears here -->
+                        <div id="map" style="height:500px; width:100%;"></div>                
                 </div>
             </div>
             <!-- Collapse #myContact-->
@@ -194,7 +186,7 @@
                                     <label for="Email">@Model.User.Email</label>
                                 </div>
                             </div>
-                             <div class="col-md-12">
+                                <div class="col-md-12">
                                 <div class="form-floating">
                                 <input type="text" class="form-control" id="Subject" placeholder="Enter Your Subject">
                                     <label for="Subject">Subject</label>
