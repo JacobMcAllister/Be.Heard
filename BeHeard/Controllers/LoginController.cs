@@ -119,6 +119,8 @@ namespace BeHeard.Controllers
 
             user.Settings = settings;
             user.Profile = profile;
+            user.Date = DateTime.Now;
+
             //if (_userService.IsAnExistingUser(user.Username))
             //{
             //    TempData["Error"] = "Sorry, that 'Username' and 'Password' combination do not match any record.";

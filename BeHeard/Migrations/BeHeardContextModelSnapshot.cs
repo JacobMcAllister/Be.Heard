@@ -28,19 +28,28 @@ namespace BeHeard.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
+
                     b.Property<int>("Counter")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("Decibel")
-                        .HasColumnType("float");
+                    b.Property<string>("Decibel")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Frequency")
-                        .HasColumnType("float");
+                    b.Property<int>("Difficulty")
+                        .HasColumnType("int");
 
-                    b.Property<int>("Level")
+                    b.Property<int>("Exercise")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SentenceSet")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Syllable")
                         .HasColumnType("int");
 
                     b.Property<Guid?>("UserProfileId")

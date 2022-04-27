@@ -12,7 +12,7 @@ public class NavigationViewComponent : ViewComponent
         {
             var model = new SideNavigationModel
             {
-                Admin               = null,
+                Admin               = Url.Action("Index", "Admin"),
                 AdminIcon           = "fas fa-user-lock",
                 Dashboard           = Url.Action("Index", "Dashboard"),
                 DashboardIcon       = "fas fa-th-large",
@@ -20,7 +20,7 @@ public class NavigationViewComponent : ViewComponent
                 ExercisesIcon       = "fas fa-dumbbell",
                 Home                = Url.Action("Index", "Home"),
                 HomeIcon            = "fas fa-house-user",
-                MedicalProvider     = null,
+                MedicalProvider     = Url.Action("Index", "MedicalProvider"),
                 MedicalProviderIcon = "fas fa-user-md"
             };
             return Task.FromResult<IViewComponentResult>(View("SideNav", model));
