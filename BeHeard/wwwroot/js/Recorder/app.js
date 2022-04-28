@@ -125,7 +125,7 @@ function createDownloadLink(blob) {
                 modelCommunication.response_sentence = responseJSON.text;
                 //Only add the recording if it was successful
                 //recordingsList.appendChild(li);
-                updateScore(li);
+                updateScore(li, modalBody);
             },
             error: function (req, status, error) {
                 let modalBody = $('#staticBackdrop').find('.modal-body');
