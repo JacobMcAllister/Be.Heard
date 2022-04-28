@@ -51,7 +51,7 @@ namespace BeHeard.Controllers
             var model = new ExerciseViewModel
             {
                 User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
-                ActivityResults = _contextManager.ActivityResultRepository.GetFiveChasingResults(user)
+                ActivityResults = _contextManager.ActivityResultRepository.GetFiveExerciseResults(user, 0)
             };
 
             return View(model);
@@ -86,7 +86,7 @@ namespace BeHeard.Controllers
             var model = new ExerciseViewModel
             {
                 User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
-                ActivityResults = _contextManager.ActivityResultRepository.GetFiveBreathingResults(user)
+                ActivityResults = _contextManager.ActivityResultRepository.GetFiveExerciseResults(user, 1)
             };
             return View(model);
         }
@@ -94,9 +94,11 @@ namespace BeHeard.Controllers
         public IActionResult volume_phrasing()
         {
             var service = new SessionService(HttpContext);
+            var user = _contextManager.UserRepository.GetUserByUsername(service.Get().Username);
             var model = new ExerciseViewModel
             {
                 User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
+                ActivityResults = _contextManager.ActivityResultRepository.GetFiveExerciseResults(user, 2)
             };
             return View(model);
         }
@@ -104,9 +106,11 @@ namespace BeHeard.Controllers
         public IActionResult rote_speech()
         {
             var service = new SessionService(HttpContext);
+            var user = _contextManager.UserRepository.GetUserByUsername(service.Get().Username);
             var model = new ExerciseViewModel
             {
                 User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
+                ActivityResults = _contextManager.ActivityResultRepository.GetFiveExerciseResults(user, 3)
             };
             return View(model);
         }

@@ -88,13 +88,15 @@
                             <th>Difficulty</th>
                         </tr>
                     </thead>
+                    <tbody>
                     @foreach (var activityresults in @Model.ActivityResults)
                    {
                        <tr>
-                           <td>@activityresults.Date</td>
-                           <td>@activityresults.Difficulty</td>
+                           <td style="width:50%;">@activityresults.Date</td>
+                           <td style="width:50%;">@activityresults.Difficulty</td>
                        </tr>
                    }
+                   </tbody>
                 </table>
             </div>
         </div>

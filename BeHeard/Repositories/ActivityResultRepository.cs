@@ -20,27 +20,40 @@ namespace BeHeard.Repositories
                 .ActivityResults;
         }
 
-        
-        public IEnumerable<ActivityResult> GetFiveChasingResults(User user)
-        {
-            return
-                Context.
-                ActivityResults.
-                Where(x => x.UserProfileId == user.Id && x.Exercise == Exercise.VolumeChasing).
-                OrderByDescending(x => x.Date).
-                Take(5);
-                
-        }
 
-        public IEnumerable<ActivityResult> GetFiveBreathingResults(User user)
-        {
-            return
-                Context.
-                ActivityResults.
-                Where(x => x.UserProfileId == user.Id && x.Exercise == Exercise.Breathing).
-                OrderByDescending(x => x.Date).
-                Take(5);
+        public IEnumerable<ActivityResult> GetFiveExerciseResults(User user, int exercise)
+        { 
+            switch (exercise)
+            {
+                case 0:
+                    return Context.
+                        ActivityResults.
+                        Where(x => x.UserProfileId == user.Id && x.Exercise == Exercise.VolumeChasing).
+                        OrderByDescending(x => x.Date).
+                        Take(5);
+                case 1:
+                    return Context.
+                        ActivityResults.
+                        Where(x => x.UserProfileId == user.Id && x.Exercise == Exercise.Breathing).
+                        OrderByDescending(x => x.Date).
+                        Take(5);
+                case 2:
+                    return Context.
+                        ActivityResults.
+                        Where(x => x.UserProfileId == user.Id && x.Exercise == Exercise.Phrasing).
+                        OrderByDescending(x => x.Date).
+                        Take(5);
+                case 3:
+                    return Context.
+                        ActivityResults.
+                        Where(x => x.UserProfileId == user.Id && x.Exercise == Exercise.Rote).
+                        OrderByDescending(x => x.Date).
+                        Take(5);
+                default:
+                    IEnumerable<ActivityResult> none = null;
+                    System.Console.WriteLine("Error: No Exercise Input.");
+                    return none;
+            }
         }
-        
     }
 }
