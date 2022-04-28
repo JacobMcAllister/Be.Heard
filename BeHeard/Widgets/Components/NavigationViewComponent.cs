@@ -30,9 +30,9 @@ public class NavigationViewComponent : ViewComponent
             var model = new NavigationModel
             {
                 About                       = Url.Action("About", "Landing"),
-                CreateAccount               = Url.Action("Registration", "Login"),
+                CreateAccount               = Url.Action("Registration", "Login") + "?type=0",
                 Home                        = Url.Action("Index", "Landing"),
-                MedicalProviderRegistration = Url.Action("Registration", "Login"), // add roles param
+                MedicalProviderRegistration = Url.Action("Registration", "Login") + "?type=2", // add roles param
                 SignIn                      = Url.Action("Index", "Login")
             };
             return Task.FromResult<IViewComponentResult>(View("Navbar", model));

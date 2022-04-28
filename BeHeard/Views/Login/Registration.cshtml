@@ -87,6 +87,7 @@
                             <input type="password" class="form-control" id="Password" aria-describedby="PasswordHelp" placeholder="Password" name="Password"/>
                         </div>
                     </div>
+                    <input id="AccountType" type="text"  class="d-none" name="Role" />
                     <div class="col-12 pt-3" id="RegistrationSubmitButtonContainer">
                         <button type="submit" class="btn bh-btn-primary w-100">Submit</button>
                     </div>
@@ -98,3 +99,15 @@
         </div>
     </div>
 </section>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            const params = new Proxy(new URLSearchParams(window.location.search), {
+              get: (searchParams, prop) => searchParams.get(prop),
+            });
+            $('#AccountType').val(params.type);
+        });
+    </script>
+}

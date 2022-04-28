@@ -15,6 +15,6 @@
         public string       Username     { get; set; }
         public string icon { get; set; } // Better name is 'Avatar'
         public Subscription Subscription { get; set; }
-        // public BeHeardRole Role { get; }
+        public RoleType Role { get; set; }
     }
 }
