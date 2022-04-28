@@ -35,6 +35,7 @@ function startRecording() {
     recordButton.disabled = true;
     stopButton.disabled = false;
     pauseButton.disabled = false
+    document.getElementById("micGif").style.display = "block";
     navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
         //console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
         /* assign to gumStream for later use */
@@ -73,6 +74,7 @@ function stopRecording() {
     stopButton.disabled = true;
     recordButton.disabled = false;
     pauseButton.disabled = true;
+    document.getElementById("micGif").style.display = "none";
     //reset button just in case the recording is stopped while paused 
     pauseButton.innerHTML = "Pause";
     //tell the recorder to stop the recording 

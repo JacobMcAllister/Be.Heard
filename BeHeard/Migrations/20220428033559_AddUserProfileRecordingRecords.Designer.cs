@@ -4,6 +4,7 @@ using BeHeard.Application;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeHeard.Migrations
 {
     [DbContext(typeof(BeHeardContext))]
-    partial class BeHeardContextModelSnapshot : ModelSnapshot
+    [Migration("20220428033559_AddUserProfileRecordingRecords")]
+    partial class AddUserProfileRecordingRecords
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +61,7 @@ namespace BeHeard.Migrations
 
                     b.HasIndex("UserProfileId");
 
-                    b.ToTable("ActivityResults", (string)null);
+                    b.ToTable("ActivityResults");
                 });
 
             modelBuilder.Entity("BeHeard.Application.Models.Address", b =>
@@ -94,7 +96,7 @@ namespace BeHeard.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Address", (string)null);
+                    b.ToTable("Address");
                 });
 
             modelBuilder.Entity("BeHeard.Application.Models.Preferences", b =>
@@ -114,7 +116,7 @@ namespace BeHeard.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Preferences", (string)null);
+                    b.ToTable("Preferences");
                 });
 
             modelBuilder.Entity("BeHeard.Application.Models.RecordingRecord", b =>
@@ -139,7 +141,7 @@ namespace BeHeard.Migrations
 
                     b.HasIndex("UserProfileId");
 
-                    b.ToTable("RecordingRecord", (string)null);
+                    b.ToTable("RecordingRecord");
                 });
 
             modelBuilder.Entity("BeHeard.Application.Models.Settings", b =>
@@ -162,7 +164,7 @@ namespace BeHeard.Migrations
 
                     b.HasIndex("SubscriptionId");
 
-                    b.ToTable("Settings", (string)null);
+                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("BeHeard.Application.Models.Subscription", b =>
@@ -176,7 +178,7 @@ namespace BeHeard.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Subscription", (string)null);
+                    b.ToTable("Subscription");
                 });
 
             modelBuilder.Entity("BeHeard.Application.Models.User", b =>
@@ -222,7 +224,7 @@ namespace BeHeard.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("BeHeard.Application.Models.UserProfile", b =>
@@ -237,7 +239,7 @@ namespace BeHeard.Migrations
 
                     b.HasIndex("SettingsId");
 
-                    b.ToTable("UserProfiles", (string)null);
+                    b.ToTable("UserProfiles");
                 });
 
             modelBuilder.Entity("BeHeard.Application.Models.ActivityResult", b =>
