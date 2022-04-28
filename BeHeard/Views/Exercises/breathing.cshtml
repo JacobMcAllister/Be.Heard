@@ -63,12 +63,12 @@
             <button id="startButton" type="button">Start</button>
         </div>
         <div class="column" style="width:50%;">
-            <div id="anim_holder" style="width:400px;height:400px;display:flex;justify-content:center;align-items:center;margin:auto;">
+            <div id="anim_holder" style="width:500px;height:500px;display:flex;justify-content:center;align-items:center;margin:auto;">
                 <div class="container" id="breathing_anim">
                     <div class="circle">
                         <p id="text" style="font-size:30px;"></p>
                     </div>
-                    <div class="pointer-container">
+                    <div class="pointer-container" id="rotating_ball">
                         <div class="pointer"></div>
                     </div>
                     <div class="gradient-circle"></div>
@@ -227,15 +227,40 @@
         transform: scale(1);
     }
 
-    #breathing_anim.grow {
-        animation: grow 7s linear forwards;
+    #breathing_anim.grow7 {
+        animation: grow 7.5s linear forwards;
     }
 
-    #breathing_anim.shrink  {
-        animation: shrink 7s linear forwards
+    #breathing_anim.shrink7  {
+        animation: shrink 7.5s linear forwards;
+    }
+
+    #breathing_anim.grow9 {
+        animation: grow 9.5s linear forwards;
+    }
+
+    #breathing_anim.shrink9  {
+        animation: shrink 9.5s linear forwards;
+    }
+
+    #breathing_anim.grow11 {
+        animation: grow 11.5s linear forwards;
+    }
+
+    #breathing_anim.shrink11  {
+        animation: shrink 11.5s linear forwards;
+    }
+
+    #breathing_anim.grow15 {
+        animation: grow 15.5s linear forwards;
+    }
+
+    #breathing_anim.shrink15  {
+        animation: shrink 15.5s linear forwards;
     }
 
     .gradient-circle {
+        display: flex;
         background: conic-gradient(
         #FF8B00 50%,
         #FF8B00 50%,
@@ -262,17 +287,62 @@
         border-radius: 50%;
     }
 
-    .pointer-container {
+    #rotating_ball {
+        display: flex;
         position:absolute;
         top: -30px;
         left: 140px;
         width: 20px;
         height: 180px;
-        animation: rotate 14s linear forwards infinite;
         transform-origin: bottom center;
     }
 
+    #rotating_ball.rotate7 {
+        display: flex;
+        position:absolute;
+        top: -30px;
+        left: 140px;
+        width: 20px;
+        height: 180px;
+        transform-origin: bottom center;
+        animation: rotate 15s linear forwards 1;
+    }
+
+    #rotating_ball.rotate9 {
+        display: flex;
+        position:absolute;
+        top: -30px;
+        left: 140px;
+        width: 20px;
+        height: 180px;
+        transform-origin: bottom center;
+        animation: rotate 19s linear forwards 1;
+    }
+
+    #rotating_ball.rotate11 {
+        display: flex;
+        position:absolute;
+        top: -30px;
+        left: 140px;
+        width: 20px;
+        height: 180px;
+        transform-origin: bottom center;
+        animation: rotate 23s linear forwards 1;
+    }
+
+    #rotating_ball.rotate15 {
+        display: flex;
+        position:absolute;
+        top: -30px;
+        left: 140px;
+        width: 20px;
+        height: 180px;
+        transform-origin: bottom center;
+        animation: rotate 31s linear forwards 1;
+    }
+
     .pointer {
+        display: flex;
         border-radius: 50%;
         background-color: black;
         height: 20px;
