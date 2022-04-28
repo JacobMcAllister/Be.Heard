@@ -36,11 +36,13 @@ namespace BeHeard.Controllers
         [HttpPost]
         public IActionResult Login(User user, bool isFirstLogin = false)
         {
-            //TempData["Error"] = "Sorry, that 'Username' and 'Password' combination do not match any record.";
             // NOTE: Add redirects for failed attempts and nonexistent accounts
             var password = isFirstLogin ? user.Password : PasswordService.hashPassword(user.Password);
             if (!_userService.IsValidUserCredentials(user.Username, password))
+            {
+                TempData["Error"] = "Sorry, that 'Username' and 'Password' combination do not match any record.";
                 return View("~/Views/Login/Index.cshtml");
+            }
 
             var role = _userService.GetUserRole(user.Username);
             var claims = new[]
