@@ -50,8 +50,8 @@
              <br />
             <div id="breathing_guide" style="text-align:center;">
                 <h3>Breathing Action</h3>
-                <p style="font-size:20px">Breathe in for <strong><span id="breathin"></span></strong> seconds.</p>
-                <p style="font-size:20px">Breathe out for <strong><span id="breathout"></span></strong> seconds.</p>
+                <p style="font-size:20px">Breathe in for <strong><span id="breathin" style="color:#FF8B00;"></span></strong> seconds.</p>
+                <p style="font-size:20px">Breathe out for <strong><span id="breathout" style="color:dodgerblue;"></span></strong> seconds.</p>
             </div>
             <br />
             <div id="time_countdown">
@@ -227,6 +227,14 @@
         transform: scale(1);
     }
 
+    #breathing_anim.grow5 {
+        animation: grow 5.5s linear forwards;
+    }
+
+    #breathing_anim.shrink5  {
+        animation: shrink 5.5s linear forwards;
+    }
+
     #breathing_anim.grow7 {
         animation: grow 7.5s linear forwards;
     }
@@ -243,20 +251,12 @@
         animation: shrink 9.5s linear forwards;
     }
 
-    #breathing_anim.grow11 {
-        animation: grow 11.5s linear forwards;
+    #breathing_anim.grow13 {
+        animation: grow 13.5s linear forwards;
     }
 
-    #breathing_anim.shrink11  {
-        animation: shrink 11.5s linear forwards;
-    }
-
-    #breathing_anim.grow15 {
-        animation: grow 15.5s linear forwards;
-    }
-
-    #breathing_anim.shrink15  {
-        animation: shrink 15.5s linear forwards;
+    #breathing_anim.shrink13  {
+        animation: shrink 13.5s linear forwards;
     }
 
     .gradient-circle {
@@ -297,6 +297,17 @@
         transform-origin: bottom center;
     }
 
+    #rotating_ball.rotate5 {
+        display: flex;
+        position:absolute;
+        top: -30px;
+        left: 140px;
+        width: 20px;
+        height: 180px;
+        transform-origin: bottom center;
+        animation: rotate 11s linear forwards 1;
+    }
+
     #rotating_ball.rotate7 {
         display: flex;
         position:absolute;
@@ -319,7 +330,7 @@
         animation: rotate 19s linear forwards 1;
     }
 
-    #rotating_ball.rotate11 {
+    #rotating_ball.rotate13 {
         display: flex;
         position:absolute;
         top: -30px;
@@ -327,18 +338,7 @@
         width: 20px;
         height: 180px;
         transform-origin: bottom center;
-        animation: rotate 23s linear forwards 1;
-    }
-
-    #rotating_ball.rotate15 {
-        display: flex;
-        position:absolute;
-        top: -30px;
-        left: 140px;
-        width: 20px;
-        height: 180px;
-        transform-origin: bottom center;
-        animation: rotate 31s linear forwards 1;
+        animation: rotate 27s linear forwards 1;
     }
 
     .pointer {
@@ -364,13 +364,13 @@
             transform: scale(1)
         }
         to {
-            transform: scale(1.2)
+            transform: scale(1.3)
         }
     }
 
     @@keyframes shrink {
         from {
-            transform: scale(1.2)
+            transform: scale(1.3)
         }
         to {
             transform: scale(1)
