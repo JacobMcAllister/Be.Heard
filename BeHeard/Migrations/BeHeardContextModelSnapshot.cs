@@ -52,6 +52,9 @@ namespace BeHeard.Migrations
                     b.Property<int>("Syllable")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("UserProfileId")
                         .HasColumnType("uniqueidentifier");
 
@@ -166,6 +169,9 @@ namespace BeHeard.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<int>("Counter")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -186,6 +192,9 @@ namespace BeHeard.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");

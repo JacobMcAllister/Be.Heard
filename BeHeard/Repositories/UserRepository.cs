@@ -24,6 +24,11 @@ namespace BeHeard.Repositories
                     .ToList();
         }
 
+        public IEnumerable<ActivityResult> PullExercises(Guid id)
+        {
+            return Context.ActivityResults.Where(a => a.UserId == id);
+        }
+
         public User GetUserByCredentials(AuthorizationRequest credentials)
         {
             //return Context.Set<User>()
