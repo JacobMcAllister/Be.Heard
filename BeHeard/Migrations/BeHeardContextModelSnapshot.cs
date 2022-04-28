@@ -52,10 +52,7 @@ namespace BeHeard.Migrations
                     b.Property<int>("Syllable")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("UserProfileId")
+                    b.Property<Guid>("UserProfileId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -193,6 +190,9 @@ namespace BeHeard.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
@@ -225,7 +225,9 @@ namespace BeHeard.Migrations
                 {
                     b.HasOne("BeHeard.Application.Models.UserProfile", null)
                         .WithMany("ActivityResults")
-                        .HasForeignKey("UserProfileId");
+                        .HasForeignKey("UserProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BeHeard.Application.Models.Settings", b =>

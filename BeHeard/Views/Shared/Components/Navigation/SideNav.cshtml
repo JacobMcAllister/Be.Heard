@@ -1,6 +1,7 @@
 @model BeHeard.Widgets.Models.SideNavigationModel
 
 @using BeHeard.Services
+@using BeHeard.Application.Models
 @{
     var service = new SessionService(Context);
     var user = service.Get();
@@ -32,21 +33,30 @@
             </a>
         </li>
     </ul>
+    @if (user.Role is RoleType.Admin or RoleType.MedicalProvider)
+    {
     <ul id="SpecialAccessMenu" class="nav flex-column">
         <li class="nav-item d-xs-none d-sm-none d-md-none d-lg-inline-block">
             <h6>Special Access</h6>
         </li>
+        @if (user.Role is RoleType.MedicalProvider or RoleType.Admin)
+        {
         <li class="nav-item">
             <a href="@Model.MedicalProvider" class="nav-link bh-nav-link-light">
                 <i class="@Model.MedicalProviderIcon fa-fw fs-6"></i> <span class="d-xs-none d-sm-none d-md-none d-lg-inline-block">Specialist</span>
             </a>
         </li>
+        }
+        @if (user.Role == RoleType.Admin)
+        {
         <li class="nav-item">
             <a href="@Model.Admin" class="nav-link bh-nav-link-light">
                 <i class="@Model.AdminIcon fa-fw fs-6"></i> <span class="d-xs-none d-sm-none d-md-none d-lg-inline-block">Admin</span>
             </a>
         </li>
+        }
     </ul>
+    }
     <div id="UserAction" class="dropdown d-flex align-items-end">
         <a href="#" class="dropdown-toggle" id="UserActionDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="/images/@user.icon" alt="User Avatar" id="UserAvatar" class="rounded-circle" /> 

@@ -2,6 +2,7 @@
 using System;
 using BeHeard.Core;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using BeHeard.Application;
 using BeHeard.Application.Helpers;
 using BeHeard.Application.Models;
@@ -35,10 +36,13 @@ namespace BeHeard.Controllers
         [HttpPost]
         public IActionResult Login(User user, bool isFirstLogin = false)
         {
-            //TempData["Error"] = "Sorry, that 'Username' and 'Password' combination do not match any record.";
             // NOTE: Add redirects for failed attempts and nonexistent accounts
-            if (!_userService.IsValidUserCredentials(user.Username, user.Password))
+            var password = isFirstLogin ? user.Password : PasswordService.hashPassword(user.Password);
+            if (!_userService.IsValidUserCredentials(user.Username, password))
+            {
+                TempData["Error"] = "Sorry, that 'Username' and 'Password' combination do not match any record.";
                 return View("~/Views/Login/Index.cshtml");
+            }
 
             var role = _userService.GetUserRole(user.Username);
             var claims = new[]
@@ -88,12 +92,13 @@ namespace BeHeard.Controllers
                 pass = PasswordService.hashPassword(user.Password);
                 user.Password = pass;
             }
-            
-            user.icon = "face1.png";
+
+            // var random = new Random();
+            user.icon = $"face{RandomNumberGenerator.GetInt32(1,4)}.png";
             
             var subscription = new Subscription
             {
-                Type = SubscriptionType.Paid,
+                Type = SubscriptionType.Free,
             };
 
             var preferences = new Preferences
