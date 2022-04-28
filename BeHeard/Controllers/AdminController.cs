@@ -20,9 +20,11 @@ namespace BeHeard.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            var users = _beHeardContextManager.UserRepository.GetAll();
+
             var model = new AdminViewModel();
             model.users = _beHeardContextManager.UserRepository.Count();
-            model.activities = _beHeardContextManager.ActivityResultRepository.Count();
+            model.activities = users.Sum(u => u.Counter);
 
             return View(model);
         }

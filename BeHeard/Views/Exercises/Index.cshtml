@@ -20,16 +20,7 @@
                         <div class="row g-4 mb-4">
                             <div class="col-sm-6">
                                 <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0">2/1</h1>
-                                    <div class="ps-4">
-                                        <p class="mb-0">Day of</p>
-                                        <h6 class="text-uppercase mb-0">Last Login</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="75" data-time="2000"></span></h1>
+                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="@Model.User.Counter" data-time="2000"></span></h1>
                                     <div class="ps-4">
                                         <p class="mb-0">Total Completed</p>
                                         <h6 class="text-uppercase mb-0">Activities</h6>
@@ -37,8 +28,8 @@
                                 </div>
                             </div>
                         </div>
-                        <a asp-area="" asp-controller="Exercises" asp-action="Index" class="btn btn-primary py-3 px-5 mt-2">Continue Where You Left Off</a>
-                    </div>
+@*                        <a asp-area="" asp-controller="Exercises" asp-action="Index" class="btn btn-primary py-3 px-5 mt-2">Continue Where You Left Off</a>
+*@                    </div>
                     @*<div class="col-lg-4 mx-auto">
                             <div class="g-3 vh-20 d-none d-lg-block">
                                 <img src="/images/family_col-01.png" class="img-responsive" alt="Responsive image" />
@@ -49,7 +40,7 @@
         </div>
         <hr style="width:100%" size="3" color="black">
 
-    <!-- Activites -->
+ @*   <!-- Activites -->
     <div class="container-xxl pt-5 pb-3">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
@@ -123,14 +114,18 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
 
     <!-- Exercises -->
     <div class="container-xxl pb-3">
         <div class="container">
-            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+@*            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h5 class="section-title ff-secondary text-center text-primary fw-normal">Exercises</h5>
                 <h1 class="mb-5">Weekly 1 Hour Sessions</h1>
+            </div>*@
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Activities</h5>
+                <h1 class="mb-5">Made For You</h1>
             </div>
             <div class="row g-4">
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
