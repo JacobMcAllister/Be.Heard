@@ -47,10 +47,13 @@ namespace BeHeard.Controllers
         public IActionResult volume_chasing()
         {
             var service = new SessionService(HttpContext);
+            var user = _contextManager.UserRepository.GetUserByUsername(service.Get().Username);
             var model = new ExerciseViewModel
             {
                 User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
+                ActivityResults = _contextManager.ActivityResultRepository.GetFiveChasingResults(user)
             };
+
             return View(model);
         }
 
@@ -66,11 +69,13 @@ namespace BeHeard.Controllers
 
         public IActionResult Exercise3()
         {
+
             var service = new SessionService(HttpContext);
             var model = new ExerciseViewModel
             {
                 User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
             };
+
             return View(model);
         }
 

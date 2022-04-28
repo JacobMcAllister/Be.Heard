@@ -1,11 +1,8 @@
 ﻿using BeHeard.Application;
 using BeHeard.Application.Models;
 using BeHeard.Core;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace BeHeard.Repositories
 {
@@ -23,5 +20,16 @@ namespace BeHeard.Repositories
                 .ActivityResults;
         }
 
+        
+        public IEnumerable<ActivityResult> GetFiveChasingResults(User user)
+        {
+            return
+            Context.
+            ActivityResults.
+            Where(x => x.UserProfileId == user.Id && x.Exercise == Exercise.VolumeChasing).
+            Take(5).
+            OrderBy(x => x.Date);
+        }
+        
     }
 }
