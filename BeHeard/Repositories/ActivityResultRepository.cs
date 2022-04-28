@@ -28,25 +28,25 @@ namespace BeHeard.Repositories
                 case 0:
                     return Context.
                         ActivityResults.
-                        Where(x => x.UserProfileId == user.Id && x.Exercise == Exercise.VolumeChasing).
+                        Where(x => x.UserId == user.Id && x.Exercise == Exercise.VolumeChasing).
                         OrderByDescending(x => x.Date).
                         Take(5);
                 case 1:
                     return Context.
                         ActivityResults.
-                        Where(x => x.UserProfileId == user.Id && x.Exercise == Exercise.Breathing).
+                        Where(x => x.UserId == user.Id && x.Exercise == Exercise.Breathing).
                         OrderByDescending(x => x.Date).
                         Take(5);
                 case 2:
                     return Context.
                         ActivityResults.
-                        Where(x => x.UserProfileId == user.Id && x.Exercise == Exercise.Phrasing).
+                        Where(x => x.UserId == user.Id && x.Exercise == Exercise.Phrasing).
                         OrderByDescending(x => x.Date).
                         Take(5);
                 case 3:
                     return Context.
                         ActivityResults.
-                        Where(x => x.UserProfileId == user.Id && x.Exercise == Exercise.Rote).
+                        Where(x => x.UserId == user.Id && x.Exercise == Exercise.Rote).
                         OrderByDescending(x => x.Date).
                         Take(5);
                 default:
