@@ -88,28 +88,13 @@
                             <th>Difficulty</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>04/25/22</td>
-                            <td>Easy</td>
-                        </tr>
-                        <tr>
-                            <td>04/26/22</td>
-                            <td>Easy</td>
-                        </tr>
-                        <tr>
-                            <td>04/28/22</td>
-                            <td>Medium</td>
-                        </tr>
-                        <tr>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                    </tbody>
+                    @foreach (var activityresults in @Model.ActivityResults)
+                   {
+                       <tr>
+                           <td>@activityresults.Date</td>
+                           <td>@activityresults.Difficulty</td>
+                       </tr>
+                   }
                 </table>
             </div>
         </div>

@@ -24,11 +24,22 @@ namespace BeHeard.Repositories
         public IEnumerable<ActivityResult> GetFiveChasingResults(User user)
         {
             return
-            Context.
-            ActivityResults.
-            Where(x => x.UserProfileId == user.Id && x.Exercise == Exercise.VolumeChasing).
-            Take(5).
-            OrderBy(x => x.Date);
+                Context.
+                ActivityResults.
+                Where(x => x.UserProfileId == user.Id && x.Exercise == Exercise.VolumeChasing).
+                OrderByDescending(x => x.Date).
+                Take(5);
+                
+        }
+
+        public IEnumerable<ActivityResult> GetFiveBreathingResults(User user)
+        {
+            return
+                Context.
+                ActivityResults.
+                Where(x => x.UserProfileId == user.Id && x.Exercise == Exercise.Breathing).
+                OrderByDescending(x => x.Date).
+                Take(5);
         }
         
     }

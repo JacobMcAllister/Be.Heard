@@ -82,9 +82,11 @@ namespace BeHeard.Controllers
         public IActionResult breathing()
         {
             var service = new SessionService(HttpContext);
+            var user = _contextManager.UserRepository.GetUserByUsername(service.Get().Username);
             var model = new ExerciseViewModel
             {
                 User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
+                ActivityResults = _contextManager.ActivityResultRepository.GetFiveBreathingResults(user)
             };
             return View(model);
         }
