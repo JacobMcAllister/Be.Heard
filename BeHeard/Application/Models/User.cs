@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,11 +22,19 @@ namespace BeHeard.Application.Models
         public string      Username    { get; set; }
         public UserProfile Profile     { get; set; }
         public DateTime    Date   { get; set; }
+        public RoleType Role { get; set; }
 
     }
 
     public enum Gender
     {
         Male, Female
+    }
+
+    public enum RoleType
+    {
+        User,
+        Admin,
+        MedicalProvider
     }
 }
