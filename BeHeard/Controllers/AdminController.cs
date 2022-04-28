@@ -99,6 +99,7 @@ namespace BeHeard.Controllers
             user.Gender = model.Settings.User.Gender;
             user.Username = model.Settings.User.Username;
             user.Age = model.Settings.User.Age;
+
             //  Set Address Changes.
             user.Address.Street = model.Settings.User.Address.Street;
             user.Address.City = model.Settings.User.Address.City;
@@ -185,6 +186,7 @@ namespace BeHeard.Controllers
                 user.Gender = (Gender)random.Next(0, 2);
                 user.Counter = random.Next(0,50);
                 user.PhoneNumber = "(" + random.Next(100, 999) + ")-" + random.Next(100,999) + "-" + random.Next(1000, 9999);
+                user.icon = "face" + random.Next(1, 6) + ".png";
 
                 if (specialist == 50)
                 {
