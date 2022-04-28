@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BeHeard.Core;
 using BeHeard.Services;
+using BeHeard.Application.Models;
 
 //  Comment
 namespace BeHeard.Controllers
@@ -26,9 +27,17 @@ namespace BeHeard.Controllers
             var service = new SessionService(HttpContext);
             var model = new DashboardViewModel
             {
-                Profile = _contextManager.UserProfileRepository.GetUserProfileByUsername(service.Get().Username),
                 User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
             };
+            model.ActivityResults = _contextManager.UserRepository.PullExercises(model.User.Id);
+
+            model.ActivityCount = new List<int> { };
+            for (int i = 0; i < 5; i++)
+            {
+                model.ActivityCount.Add(model.ActivityResults.Where(c => c.Exercise == (Exercise)i).Count());
+
+            }
+
             return View(model);
         }
     }

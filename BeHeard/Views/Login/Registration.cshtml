@@ -12,17 +12,17 @@
                     <div class="row">
                         <div class="form-group col-sm-12 col-md-6">
                             <label for="FirstName"></label>
-                            <input type="text" class="form-control" id="FisrtName" aria-describedby="FirstNameHelp" placeholder="First Name" name="FirstName"/>
+                            <input type="text" class="form-control" id="FisrtName" aria-describedby="FirstNameHelp" placeholder="First Name" name="FirstName" required/>
                         </div>
                         <div class="form-group col-sm-12 col-md-6">
                             <label for="LastName"></label>
-                            <input type="text" class="form-control" id="LastName" aria-describedby="LastNameHelp" placeholder="Last Name" name="LastName"/>
+                            <input type="text" class="form-control" id="LastName" aria-describedby="LastNameHelp" placeholder="Last Name" name="LastName" required/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-6 col-md-2">
                             <label for="Age"></label>
-                            <select class="form-select" aria-label="Select Age" id="Age" name="Age">
+                            <select class="form-select" aria-label="Select Age" id="Age" name="Age" required>
                                 <option value="0">Age</option>
                                 @for (var i = 18; i < 101; i++)
                                 {
@@ -32,7 +32,7 @@
                         </div>
                         <div class="form-group col-xs-12 col-sm-6 col-md-4 d-flex align-items-end">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="Gender" value="0"/>
+                                <input class="form-check-input" type="radio" name="Gender" value="0" checked/>
                                 <label class="form-check-label" for="Gender">Male</label>
                             </div>
                             <div class="form-check form-check-inline">
@@ -44,7 +44,7 @@
                     <div class="row">
                         <div class="form-group col-sm-12 col-md-8">
                             <label for="Street"></label>
-                            <input class="form-control" type="text" id="Street" aria-describedby="StreetHelp" placeholder="Street Address" name="Address.Street"/>
+                            <input class="form-control" type="text" id="Street" aria-describedby="StreetHelp" placeholder="Street Address" name="Address.Street" required/>
                         </div>
                         <div class="form-group col-sm-12 col-md-4">
                             <label for="Apartment"></label>
@@ -54,11 +54,11 @@
                     <div class="row">
                         <div class="form-group co-sm-12 col-md-6">
                             <label for="City"></label>
-                            <input class="form-control" type="text" id="City" aria-describedby="CityHelp" placeholder="City" name="Address.City"/>
+                            <input class="form-control" type="text" id="City" aria-describedby="CityHelp" placeholder="City" name="Address.City" required/>
                         </div>
                         <div class="form-group col-sm-12 col-md-6">
                             <label for="State"></label>
-                            <select class="form-select" aria-label="SelectState" id="State" name="Address.State">
+                            <select class="form-select" aria-label="SelectState" id="State" name="Address.State" required>
                                 <option value="">State</option>
                                 @foreach (var state in Model.States)
                                 {
@@ -70,21 +70,21 @@
                     <div class="row">
                         <div class="from-group col-sm-12 col-md-6">
                             <label for="PostalCode"></label>
-                            <input class="form-control" type="text" id="PostalCode" aria-describedby="ZipCodeHelp" placeholder="Zip Code" name="Address.PostalCode"/>
+                            <input class="form-control" type="text" id="PostalCode" aria-describedby="ZipCodeHelp" placeholder="Zip Code" name="Address.PostalCode" required/>
                         </div>
                         <div class="form-group col-sm-12 col-md-6">
                             <label for="PhoneNumber"></label>
-                            <input class="form-control" type="tel" id="PhoneNumber" aria-describedby="PhoneHelp" placeholder="Phone Number (xxx-xxx-xxxx)" name="PhoneNumber"/>
+                            <input class="form-control" type="tel" id="PhoneNumber" aria-describedby="PhoneHelp" placeholder="Phone Number (xxx-xxx-xxxx)" name="PhoneNumber" required/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12 col-md-6">
                             <label for="Username"></label>
-                            <input type="text" class="form-control" id="Username" aria-describedby="usernameHelp" placeholder="Username" name="Username"/>
+                            <input type="text" class="form-control" id="Username" aria-describedby="usernameHelp" placeholder="Username" name="Username" required/>
                         </div>
                         <div class="form-group col-sm-12 col-md-6">
                             <label for="Password"></label>
-                            <input type="password" class="form-control" id="Password" aria-describedby="PasswordHelp" placeholder="Password" name="Password"/>
+                            <input type="password" class="form-control" id="Password" aria-describedby="PasswordHelp" placeholder="Password" name="Password" required/>
                         </div>
                     </div>
                     <input id="AccountType" type="text"  class="d-none" name="Role" />
@@ -102,12 +102,5 @@
 
 @section Scripts
 {
-    <script>
-        $(document).ready(function () {
-            const params = new Proxy(new URLSearchParams(window.location.search), {
-              get: (searchParams, prop) => searchParams.get(prop),
-            });
-            $('#AccountType').val(params.type);
-        });
-    </script>
+    <script src="~/js/registration.js"></script>
 }

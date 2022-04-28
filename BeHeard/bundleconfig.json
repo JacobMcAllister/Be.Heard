@@ -63,6 +63,16 @@
     "sourceMap": false
   },
   {
+    "outputFileName": "wwwroot/js/registration.js",
+    "inputFiles": [
+      "Scripts/registration.js"
+    ],
+    "minify": {
+      "enabled": false
+    },
+    "sourceMap": false
+  },
+  {
     "outputFileName": "wwwroot/js/chart.js",
     "inputFiles": [
       "ResourcePackages/node_modules/chart.js/dist/chart.js"

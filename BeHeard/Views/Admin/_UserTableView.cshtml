@@ -11,7 +11,8 @@
             <th scope="col">#</th>
             <th scope="col">First</th>
             <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -24,6 +25,8 @@
             <td>@user.FirstName</td>
             <td>@user.LastName</td>
             <td>@user.Username</td>
+            <td>@user.Email</td>
+
             <td>
     @*            <button asp-page-handler="delete" asp-route-id="@user.username" onclick="return confirm('are you sure you want to delete?')" class="btn btn-danger btn-sm">delete</button>  
             <a asp-page="edit" asp-route-id="@user.username" class="btn btn-success btn-sm text-white">edit</a>
