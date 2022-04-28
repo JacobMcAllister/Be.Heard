@@ -94,7 +94,7 @@ namespace BeHeard.Controllers
             }
 
             // var random = new Random();
-            user.icon = $"face{RandomNumberGenerator.GetInt32(1,4)}.png";
+            user.icon = $"face{RandomNumberGenerator.GetInt32(1,6)}.png";
             
             var subscription = new Subscription
             {
