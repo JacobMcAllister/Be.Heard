@@ -12,5 +12,7 @@ namespace BeHeard.Core
         User GetUserByEmail(string email);
         User GetUserByCredentials(AuthorizationRequest credentials);
         IEnumerable<User> GetAllUsers();
+        IEnumerable<ActivityResult> PullExercises(Guid id);
+
     }
 }
