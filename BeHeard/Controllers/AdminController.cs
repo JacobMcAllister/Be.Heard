@@ -67,9 +67,18 @@ namespace BeHeard.Controllers
 
             if (!String.IsNullOrEmpty(searchField))
             {
-                model = model.Where(u => u.LastName.Contains(searchField)
-                               || u.FirstName.Contains(searchField) || u.Username.Contains(searchField));
-                model = model.ToList();
+                if (searchField == "Specialist")
+                {
+                    model = model.Where(u => u.Role == (RoleType)2);
+                    model = model.ToList();
+                }
+                else
+                {
+                    model = model.Where(u => u.LastName.Contains(searchField)
+                                   || u.FirstName.Contains(searchField)
+                                   || u.Username.Contains(searchField));
+                    model = model.ToList();
+                }
             }
 
             string redirectLocation = "_UserTableView";
@@ -159,8 +168,11 @@ namespace BeHeard.Controllers
             string tempPassword = "password";
             var States = Localization.Abbreviations();
 
+            int limit = 400;
+            int specialist = 0;
+
             Random random = new Random();
-            for (int i = 0; i < 400; i++)
+            for (int i = 0; i < limit; i++)
             {
                 User user = new User();
 
@@ -172,20 +184,26 @@ namespace BeHeard.Controllers
                 user.Email = user.Username + "@test.com";
                 user.Gender = (Gender)random.Next(0, 2);
                 user.Counter = random.Next(0,50);
+                user.PhoneNumber = "(" + random.Next(100, 999) + ")-" + random.Next(100,999) + "-" + random.Next(1000, 9999);
+
+                if (specialist == 50)
+                {
+                    user.Role = (RoleType)2;
+                    specialist = 0;
+                }
+                specialist++;
 
                 user.Address = new Address();
                 user.Address.City = cities[random.Next(1, cities.Length - 1)];
                 user.Address.Street = random.Next(100, 4000) + " Street";
                 user.Address.State = States[random.Next(1, 49)];
-
+                
                 string pass = "";
                 if (user.Password != null)
                 {
                     pass = PasswordService.hashPassword(user.Password);
                     user.Password = pass;
                 }
-
-                user.icon = "face1.png";
 
                 var subscription = new Subscription
                 {
@@ -225,13 +243,14 @@ namespace BeHeard.Controllers
                 try
                 {
                     _beHeardContextManager.UserRepository.Add(user);
-                    _beHeardContextManager.SaveChanges();
                 }
                 catch
                 {
                     return BadRequest();
                 }
             }
+            _beHeardContextManager.SaveChanges();
+
 
             var model = _beHeardContextManager.UserRepository.GetAll();
 
