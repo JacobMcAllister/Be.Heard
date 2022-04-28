@@ -117,7 +117,7 @@ namespace BeHeard.Controllers
             activityresult.Date = DateTime.Now;
             activityresult.SentenceSet = SentenceSet;
             activityresult.Decibel = Decibel;
-            activityresult.Counter = 1;
+            activityresult.Counter += 1;
             switch (viewDifficulty)
             {
                 case "Easy":
@@ -187,7 +187,7 @@ namespace BeHeard.Controllers
                     activityresult.Category = Category.NONE;
                     break;
             }
-            activityresult.UserProfileId = user.Id;
+            activityresult.UserId = user.Id;
             //results_ToList.Add(activityresult);
             //IEnumerable<ActivityResult> finalResults = results_ToList.AsEnumerable();
 

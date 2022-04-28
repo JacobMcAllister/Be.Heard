@@ -92,7 +92,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="75" data-time="2000"></span></h1>
+                                <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="@Model.User.Counter" data-time="2000"></span></h1>
                                 <div class="ps-4">
                                     <p class="mb-0">Total Completed</p>
                                     <h6 class="text-uppercase mb-0">Activities</h6>
@@ -544,15 +544,14 @@
     <script>
         const data = {
             labels: [
+                'Volume Chaser',
                 'Breathing',
-                'Bar Chaser',
-                'Breathing',
-                'Sentences',
-                'Freqency'
+                'Phrasing',
+                'Rote Speech'
             ],
             datasets: [{
                 label: '@Model.User.FirstName Activity Tracker',
-                data: [11, 16, 7, 3, 14],
+                data: [@Model.ActivityCount[0], @Model.ActivityCount[1],@Model.ActivityCount[2], @Model.ActivityCount[3],@Model.ActivityCount[4]],
                 backgroundColor: [
                     'rgb(255, 99, 132)',
                     'rgb(75, 192, 192)',
