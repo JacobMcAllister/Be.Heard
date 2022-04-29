@@ -32,20 +32,21 @@
                 <p>Choose the difficulty of the exercise in the dropdown!</p>
             </div>
             <div id="diff_dropdown">
-                <label for="difficulties">Choose a Difficulty: </label>
+                <label for="difficulties">Difficulty: </label>
                 <select name="difficulty" id="diff_option" onchange="difficulty_dropdown()">
-                    <option value="easy">easy</option>
-                    <option value="medium">medium</option>
-                    <option value="hard">hard</option>
-                    <option value="impossible">impossible</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                    <option value="Extreme">Extreme</option>
                 </select>
             </div>
             <br />
             <div id="diff_alert"></div>
             <br />
             <h3>Sentence Category</h3>
+            <p>Choose the category of the exercise in the dropdown!</p>
             <div id="dropdown">
-            <label for="rote options">Choose your category:</label>
+            <label for="rote options">Category:</label>
                 <select name="option" id="option">
                     <option value="0">Cities</option>
                     <option value="1">Directions</option>
@@ -65,7 +66,7 @@
                 <div id="random_button">
                     <button id="random" type="button" onclick="getSentence()">Randomize</button>
                 </div>
-                <div id="random_sentence" style="font-size:25px"></div>
+                <div id="random_sentence" style="font-size:25px;white-space:pre-line;"></div>
                 <br />
             </div>
         </div>
@@ -85,49 +86,28 @@
     <br />
     <div class="row text-center align-items-center shadow rounded border bg-white wow fadeInDown">
         <div id="database_area">
-            <table style="width:100%;">
-                <caption style="caption-side:top;">@Model.FullName, Volume Phrasing Exercise Results</caption>
+            <table style="width:100%;text-align:center;">
+                <caption style="caption-side:top;text-align:center;">@Model.FullName, Volume Phrasing Exercise Results</caption>
                 <thead>
                     <tr>
                         <th>Date</th>
                         <th>Difficulty</th>
+                        <th>Category</th>
                         <th>Sentence Set</th>
                         <th>Volume Level</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>04/25/22</td>
-                        <td>Easy</td>
-                        <td>Cities 4</td>
-                        <td>~30 dba</td>
-                    </tr>
-                    <tr>
-                        <td>04/26/22</td>
-                        <td>Easy</td>
-                        <td>Phone Numbers 1</td>
-                        <td>~40 dba</td>
-                    </tr>
-                    <tr>
-                        <td>04/28/22</td>
-                        <td>Easy</td>
-                        <td>Meal Orders 2</td>
-                        <td>~30 dba</td>
-                    </tr>
-                    <tr>
-                        <td>04/29/22</td>
-                        <td>Medium</td>
-                        <td>Cities 3</td>
-                        <td>~40 dba</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                </tbody>
-            </table>
+                    @foreach(var activityresults in @Model.ActivityResults)
+                    {
+                        <tr>
+                            <td>@activityresults.Date</td>
+                            <td>@activityresults.Difficulty</td>
+                            <td>@activityresults.Category</td>
+                            <td>@activityresults.SentenceSet</td>
+                            <td>@activityresults.Decibel</td>
+                        </tr>
+                    }
+                </table>
         </div>
     </div>
    <br />

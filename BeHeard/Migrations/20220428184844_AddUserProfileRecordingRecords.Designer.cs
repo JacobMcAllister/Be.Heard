@@ -4,6 +4,7 @@ using BeHeard.Application;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeHeard.Migrations
 {
     [DbContext(typeof(BeHeardContext))]
-    partial class BeHeardContextModelSnapshot : ModelSnapshot
+    [Migration("20220428184844_AddUserProfileRecordingRecords")]
+    partial class AddUserProfileRecordingRecords
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,10 +54,7 @@ namespace BeHeard.Migrations
                     b.Property<int>("Syllable")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("UserProfileId")
+                    b.Property<Guid>("UserProfileId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -194,9 +193,6 @@ namespace BeHeard.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<int>("Counter")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -253,7 +249,9 @@ namespace BeHeard.Migrations
                 {
                     b.HasOne("BeHeard.Application.Models.UserProfile", null)
                         .WithMany("ActivityResults")
-                        .HasForeignKey("UserProfileId");
+                        .HasForeignKey("UserProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BeHeard.Application.Models.RecordingRecord", b =>

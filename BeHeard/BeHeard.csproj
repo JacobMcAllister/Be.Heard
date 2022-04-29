@@ -57,6 +57,7 @@
     <Folder Include="ResourcePackages\js\src\" />
     <Folder Include="ResourcePackages\webfonts\" />
     <Folder Include="wwwroot\assets" />
+    <Folder Include="wwwroot\gif\" />
   </ItemGroup>
 
   <ItemGroup>
