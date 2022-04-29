@@ -7,14 +7,11 @@ namespace BeHeard.Models
     public class AnalyticsViewModel
     {
         public int count;
-        public List<State> States = Localization.Los;
 
-        public List<int> stateCount { get; set; }
-        public List<int> ageCountMale { get; set; }
-        public List<int> ageCountFemale { get; set; }
         public IEnumerable<ActivityResult> ActivityResults { get; set; }
 
         public List<int> ActivityCount { get; set; }
+        public List<int> ActivityDifficultyCount { get; set; }
 
     }
 }

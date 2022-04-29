@@ -16,15 +16,6 @@
                 <h1 class="mb-4">Welcome to the Admin <i class="fa fa-hammer" style="color: dodgerblue;"></i> Dashboard</h1>
                 <p class="mb-4"><strong>Location for datebase editing, demographic breakdown, and more.</strong></p>
                 <div class="row g-4 mb-4">
-    @*                        <div class="col-sm-6">
-                        <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                            <h1 class="flex-shrink-0 display-5 text-primary mb-0">2/1</h1>
-                            <div class="ps-4">
-                                <p class="mb-0">day of</p>
-                                <h6 class="text-uppercase mb-0">last login</h6>
-                            </div>
-                        </div>
-                    </div>*@
                     <div class="col-sm-3">
                         <div class="d-flex align-items-center border-start border-5 border-primary px-3">
                             <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="@Model.users" data-time="2000"></span></h1>
@@ -97,7 +88,7 @@
                                 <i class="fa fa-3x fa-chart-pie text-primary mb-4"></i>
                                 <h5>Analytics</h5>
                                 <p>Statistical data relating to the available users activities.</p>
-                                <a id="demographicsDetails" href="#demographicsDetails" class="stretched-link"> </a>
+                                <a id="analyticsDetails" href="#analyticsDetails" class="stretched-link"> </a>
                             </div>
                         </div>
                     </div>
@@ -143,13 +134,11 @@
                 </div>
             </div>
                     <!-- Collapse #analyticsDetailsCollapse-->
-            <div class="panel-collapse collapse py-2" id="userDetailsCollapse">
+            <div class="panel-collapse collapse py-2" id="analyticsCollapse">
                 <div class="card card-body" id="myCollapse1">
-                    <div class="container-xxl shadow overflow-auto" style="max-height:800px;">
-                        Find by First Name, Last Name, or Username: <input type="text" id="searchField" name="searchString"/>
-                        <input type="submit" class="btn searchButton btn-success text-white" />                     
+                    <div class="container-xxl shadow">             
                         <hr style="width:100%" size="3" color="black">
-                        <div id="divUserDetails">
+                        <div id="divAnalyticsDetails">
                             <!--- Render Content --->
                         </div>
                     </div>
@@ -348,7 +337,7 @@
                     },
                     success: function (data) {
                         $('#divMedicalProvidersDetails').html(data).data('subMenuPopulated', true);
-                        //$("#userDetailsCollapse").collapse("toggle");
+                        //$("#medicalProvidersCollapse").collapse("toggle");
                         $('#medicalProvidersCollapse').on('shown.bs.collapse', function () {
                             this.scrollIntoView();
                         });
@@ -362,6 +351,7 @@
                     }
                 });
             }
+
         });
 
         var searchUrl = "../Admin/UserTable";
@@ -407,7 +397,7 @@
                     datatype: "json",
                     success: function (data) {                
                          $('#divDemographicsDetails').html(data);
-                        //$("#demographicsCollapse").collapse("toggle");
+                        $("#demographicsCollapse").collapse("toggle");
                         $('#demographicsCollapse').on('shown.bs.collapse', function () {
                             this.scrollIntoView();
                         });
@@ -417,11 +407,41 @@
                     }
                 });
             }
-
-            setTimeout(function() {
+            else{
                 $("#demographicsCollapse").collapse("toggle");
-            }, delay);
+            }
+        });
 
+        $("#analyticsDetails").click(function () {
+            var $attrib = $('#divAnalyticsDetails');
+            var options = { "backdrop": "static", keyboard: true };
+            var delay = 500;
+
+            if(!$attrib.is(":visible")){
+
+                $.ajax({
+                    type: "GET",
+                    url: '/Admin/Analytics',
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    success: function (data) {                
+                         $('#divAnalyticsDetails').html(data);
+                        $("#analyticsCollapse").collapse("toggle");
+                        $('#analyticsCollapse').on('shown.bs.collapse', function () {
+                            this.scrollIntoView();
+                        });
+                        },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            }
+            else{
+                setTimeout(function(){
+                $("#analyticsCollapse").collapse("toggle");
+
+                }, delay)
+            }
         });
     });
            

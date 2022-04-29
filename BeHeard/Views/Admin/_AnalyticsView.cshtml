@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Analytics";
 }
+
 @using BeHeard.Application.Helpers
 @model BeHeard.Models.AnalyticsViewModel
 
@@ -10,20 +11,109 @@
 
 
 <hr/>
-<div class="card mb-4">
+<div class="card mb-4 d-flex" style="height: 45vh;">
     <div class="card-header">
        <i class="fas fa-chart-bar me-1"></i>
-       Current User Age Distribution
+       Current User Completed Exercise Distribution
     </div>
-    <div class="card-body"><canvas id="myChart" style="width:100%; height:50px;"></canvas></div>
+    <div class="card-body" style="height: 500px !important;"><canvas id="myChart" width="600" height="250"></canvas></div>
+
+         <div class="row g-4 mb-4 px-3">
+            <div class="col-sm-3">
+                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                    <h1 class="flex-shrink-0 display-5 text-primary mb-0">@Model.ActivityDifficultyCount[0]</h1>
+                    <div class="ps-4">
+                        <p class="mb-0">Total</p>
+                        <h6 class="text-uppercase mb-0">Easy Exercises</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                    <h1 class="flex-shrink-0 display-5 text-primary mb-0">@Model.ActivityDifficultyCount[1]</h1>
+                    <div class="ps-4">
+                        <p class="mb-0">Total</p>
+                        <h6 class="text-uppercase mb-0">Medium Exercises</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                    <h1 class="flex-shrink-0 display-5 text-primary mb-0">@Model.ActivityDifficultyCount[2]</h1>
+                    <div class="ps-4">
+                        <p class="mb-0">Total</p>
+                        <h6 class="text-uppercase mb-0">Hard Exercises</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                    <h1 class="flex-shrink-0 display-5 text-primary mb-0">@Model.ActivityDifficultyCount[3]</h1>
+                    <div class="ps-4">
+                        <p class="mb-0">Total</p>
+                        <h6 class="text-uppercase mb-0">Extreme Exercises</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
 </div>
-
-
-
-
-
 
 <script>
 
+    // <block:data:3>
+    const data = {
+      labels: ['Volume Chasing', 'Breathing', 'Phrasing', 'Rote Speach'],
+      datasets: [{
+        label: '# of Votes',
+        data: [@Model.ActivityCount[0], @Model.ActivityCount[1], @Model.ActivityCount[2], @Model.ActivityCount[3]],
+        borderWidth: 1,
+        backgroundColor: ['#CB4335', '#1F618D', '#F1C40F', '#27AE60'],
+      }]
+    };
+    // </block:data>
+
+    // <block:handleHover:1>
+    // Append '4d' to the colors (alpha channel), except for the hovered index
+    function handleHover(evt, item, legend) {
+      legend.chart.data.datasets[0].backgroundColor.forEach((color, index, colors) => {
+        colors[index] = index === item.index || color.length === 9 ? color : color + '4D';
+      });
+      legend.chart.update();
+    }
+    // </block:handleHover>
+
+    // <block:handleLeave:2>
+    // Removes the alpha channel from background colors
+    function handleLeave(evt, item, legend) {
+      legend.chart.data.datasets[0].backgroundColor.forEach((color, index, colors) => {
+        colors[index] = color.length === 9 ? color.slice(0, -2) : color;
+      });
+      legend.chart.update();
+    }
+    // </block:handleLeave>
+
+    // <block:config:0>
+    const config = {
+      type: 'pie',
+      data: data,
+      options: {
+            responsive: true,
+            maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            onHover: handleHover,
+            onLeave: handleLeave
+          }
+        }
+      }
+    };
+
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
 
 </script>

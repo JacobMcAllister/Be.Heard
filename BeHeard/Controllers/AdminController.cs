@@ -165,34 +165,22 @@ namespace BeHeard.Controllers
 
         public ActionResult Analytics(string searchField)
         {
-            var users = _beHeardContextManager.UserRepository.GetAllUsers();
 
-            //if (!String.IsNullOrEmpty(searchField))
-            //{
-            //    model = model.Where(u => u.LastName.Contains(searchField)
-            //                   || u.FirstName.Contains(searchField) || u.Username.Contains(searchField));
-            //    model = model.ToList();
-            //}
-            //List<State> States = Localization.Los;
-
-            var model = new AnalyticsViewModel
-            {
-                stateCount = new List<int> { 0 },
-                ageCountMale = new List<int> { 0 },
-                ageCountFemale = new List<int> { 0 },
-
-            };
-
-            foreach (State state in model.States)
-            {
-                model.stateCount.Add(users.Where(c => c.Address.State.Contains(state.Abbreviation)).Count());
-            }    
-
+            var model = new AnalyticsViewModel() { };
+            model.ActivityResults = _beHeardContextManager.ActivityResultRepository.GetAll();
             model.ActivityCount = new List<int> { };
-            //model.ActivityResults = _beHeardContextManager.ActivityResultRepository.GetAll();
+            model.ActivityDifficultyCount = new List<int> { };
 
+            for (int i = 0; i < 4; i++)
+            {
+                model.ActivityDifficultyCount.Add(model.ActivityResults.Where(c => c.Difficulty == (ActivityLevel)i).Count());
 
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                model.ActivityCount.Add(model.ActivityResults.Where(c => c.Exercise == (Exercise)i).Count());
 
+            }
             string redirectLocation = "_AnalyticsView";
 
             return PartialView(redirectLocation, model);
@@ -236,7 +224,7 @@ namespace BeHeard.Controllers
                 user.Address = new Address();
                 user.Address.City = cities[random.Next(1, cities.Length - 1)];
                 user.Address.Street = random.Next(100, 4000) + " Street";
-                user.Address.State = States[random.Next(1, 49)];
+                user.Address.State = States[random.Next(0, 50)];
                 
                 string pass = "";
                 if (user.Password != null)
