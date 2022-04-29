@@ -128,7 +128,7 @@ namespace BeHeard.Controllers
             activityresult.Date = DateTime.Now;
             activityresult.SentenceSet = SentenceSet;
             activityresult.Decibel = Decibel;
-            activityresult.Counter += 1;
+            user.Counter += 1;
             switch (viewDifficulty)
             {
                 case "Easy":
