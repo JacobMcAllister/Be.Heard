@@ -22,46 +22,70 @@ var option_Choice = null;
 var target_fillVol = 50;
 var difficulty = null;
 var diff_value = null;
-var db_sentenceChoice = null;
-var db_catChoice = null;
+var option_val = null;
 
-const cities = [
-    "I live in Reno, Nevada.  By car, Reno is about 2 hours away from Sacramento.  By plane, Reno is about 1 hour away from Las Vegas.",
-    "The White House is in Washington D.C.  The Queen of England lives in London.  The Chancellor of Germany resides in Berlin.",
-    "The capital of Japan is Tokyo.  I have always wanted to visit Kyoto.  I have heard that Osaka is also a nice place to visit.",
-    "San Francisco is home to the baseball Giants.  New York is home to the football Giants.  There is also a Giants baseball team in Tokyo.",
-    "Kingman is a small town in Arizona.  Elko is an even smaller town in Nevada.  New Harmony is much smaller than both in Utah."
+// DB Fields
+var SentenceSet = -1;
+var Decibel = null;
+var Syllable = null;
+var Difficulty = null;
+var Exercise = null;
+var Category = null;
+
+function UpdateDB(volume) {
+
+    $.ajax({
+        url: "UpdateDBwResults",
+        type: "POST",
+        data: {
+            Decibel: volume,
+            viewSyllable: "NONE",
+            viewDifficulty: diff_value,
+            viewExercise: "Rote",
+            viewCategory: Category,
+            SentenceSet: SentenceSet
+        }
+    })
+}
+
+
+const Cities = [
+    "I live in Reno, Nevada.\nBy car, Reno is about 2 hours away from Sacramento.\nBy plane, Reno is about 1 hour away from Las Vegas.",
+    "The White House is in Washington D.C.\nThe Queen of England lives in London.\nThe Chancellor of Germany resides in Berlin.",
+    "The capital of Japan is Tokyo.\nI have always wanted to visit Kyoto.\nI have heard that Osaka is also a nice place to visit.",
+    "San Francisco is home to the baseball Giants.\nNew York is home to the football Giants.\nThere is also a Giants baseball team in Tokyo.",
+    "Kingman is a small town in Arizona.\nElko is an even smaller town in Nevada.\nNew Harmony is much smaller than both in Utah."
 ];
-const directions = [
-    "To get to school, I must turn left down Main street, then take a right on Broadway.  If I have gotten to twenty third street, then I know I have gone too far.",
-    "The nice woman said the bus stop is three blocks down seventh avenue and then turn right on C street.  I hope I do not forget C street.",
-    "If I am traveling down Glendale boulevard, eventually I will need to turn right at the movie theater.  The movie theater is on John Wayne street, that is funny.",
-    "To get to the airport, I must get on the freeway at Keystone avenue.  Then I must take the freeway past Wells boulevard.  If I miss the turn onto the three ninety five highway, I'll have to circle around.",
-    "My house is on Barbara drive.  To get there from here, I need to go down Pennsylvania drive and turn left on Montana drive.  Barbara is just on the right."
+const Directions = [
+    "To get to school, I must turn left down Main street, then take a right on Broadway.\nIf I have gotten to twenty third street, then I know I have gone too far.",
+    "The nice woman said the bus stop is three blocks down seventh avenue and then turn right on C street.\nI hope I do not forget C street.",
+    "If I am traveling down Glendale boulevard, eventually I will need to turn right at the movie theater.\nThe movie theater is on John Wayne street, that is funny.",
+    "To get to the airport, I must get on the freeway at Keystone avenue.\nThen I must take the freeway past Wells boulevard.\nIf I miss the turn onto the three ninety five highway, I'll have to circle around.",
+    "My house is on Barbara drive.\nTo get there from here, I need to go down Pennsylvania drive and turn left on Montana drive.\nBarbara is just on the right."
 ]
-const phoneNumbers = [
-    "My phone number is one two three, four five six, seven eight nine zero.  What a mouthful.  But remember, one two three, four five six, seven eight nine zero.",
-    "The cab company phone number is easy to remember.  Three three three, thirty three thirty three.  The owner must like the number three.",
-    "Always remember, in an emergency, call nine one one.  It is only three digits, nine one one.  You cannot forget, nine one one.",
-    "I wrote down Dave's number and I think it was four five five, six eight nine one.  I called and he did not answer.  I hope it is nine one and not one nine.",
-    "Did you write down the number for the soccer coach?  Yes I did, seven seven five, eight three nine, four five one two.  Remember, seven seven five for the area code."
+const PhoneNumbers = [
+    "My phone number is one two three, four five six, seven eight nine zero.\nWhat a mouthful.\nBut remember, one two three, four five six, seven eight nine zero.",
+    "The cab company phone number is easy to remember.\nThree three three, thirty three thirty three.\nThe owner must like the number three.",
+    "Always remember, in an emergency, call nine one one.\nIt is only three digits, nine one one.\nYou cannot forget, nine one one.",
+    "I wrote down Dave's number and I think it was four five five, six eight nine one.\nI called and he did not answer.\nI hope it is nine one and not one nine.",
+    "Did you write down the number for the soccer coach?\nYes I did, seven seven five, eight three nine, four five one two.\nRemember, seven seven five for the area code."
 ]
-const commonRequests = [
-    "Hey, could you please open the window?  It is getting really hot in the car.  Sure, no problem.",
-    "Please pass the ketchup.  I sure do love putting ketchup on my french fries.  I heard that Pat Mahomes puts ketchup on everything.",
-    "Will that be paper or plastic for your groceries?  Paper please, I use the bags to cover my text books.",
-    "Can you watch my dog while I am away?  Oh, I am sorry.  I am also going out of town for vacation then.",
-    "Excuse me!  I just need to go past, my seat for the movie is on the other side of you.  Oh, sure thing."
+const CommonRequests = [
+    "Hey, could you please open the window?\nIt is getting really hot in the car.\nSure, no problem.",
+    "Please pass the ketchup.\nI sure do love putting ketchup on my french fries.\nI heard that Pat Mahomes puts ketchup on everything.",
+    "Will that be paper or plastic for your groceries?\nPaper please, I use the bags to cover my text books.",
+    "Can you watch my dog while I am away?\nOh, I am sorry.\nI am also going out of town for vacation then.",
+    "Excuse me!\nI just need to go past, my seat for the movie is on the other side of you.\nOh, sure thing."
 ]
-const mealOrders = [
-    "I will have the cheeseburger for dinner.  For my side, I will have a salad with caesar dressing.  Oh, and I would like a coca-cola to drink.",
-    "For breakfast, I will have two eggs, over easy, bacon, and a side of sourdough toast.  Nice and simple breakfast for me.",
-    "Nothing is better for lunch on a busy day than a sub sandwich.  I like my sandwish with salami, turkey, and ham.  Oh, and do not forget the mayo and mustard please.",
-    "My favorite thing to order at a baseball game is a hot dog with relish, mustard, ketchup, and onions.  Then, I go to the popcorn stand and order a large buttery popcorn!",
-    "When I am at a fancy restaurant, I order the steak, medium rare, with vegetables and a baked potato.  Actually, my favorite thing is to order dessert, one giant hot fudge sundae."
+const MealOrders = [
+    "I will have the cheeseburger for dinner.\nFor my side, I will have a salad with caesar dressing.\nOh, and I would like a coca-cola to drink.",
+    "For breakfast, I will have two eggs, over easy, bacon, and a side of sourdough toast.\nNice and simple breakfast for me.",
+    "Nothing is better for lunch on a busy day than a sub sandwich.\n  I like my sandwish with salami, turkey, and ham.\nOh, and do not forget the mayo and mustard please.",
+    "My favorite thing to order at a baseball game is a hot dog with relish, mustard, ketchup, and onions.\nThen, I go to the popcorn stand and order a large buttery popcorn!",
+    "When I am at a fancy restaurant, I order the steak, medium rare, with vegetables and a baked potato.\nActually, my favorite thing is to order dessert, one giant hot fudge sundae."
 ]
 
-const options = ["cities", "directions", "phoneNumbers", "commonRequests", "mealOrders"]
+const options = ["Cities", "Directions", "PhoneNumbers", "CommonRequests", "MealOrders"]
 
 //  Random number between min and max
 function random_Int(min, max) {
@@ -72,11 +96,11 @@ function random_Int(min, max) {
 function get_Randomsentence(option_array) {
     let loop = true;
 
-    sentence_Choice = random_Int(0, 4);
+    sentence_Choice = random_Int(0, 5);
     current_sentence = sentence_Choice;
     if (current_sentence === last_sentence) {
         while (loop) {
-            sentence_Choice = random_Int(0, 4);
+            sentence_Choice = random_Int(0, 5);
             current_sentence = sentence_Choice;
             if (current_sentence != last_sentence) {
                 loop = false
@@ -86,30 +110,32 @@ function get_Randomsentence(option_array) {
 
     last_sentence = current_sentence;
     console.log(sentence_Choice);
-    db_sentenceChoice = sentence_Choice;
+    SentenceSet = sentence_Choice;
     document.getElementById("random_sentence").innerHTML = option_array[sentence_Choice];
 }
 
 function getSentence() {
+    console.log("Clicked");
     option = document.getElementById("option");
-    option_Choice = options[option.value];
-    db_catChoice = option_Choice;
+    option_val = option.value;
+    option_Choice = options[option_val];
+    Category = option_Choice;
 
     switch (option_Choice) {
-        case "cities":
-            get_Randomsentence(cities);
+        case "Cities":
+            get_Randomsentence(Cities);
             break;
-        case "directions":
-            get_Randomsentence(directions);
+        case "Directions":
+            get_Randomsentence(Directions);
             break;
-        case "phoneNumbers":
-            get_Randomsentence(phoneNumbers);
+        case "PhoneNumbers":
+            get_Randomsentence(PhoneNumbers);
             break;
-        case "commonRequests":
-            get_Randomsentence(commonRequests);
+        case "CommonRequests":
+            get_Randomsentence(CommonRequests);
             break;
-        case "mealOrders":
-            get_Randomsentence(mealOrders);
+        case "MealOrders":
+            get_Randomsentence(MealOrders);
             break;
     }
 }
@@ -313,13 +339,15 @@ function start_timer() {
                         break;
                     case (percent_decibel > 65.1):
                         loud = true;
-                        output = " greater then 100";
+                        output = ">100";
                         break;
                 }
 
                 if (loud) {
-                    alert("Wow!\n'Normal' voice volume is around 50-60 dba.\nYour volume was" + output + "dba!")
+                    UpdateDB(output);
+                    alert("Wow!\n'Normal' voice volume is around 50-60 dba.\nYour volume was: " + output + " dba!")
                 } else {
+                    UpdateDB(output);
                     alert("Great Job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + output + " dba.");
                 }
             }
@@ -354,19 +382,19 @@ function difficulty_dropdown() {
 
     function alter_difficulty(value) {
         switch (true) {
-            case (value == 'easy'):
+            case (value == 'Easy'):
                 target_fillVol = 50
                 diff_alert(1);
                 break;
-            case (value == 'medium'):
+            case (value == 'Medium'):
                 target_fillVol = 100;
                 diff_alert(2);
                 break;
-            case (value == 'hard'):
+            case (value == 'Hard'):
                 target_fillVol = 200;
                 diff_alert(3);
                 break;
-            case (value == 'impossible'):
+            case (value == 'Extreme'):
                 target_fillVol = WIDTH;
                 diff_alert(4);
                 break;

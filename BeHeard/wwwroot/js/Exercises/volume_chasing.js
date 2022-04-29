@@ -36,7 +36,7 @@ function UpdateDB(volume) {
         type: "POST",
         data: {
             Decibel: volume,
-            viewSyllable: syllablechoice,
+            viewSyllable: Syllable,
             viewDifficulty: diff_value,
             viewExercise: "VolumeChasing",
             viewCategory: "NONE",
@@ -47,8 +47,12 @@ function UpdateDB(volume) {
 
 
 // Grab Syllable
-syllable1 = document.getElementById("dropdown");
-syllablechoice = syllable1.value;
+function grab_syllable() {
+    syllable1 = document.getElementById("syllable");
+    syllablechoice = syllable1.value;
+    console.log(syllablechoice);
+    Syllable = syllablechoice;
+}
 
 // Grab our canvas
 canvasContext = document.getElementById("meter").getContext("2d");
@@ -309,7 +313,7 @@ function difficulty_dropdown() {
                 document.getElementById("diff_span").innerHTML = timeleft;
                 diff_alert(3);
                 break;
-            case (value == 'Impossible'):
+            case (value == 'Extreme'):
                 target_fillVol = WIDTH;
                 timeleft = 20;
                 document.getElementById("diff_span").innerHTML = timeleft;

@@ -120,6 +120,31 @@ namespace BeHeard.Migrations
                     b.ToTable("Preferences");
                 });
 
+            modelBuilder.Entity("BeHeard.Application.Models.RecordingRecord", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Chosen")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Result")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("UserProfileId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserProfileId");
+
+                    b.ToTable("RecordingRecord");
+                });
+
             modelBuilder.Entity("BeHeard.Application.Models.Settings", b =>
                 {
                     b.Property<Guid>("Id")
@@ -231,6 +256,13 @@ namespace BeHeard.Migrations
                         .HasForeignKey("UserProfileId");
                 });
 
+            modelBuilder.Entity("BeHeard.Application.Models.RecordingRecord", b =>
+                {
+                    b.HasOne("BeHeard.Application.Models.UserProfile", null)
+                        .WithMany("RecordingRecords")
+                        .HasForeignKey("UserProfileId");
+                });
+
             modelBuilder.Entity("BeHeard.Application.Models.Settings", b =>
                 {
                     b.HasOne("BeHeard.Application.Models.User", "User")
@@ -290,6 +322,8 @@ namespace BeHeard.Migrations
             modelBuilder.Entity("BeHeard.Application.Models.UserProfile", b =>
                 {
                     b.Navigation("ActivityResults");
+
+                    b.Navigation("RecordingRecords");
                 });
 #pragma warning restore 612, 618
         }

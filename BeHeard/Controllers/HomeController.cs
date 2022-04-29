@@ -69,5 +69,36 @@ namespace BeHeard.Controllers
             return View();
             //return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpPost]
+        public IActionResult UpdateDBRecords(int score, string chosen, string result) {
+            var service = new SessionService(HttpContext);
+            var session = service.Get();
+
+            var newRecord = new RecordingRecord();
+            newRecord.Score = score;
+            newRecord.Chosen = chosen;
+            newRecord.Result = result;
+            var updateUser = _beHeardContextManager.UserRepository.GetUserByUsername(session.Username);
+
+            if (updateUser.Profile.RecordingRecords == null)
+            {
+                var updateRecordList = new List<RecordingRecord>
+                {
+                    newRecord
+                };
+                updateUser.Profile.RecordingRecords = updateRecordList;
+            }
+            else 
+            {
+                updateUser.Profile.RecordingRecords.Add(newRecord);
+            }
+
+            _beHeardContextManager.SaveChanges();
+            service.Save();
+
+            Console.Write("gets here");
+            return new EmptyResult();
+        }
     }
 }
