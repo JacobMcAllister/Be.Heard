@@ -86,9 +86,24 @@
                 <li class="nav-item"><a class="nav-link" href="@Model.Dashboard">Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link" href="@Model.Exercises">Exercises</a></li>
             </ul>
+            @if (user.Role is RoleType.MedicalProvider or RoleType.Admin)
+            {
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    @if (user.Role is RoleType.MedicalProvider or RoleType.Admin)
+                    {
+                    <li class="nav-item"><a class="nav-link" href="@Model.MedicalProvider">Specialist</a></li>
+                    }
+                    @if (user.Role == RoleType.Admin)
+                    {
+                    <li class="nav-item"><a class="nav-link" href="@Model.Admin">Admin</a></li>
+                    }
+                </ul>
+            }
             <ul class="navbar-nav mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="@Model.MedicalProvider">Specialist</a></li>
-                <li class="nav-item"><a class="nav-link" href="@Model.Admin">Admin</a></li>
+                <li><a href="/Settings" class="nav-link">Settings</a></li> 
+                <li><a href="/Profile" class="nav-link">Profile</a></li> 
+                <li><hr class="dropdown-divider" /></li> 
+                <li><a class="nav-link" asp-controller="Logout" asp-action="Logout">Sign out</a></li> 
             </ul>
         </div>
     </div>

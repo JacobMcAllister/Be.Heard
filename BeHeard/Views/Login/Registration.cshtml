@@ -87,6 +87,7 @@
                             <input type="password" class="form-control" id="Password" aria-describedby="PasswordHelp" placeholder="Password" name="Password" required/>
                         </div>
                     </div>
+                    <input id="AccountType" type="text"  class="d-none" name="Role" />
                     <div class="col-12 pt-3" id="RegistrationSubmitButtonContainer">
                         <button type="submit" class="btn bh-btn-primary w-100">Submit</button>
                     </div>
@@ -99,25 +100,7 @@
     </div>
 </section>
 
-<script>
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
-</script>
+@section Scripts
+{
+    <script src="~/js/registration.js"></script>
+}
