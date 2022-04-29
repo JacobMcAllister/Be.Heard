@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeHeard.Migrations
 {
     [DbContext(typeof(BeHeardContext))]
-    [Migration("20220428184844_AddUserProfileRecordingRecords")]
-    partial class AddUserProfileRecordingRecords
+    [Migration("20220429044614_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,7 +54,10 @@ namespace BeHeard.Migrations
                     b.Property<int>("Syllable")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserProfileId")
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("UserProfileId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -193,6 +196,9 @@ namespace BeHeard.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<int>("Counter")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -249,9 +255,7 @@ namespace BeHeard.Migrations
                 {
                     b.HasOne("BeHeard.Application.Models.UserProfile", null)
                         .WithMany("ActivityResults")
-                        .HasForeignKey("UserProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserProfileId");
                 });
 
             modelBuilder.Entity("BeHeard.Application.Models.RecordingRecord", b =>
