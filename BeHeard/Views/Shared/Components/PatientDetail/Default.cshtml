@@ -1,0 +1,22 @@
+@model BeHeard.Widgets.Models.PatientDetailModel
+@using BeHeard.Application.Models
+
+<section id="PatientDetail">
+    <div class="row">
+        <div class="col-4">
+            <div class="card">
+                <img src="~/images/@Model.User.icon" alt="User Avatar" class="card-img-top" />
+                <div class="card-body">
+                    <h6 class="card-title">@Model.User.FirstName @Model.User.LastName</h6>
+                    <p>
+                        @Enum.GetName(typeof(Gender), Model.User.Gender)<br/>
+                        @Model.User.Age yr.
+                    </p>
+                </div>
+            </div> 
+        </div> 
+        <div class="col-8">
+            
+        </div> 
+    </div>
+</section>
