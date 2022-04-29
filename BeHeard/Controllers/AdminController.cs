@@ -25,6 +25,7 @@ namespace BeHeard.Controllers
 
             var model = new AdminViewModel();
             model.users = _beHeardContextManager.UserRepository.Count();
+            model.medicalProviders = users.Where(u => u.Role == (RoleType)2).Count();
             model.activities = users.Sum(u => u.Counter);
 
             return View(model);
@@ -143,7 +144,7 @@ namespace BeHeard.Controllers
                 model.stateCount.Add(users.Where(c => c.Address.State.Contains(state.Abbreviation)).Count());
             }
 
-            //  Need to change this all to joins.
+            //  Need to change this all.
             model.ageCountMale.Add(users.Where(c => c.Age < 19 & c.Gender == 0).Count());
             model.ageCountMale.Add(users.Where(c => c.Age < 40 & c.Age > 18 & c.Gender == 0).Count());
             model.ageCountMale.Add(users.Where(c => c.Age < 60 & c.Age > 39 & c.Gender == 0).Count());
@@ -162,6 +163,29 @@ namespace BeHeard.Controllers
             return PartialView(redirectLocation, model);
         }
 
+        public ActionResult Analytics(string searchField)
+        {
+
+            var model = new AnalyticsViewModel() { };
+            model.ActivityResults = _beHeardContextManager.ActivityResultRepository.GetAll();
+            model.ActivityCount = new List<int> { };
+            model.ActivityDifficultyCount = new List<int> { };
+
+            for (int i = 0; i < 4; i++)
+            {
+                model.ActivityDifficultyCount.Add(model.ActivityResults.Where(c => c.Difficulty == (ActivityLevel)i).Count());
+
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                model.ActivityCount.Add(model.ActivityResults.Where(c => c.Exercise == (Exercise)i).Count());
+
+            }
+            string redirectLocation = "_AnalyticsView";
+
+            return PartialView(redirectLocation, model);
+        }
+
         public ActionResult PopulateDB()
         {
             string[] firstNames = new string[] { "Aaran", "Aaren", "Aarez", "Aarman", "Aaron", "Aaron-James", "Aarron", "Aaryan", "Aaryn", "Aayan", "Aazaan", "Abaan", "Abbas", "Abdallah", "Abdalroof", "Abdihakim", "Abdirahman", "Abdisalam", "Abdul", "Abdul-Aziz", "Abdulbasir", "Abdulkadir", "Abdulkarem", "Abdulkhader", "Abdullah", "Abdul-Majeed", "Abdulmalik", "Abdul-Rehman", "Abdur", "Abdurraheem", "Abdur-Rahman", "Abdur-Rehmaan", "Abel", "Abhinav", "Abhisumant", "Abid", "Abir", "Abraham", "Abu", "Abubakar", "Ace", "Adain", "Adam", "Adam-James", "Addison", "Addisson", "Adegbola", "Adegbolahan", "Aden", "Adenn", "Adie", "Adil", "Aditya", "Adnan", "Adrian", "Adrien", "Aedan", "Aedin", "Aedyn", "Aeron", "Afonso", "Ahmad", "Ahmed", "Ahmed-Aziz", "Ahoua", "Ahtasham", "Aiadan", "Aidan", "Aiden", "Aiden-Jack", "Aiden-Vee", "Aidian", "Aidy", "Ailin", "Aiman", "Ainsley", "Ainslie", "Airen", "Airidas", "Airlie", "AJ", "Ajay", "A-Jay", "Ajayraj", "Akan", "Akram", "Al", "Ala", "Alan", "Alanas", "Alasdair", "Alastair", "Alber", "Albert", "Albie", "Aldred", "Alec", "Aled", "Aleem", "Aleksandar", "Aleksander", "Aleksandr", "Aleksandrs", "Alekzander", "Alessandro", "Alessio", "Alex", "Alexander", "Alexei", "Alexx", "Alexzander", "Alf", "Alfee", "Alfie", "Alfred", "Alfy", "Alhaji", "Al-Hassan", "Ali", "Aliekber", "Alieu", "Alihaider", "Alisdair", "Alishan", "Alistair", "Alistar", "Alister", "Aliyaan", "Allan", "Allan-Laiton", "Allen", "Allesandro", "Allister", "Ally", "Alphonse", "Altyiab", "Alum", "Alvern", "Alvin", "Alyas", "Amaan", "Aman", "Amani", "Ambanimoh", "Ameer", "Amgad", "Ami", "Amin", "Amir", "Ammaar", "Ammar", "Ammer", "Amolpreet", "Amos", "Amrinder", "Amrit", "Amro", "Anay", "Andrea", "Andreas", "Andrei", "Andrejs", "Andrew", "Andy", "Anees", "Anesu", "Angel", "Angelo", "Angus", "Anir", "Anis", "Anish", "Anmolpreet", "Annan", "Anndra", "Anselm", "Anthony", "Anthony-John", "Antoine", "Anton", "Antoni", "Antonio", "Antony", "Antonyo", "Anubhav", "Aodhan", "Aon", "Aonghus", "Apisai", "Arafat", "Aran", "Arandeep", "Arann", "Aray", "Arayan", "Archibald", "Archie", "Arda", "Ardal", "Ardeshir", "Areeb", "Areez", "Aref", "Arfin", "Argyle", "Argyll", "Ari", "Aria", "Arian", "Arihant", "Aristomenis", "Aristotelis", "Arjuna", "Arlo", "Armaan", "Arman", "Armen", "Arnab", "Arnav", "Arnold", "Aron", "Aronas", "Arran", "Arrham", "Arron", "Arryn", "Arsalan", "Artem", "Arthur", "Artur", "Arturo", "Arun", "Arunas", "Arved", "Arya", "Aryan", "Aryankhan", "Aryian", "Aryn", "Asa", "Asfhan", "Ash", "Ashlee-jay", "Ashley", "Ashton", "Ashton-Lloyd", "Ashtyn", "Ashwin", "Asif", "Asim", "Aslam", "Asrar", "Ata", "Atal", "Atapattu", "Ateeq", "Athol", "Athon", "Athos-Carlos", "Atli", "Atom", "Attila", "Aulay", "Aun", "Austen", "Austin", "Avani", "Averon", "Avi", "Avinash", "Avraham", "Awais", "Awwal", "Axel", "Ayaan", "Ayan", "Aydan", "Ayden", "Aydin", "Aydon", "Ayman", "Ayomide", "Ayren", "Ayrton", "Aytug", "Ayub", "Ayyub", "Azaan", "Azedine", "Azeem", "Azim", "Aziz", "Azlan", "Azzam", "Azzedine", "Babatunmise", "Babur", "Bader", "Badr", "Badsha", "Bailee", "Bailey", "Bailie", "Bailley", "Baillie", "Baley", "Balian", "Banan", "Barath", "Barkley", "Barney", "Baron", "Barrie", "Barry", "Bartlomiej", "Bartosz", "Basher", "Basile", "Baxter", "Baye", "Bayley", "Beau", "Beinn", "Bekim", "Believe", "Ben", "Bendeguz", "Benedict", "Benjamin", "Benjamyn", "Benji", "Benn", "Bennett", "Benny", "Benoit", "Bentley", "Berkay", "Bernard", "Bertie", "Bevin", "Bezalel", "Bhaaldeen", "Bharath", "Bilal", "Bill", "Billy", "Binod", "Bjorn", "Blaike", "Blaine", "Blair", "Blaire", "Blake", "Blazej", "Blazey", "Blessing", "Blue", "Blyth", "Bo", "Boab", "Bob", "Bobby", "Bobby-Lee", "Bodhan", "Boedyn", "Bogdan", "Bohbi", "Bony", "Bowen", "Bowie", "Boyd", "Bracken", "Brad", "Bradan", "Braden", "Bradley", "Bradlie", "Bradly", "Brady", "Bradyn", "Braeden", "Braiden", "Brajan", "Brandan", "Branden", "Brandon", "Brandonlee", "Brandon-Lee", "Brandyn", "Brannan", "Brayden", "Braydon", "Braydyn", "Breandan", "Brehme", "Brendan", "Brendon", "Brendyn", "Breogan", "Bret", "Brett", "Briaddon", "Brian", "Brodi", "Brodie", "Brody", "Brogan", "Broghan", "Brooke", "Brooklin", "Brooklyn", "Bruce", "Bruin", "Bruno", "Brunon", "Bryan", "Bryce", "Bryden", "Brydon", "Brydon-Craig", "Bryn", "Brynmor", "Bryson", "Buddy", "Bully", "Burak", "Burhan", "Butali", "Butchi", "Byron", "Cabhan", "Cadan", "Cade", "Caden", "Cadon", "Cadyn", "Caedan", "Caedyn", "Cael", "Caelan", "Caelen", "Caethan", "Cahl", "Cahlum", "Cai", "Caidan", "Caiden", "Caiden-Paul", "Caidyn", "Caie", "Cailaen", "Cailean", "Caileb-John", "Cailin", "Cain", "Caine", "Cairn", "Cal", "Calan", "Calder", "Cale", "Calean", "Caleb", "Calen", "Caley", "Calib", "Calin", "Callahan", "Callan", "Callan-Adam", "Calley", "Callie", "Callin", "Callum", "Callun", "Callyn", "Calum", "Calum-James", "Calvin", "Cambell", "Camerin", "Cameron", "Campbel", "Campbell", "Camron", "Caolain", "Caolan", "Carl", "Carlo", "Carlos", "Carrich", "Carrick", "Carson", "Carter", "Carwyn", "Casey", "Casper", "Cassy", "Cathal", "Cator", "Cavan", "Cayden", "Cayden-Robert", "Cayden-Tiamo", "Ceejay", "Ceilan", "Ceiran", "Ceirin", "Ceiron", "Cejay", "Celik", "Cephas", "Cesar", "Cesare", "Chad", "Chaitanya", "Chang-Ha", "Charles", "Charley", "Charlie", "Charly", "Chase", "Che", "Chester", "Chevy", "Chi", "Chibudom", "Chidera", "Chimsom", "Chin", "Chintu", "Chiqal", "Chiron" };
@@ -170,7 +194,7 @@ namespace BeHeard.Controllers
             string tempPassword = "password";
             var States = Localization.Abbreviations();
 
-            int limit = 100;
+            int limit = 200;
             int specialist = 0;
 
             Random random = new Random();
@@ -187,11 +211,10 @@ namespace BeHeard.Controllers
                 user.Age = random.Next(18, 101);
                 user.Email = user.Username + "@test.com";
                 user.Gender = (Gender)random.Next(0, 2);
-                user.Counter = random.Next(0,50);
                 user.PhoneNumber = "(" + random.Next(100, 999) + ")-" + random.Next(100,999) + "-" + random.Next(1000, 9999);
                 user.icon = "face" + random.Next(1, 6) + ".png";
 
-                if (specialist == 2)
+                if (specialist == 40)
                 {
                     user.Role = (RoleType)2;
                     specialist = 0;
@@ -201,7 +224,7 @@ namespace BeHeard.Controllers
                 user.Address = new Address();
                 user.Address.City = cities[random.Next(1, cities.Length - 1)];
                 user.Address.Street = random.Next(100, 4000) + " Street";
-                user.Address.State = States[random.Next(1, 49)];
+                user.Address.State = States[random.Next(0, 50)];
                 
                 string pass = "";
                 if (user.Password != null)
@@ -235,6 +258,8 @@ namespace BeHeard.Controllers
                 var startingDate = new DateTime(2022, 1, 1);
                 var range = (DateTime.Today - startingDate).Days;
                 var activityResultsCount = random.Next(10, 100);
+                user.Counter = activityResultsCount;
+
                 for (var activityCount = 0; activityCount < activityResultsCount; activityCount++)
                 {
                     ActivityResult exercise = null;
@@ -287,6 +312,7 @@ namespace BeHeard.Controllers
                     }
                     activityResults.Add(exercise);
                 }
+    
 
                 var recordingRecords = new List<RecordingRecord>();
                 var recordingRecordsCount = random.Next(10, 100);

@@ -13,37 +13,37 @@
 
         <div class="container-xxl py-5 pb-2">
             <div class="container ">
-                        <h1 class="mb-4">Welcome to the Admin <i class="fa fa-hammer" style="color: dodgerblue;"></i> Dashboard</h1>
-                        <p class="mb-4"><strong>Location for datebase editing, demographic breakdown, and more.</strong></p>
-                        <div class="row g-4 mb-4">
-    @*                        <div class="col-sm-6">
-                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0">2/1</h1>
-                                    <div class="ps-4">
-                                        <p class="mb-0">day of</p>
-                                        <h6 class="text-uppercase mb-0">last login</h6>
-                                    </div>
-                                </div>
-                            </div>*@
-                            <div class="col-sm-6">
-                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="@Model.users" data-time="2000"></span></h1>
-                                    <div class="ps-4">
-                                        <p class="mb-0">Total</p>
-                                        <h6 class="text-uppercase mb-0">Users</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count1" data-from="0" data-to="@Model.activities" data-time="2000"></span></h1>
-                                    <div class="ps-4">
-                                        <p class="mb-0">Total</p>
-                                        <h6 class="text-uppercase mb-0">Activities Results</h6>
-                                    </div>
-                                </div>
+                <h1 class="mb-4">Welcome to the Admin <i class="fa fa-hammer" style="color: dodgerblue;"></i> Dashboard</h1>
+                <p class="mb-4"><strong>Location for datebase editing, demographic breakdown, and more.</strong></p>
+                <div class="row g-4 mb-4">
+                    <div class="col-sm-3">
+                        <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                            <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="@Model.users" data-time="2000"></span></h1>
+                            <div class="ps-4">
+                                <p class="mb-0">Total</p>
+                                <h6 class="text-uppercase mb-0">Users</h6>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                            <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count2" data-from="0" data-to="@Model.medicalProviders" data-time="2000"></span></h1>
+                            <div class="ps-4">
+                                <p class="mb-0">Total</p>
+                                <h6 class="text-uppercase mb-0">Medical Providers</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                            <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count1" data-from="0" data-to="@Model.activities" data-time="2000"></span></h1>
+                            <div class="ps-4">
+                                <p class="mb-0">Total</p>
+                                <h6 class="text-uppercase mb-0">Activities Results</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -52,7 +52,7 @@
         <div class="container py-5">
             <div class="container">
                  <div class="row g-4 pb-2 mx-3">
-                    <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="d-flex col-lg-3 wow fadeInUp" data-wow-delay="0.7s">
                         <div class="color-flip rounded pt-3" id="color-flip">
                             <div class="p-4">
                                 <i class="fa fa-3x fa-user text-primary mb-4"></i>
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="d-flex col-lg-3 wow fadeInUp" data-wow-delay="0.7s">
                         <div class="color-flip rounded pt-3" id="color-flip">
                             <div class="p-4">
                                 <i class="fa fa-3x fa-user-md text-primary mb-4"></i>
@@ -72,13 +72,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="d-flex col-lg-3 wow fadeInUp" data-wow-delay="0.7s">
                         <div class="color-flip rounded pt-3" id="color-flip">
                             <div class="p-4">
-                                <i class="fa fa-3x fa-chart-pie text-primary mb-4"></i>
+                                <i class="fa fa-3x fa-user-plus text-primary mb-4"></i>
                                 <h5>Demographics</h5>
                                 <p>Statistical data relating to the population and particular groups within the User group.</p>
                                 <a id="demographicsDetails" href="#demographicsDetails" class="stretched-link"> </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex col-lg-3 wow fadeInUp" data-wow-delay="0.7s">
+                        <div class="color-flip rounded pt-3" id="color-flip">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-chart-pie text-primary mb-4"></i>
+                                <h5>Analytics</h5>
+                                <p>Statistical data relating to the available users activities.</p>
+                                <a id="analyticsDetails" href="#analyticsDetails" class="stretched-link"> </a>
                             </div>
                         </div>
                     </div>
@@ -99,14 +109,36 @@
                     </div>
                 </div>
             </div>
+                    <!-- Collapse #medicalProviderDetailsCollapse-->
+            <div class="panel-collapse collapse py-2" id="medicalProvidersCollapse">
+                <div class="card card-body" id="myCollapse1">
+                    <div class="container-xxl shadow overflow-auto" style="max-height:800px;">
+                        <h1>Current Providers on the database -</h1>             
+                        <hr style="width:100%" size="3" color="black">
+                        <div id="divMedicalProvidersDetails">
+                            <!--- Render Content --->
+                        </div>
+                    </div>
+                </div>
+            </div>
                             <!-- Collapse #demographicsCollapse-->
             <div class="panel-collapse collapse py-2" id="demographicsCollapse">
                 <div class="card card-body" id="myCollapse1">
                     <div class="container shadow">
                         <h1>Demographics -</h1>
                         <hr/>
-                        <div id="divDemographicsDetails" overflow-y: hidden;>
-                        
+                        <div id="divDemographicsDetails" overflow-y: hidden;>                    
+                            <!--- Render Content --->
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    <!-- Collapse #analyticsDetailsCollapse-->
+            <div class="panel-collapse collapse py-2" id="analyticsCollapse">
+                <div class="card card-body" id="myCollapse1">
+                    <div class="container-xxl shadow">             
+                        <hr style="width:100%" size="3" color="black">
+                        <div id="divAnalyticsDetails">
                             <!--- Render Content --->
                         </div>
                     </div>
@@ -225,33 +257,11 @@
                     }
                 });
             });
-            });
+         });
     };
 
     $(document).ready(function () {
             
-        $("#demographicsDetails").click(function () {
-
-            var options = { "backdrop": "static", keyboard: true };
-            $.ajax({
-                type: "GET",
-                url: '/Admin/Demographics',
-                contentType: "application/json; charset=utf-8",
-                datatype: "json",
-                success: function (data) {
-                    $('#divDemographicsDetails').html(data);
-                    $("#demographicsCollapse").collapse("toggle");
-                    $('#demographicsCollapse').on('shown.bs.collapse', function () {
-                        this.scrollIntoView();
-                    });
-                    },
-                error: function () {
-                    alert("Dynamic content load failed.");
-                }
-            });
-        });
-
-
         if (window.location.href.indexOf("?saveUpdate") > -1 || window.location.href.indexOf("?deleted") > -1 ) {
             var options = { "backdrop": "static", keyboard: true };
             $.ajax({
@@ -269,68 +279,84 @@
                         modalCall(URLs.show, buttons.show);
                         modalCall(URLs.edit, buttons.edit);
                         deleteCall(buttons.delete);
-                    },
+                },
                 error: function () {
                     alert("Dynamic content load failed.");
                 }
             });
-        }
+        };
 
         $(".userDetails").click(function () {
 
+            var $attrib = $("#divUserDetails");
             var options = { "backdrop": "static", keyboard: true };
-            $.ajax({
-                type: "GET",
-                url: '/Admin/UserTable',
-                contentType: "application/json; charset=utf-8",
-                datatype: "json",
-                success: function (data) {
 
-                    $('#divUserDetails').html(data);
-                    $("#userDetailsCollapse").collapse("toggle");
-                    $('#userDetailsCollapse').on('shown.bs.collapse', function () {
-                        this.scrollIntoView();
-                    });
-                        //  Load Modals
-                        modalCall(URLs.show, buttons.show);
-                        modalCall(URLs.edit, buttons.edit);
-                        deleteCall(buttons.delete);
+            
+            $("#userDetailsCollapse").collapse("toggle");
+
+            if(!$attrib.data("subMenuPopulated") && $attrib.is(":visible")){
+                $.ajax({
+                    type: "GET",
+                    url: '/Admin/UserTable',
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    success: function (data) {
+
+                        $('#divUserDetails').html(data).data('subMenuPopulated', true);
+                        //$("#userDetailsCollapse").collapse("toggle");
+                        $('#userDetailsCollapse').on('shown.bs.collapse', function () {
+                            this.scrollIntoView();
+                        });
+                            //  Load Modals
+                            modalCall(URLs.show, buttons.show);
+                            modalCall(URLs.edit, buttons.edit);
+                            deleteCall(buttons.delete);
                     },
-                error: function () {
-                    alert("Dynamic content load failed.");
-                }
-            });
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            }
         });
 
         $(".providerDetails").click(function () {
-
+            
+            var $attrib = $("#divMedicalProvidersDetails");
             var options = { "backdrop": "static", keyboard: true };
-            $.ajax({
-                type: "GET",
-                url: '/Admin/UserTable',
-                contentType: "application/json; charset=utf-8",
-                datatype: "json",
-                data: {
-                    searchField: "Specialist"
-                },
-                success: function (data) {
-                    $('#divUserDetails').html(data);
-                    $("#userDetailsCollapse").collapse("toggle");
-                    $('#userDetailsCollapse').on('shown.bs.collapse', function () {
-                        this.scrollIntoView();
-                    });
-                        //  Load Modals
-                        modalCall(URLs.show, buttons.show);
-                        modalCall(URLs.edit, buttons.edit);
-                        deleteCall(buttons.delete);
+
+            $("#medicalProvidersCollapse").collapse("toggle");
+
+            if(!$attrib.data("subMenuPopulated") && $attrib.is(":visible")){
+                $.ajax({
+                    type: "GET",
+                    url: '/Admin/UserTable',
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    data: {
+                        searchField: "Specialist"
                     },
-                error: function () {
-                    alert("Dynamic content load failed.");
-                }
-            });
+                    success: function (data) {
+                        $('#divMedicalProvidersDetails').html(data).data('subMenuPopulated', true);
+                        //$("#medicalProvidersCollapse").collapse("toggle");
+                        $('#medicalProvidersCollapse').on('shown.bs.collapse', function () {
+                            this.scrollIntoView();
+                        });
+                            //  Load Modals
+                            modalCall(URLs.show, buttons.show);
+                            modalCall(URLs.edit, buttons.edit);
+                            deleteCall(buttons.delete);
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            }
+
         });
+
         var searchUrl = "../Admin/UserTable";
         $(".searchButton").click(function () {
+
             var options = { "backdrop": "static", keyboard: true };
             $.ajax({
                 type: "GET",
@@ -354,6 +380,68 @@
                     alert("Dynamic content load failed.");
                 }
             });
+        });
+
+
+        $("#demographicsDetails").click(function () {
+            var $attrib = $("#divDemographicsDetails");
+            //var options = { "backdrop": "static", keyboard: true };
+            var delay = 500;
+
+            if(!$attrib.is(":visible")){
+
+                $.ajax({
+                    type: "GET",
+                    url: '/Admin/Demographics',
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    success: function (data) {                
+                         $('#divDemographicsDetails').html(data);
+                        $("#demographicsCollapse").collapse("toggle");
+                        $('#demographicsCollapse').on('shown.bs.collapse', function () {
+                            this.scrollIntoView();
+                        });
+                        },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            }
+            else{
+                $("#demographicsCollapse").collapse("toggle");
+            }
+        });
+
+        $("#analyticsDetails").click(function () {
+            var $attrib = $('#divAnalyticsDetails');
+            var options = { "backdrop": "static", keyboard: true };
+            var delay = 500;
+
+            if(!$attrib.is(":visible")){
+
+                $.ajax({
+                    type: "GET",
+                    url: '/Admin/Analytics',
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    success: function (data) {                
+                         $('#divAnalyticsDetails').html(data);
+                        $("#analyticsCollapse").collapse("toggle");
+                        $('#analyticsCollapse').on('shown.bs.collapse', function () {
+                            this.scrollIntoView();
+                        });
+                        },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            }
+            else{
+                setTimeout(function(){
+                $("#analyticsCollapse").collapse("toggle");
+
+                }, delay)
+            }
         });
     });
            
