@@ -234,34 +234,44 @@ function start_timer() {
                 switch (true) {
                     case (percent_decibel > 0 && percent_decibel < 20.0):
                         output = "~20";
+                        modal_image_element.innerHTML = "<img src='/images/great_job_alex.png'>";
                         break;
                     case (percent_decibel > 20.1 && percent_decibel < 25.0):
                         output = "~30";
+                        modal_image_element.innerHTML = "<img src='/images/great_job_alex.png'>";
                         break;
                     case (percent_decibel > 25.1 && percent_decibel < 35.0):
                         output = "~40";
+                        modal_image_element.innerHTML = "<img src='/images/great_job_alex.png'>";
                         break;
                     case (percent_decibel > 35.1 && percent_decibel < 40.0):
                         output = "~50";
+                        modal_image_element.innerHTML = "<img src='/images/great_job_alex.png'>";
                         break;
                     case (percent_decibel > 40.1 && percent_decibel < 45.0):
                         output = "~60";
+                        modal_image_element.innerHTML = "<img src='/images/great_job_alex.png'>";
                         break;
                     case (percent_decibel > 45.1 && percent_decibel < 50.0):
                         output = "~70";
+                        modal_image_element.innerHTML = "<img src='/images/great_job_alex.png'>";
                         break;
                     case (percent_decibel > 50.1 && percent_decibel < 55.0):
                         output = "~80";
+                        modal_image_element.innerHTML = "<img src='/images/great_job_alex.png'>";
                         break;
                     case (percent_decibel > 55.1 && percent_decibel < 60.0):
                         output = "~90";
+                        modal_image_element.innerHTML = "<img src='/images/great_job_alex.png'>";
                         break;
                     case (percent_decibel > 60.1 && percent_decibel < 65.0):
                         output = "~100";
+                        modal_image_element.innerHTML = "<img src='/images/great_job_alex.png'>";
                         break;
                     case (percent_decibel > 65.1):
                         loud = true;
                         output = ">100";
+                        modal_image_element.innerHTML = "<img src='/images/great_job_alex.png'>";
                         break;
                 }
 
@@ -352,3 +362,21 @@ function difficulty_dropdown() {
 
     alter_difficulty(diff_value);
 }
+
+var modal_image_element = document.createElement('modal_image');
+
+modal_image_element.innerHTML = "<img src='/images/Near_perfect_alex.png'>"
+
+$(document).ready(function () {
+    console.log('ready state');
+    let modal = $("#staticBackdrop");
+    let stopButton = $("#stopButton");
+    // console.log(stopButton);
+
+    stopButton.click(() => {
+        console.log('button is clicked');
+        modal.modal('show');
+        //console.log(modal.find(".modal-body"));
+        modal.find(".modal-body").html('<div class="lds-roller mx-auto"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
+    });
+});
