@@ -47,10 +47,13 @@ namespace BeHeard.Controllers
         public IActionResult volume_chasing()
         {
             var service = new SessionService(HttpContext);
+            var user = _contextManager.UserRepository.GetUserByUsername(service.Get().Username);
             var model = new ExerciseViewModel
             {
                 User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
+                ActivityResults = _contextManager.ActivityResultRepository.GetFiveExerciseResults(user, 0)
             };
+
             return View(model);
         }
 
@@ -66,20 +69,24 @@ namespace BeHeard.Controllers
 
         public IActionResult Exercise3()
         {
+
             var service = new SessionService(HttpContext);
             var model = new ExerciseViewModel
             {
                 User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
             };
+
             return View(model);
         }
 
         public IActionResult breathing()
         {
             var service = new SessionService(HttpContext);
+            var user = _contextManager.UserRepository.GetUserByUsername(service.Get().Username);
             var model = new ExerciseViewModel
             {
                 User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
+                ActivityResults = _contextManager.ActivityResultRepository.GetFiveExerciseResults(user, 1)
             };
             return View(model);
         }
@@ -87,9 +94,11 @@ namespace BeHeard.Controllers
         public IActionResult volume_phrasing()
         {
             var service = new SessionService(HttpContext);
+            var user = _contextManager.UserRepository.GetUserByUsername(service.Get().Username);
             var model = new ExerciseViewModel
             {
                 User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
+                ActivityResults = _contextManager.ActivityResultRepository.GetFiveExerciseResults(user, 2)
             };
             return View(model);
         }
@@ -97,9 +106,11 @@ namespace BeHeard.Controllers
         public IActionResult rote_speech()
         {
             var service = new SessionService(HttpContext);
+            var user = _contextManager.UserRepository.GetUserByUsername(service.Get().Username);
             var model = new ExerciseViewModel
             {
                 User = _contextManager.UserRepository.GetUserByUsername(service.Get().Username),
+                ActivityResults = _contextManager.ActivityResultRepository.GetFiveExerciseResults(user, 3)
             };
             return View(model);
         }
@@ -129,8 +140,8 @@ namespace BeHeard.Controllers
                 case "Hard":
                     activityresult.Difficulty = ActivityLevel.Hard;
                     break;
-                case "Impossible":
-                    activityresult.Difficulty = ActivityLevel.Impossible;
+                case "Extreme":
+                    activityresult.Difficulty = ActivityLevel.Extreme;
                     break;
             };
             switch (viewSyllable)
@@ -162,7 +173,7 @@ namespace BeHeard.Controllers
                 case "Phrasing":
                     activityresult.Exercise = Exercise.Phrasing;
                     break;
-                case "RoteSpeech":
+                case "Rote":
                     activityresult.Exercise = Exercise.Rote;
                     break;
             }
