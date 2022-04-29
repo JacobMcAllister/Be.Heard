@@ -6,6 +6,9 @@
             <div class="col-12">
                 @await Component.InvokeAsync("PatientList")
             </div>
+            <div class="col-12">
+                @await Component.InvokeAsync("PatientDetail", new Guid("7EC7A068-6AFA-42BC-FC75-08DA29651445"))
+            </div>
         </div> 
     </div>
 </section>

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeHeard.Migrations
 {
     [DbContext(typeof(BeHeardContext))]
-    [Migration("20220428205446_Initial")]
-    partial class Initial
+    [Migration("20220429044614_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -120,6 +120,31 @@ namespace BeHeard.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Preferences");
+                });
+
+            modelBuilder.Entity("BeHeard.Application.Models.RecordingRecord", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Chosen")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Result")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("UserProfileId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserProfileId");
+
+                    b.ToTable("RecordingRecord");
                 });
 
             modelBuilder.Entity("BeHeard.Application.Models.Settings", b =>
@@ -233,6 +258,13 @@ namespace BeHeard.Migrations
                         .HasForeignKey("UserProfileId");
                 });
 
+            modelBuilder.Entity("BeHeard.Application.Models.RecordingRecord", b =>
+                {
+                    b.HasOne("BeHeard.Application.Models.UserProfile", null)
+                        .WithMany("RecordingRecords")
+                        .HasForeignKey("UserProfileId");
+                });
+
             modelBuilder.Entity("BeHeard.Application.Models.Settings", b =>
                 {
                     b.HasOne("BeHeard.Application.Models.User", "User")
@@ -292,6 +324,8 @@ namespace BeHeard.Migrations
             modelBuilder.Entity("BeHeard.Application.Models.UserProfile", b =>
                 {
                     b.Navigation("ActivityResults");
+
+                    b.Navigation("RecordingRecords");
                 });
 #pragma warning restore 612, 618
         }
