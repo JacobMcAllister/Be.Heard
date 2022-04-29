@@ -33,12 +33,12 @@
             </div>
             <br />
             <div id="diff_dropdown">
-                <label for="difficulties">Difficulty: </label>
+                <label for="difficulties">Choose a Difficulty: </label>
                 <select name="difficulty" id="diff_option" onchange="difficulty_dropdown()">
-                    <option value="Easy">Easy</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Hard">Hard</option>
-                    <option value="Extreme">Extreme</option>
+                    <option value="easy">easy</option>
+                    <option value="medium">medium</option>
+                    <option value="hard">hard</option>
+                    <option value="impossible">impossible</option>
                 </select>
             </div>
             <br />
@@ -50,11 +50,10 @@
         <div>
             <div id="sentence_id">
                 <h3>Choose your sentence!</h3>
-                <p>Choose the sentence of the exercise in the dropdown!</p>
                 <div id="random_button">
                     <button id="random" type="button" onclick="get_Randomsentence()">Randomize</button>
                 </div>
-                <div id="random_sentence" style="font-size:25px;white-space:pre-line;"></div>
+                <div id="random_sentence" style="font-size:25px"></div>
                 <br />
             </div>
         </div>
@@ -74,8 +73,8 @@
     <br />
     <div class="row text-center align-items-center shadow rounded border bg-white wow fadeInDown">
         <div id="database_area">
-            <table style="width:100%;text-align:center;">
-                <caption style="caption-side:top;text-align:center;">@Model.FullName, Volume Phrasing Exercise Results</caption>
+            <table style="width:100%;">
+                <caption style="caption-side:top;">@Model.FullName, Volume Phrasing Exercise Results</caption>
                 <thead>
                     <tr>
                         <th>Date</th>
@@ -84,15 +83,38 @@
                         <th>Volume Level</th>
                     </tr>
                 </thead>
-                    @foreach(var activityresults in @Model.ActivityResults)
-                    {
-                        <tr>
-                            <td>@activityresults.Date</td>
-                            <td>@activityresults.Difficulty</td>
-                            <td>@activityresults.SentenceSet</td>
-                            <td>@activityresults.Decibel</td>
-                        </tr>
-                    }
+                <tbody>
+                    <tr>
+                        <td>04/25/22</td>
+                        <td>Easy</td>
+                        <td>9</td>
+                        <td>~30 dba</td>
+                    </tr>
+                    <tr>
+                        <td>04/26/22</td>
+                        <td>Easy</td>
+                        <td>3</td>
+                        <td>~40 dba</td>
+                    </tr>
+                    <tr>
+                        <td>04/28/22</td>
+                        <td>Easy</td>
+                        <td>3</td>
+                        <td>~30 dba</td>
+                    </tr>
+                    <tr>
+                        <td>04/29/22</td>
+                        <td>Medium</td>
+                        <td>1</td>
+                        <td>~40 dba</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>

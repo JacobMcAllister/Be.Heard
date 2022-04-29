@@ -21,7 +21,7 @@ namespace BeHeard.Application.Models
 
     public enum ActivityLevel
     {
-        Easy, Medium, Hard, Extreme
+        Easy, Medium, Hard, Impossible
     }
     public enum Syllable
     {

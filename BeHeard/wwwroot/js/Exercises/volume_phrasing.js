@@ -23,42 +23,19 @@ var last_sentence = 15;
 var current_sentence = null;
 var difficulty = null;
 var diff_value = null;
-
-// DB Fields
-var SentenceSet = -1;
-var Decibel = null;
-var Syllable = null;
-var Difficulty = null;
-var Exercise = null;
-var Category = null;
-
-function UpdateDB(volume) {
-
-    $.ajax({
-        url: "UpdateDBwResults",
-        type: "POST",
-        data: {
-            Decibel: volume,
-            viewSyllable: "NONE",
-            viewDifficulty: diff_value,
-            viewExercise: "Phrasing",
-            viewCategory: "NONE",
-            SentenceSet: SentenceSet
-        }
-    })
-}
+var db_sentenceChoice = null;
 
 const sentences = [
-    "The mute muffled the high tones of the horn.\nSlide the box into the empty space.\nThe store walls were lined with colored frocks.",
-    "The gold ring fits only a pierced ear.\nThe plant grew large and green in the window.\nThe peace league met to discuss their plans.",
-    "The old pan was covered with hard fudge.\nThe beam dropped down on the workmen's head.\nThe rise to fame of a person takes luck.",
-    "Watch the log float in the wide river.\nPink clouds floated with the breeze.\nPaper is scarce so write with much care.",
-    "The node on the stalk of wheat grew daily.\nShe danced like a swan, tall and graceful.\nThe quick fox jumped on the sleeping cat.",
-    "Write fast, if you want to finish early.\nThe tube was blown and the tire flat and useless.\nThe nozzle of the fire hose was bright brass.",
-    "His shirt was clean but one button was gone.\nLet's all join as we sing the last chorus.\nTime brings us many changes.",
-    "The barrel of beer was a brew of malt and hops.\nThe last switch cannot be turned off.\nThe purple tie was ten years old.",
-    "Tin cans are absent from store shelves.\nThe fight will end in just six minutes.\nMen think and plan and sometimes act.",
-    "The heap of fallen leaves was set on fire.\nIt is late morning on the old wall clock.\nScrew the round cap on as tight as needed."
+    "The mute muffled the high tones of the horn. Slide the box into the empty space. The store walls were lined with colored frocks.",
+    "The gold ring fits only a pierced ear. The plant grew large and green in the window. The peace league met to discuss their plans.",
+    "The old pan was covered with hard fudge. The beam dropped down on the workmen's head. The rise to fame of a person takes luck.",
+    "Watch the log float in the wide river. Pink clouds floated with the breeze. Paper is scarce so write with much care.",
+    "The node on the stalk of wheat grew daily. She danced like a swan, tall and graceful. The quick fox jumped on the sleeping cat.",
+    "Write fast, if you want to finish early. The tube was blown and the tire flat and useless. The nozzle of the fire hose was bright brass.",
+    "His shirt was clean but one button was gone. Let's all join as we sing the last chorus. Time brings us many changes.",
+    "The barrel of beer was a brew of malt and hops. The last switch cannot be turned off. The purple tie was ten years old.",
+    "Tin cans are absent from store shelves. The fight will end in just six minutes. Men think and plan and sometimes act.",
+    "The heap of fallen leaves was set on fire. It is late morning on the old wall clock. Scrw the round cap on as tight as needed."
 ];
 
 // Grab our canvas
@@ -261,15 +238,13 @@ function start_timer() {
                         break;
                     case (percent_decibel > 65.1):
                         loud = true;
-                        output = ">100";
+                        output = " greater then 100";
                         break;
                 }
 
                 if (loud) {
-                    UpdateDB(output);
                     alert("Wow!\n'Normal' voice volume is around 50-60 dba.\nYour volume was" + output + "dba!")
                 } else {
-                    UpdateDB(output);
                     alert("Great Job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + output + " dba.");
                 }
             }
@@ -304,7 +279,7 @@ function get_Randomsentence() {
 
     last_sentence = current_sentence;
     console.log(sentence_Choice);
-    SentenceSet = sentence_Choice;
+    db_sentenceChoice = sentence_Choice;
     document.getElementById("random_sentence").innerHTML = sentences[sentence_Choice];
 }
 
@@ -331,19 +306,19 @@ function difficulty_dropdown() {
 
     function alter_difficulty(value) {
         switch (true) {
-            case (value == 'Easy'):
+            case (value == 'easy'):
                 target_fillVol = 50
                 diff_alert(1);
                 break;
-            case (value == 'Medium'):
+            case (value == 'medium'):
                 target_fillVol = 100;
                 diff_alert(2);
                 break;
-            case (value == 'Hard'):
+            case (value == 'hard'):
                 target_fillVol = 200;
                 diff_alert(3);
                 break;
-            case (value == 'Extreme'):
+            case (value == 'impossible'):
                 target_fillVol = WIDTH;
                 diff_alert(4);
                 break;

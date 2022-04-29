@@ -9,6 +9,5 @@ namespace BeHeard.Core
     public interface IActivityResultRepository : IRepository<ActivityResult>
     {
         IEnumerable<ActivityResult> GetActivityResultsByUser(User user);
-        IEnumerable<ActivityResult> GetFiveExerciseResults(User user, int exercise);
     }
 }

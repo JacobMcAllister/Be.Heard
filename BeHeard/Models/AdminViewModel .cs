@@ -7,6 +7,7 @@ namespace BeHeard.Models
     public class AdminViewModel
     {
         public int users;
+        public int medicalProviders;
         public int activities;
 
     }

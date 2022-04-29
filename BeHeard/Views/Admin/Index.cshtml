@@ -25,7 +25,7 @@
                                     </div>
                                 </div>
                             </div>*@
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <div class="d-flex align-items-center border-start border-5 border-primary px-3">
                                     <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="@Model.users" data-time="2000"></span></h1>
                                     <div class="ps-4">
@@ -34,7 +34,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
+                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count2" data-from="0" data-to="@Model.medicalProviders" data-time="2000"></span></h1>
+                                    <div class="ps-4">
+                                        <p class="mb-0">Total</p>
+                                        <h6 class="text-uppercase mb-0">Medical Providers</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
                                 <div class="d-flex align-items-center border-start border-5 border-primary px-3">
                                     <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count1" data-from="0" data-to="@Model.activities" data-time="2000"></span></h1>
                                     <div class="ps-4">
@@ -92,6 +101,19 @@
                     <div class="container-xxl shadow overflow-auto" style="max-height:800px;">
                         Find by First Name, Last Name, or Username: <input type="text" id="searchField" name="searchString"/>
                         <input type="submit" class="btn searchButton btn-success text-white" />                     
+                        <hr style="width:100%" size="3" color="black">
+                        <div id="divUserDetails">
+                            <!--- Render Content --->
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    <!-- Collapse #userDetailsCollapse-->
+            <div class="panel-collapse collapse py-2" id="userDetailsCollapse">
+                <div class="card card-body" id="myCollapse1">
+                    <div class="container-xxl shadow overflow-auto" style="max-height:800px;">
+                        <h1>Current Providers on the database -</h1>
+               
                         <hr style="width:100%" size="3" color="black">
                         <div id="divUserDetails">
                             <!--- Render Content --->
@@ -230,28 +252,6 @@
 
     $(document).ready(function () {
             
-        $("#demographicsDetails").click(function () {
-
-            var options = { "backdrop": "static", keyboard: true };
-            $.ajax({
-                type: "GET",
-                url: '/Admin/Demographics',
-                contentType: "application/json; charset=utf-8",
-                datatype: "json",
-                success: function (data) {
-                    $('#divDemographicsDetails').html(data);
-                    $("#demographicsCollapse").collapse("toggle");
-                    $('#demographicsCollapse').on('shown.bs.collapse', function () {
-                        this.scrollIntoView();
-                    });
-                    },
-                error: function () {
-                    alert("Dynamic content load failed.");
-                }
-            });
-        });
-
-
         if (window.location.href.indexOf("?saveUpdate") > -1 || window.location.href.indexOf("?deleted") > -1 ) {
             var options = { "backdrop": "static", keyboard: true };
             $.ajax({
@@ -269,68 +269,91 @@
                         modalCall(URLs.show, buttons.show);
                         modalCall(URLs.edit, buttons.edit);
                         deleteCall(buttons.delete);
-                    },
+                },
                 error: function () {
                     alert("Dynamic content load failed.");
                 }
             });
-        }
+        };
 
         $(".userDetails").click(function () {
 
+            var $attrib = $("#divUserDetails");
             var options = { "backdrop": "static", keyboard: true };
-            $.ajax({
-                type: "GET",
-                url: '/Admin/UserTable',
-                contentType: "application/json; charset=utf-8",
-                datatype: "json",
-                success: function (data) {
 
-                    $('#divUserDetails').html(data);
-                    $("#userDetailsCollapse").collapse("toggle");
-                    $('#userDetailsCollapse').on('shown.bs.collapse', function () {
-                        this.scrollIntoView();
-                    });
-                        //  Load Modals
-                        modalCall(URLs.show, buttons.show);
-                        modalCall(URLs.edit, buttons.edit);
-                        deleteCall(buttons.delete);
+            
+            $("#userDetailsCollapse").collapse("toggle");
+
+            if(!$attrib.data("subMenuPopulated") && $attrib.is(":visible")){
+
+
+
+                $.ajax({
+                    type: "GET",
+                    url: '/Admin/UserTable',
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    success: function (data) {
+
+                        $('#divUserDetails').html(data).data('subMenuPopulated', true);
+                        //$("#userDetailsCollapse").collapse("toggle");
+                        $('#userDetailsCollapse').on('shown.bs.collapse', function () {
+                            this.scrollIntoView();
+                        });
+                            //  Load Modals
+                            modalCall(URLs.show, buttons.show);
+                            modalCall(URLs.edit, buttons.edit);
+                            deleteCall(buttons.delete);
                     },
-                error: function () {
-                    alert("Dynamic content load failed.");
-                }
-            });
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+
+            }
+
+ 
+
+
         });
 
         $(".providerDetails").click(function () {
-
+            
+            var $attrib = $("#divUserDetails");
             var options = { "backdrop": "static", keyboard: true };
-            $.ajax({
-                type: "GET",
-                url: '/Admin/UserTable',
-                contentType: "application/json; charset=utf-8",
-                datatype: "json",
-                data: {
-                    searchField: "Specialist"
-                },
-                success: function (data) {
-                    $('#divUserDetails').html(data);
-                    $("#userDetailsCollapse").collapse("toggle");
-                    $('#userDetailsCollapse').on('shown.bs.collapse', function () {
-                        this.scrollIntoView();
-                    });
-                        //  Load Modals
-                        modalCall(URLs.show, buttons.show);
-                        modalCall(URLs.edit, buttons.edit);
-                        deleteCall(buttons.delete);
+
+            $("#userDetailsCollapse").collapse("toggle");
+
+            if(!$attrib.data("subMenuPopulated") && $attrib.is(":visible")){
+                $.ajax({
+                    type: "GET",
+                    url: '/Admin/UserTable',
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    data: {
+                        searchField: "Specialist"
                     },
-                error: function () {
-                    alert("Dynamic content load failed.");
-                }
-            });
+                    success: function (data) {
+                        $('#divUserDetails').html(data).data('subMenuPopulated', true);
+                        //$("#userDetailsCollapse").collapse("toggle");
+                        $('#userDetailsCollapse').on('shown.bs.collapse', function () {
+                            this.scrollIntoView();
+                        });
+                            //  Load Modals
+                            modalCall(URLs.show, buttons.show);
+                            modalCall(URLs.edit, buttons.edit);
+                            deleteCall(buttons.delete);
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            }
         });
+
         var searchUrl = "../Admin/UserTable";
         $(".searchButton").click(function () {
+
             var options = { "backdrop": "static", keyboard: true };
             $.ajax({
                 type: "GET",
@@ -354,6 +377,34 @@
                     alert("Dynamic content load failed.");
                 }
             });
+        });
+
+
+        $("#demographicsDetails").click(function () {
+            var $attrib = $("#divDemographicsDetails");
+            var options = { "backdrop": "static", keyboard: true };
+
+            $("#demographicsCollapse").collapse("toggle");
+
+            if(!$attrib.data("subMenuPopulated") && $attrib.is(":visible")){
+
+                $.ajax({
+                    type: "GET",
+                    url: '/Admin/Demographics',
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    success: function (data) {
+                        $('#divDemographicsDetails').html(data);
+                        //$("#demographicsCollapse").collapse("toggle");
+                        $('#demographicsCollapse').on('shown.bs.collapse', function () {
+                            this.scrollIntoView();
+                        });
+                        },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            }
         });
     });
            

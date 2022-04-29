@@ -11,7 +11,7 @@
 
 <!DOCTYPE html>
 <html>
-<body onload="difficulty_dropdown();grab_syllable();">
+<body onload="difficulty_dropdown()">
 <br />
 <div class="col text-center align-items-center shadow rounded border bg-white wow fadeInDown">
     <h1>Hello @Model.FullName</h1>
@@ -36,22 +36,21 @@
                 <p>Choose the difficulty of the exercise in the dropdown!</p>
             </div>
             <div id="diff_dropdown">
-                <label for="difficulties">Difficulty: </label>
+                <label for="difficulties">Choose a Difficulty: </label>
                 <select name="difficulty" id="diff_option" onchange="difficulty_dropdown()">
-                    <option value="Easy">Easy</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Hard">Hard</option>
-                    <option value="Extreme">Extreme</option>
+                    <option value="Easy">easy</option>
+                    <option value="Medium">medium</option>
+                    <option value="Hard">hard</option>
+                    <option value="Impossible">impossible</option>
                 </select>
             </div>
             <br />
             <div id="diff_alert"></div>
             <br />
             <h3>Syllable</h3>
-            <p>Choose the syllable of the exercise in the dropdown!</p>
             <div id="dropdown">
-                <label for="syllables">Syllable:</label>
-                <select name="syllable" id="syllable" onchange="grab_syllable()">
+                <label for="syllables">Choose a Syllable:</label>
+                <select name="syllable" id="syllable" onchange="">
                     <option value="A">A</option>
                     <option value="E">E</option>
                     <option value="O">O</option>
@@ -77,8 +76,8 @@
         </div>
         <div class="column" style="width:50%;">
             <div id="database_area">
-                <table style="width:100%;text-align:center;">
-                    <caption style="caption-side:top;text-align:center;">@Model.FullName, Volume Chasing Exercise Results</caption>
+                <table style="width:100%;">
+                    <caption style="caption-side:top;">@Model.FullName, Volume Chasing Exercise Results</caption>
                     <thead>
                         <tr>
                             <th>Date</th>
@@ -88,15 +87,36 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var activityResult in @Model.ActivityResults)
-                        {
-                            <tr>
-                                <td>@activityResult.Date</td>
-                                <td>@activityResult.Difficulty</td>
-                                <td>@activityResult.Syllable</td>
-                                <td>@activityResult.Decibel</td>
-                            </tr>
-                        }                       
+                        <tr>
+                            <td>04/25/22</td>
+                            <td>Easy</td>
+                            <td>A</td>
+                            <td>~30 dba</td>
+                        </tr>
+                        <tr>
+                            <td>04/26/22</td>
+                            <td>Easy</td>
+                            <td>A</td>
+                            <td>~40 dba</td>
+                        </tr>
+                        <tr>
+                            <td>04/28/22</td>
+                            <td>Easy</td>
+                            <td>O</td>
+                            <td>~30 dba</td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

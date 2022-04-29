@@ -13,6 +13,5 @@ namespace BeHeard.Application.Models
         public User User { get; set; }
         public Settings Settings { get; set; } // NOTE: UserProfile does not interact with Settings. Consider deleting.
         public List<ActivityResult> ActivityResults { get; set; }
-        public List<RecordingRecord> RecordingRecords { get; set; }
     }
 }
