@@ -210,10 +210,12 @@ namespace BeHeard.Controllers
             int specialist = 0;
 
             Random random = new Random();
-            for (int i = 0; i < limit; i++)
+
+            for (var i = 0; i < limit; i++)
             {
                 User user = new User();
 
+                user.Id = Guid.NewGuid();
                 user.FirstName = firstNames[random.Next(0, firstNames.Length - 1)];
                 user.LastName = lastNames[random.Next(0, lastNames.Length - 1)];
                 user.Username = user.FirstName + user.LastName;
@@ -221,11 +223,11 @@ namespace BeHeard.Controllers
                 user.Age = random.Next(18, 101);
                 user.Email = user.Username + "@test.com";
                 user.Gender = (Gender)random.Next(0, 2);
-                user.Counter = random.Next(0,50);
-                user.PhoneNumber = "(" + random.Next(100, 999) + ")-" + random.Next(100,999) + "-" + random.Next(1000, 9999);
+                user.Counter = random.Next(0, 10);
+                user.PhoneNumber = "(" + random.Next(100, 999) + ")-" + random.Next(100, 999) + "-" + random.Next(1000, 9999);
                 user.icon = "face" + random.Next(1, 6) + ".png";
 
-                if (specialist == 50)
+                if (specialist == 2)
                 {
                     user.Role = (RoleType)2;
                     specialist = 0;
@@ -236,7 +238,7 @@ namespace BeHeard.Controllers
                 user.Address.City = cities[random.Next(1, cities.Length - 1)];
                 user.Address.Street = random.Next(100, 4000) + " Street";
                 user.Address.State = States[random.Next(1, 49)];
-                
+
                 string pass = "";
                 if (user.Password != null)
                 {
@@ -264,10 +266,82 @@ namespace BeHeard.Controllers
                     Subscription = subscription,
                     User = user,
                 };
+
+                var activityResults = new List<ActivityResult>();
+                var startingDate = new DateTime(2022, 1, 1);
+                var range = (DateTime.Today - startingDate).Days;
+                var activityResultsCount = random.Next(10, 100);
+                for (var activityCount = 0; activityCount < activityResultsCount; activityCount++)
+                {
+                    ActivityResult exercise = null;
+                    Exercise exerciseType = (Exercise)random.Next(0, 3);
+                    switch (exerciseType)
+                    {
+                        case Exercise.Breathing:
+                            exercise = new ActivityResult
+                            {
+                                UserId = user.Id,
+                                Exercise = exerciseType,
+                                Difficulty = (ActivityLevel)random.Next(0, 3),
+                                Date = startingDate.AddDays(random.Next(range))
+                            };
+                            break;
+                        case Exercise.VolumeChasing:
+                            exercise = new ActivityResult
+                            {
+                                UserId = user.Id,
+                                Exercise = exerciseType,
+                                Date = startingDate.AddDays(random.Next(range)),
+                                Difficulty = (ActivityLevel)random.Next(0, 3),
+                                Syllable = (Syllable)random.Next(0, 4),
+                                Decibel = $"~{random.Next(50, 70)}"
+                            };
+                            break;
+                        case Exercise.Phrasing:
+                            exercise = new ActivityResult
+                            {
+                                UserId = user.Id,
+                                Exercise = exerciseType,
+                                Date = startingDate.AddDays(random.Next(range)),
+                                Difficulty = (ActivityLevel)random.Next(0, 3),
+                                SentenceSet = random.Next(0, 9),
+                                Decibel = $"~{random.Next(50, 70)}"
+                            };
+                            break;
+                        case Exercise.Rote:
+                            exercise = new ActivityResult
+                            {
+                                UserId = user.Id,
+                                Exercise = exerciseType,
+                                Date = startingDate.AddDays(random.Next(range)),
+                                Difficulty = (ActivityLevel)random.Next(0, 3),
+                                Category = (Category)random.Next(0, 5),
+                                SentenceSet = random.Next(0, 4),
+                                Decibel = $"~{random.Next(50, 70)}"
+                            };
+                            break;
+                    }
+                    activityResults.Add(exercise);
+                }
+
+                var recordingRecords = new List<RecordingRecord>();
+                var recordingRecordsCount = random.Next(10, 100);
+                var dummyDataService = new DummyDataService();
+                for (var recordingCount = 0; recordingCount < recordingRecordsCount; recordingCount++)
+                {
+                    recordingRecords.Add(new RecordingRecord
+                    {
+                        Chosen = dummyDataService.getRandomSentence(),
+                        Score = random.Next(70, 100)
+                    });
+                }
+
                 var profile = new UserProfile
                 {
                     Settings = settings,
                     User = user,
+                    ActivityResults = activityResults,
+                    RecordingRecords = recordingRecords,
                 };
 
                 user.Settings = settings;
@@ -291,27 +365,28 @@ namespace BeHeard.Controllers
             _beHeardContextManager.SaveChanges();
 
 
-            var model = _beHeardContextManager.UserRepository.GetAll();
-
-            foreach(var user in model)
-            {
-
-                for (int i = 0; i < user.Counter + 1; i++)
-                {
-                    var activityresult = new ActivityResult();
-
-                    activityresult.UserId = user.Id;
-                    activityresult.Exercise = (Exercise)random.Next(0, 5);
-                    _beHeardContextManager.ActivityResultRepository.Add(activityresult);
-
-                }
-                _beHeardContextManager.SaveChanges();
-
-
-            }
+            // var model = _beHeardContextManager.UserRepository.GetAll();
+            //
+            // foreach(var user in model)
+            // {
+            //
+            //     for (i = 0; i < user.Counter + 1; i++)
+            //     {
+            //         var activityresult = new ActivityResult();
+            //
+            //         activityresult.UserId = user.Id;
+            //         activityresult.Exercise = (Exercise)random.Next(0, 5);
+            //         _beHeardContextManager.ActivityResultRepository.Add(activityresult);
+            //
+            //     }
+            //     _beHeardContextManager.SaveChanges();
+            //
+            //
+            // }
 
 
             return Ok();
+
 
         }
 

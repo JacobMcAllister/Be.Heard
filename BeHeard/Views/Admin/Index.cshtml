@@ -13,46 +13,46 @@
 
         <div class="container-xxl py-5 pb-2">
             <div class="container ">
-                        <h1 class="mb-4">Welcome to the Admin <i class="fa fa-hammer" style="color: dodgerblue;"></i> Dashboard</h1>
-                        <p class="mb-4"><strong>Location for datebase editing, demographic breakdown, and more.</strong></p>
-                        <div class="row g-4 mb-4">
+                <h1 class="mb-4">Welcome to the Admin <i class="fa fa-hammer" style="color: dodgerblue;"></i> Dashboard</h1>
+                <p class="mb-4"><strong>Location for datebase editing, demographic breakdown, and more.</strong></p>
+                <div class="row g-4 mb-4">
     @*                        <div class="col-sm-6">
-                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0">2/1</h1>
-                                    <div class="ps-4">
-                                        <p class="mb-0">day of</p>
-                                        <h6 class="text-uppercase mb-0">last login</h6>
-                                    </div>
-                                </div>
-                            </div>*@
-                            <div class="col-sm-3">
-                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="@Model.users" data-time="2000"></span></h1>
-                                    <div class="ps-4">
-                                        <p class="mb-0">Total</p>
-                                        <h6 class="text-uppercase mb-0">Users</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count2" data-from="0" data-to="@Model.medicalProviders" data-time="2000"></span></h1>
-                                    <div class="ps-4">
-                                        <p class="mb-0">Total</p>
-                                        <h6 class="text-uppercase mb-0">Medical Providers</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count1" data-from="0" data-to="@Model.activities" data-time="2000"></span></h1>
-                                    <div class="ps-4">
-                                        <p class="mb-0">Total</p>
-                                        <h6 class="text-uppercase mb-0">Activities Results</h6>
-                                    </div>
-                                </div>
+                        <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                            <h1 class="flex-shrink-0 display-5 text-primary mb-0">2/1</h1>
+                            <div class="ps-4">
+                                <p class="mb-0">day of</p>
+                                <h6 class="text-uppercase mb-0">last login</h6>
                             </div>
                         </div>
+                    </div>*@
+                    <div class="col-sm-3">
+                        <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                            <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count-up" data-from="0" data-to="@Model.users" data-time="2000"></span></h1>
+                            <div class="ps-4">
+                                <p class="mb-0">Total</p>
+                                <h6 class="text-uppercase mb-0">Users</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                            <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count2" data-from="0" data-to="@Model.medicalProviders" data-time="2000"></span></h1>
+                            <div class="ps-4">
+                                <p class="mb-0">Total</p>
+                                <h6 class="text-uppercase mb-0">Medical Providers</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                            <h1 class="flex-shrink-0 display-5 text-primary mb-0"><span class="count1" data-from="0" data-to="@Model.activities" data-time="2000"></span></h1>
+                            <div class="ps-4">
+                                <p class="mb-0">Total</p>
+                                <h6 class="text-uppercase mb-0">Activities Results</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -84,9 +84,19 @@
                     <div class="d-flex col-lg-3 wow fadeInUp" data-wow-delay="0.7s">
                         <div class="color-flip rounded pt-3" id="color-flip">
                             <div class="p-4">
-                                <i class="fa fa-3x fa-chart-pie text-primary mb-4"></i>
+                                <i class="fa fa-3x fa-user-plus text-primary mb-4"></i>
                                 <h5>Demographics</h5>
                                 <p>Statistical data relating to the population and particular groups within the User group.</p>
+                                <a id="demographicsDetails" href="#demographicsDetails" class="stretched-link"> </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex col-lg-3 wow fadeInUp" data-wow-delay="0.7s">
+                        <div class="color-flip rounded pt-3" id="color-flip">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-chart-pie text-primary mb-4"></i>
+                                <h5>Analytics</h5>
+                                <p>Statistical data relating to the available users activities.</p>
                                 <a id="demographicsDetails" href="#demographicsDetails" class="stretched-link"> </a>
                             </div>
                         </div>
@@ -108,14 +118,13 @@
                     </div>
                 </div>
             </div>
-                    <!-- Collapse #userDetailsCollapse-->
-            <div class="panel-collapse collapse py-2" id="userDetailsCollapse">
+                    <!-- Collapse #medicalProviderDetailsCollapse-->
+            <div class="panel-collapse collapse py-2" id="medicalProvidersCollapse">
                 <div class="card card-body" id="myCollapse1">
                     <div class="container-xxl shadow overflow-auto" style="max-height:800px;">
-                        <h1>Current Providers on the database -</h1>
-               
+                        <h1>Current Providers on the database -</h1>             
                         <hr style="width:100%" size="3" color="black">
-                        <div id="divUserDetails">
+                        <div id="divMedicalProvidersDetails">
                             <!--- Render Content --->
                         </div>
                     </div>
@@ -127,8 +136,20 @@
                     <div class="container shadow">
                         <h1>Demographics -</h1>
                         <hr/>
-                        <div id="divDemographicsDetails" overflow-y: hidden;>
-                        
+                        <div id="divDemographicsDetails" overflow-y: hidden;>                    
+                            <!--- Render Content --->
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    <!-- Collapse #analyticsDetailsCollapse-->
+            <div class="panel-collapse collapse py-2" id="userDetailsCollapse">
+                <div class="card card-body" id="myCollapse1">
+                    <div class="container-xxl shadow overflow-auto" style="max-height:800px;">
+                        Find by First Name, Last Name, or Username: <input type="text" id="searchField" name="searchString"/>
+                        <input type="submit" class="btn searchButton btn-success text-white" />                     
+                        <hr style="width:100%" size="3" color="black">
+                        <div id="divUserDetails">
                             <!--- Render Content --->
                         </div>
                     </div>
@@ -247,7 +268,7 @@
                     }
                 });
             });
-            });
+         });
     };
 
     $(document).ready(function () {
@@ -285,9 +306,6 @@
             $("#userDetailsCollapse").collapse("toggle");
 
             if(!$attrib.data("subMenuPopulated") && $attrib.is(":visible")){
-
-
-
                 $.ajax({
                     type: "GET",
                     url: '/Admin/UserTable',
@@ -309,20 +327,15 @@
                         alert("Dynamic content load failed.");
                     }
                 });
-
             }
-
- 
-
-
         });
 
         $(".providerDetails").click(function () {
             
-            var $attrib = $("#divUserDetails");
+            var $attrib = $("#divMedicalProvidersDetails");
             var options = { "backdrop": "static", keyboard: true };
 
-            $("#userDetailsCollapse").collapse("toggle");
+            $("#medicalProvidersCollapse").collapse("toggle");
 
             if(!$attrib.data("subMenuPopulated") && $attrib.is(":visible")){
                 $.ajax({
@@ -334,9 +347,9 @@
                         searchField: "Specialist"
                     },
                     success: function (data) {
-                        $('#divUserDetails').html(data).data('subMenuPopulated', true);
+                        $('#divMedicalProvidersDetails').html(data).data('subMenuPopulated', true);
                         //$("#userDetailsCollapse").collapse("toggle");
-                        $('#userDetailsCollapse').on('shown.bs.collapse', function () {
+                        $('#medicalProvidersCollapse').on('shown.bs.collapse', function () {
                             this.scrollIntoView();
                         });
                             //  Load Modals
@@ -382,19 +395,18 @@
 
         $("#demographicsDetails").click(function () {
             var $attrib = $("#divDemographicsDetails");
-            var options = { "backdrop": "static", keyboard: true };
+            //var options = { "backdrop": "static", keyboard: true };
+            var delay = 500;
 
-            $("#demographicsCollapse").collapse("toggle");
-
-            if(!$attrib.data("subMenuPopulated") && $attrib.is(":visible")){
+            if(!$attrib.is(":visible")){
 
                 $.ajax({
                     type: "GET",
                     url: '/Admin/Demographics',
                     contentType: "application/json; charset=utf-8",
                     datatype: "json",
-                    success: function (data) {
-                        $('#divDemographicsDetails').html(data);
+                    success: function (data) {                
+                         $('#divDemographicsDetails').html(data);
                         //$("#demographicsCollapse").collapse("toggle");
                         $('#demographicsCollapse').on('shown.bs.collapse', function () {
                             this.scrollIntoView();
@@ -405,6 +417,11 @@
                     }
                 });
             }
+
+            setTimeout(function() {
+                $("#demographicsCollapse").collapse("toggle");
+            }, delay);
+
         });
     });
            
