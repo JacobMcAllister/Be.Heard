@@ -9,7 +9,7 @@ var micStreamSourceNode = null;
 var isPaused = false;
 var isRecording = false;
 var fillVol = 0;
-var timeleft = 10;
+var timeleft = 9;
 var average_over_time = null;
 var average_over_meter = null;
 var counter = 0;
@@ -170,7 +170,7 @@ function pause_Play() {
 }
 */
 
-document.getElementById("startButton").onclick = function () { start_timer() };
+//document.getElementById("startButton").onclick = function () { start_timer() };
 
 function start_timer() {
     let exercise_timer;
@@ -186,10 +186,10 @@ function start_timer() {
     total_decibel = 0;
     isRecording = true;
 
-    //animateVoice();
+    animateVoice();
 
     function timeDetails() {
-        animateVoice();
+        //animateVoice();
 
         if (!isPaused) {
             if (exercise_timer < 0) {
@@ -253,11 +253,15 @@ function start_timer() {
 
                 if (loud) {
                     UpdateDB(output);
-                    alert("Wow!\n'Normal' voice volume is around 50-60 dba.\nYour volume was" + output + "dba!")
+                    document.getElementById("results_span").innerHTML = "Wow, great volume!\nYour volume was " + output + " dba!";
+                    resultmodal.style.display = "block";
+                    //alert("Wow!\n'Normal' voice volume is around 50-60 dba.\nYour volume was" + output + "dba!")
                     //document.location.reload();
                 } else {
                     UpdateDB(output);
-                    alert("Great Job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + output + " dba.");
+                    document.getElementById("results_span").innerHTML = "Your volume was " + output + " dba!";
+                    resultmodal.style.display = "block";
+                    //alert("Great Job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + output + " dba.");
                     //document.location.reload();
                 }
 
@@ -297,25 +301,25 @@ function difficulty_dropdown() {
         switch (true) {
             case (value == 'Easy'):
                 target_fillVol = 100;
-                timeleft = 10;
+                timeleft = 9;
                 document.getElementById("diff_span").innerHTML = timeleft;
                 diff_alert(1);
                 break;
             case (value == 'Medium'):
                 target_fillVol = 125;
-                timeleft = 12;
+                timeleft = 11;
                 document.getElementById("diff_span").innerHTML = timeleft;
                 diff_alert(2);
                 break;
             case (value == 'Hard'):
                 target_fillVol = 200;
-                timeleft = 15;
+                timeleft = 14;
                 document.getElementById("diff_span").innerHTML = timeleft;
                 diff_alert(3);
                 break;
             case (value == 'Extreme'):
                 target_fillVol = WIDTH;
-                timeleft = 20;
+                timeleft = 19;
                 document.getElementById("diff_span").innerHTML = timeleft;
                 diff_alert(4);
                 break;
@@ -324,3 +328,32 @@ function difficulty_dropdown() {
 
     alter_difficulty(diff_value);
 }
+
+
+// MODALS
+var modal = document.getElementById('myModal');
+var resultmodal = document.getElementById("resultModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("startButton");
+
+// Get the <span> element that closes the modal
+var closebutton = document.getElementById("closebtn");
+var resultClose = document.getElementById("resultClose");
+
+// When the user clicks on the button, open the modal
+btn.onclick = function () {
+    console.log("button clicked")
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+closebutton.onclick = function () {
+    modal.style.display = "none";
+    start_timer();
+}
+
+resultClose.onclick = function () {
+    resultmodal.style.display = "none";
+}
+
