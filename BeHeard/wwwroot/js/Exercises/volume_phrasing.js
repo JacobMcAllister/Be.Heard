@@ -199,10 +199,10 @@ function start_timer() {
     userStopped = false;
     isRecording = true;
 
-    //animateVoice();
+    animateVoice();
 
     function timeDetails() {
-        animateVoice();
+        //animateVoice();
 
         if (!isPaused) {
             if (userStopped || timeDuration == 30) {
@@ -267,10 +267,12 @@ function start_timer() {
 
                 if (loud) {
                     UpdateDB(output);
-                    alert("Wow!\n'Normal' voice volume is around 50-60 dba.\nYour volume was" + output + "dba!")
+                    document.getElementById("results_span").innerHTML = "Wow, great volume!\nYour volume was " + output + " dba!";
+                    resultmodal.style.display = "block";
                 } else {
                     UpdateDB(output);
-                    alert("Great Job!\n'Normal' voice volume is around 50-60 dba.\nYour average volume was: " + output + " dba.");
+                    document.getElementById("results_span").innerHTML = "Your volume was " + output + " dba!";
+                    resultmodal.style.display = "block";
                 }
             }
 
@@ -351,4 +353,31 @@ function difficulty_dropdown() {
     }
 
     alter_difficulty(diff_value);
+}
+
+// MODALS
+var modal = document.getElementById('myModal');
+var resultmodal = document.getElementById("resultModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("startButton");
+
+// Get the <span> element that closes the modal
+var closebutton = document.getElementById("closebtn");
+var resultClose = document.getElementById("resultClose");
+
+// When the user clicks on the button, open the modal
+btn.onclick = function () {
+    console.log("button clicked")
+    modal.style.display = "block";
+}
+
+// When the user clicks on close button close the modal
+closebutton.onclick = function () {
+    modal.style.display = "none";
+    start_timer();
+}
+
+resultClose.onclick = function () {
+    resultmodal.style.display = "none";
 }

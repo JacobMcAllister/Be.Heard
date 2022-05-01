@@ -2,10 +2,12 @@
 
 <!--Exercises-->
 @model BeHeard.Models.ExerciseViewModel
+@using BeHeard.Extensions
 
 @{
 
 }
+
 <!DOCTYPE html>
 <html>
 <body onload="difficulty_dropdown();">
@@ -63,7 +65,7 @@
         <!-- The canvas that will be used to render the input level -->
             <canvas id="meter" width="300" height="50" style="border: 1px solid black;"></canvas>
             <div id="Buttons">
-                <button id="startButton" type="button" onclick="start_timer()">Start</button>
+                <button id="startButton" type="button">Start</button>
                 <button id="stopButton" type="button" onclick="Stop()">Stop</button>
                 <button id="pauseButton" type="button" onclick="Pause()">Pause</button>
                 <button id="resumeButton" type="button" onclick="Resume()">Resume</button>
@@ -169,6 +171,29 @@
         </div>
     </div> -->
 </div>
+
+<!-- Open Modal -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content modal-sm" style="text-align:center;">
+        <h1>3..</h1>
+        <h2>2....</h2>
+        <h3>1......</h3>
+        <button class="close" id="closebtn">GO!</button>
+    </div>
+</div>
+
+<!-- Result Modal -->
+<div id="resultModal" class="modal">
+    <!-- Modal Content -->
+    <div class="modal-content modal-sm" style="text-align:center;">
+        <h3>Great job!</h3>
+        <span id="results_span"></span>
+        <button class="close" id="resultClose">Dismiss</button>
+    </div>
+</div>
+
+
 </body>
 </html>
 
@@ -181,26 +206,69 @@
         transition: .5s;
     }
 
-        .activity-box h1 {
-            color: dodgerblue;
-            transition: .5s;
-        }
+    .activity-box h1 {
+        color: dodgerblue;
+        transition: .5s;
+    }
 
-        .activity-box:hover h1 {
-            transform: scale(1.5);
-        }
+    .activity-box:hover h1 {
+        transform: scale(1.5);
+    }
 
-        .activity-box:hover {
-            height: 100%;
-        }
+    .activity-box:hover {
+        height: 100%;
+    }
 
-        .activity-box .btn {
-            border-radius: 38px 38px 0 0;
-        }
+    .activity-box .btn {
+        border-radius: 38px 38px 0 0;
+    }
+
+    .modal {
+        display: none;
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        width: 50%;
+        text-align: center;
+        margin: auto;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
 </style>
 
 @section Scripts
 {
     <script type="text/javascript" src="~/js/Exercises/volume_phrasing.js"></script>
     <script src="~/js/app.js"></script>
+ 
 }
