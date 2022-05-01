@@ -347,7 +347,7 @@ btn.onclick = function () {
     modal.style.display = "block";
 }
 
-// When the user clicks on <span> (x), close the modal
+// When the user clicks on close button close the modal
 closebutton.onclick = function () {
     modal.style.display = "none";
     start_timer();
